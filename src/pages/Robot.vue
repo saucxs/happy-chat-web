@@ -26,6 +26,11 @@ export default {
       img: "",
       isScrollToBottom: true
     }
+  },
+  methods: {
+    async sendMessage() {
+      console.log(this.inputMsg, '发送信息')
+    }
   }
 }
 </script>
