@@ -3,10 +3,9 @@
   <div class="wrapper">
     <p class="title">机器人</p>
     <ul>
-      <li>
-        <div class="chat-item">
-
-        </div>
+      <li v-for="msg in robotMsgGetter">
+        <ChatItem v-if="msg.user" :msg="msg.message" :name="msg.user" :time="time"></ChatItem>
+        <ChatItem v-if="!msg.user" me="true" :img=img :msg="msg.message" :time="time"></ChatItem>
       </li>
     </ul>
     <div class="input-msg">
@@ -18,19 +17,53 @@
 </template>
 
 <script>
+  import ChatItem from '../components/ChatItem.vue'
+  import axios from "axios";
+  import { mapGetters } from 'vuex';
 export default {
   name: 'Robot',
   data () {
     return {
       inputMsg: "",
+      time: this.toNomalTime(Date.parse(new Date()) / 1000),
       img: "",
       isScrollToBottom: true
     }
   },
+  components: {
+    ChatItem
+  },
   methods: {
     async sendMessage() {
-      console.log(this.inputMsg, '发送信息')
+      console.log(this.inputMsg, '发送信息');
+      if (this.inputMsg.trim() == '') return;
+      this.$store.commit('robotMsgMutation', { //提交自己的内容
+        message: this.inputMsg
+      })
+      await this.$store.dispatch('robatMsgAction', { //提交由自己输入内容作为参数请求接口异步得来的内容（机器人的回复）
+        message: this.inputMsg
+      })
+      this.inputMsg = '';
+    },
+    toNomalTime(timestamp){
+      const date = new Date(timestamp*1000) ,
+        Y = date.getFullYear() + '-',
+        M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-',
+        D = date.getDate() + ' ',
+        h = date.getHours() + ':',
+        m = date.getMinutes();
+      return Y+M+D+h+m
     }
+  },
+  watch: {
+    robotMsgGetter() { //当数据改变了,则自动刷新
+      this.refresh();
+    }
+  },
+  computed: {
+  ...mapGetters([
+      'robotMsgGetter'
+    ])
   }
 }
 </script>
