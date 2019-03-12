@@ -6,9 +6,12 @@ import router from './router'
 import axios from 'axios'
 import store from './store'
 
+import Components from './components/index'
+Vue.use(Components);
+
 Vue.config.productionTip = false
 
-axios.defaults.baseURL = 'http://localhost:3001';
+axios.defaults.baseURL = 'http://localhost:3000';
 
 axios.interceptors.request.use(
   config => {

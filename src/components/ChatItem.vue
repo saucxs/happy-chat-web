@@ -1,18 +1,19 @@
 <template>
     <div class="chat-item">
         <div v-if="!me" class="otherchat">
-            <!-- <a :href="href" ><img :src="img" alt="" class="img"></a> -->
-            <img :src="img" alt="" class="img" @click="lookInfo">
-            <div class="nt"><span v-if="name">{{name}}</span><span v-if="time">{{time}}</span></div>
-            <div class="msg">{{msg}}</div>
+          <svg class="icon img" aria-hidden="true">
+            <use xlink:href="#iconrobot"></use>
+          </svg>
+          <div class="nt"><span v-if="name">{{name}}</span><span v-if="time">{{time}}</span></div>
+          <div class="msg">{{msg}}</div>
         </div>
 
         <div v-if="me" class="mychat">
-            <!-- <a :href="href"><img :src="img" alt="" class="img"></a> -->
-            <img :src="img" alt="" class="img" @click="lookInfo">
-            <div class="nt"><span v-if="time">{{time}}</span><span v-if="name">{{name}}</span></div>
-            <div class="msg">{{msg}}</div>
-
+          <svg class="icon img" aria-hidden="true">
+            <use xlink:href="#iconniu"></use>
+          </svg>
+          <div class="nt"><span v-if="time">{{time}}</span><span v-if="name">{{name}}</span></div>
+          <div class="msg">{{msg}}</div>
         </div>
 
 

@@ -25,10 +25,7 @@ mutations: {
 },
 actions: {
   //机器人
-  robatMsgAction({
-    commit
-  }, data) {
-    // console.log(data + "  robatMsgAction");
+  robatMsgAction({commit}, data) {
     axios.get("/api/v1/robot", {
       params: data
     }).then(res => {
