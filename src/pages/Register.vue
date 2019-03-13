@@ -18,9 +18,16 @@
         </div>
 			</div>
 			<form>
-				<input type="text" class="fadeIn second" v-model="name" placeholder="用户名">
-				<input type="password" class="fadeIn third" v-model="password" placeholder="密码">
-				<input type="button" @click="register" class="fadeIn fourth" value="注册">
+				<div>
+          <span class="normal-word">用户名：</span><input type="text" class="fadeIn second" v-model="name" placeholder="用户名">
+        </div>
+        <div>
+          <span class="normal-word">密码：</span><input type="password" class="fadeIn third" v-model="password" placeholder="密码">
+        </div>
+				<div>
+          <span class="normal-word">邮箱：</span><input type="password" class="fadeIn third" v-model="password" placeholder="邮箱">
+        </div>
+				<input type="button" :disabed="disabledFlag" @click="register" class="fadeIn fourth" value="注册">
 			</form>
 		</div>
 	</div>
@@ -29,6 +36,7 @@
 
 <script>
 import axios from 'axios'
+import { debounce } from "../utils/common"
 export default {
 	data() {
 		return {
@@ -39,46 +47,51 @@ export default {
 				message: "", //弹窗内容
 				hasCancel: true, //弹窗是否有取消键
 				messageBoxEvent: "" // 弹窗事件名称
-			}
+			},
+      disabledFlag: false
 		}
 	},
 	methods: {
+	  actualRegister() {
+      if (this.name !== "" && this.password !== "") {
+        axios.post(
+          '/api/chat/register', {
+            name: this.name,
+            password: this.password
+          }).then(res => {
+          console.log(res);
+        if (res) {
+          if (res.data.success) {
+            //弹窗
+            this.messageBox.messageBoxEvent = 'register'
+            this.messageBox.visible = true;
+            this.messageBox.message = "您已注册成功";
+          } else {
+            this.$message({
+              message: res.data.message,
+              type: "error"
+            });
+          }
+        }
+      }).catch(err => {
+          console.log(err)
+        this.$message({
+          message: '服务器出错啦',
+          type: "error"
+        });
+      })
+      } else {
+        const message = this.name === "" ? "请输入用户名" : "请输入密码";
+        this.$message({
+          message: message,
+          type: "warn"
+        });
+      }
+    },
 		register() {
-			if (this.name !== "" && this.password !== "") {
-				axios.post(
-					'/api/v1/register', {
-						name: this.name,
-						password: this.password
-					}).then(res => {
-					console.log(res);
-					if (res) {
-						if (res.data.success) {
-							//弹窗
-							this.messageBox.messageBoxEvent = 'register'
-							this.messageBox.visible = true;
-							this.messageBox.message = "您已注册成功";
-						} else {
-							this.$message({
-								message: res.data.message,
-								type: "error"
-							});
-						}
-					}
-				}).catch(err => {
-					console.log(err)
-					this.$message({
-						message: '服务器出错啦',
-						type: "error"
-					});
-				})
-			} else {
-				const message = this.name === "" ? "请输入用户名" : "请输入密码";
-				this.$message({
-					message: message,
-					type: "warn"
-				});
-			}
-
+      this.disabledFlag = true;
+      this.actualRegister()
+      this.disabledFlag = false;
 		},
 		confirm(value) {
 			if (value === 'register') {

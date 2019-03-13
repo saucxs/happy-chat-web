@@ -89,7 +89,7 @@
           display: inline-block;
           font-size: 0.16rem;
           margin: 0.05rem;
-          width: 85%;
+          width: 50%;
           border: 0.02rem solid #f6f6f6;
           -webkit-transition: all 0.5s ease-in-out;
           -moz-transition: all 0.5s ease-in-out;
@@ -117,6 +117,11 @@
         input[type=password]:placeholder {
           color: #cccccc;
         }
+
+        .normal-word {
+          font-size: 0.16rem;
+        }
+
       }
     }
 
@@ -159,8 +164,4 @@
 
 *:focus {
   outline: none;
-}
-
-#icon {
-  width: 60%;
 }

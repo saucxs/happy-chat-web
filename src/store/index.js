@@ -26,7 +26,7 @@ mutations: {
 actions: {
   //机器人
   robatMsgAction({commit}, data) {
-    axios.get("/api/v1/robot", {
+    axios.get("/api/chat/robot", {
       params: data
     }).then(res => {
       if (res) {
