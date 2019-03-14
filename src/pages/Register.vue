@@ -25,7 +25,7 @@
           <span class="normal-word">密码：</span><input type="password" class="fadeIn third" v-model="password" placeholder="密码">
         </div>
 				<div>
-          <span class="normal-word">邮箱：</span><input type="password" class="fadeIn third" v-model="password" placeholder="邮箱">
+          <span class="normal-word">邮箱：</span><input type="text" class="fadeIn third" v-model="email" placeholder="邮箱">
         </div>
 				<input type="button" :disabed="disabledFlag" @click="register" class="fadeIn fourth" value="注册">
 			</form>
@@ -36,12 +36,14 @@
 
 <script>
 import axios from 'axios'
-import { debounce } from "../utils/common"
+import { mapGetters, mapActions } from 'vuex';
+import { debounce, checkEmail } from "../utils/common"
 export default {
 	data() {
 		return {
 			name: '',
 			password: '',
+      email: '',
 			messageBox: {
 				visible: false,
 				message: "", //弹窗内容
@@ -52,36 +54,41 @@ export default {
 		}
 	},
 	methods: {
+    ...mapActions(["activateEmail"]),
 	  actualRegister() {
-      if (this.name !== "" && this.password !== "") {
-        axios.post(
-          '/api/chat/register', {
-            name: this.name,
-            password: this.password
-          }).then(res => {
-          console.log(res);
-        if (res) {
-          if (res.data.success) {
-            //弹窗
-            this.messageBox.messageBoxEvent = 'register'
-            this.messageBox.visible = true;
-            this.messageBox.message = "您已注册成功";
-          } else {
-            this.$message({
-              message: res.data.message,
-              type: "error"
-            });
+	    let params = {
+	      name: this.name,
+        password: this.password,
+        email: this.email
+      }
+      if (this.name !== "" && this.password !== "" && this.email !== "" && checkEmail(this.email)) {
+        axios.post('/api/chat/register', params).then(res => {
+          if (res) {
+            if (res.data.success) {
+              //弹窗
+              this.messageBox.messageBoxEvent = 'register'
+              this.messageBox.visible = true;
+              this.messageBox.message = "您已注册成功";
+            } else {
+              this.$message({
+                message: res.data.message,
+                type: "error"
+              });
+            }
           }
-        }
-      }).catch(err => {
-          console.log(err)
-        this.$message({
-          message: '服务器出错啦',
-          type: "error"
-        });
-      })
+        }).catch(err => {
+            console.log(err)
+          this.$message({
+            message: '服务器出错啦',
+            type: "error"
+          });
+        })
       } else {
-        const message = this.name === "" ? "请输入用户名" : "请输入密码";
+        let message;
+        if (this.name === "") { message = "请输入用户名" }
+        if (this.password === "") { message = "请输入密码" }
+        if (this.email === "") { message = "请输入邮箱" }
+        if (!checkEmail(this.email)) { message = "请输入正确的邮箱" }
         this.$message({
           message: message,
           type: "warn"

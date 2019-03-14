@@ -25,3 +25,14 @@ export function debounce(func, wait, immediate){
     }
   }
 }
+
+/**
+ * 邮箱校验
+ * @param   value-要验证的值
+ * @return   true：通过，false：不通过
+ */
+export function checkEmail(value){
+  if (!value) return ;
+  var regEmail = /^\w+@\w+\.[a-z]{2,6}$/;
+  return regEmail.test(value)
+}
