@@ -19,7 +19,7 @@
 <script>
   import ChatItem from '../components/ChatItem.vue'
   import axios from "axios";
-  import { mapGetters } from 'vuex';
+  import { mapGetters, mapActions } from 'vuex';
 export default {
   name: 'Robot',
   data () {
@@ -34,16 +34,26 @@ export default {
     ChatItem
   },
   methods: {
+    ...mapActions(["chatRobot"]),
     async sendMessage() {
       console.log(this.inputMsg, '发送信息');
       if (this.inputMsg.trim() == '') return;
       this.$store.commit('robotMsgMutation', { //提交自己的内容
         message: this.inputMsg
       })
-      await this.$store.dispatch('robatMsgAction', { //提交由自己输入内容作为参数请求接口异步得来的内容（机器人的回复）
-        message: this.inputMsg
-      })
+      let data = {
+        params: {message: this.inputMsg}
+      }
+      await this.chatRobot(data);
+//      await this.$store.dispatch('robatMsgAction', { //提交由自己输入内容作为参数请求接口异步得来的内容（机器人的回复）
+//        message: this.inputMsg
+//      })
       this.inputMsg = '';
+    },
+    refresh() {
+      setTimeout(() => {
+        window.scrollTo(0, document.body.scrollHeight + 10000)
+      }, 0)
     },
     toNomalTime(timestamp){
       const date = new Date(timestamp*1000) ,

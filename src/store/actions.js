@@ -1,9 +1,10 @@
 import Api from "../api/api";
 import * as types from "./mutation-types";
 
-// example
-export const chatRobot = ({commit},data) => {
-  return Api.chatRobot(data).then(res => {
+// chatRobot
+export const chatRobot = ({commit},params) => {
+  console.log(params, '---------------------')
+  return Api.chatRobot(params).then(res => {
     if (res) {
       if (res.data.data.code === 100000) {
         commit(types.robotMsgMutation, {

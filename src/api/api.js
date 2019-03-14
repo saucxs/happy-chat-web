@@ -4,13 +4,21 @@ import Vue from "vue";
 import axios from "axios";
 import router from '../router'
 
+axios.defaults.baseURL = 'http://localhost:3000';
+
 // 继承vue的原型方法
 Vue.prototype.axios = axios;
+
+
 const service = axios.create({
   baseURL: '/',
   // baseURL: '/',
   timeout: 10000
 })
+
+service.interceptors.request.use(config => {
+  return config;
+});
 
 service.interceptors.response.use(
   response => {
@@ -31,8 +39,9 @@ error => ({
 export default {
   // API请求example
   chatRobot: params => {
-  return service.get("/api/chat/robot", params);
-},
+    console.log(params, '222222222222222222222')
+    return service.get("/api/chat/robot", params);
+  },
 
 
 /**
