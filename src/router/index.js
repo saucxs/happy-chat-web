@@ -4,6 +4,8 @@ import Robot from "@/pages/Robot";
 import Register from "@/pages/Register";
 import Login from "@/pages/Login";
 import Activate from "@/pages/Activate";
+import Message from "@/pages/Message";
+import PrivateChat from "@/pages/PrivateChat";
 
 Vue.use(Router)
 
@@ -28,6 +30,14 @@ const router = new Router({
     { //激活
       path: "/activate/:code",
       component: Activate
+    },
+    { // 消息首页
+      path: "/message",
+      component: Message
+    },
+    { //私聊
+      path: "/private_chat/:user_id",
+      component: PrivateChat
     },
   ]
 })

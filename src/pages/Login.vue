@@ -64,6 +64,8 @@ export default {
 			    if(res) {
             console.log(res, '------------------')
 			      if (res.success) {
+              //保存soket.io
+              socket.emit('login', res.userInfo.user_id)
 			        sessionStorage.setItem("HappyChatUserToken", res.token);
 			        sessionStorage.setItem("HappyChatUserInfo", res.userInfo);
 			        /*弹窗提示*/

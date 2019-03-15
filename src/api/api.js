@@ -60,6 +60,11 @@ export default {
   login: (params) => {
     return service.post("/api/chat/login", params)
   },
+  /*消息首页列表 - get*/
+  message: (params) => {
+    params = params.params
+    return service.get("/api/chat/message", params)
+  },
 
 
 

@@ -20,12 +20,13 @@
   import ChatItem from '../components/ChatItem.vue'
   import axios from "axios";
   import { mapGetters, mapActions } from 'vuex';
+  import  {toNomalTime} from "../utils/common"
 export default {
   name: 'Robot',
   data () {
     return {
       inputMsg: "",
-      time: this.toNomalTime(Date.parse(new Date()) / 1000),
+      time: toNomalTime(Date.parse(new Date()) / 1000),
       img: "",
       isScrollToBottom: true
     }
@@ -54,15 +55,6 @@ export default {
       setTimeout(() => {
         window.scrollTo(0, document.body.scrollHeight + 10000)
       }, 0)
-    },
-    toNomalTime(timestamp){
-      const date = new Date(timestamp*1000) ,
-        Y = date.getFullYear() + '-',
-        M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-',
-        D = date.getDate() + ' ',
-        h = date.getHours() + ':',
-        m = date.getMinutes();
-      return Y+M+D+h+m
     }
   },
   watch: {
