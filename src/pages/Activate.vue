@@ -1,9 +1,6 @@
 <template>
 <!--  登录 -->
-<div class="login">
-	<Message-box :visible="this.messageBox.visible" :messageBoxEvent="this.messageBox.messageBoxEvent" @confirm="confirm" :hasCancel=false>
-		<p slot="content">{{this.messageBox.message}}</p>
-	</Message-box>
+<div class="activate">
 	<div class="wrapper fadeInDown">
 		<div id="formContent">
 			<h2 class="active"> 激活 </h2>
@@ -12,7 +9,7 @@
           <use xlink:href="#iconliaotian"></use>
         </svg>
 			</div>
-      <h3>恭喜激活成功</h3>
+      <p class="text active">{{message}}</p>
 		</div>
 	</div>
 </div>
@@ -26,20 +23,33 @@ export default {
 	components: {},
 	data() {
 		return {
-			code: this.$route.params.code
+			code: this.$route.params.code,
+      message: ''
 		};
 	},
   beforeRouteEnter: (to, from, next) => {
     next(vm => {
-      vm.activateEmail(vm.code);
+      let data = {
+        code: vm.code
+      }
+      vm.activateEmail(data).then(res => {
+        if (res) {
+          vm.message = res.message;
+        }
+      }).catch(err => {
+        this.$message({
+          message: '服务器出错啦',
+          type: "error"
+        });
+      })
     });
   },
 	methods: {
-    ...mapActions(["activateEmail"])
+    ...mapActions(["activateEmail"]),
 	}
 };
 </script>
 
 <style lang="scss" scoped>
-@import "../assets/css/loginregister.scss";
+@import "../assets/css/activate.scss";
 </style>

@@ -7,7 +7,7 @@ import Activate from "@/pages/Activate";
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   routes: [
     {
       path: "/",
@@ -31,3 +31,22 @@ export default new Router({
     },
   ]
 })
+
+/*路由守卫*/
+router.beforeEach((to, from, next) => {
+  if (!sessionStorage.HappyChatUserToken) {
+    if (to.path === "/login" || to.path === "/register") {
+      next();
+    } else {
+      next("/login");
+    }
+  } else {
+    if (to.path === "/login" || to.path === "/register") {
+      next("/robot");
+    } else {
+      next();
+    }
+  }
+});
+
+export default router;

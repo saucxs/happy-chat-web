@@ -27,7 +27,7 @@
 				<div>
           <span class="normal-word">邮箱：</span><input type="text" class="fadeIn third" v-model="email" placeholder="邮箱">
         </div>
-				<input type="button" :disabed="disabledFlag" @click="register" class="fadeIn fourth" value="注册">
+				<input type="button" :disabed="disabledFlag" @click="startRegister" class="fadeIn fourth" value="注册">
 			</form>
 		</div>
 	</div>
@@ -35,7 +35,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 import { mapGetters, mapActions } from 'vuex';
 import { debounce, checkEmail } from "../utils/common"
 export default {
@@ -54,7 +53,7 @@ export default {
 		}
 	},
 	methods: {
-    ...mapActions(["activateEmail"]),
+    ...mapActions(["register","activateEmail"]),
 	  actualRegister() {
 	    let params = {
 	      name: this.name,
@@ -62,22 +61,22 @@ export default {
         email: this.email
       }
       if (this.name !== "" && this.password !== "" && this.email !== "" && checkEmail(this.email)) {
-        axios.post('/api/chat/register', params).then(res => {
+        this.register(params).then(res => {
           if (res) {
-            if (res.data.success) {
+            if (res.success) {
               //弹窗
               this.messageBox.messageBoxEvent = 'register'
               this.messageBox.visible = true;
               this.messageBox.message = "您已注册成功";
             } else {
               this.$message({
-                message: res.data.message,
+                message: res.message,
                 type: "error"
               });
             }
           }
         }).catch(err => {
-            console.log(err)
+          console.log(err)
           this.$message({
             message: '服务器出错啦',
             type: "error"
@@ -95,7 +94,7 @@ export default {
         });
       }
     },
-		register() {
+    startRegister() {
       this.disabledFlag = true;
       this.actualRegister()
       this.disabledFlag = false;

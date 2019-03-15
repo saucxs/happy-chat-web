@@ -13,7 +13,7 @@ module.exports = {
     proxyTable: {
       '/':{
         // target: "http://172.31.231.193:8362",
-        target: "http://127.0.0.1:8362",
+        target: "http://127.0.0.1:3000",
         // changeOrigin: true,
         // pathRewrite: {                //需要rewrite重写的, 如果在服务器端做了处理则可以不要这段
         //   '^/weekly_node': '/weekly_node'

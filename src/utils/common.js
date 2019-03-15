@@ -5,7 +5,6 @@
  */
 export function debounce(func, wait, immediate){
   let timeout;
-  console.log('89898989')
   return function () {
     let context = this;
     let args = arguments;

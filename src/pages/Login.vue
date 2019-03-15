@@ -15,11 +15,14 @@
           <use xlink:href="#iconliaotian"></use>
         </svg>
 			</div>
-
 			<form>
-				<input type="text" class="fadeIn second" placeholder="用户名" v-model="name">
-				<input type="password" class="fadeIn third" placeholder="密码" v-model="password">
-				<input type="button" @click="login" class="fadeIn fourth" value="登录">
+        <div>
+          <span class="normal-word">用户名：</span><input type="text" class="fadeIn second" placeholder="用户名" v-model="name">
+        </div>
+        <div>
+          <span class="normal-word">密码：</span><input type="password" class="fadeIn third" placeholder="密码" v-model="password">
+        </div>
+				<input type="button" @click="startLogin" class="fadeIn fourth" value="登录">
 			</form>
 		</div>
 	</div>
@@ -45,40 +48,71 @@ export default {
 			}
 		};
 	},
-
 	computed: {},
 
 	watch: {},
 
 	methods: {
-		login() {
+    ...mapActions(["login"]),
+    startLogin() {
 			if (this.name !== "" && this.password !== "") {
-				axios.post("/api/v1/login", {
-					name: this.name,
-					password: this.password
-				}).then(res => {
-					if (res.data.success) {
-						//保存soket.io
-						socket.emit('login', res.data.userInfo.user_id)
-						localStorage.setItem("userToken", res.data.token);
-						localStorage.setItem("userInfo", JSON.stringify(res.data.userInfo));
-						//弹窗
-						this.messageBox.messageBoxEvent = 'login'
-						this.messageBox.visible = true;
-						this.messageBox.message = "您已登录成功"
-					} else {
-						this.$message({
-							message: res.data.message,
-							type: "error"
-						});
-					}
-				}).catch(err => {
-					console.log(err)
-					this.$message({
-						message: '服务器出错啦',
-						type: "error"
-					});
-				});
+			  let params = {
+          name: this.name,
+          password: this.password
+        }
+			  this.login(params).then(res => {
+			    if(res) {
+            console.log(res, '------------------')
+			      if (res.success) {
+			        sessionStorage.setItem("HappyChatUserToken", res.token);
+			        sessionStorage.setItem("HappyChatUserInfo", res.userInfo);
+			        /*弹窗提示*/
+              this.messageBox.messageBoxEvent = 'login'
+              this.messageBox.visible = true;
+              this.messageBox.message = "您已登录成功"
+            } else {
+              this.$message({
+                message: res.message,
+                type: "error"
+              });
+            }
+          }
+        }).catch(err => {
+          console.log(err)
+          this.$message({
+            message: '服务器出错啦',
+            type: "error"
+          });
+        });
+
+
+				// axios.post("/api/v1/login", {
+        //   name: this.name,
+        //   password: this.password
+				// }).then(res => {
+				// 	if (res.data.success) {
+				// 		//保存soket.io
+				// 		socket.emit('login', res.data.userInfo.user_id)
+				// 		localStorage.setItem("userToken", res.data.token);
+				// 		localStorage.setItem("userInfo", JSON.stringify(res.data.userInfo));
+				// 		//弹窗
+				// 		this.messageBox.messageBoxEvent = 'login'
+				// 		this.messageBox.visible = true;
+				// 		this.messageBox.message = "您已登录成功"
+				// 	} else {
+				// 		this.$message({
+				// 			message: res.data.message,
+				// 			type: "error"
+				// 		});
+				// 	}
+				// }).catch(err => {
+				// 	console.log(err)
+				// 	this.$message({
+				// 		message: '服务器出错啦',
+				// 		type: "error"
+				// 	});
+				// });
+				//
 			} else {
 				const message = this.name === "" ? "请输入用户名" : "请输入密码";
 				this.$message({
@@ -91,7 +125,7 @@ export default {
 			console.log('confirm', value)
 			if (value === 'login') {
 				this.messageBox.visible = false;
-				this.$router.push("/message");
+				this.$router.push("/robot");
 			}
 		}
 	}
