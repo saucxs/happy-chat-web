@@ -1,17 +1,9 @@
-<template>
+ <template>
 <!-- 消息 -->
 <div class="wrapper">
 	<Header :currentTab="currentTab"></Header>
 	<ul>
-		<li v-for="data in msgListGetter" @click="enterChat(data.type,data.id)">
-			<a v-if="data.type === 'group'" href=""><img :src="data.group_avator" alt="群头像" class="img"><span class="group-unread" v-if="data.unread">{{data.unread}}</span></a>
-			<a v-if="data.type === 'private'" href=""><img :src="data.avator" alt="用户头像" class="img"><span class="private-unread" v-if="data.unread">{{data.unread}}</span></a>
-			<div class="content">
-				<div v-if="data.type === 'group'" class="title">{{data.group_name}}<span>{{data.time}}</span></div>
-				<div v-if="data.type === 'private'" class="title">{{data.name}}<span>{{data.time}}</span></div>
-				<div class="message">{{data.message}}</div>
-			</div>
-		</li>
+
 	</ul>
 	<Footer :currentTab="currentTab"></Footer>
 </div>
@@ -39,34 +31,13 @@ export default {
 		])
 	},
 	methods: {
-    ...mapActions(["message"]),
+    ...mapActions([""]),
 		enterChat(chatType, chatId) {
-			const path = chatType == 'private' ? `/private_chat/${chatId}` : `/group_chat/${chatId}`
-			this.$router.push(path)
+
 		},
-		// 获取私聊和群的消息
-		getMsgBySocket() {
-			// socket.removeAllListeners('getPrivateMsg');
-			// socket.removeAllListeners('getGroupMsg');
-			socket.on('getPrivateMsg', (data) => {
-				console.log('首页获取私聊消息', data);
-				data.type = 'private'
-				this.$store.commit('updateListMutation', data)
-			})
-			socket.on('getGroupMsg', (data) => {
-				console.log('首页获取群消息', data);
-				data.type = 'group'
-				this.$store.commit('updateListMutation', data)
-			})
-		}
 	},
 	created() {
-		if (this.$store.state.firstLoad) {
-      this.message()
-			// this.$store.dispatch('msgListAction')
-			this.$store.commit('firstLoadMutation', false)
-		}
-		this.getMsgBySocket();
+
 	}
 }
 </script>

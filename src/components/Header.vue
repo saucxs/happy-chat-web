@@ -1,18 +1,18 @@
 <template>
 <div class="header">
 	<svg v-show="goback" class="icon goback" aria-hidden="true" @click="goBack">
-            <use  xlink:href="#iconback"></use>
-    </svg>
+    <use xlink:href="#iconback"></use>
+  </svg>
 	<div>{{title}}</div>
 	<svg v-show="currentTab === 1 || currentTab === 3" class="icon add" aria-hidden="true" @click="add">
-            <use  xlink:href="#icon-add"></use>
-    </svg>
+    <use xlink:href="#iconadd-copy"></use>
+  </svg>
 	<svg v-show="groupInfo" class="icon add" aria-hidden="true" @click="lookGroupInfo">
-            <use  xlink:href="#icon-group_fill-copy"></use>
-    </svg>
+    <use xlink:href="#icon-group_fill-copy"></use>
+  </svg>
 	<svg v-show="userInfo" class="icon add" aria-hidden="true" @click="lookUserInfo">
-            <use  xlink:href="#icon-group_fill-copy"></use>
-    </svg>
+    <use xlink:href="#icon-group_fill-copy"></use>
+  </svg>
 </div>
 </template>
 

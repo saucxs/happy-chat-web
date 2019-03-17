@@ -3,7 +3,7 @@
   <div class="footer">
     <router-link class="item" to="message">
       <svg class="icon" aria-hidden="true">
-            <use  v-show="currentTab === 1" xlink:href="#icon-messagefill"></use>
+            <use  v-show="currentTab === 1" xlink:href="#iconmessage"></use>
             <use v-show="currentTab !== 1" xlink:href="#iconmessage"></use>
         </svg>
     </router-link>
@@ -13,7 +13,7 @@
             <use v-show="currentTab !== 2" xlink:href="#iconrobot"></use>
         </svg>
     </router-link>
-    <router-link class="item" :class="this.tabTipsGetter.addFriendReq"  to="contact_list">
+    <router-link class="item" to="contact_list">
     <!-- <router-link v-else class="item " to="contact_list"> -->
       <svg class="icon" aria-hidden="true">
             <use  v-show="currentTab === 3" xlink:href="#icongroup"></use>
@@ -30,10 +30,8 @@
 </template>
 
 <script>
-import axios from "axios"
-import {
-	mapGetters
-} from 'vuex'
+import axios from "axios";
+import { mapGetters, mapActions } from 'vuex';
   export default {
     name: 'Footer',
     props: ['currentTab'],

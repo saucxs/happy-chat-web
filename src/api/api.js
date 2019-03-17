@@ -44,8 +44,8 @@ service.interceptors.response.use(
 export default {
   /*robot - get*/
   chatRobot: (params) => {
-    params = params.params
-    return service.get("/api/chat/robot", params)
+    let data = { params: params }
+    return service.get("/api/chat/robot", data)
   },
   /*注册-未激活 - post*/
   register: (params) => {
@@ -53,17 +53,17 @@ export default {
   },
   /*注册-激活 - get*/
   activateEmail: (params) => {
-    params = params.params
-    return service.get("/api/chat/activate", params)
+    let data = { params: params }
+    return service.get("/api/chat/activate", data)
   },
   /*登陆 - post*/
   login: (params) => {
     return service.post("/api/chat/login", params)
   },
   /*消息首页列表 - get*/
-  message: (params) => {
-    params = params.params
-    return service.get("/api/chat/message", params)
+  messageList: (params) => {
+    let data = { params: params }
+    return service.get("/api/chat/message", data)
   },
 
 

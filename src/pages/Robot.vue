@@ -1,7 +1,7 @@
 <template>
   <!--机器人-->
   <div class="wrapper">
-    <p class="title">机器人</p>
+    <Header :currentTab="currentTab"></Header>
     <ul>
       <li v-for="msg in robotMsgGetter">
         <ChatItem v-if="msg.user" :msg="msg.message" :name="msg.user" :time="time"></ChatItem>
@@ -12,11 +12,13 @@
       <textarea v-model="inputMsg" @keydown.enter.prevent="sendMessage" ref="message"></textarea>
       <p class="btn" :class="{'enable':inputMsg!=''}" @click="sendMessage">发送</p>
     </div>
-
+    <Footer :currentTab="currentTab"></Footer>
   </div>
 </template>
 
 <script>
+  import Header from '../components/Header.vue'
+  import Footer from '../components/Footer.vue'
   import ChatItem from '../components/ChatItem.vue'
   import axios from "axios";
   import { mapGetters, mapActions } from 'vuex';
@@ -25,6 +27,7 @@ export default {
   name: 'Robot',
   data () {
     return {
+      currentTab: 2,
       inputMsg: "",
       time: toNomalTime(Date.parse(new Date()) / 1000),
       img: "",
@@ -32,6 +35,8 @@ export default {
     }
   },
   components: {
+    Header,
+    Footer,
     ChatItem
   },
   methods: {
@@ -42,6 +47,9 @@ export default {
       this.$store.commit('robotMsgMutation', { //提交自己的内容
         message: this.inputMsg
       })
+//      let data = {
+//        params: {message: this.inputMsg}
+//      }
       let data = {
        message: this.inputMsg
       }

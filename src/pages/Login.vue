@@ -67,7 +67,7 @@ export default {
               //保存soket.io
               socket.emit('login', res.userInfo.user_id)
 			        sessionStorage.setItem("HappyChatUserToken", res.token);
-			        sessionStorage.setItem("HappyChatUserInfo", res.userInfo);
+			        sessionStorage.setItem("HappyChatUserInfo", JSON.stringify(res.userInfo));
 			        /*弹窗提示*/
               this.messageBox.messageBoxEvent = 'login'
               this.messageBox.visible = true;

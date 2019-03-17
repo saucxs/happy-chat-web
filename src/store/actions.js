@@ -58,14 +58,3 @@ export const login = ({commit},params) => {
   });
 };
 
-/*首页消息*/
-export const message = ({commit},params) => {
-  return Api.message(params).then(res => {
-    if (res) {
-      console.log(res, 'data')
-    }
-
-  }).catch(err => {
-    console.log(err);
-  });
-};
