@@ -65,6 +65,11 @@ export default {
     let data = { params: params }
     return service.get("/api/chat/message", data)
   },
+  /*查找人 - get*/
+  findPerson: (params) => {
+    let data = { params: params }
+    return service.get("/api/chat/find_people", data)
+  },
 
 
 

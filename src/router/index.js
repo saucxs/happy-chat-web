@@ -5,6 +5,8 @@ import Register from "@/pages/Register";
 import Login from "@/pages/Login";
 import Activate from "@/pages/Activate";
 import Message from "@/pages/Message";
+import Add from "@/pages/Add";
+import AddSeach from "@/pages/AddSeach";
 
 Vue.use(Router)
 
@@ -33,6 +35,14 @@ const router = new Router({
     { // 消息首页
       path: "/message",
       component: Message
+    },
+    { //加人或进群
+      path: "/add",
+      component: Add
+    },
+    { //搜人
+      path: "/add_seach/user/:username",
+      component: AddSeach
     },
 
   ]
