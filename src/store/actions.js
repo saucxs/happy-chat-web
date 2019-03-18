@@ -66,3 +66,24 @@ export const findPerson = ({commit},params) => {
     console.log(err);
   });
 };
+
+/*获取用户资料*/
+export const queryUserInfo = ({commit},params) => {
+  return Api.queryUserInfo(params).then(res => {
+    return res;
+  }).catch(err => {
+    console.log(err);
+  });
+};
+
+/*获取新朋友列表*/
+export const getNewFriends = ({commit},params) => {
+  return Api.getNewFriends(params).then(res => {
+    console.log(res, '12423423423423423')
+    commit(types.newFriendMutation, res.data.data.newFriends);
+  }).catch(err => {
+    console.log(err);
+  });
+};
+
+

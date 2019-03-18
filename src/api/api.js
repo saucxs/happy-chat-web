@@ -70,6 +70,16 @@ export default {
     let data = { params: params }
     return service.get("/api/chat/find_people", data)
   },
+  /*获取用户资料 - get*/
+  queryUserInfo: (params) => {
+    let data = { params: params }
+    return service.get("/api/chat/user_info", data)
+  },
+  /*获取新朋友列表 - get*/
+  getNewFriends: (params) => {
+    let data = { params: params }
+    return service.get("/api/chat/get_newfriends", data)
+  },
 
 
 

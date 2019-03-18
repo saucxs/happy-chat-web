@@ -7,6 +7,7 @@ import Activate from "@/pages/Activate";
 import Message from "@/pages/Message";
 import Add from "@/pages/Add";
 import AddSeach from "@/pages/AddSeach";
+import UserInfo from "@/pages/UserInfo";
 
 Vue.use(Router)
 
@@ -43,6 +44,10 @@ const router = new Router({
     { //搜人
       path: "/add_seach/user/:username",
       component: AddSeach
+    },
+    { //用户信息卡
+      path: "/user_info/:user_id",
+      component: UserInfo
     },
 
   ]

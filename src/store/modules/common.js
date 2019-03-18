@@ -1,17 +1,17 @@
 import {
-    USER_INFO
+  newFriendMutation
 } from "../mutation-types.js";
 
 const state = {
   systemName: 'XXX系统',
-  userInfo:{
+  newFriend: []
 
-  }
 };
 
 const mutations = {
-  [USER_INFO](state,newData){
-    state.userInfo = newData;
+  //新朋友列表
+  [newFriendMutation](state, data) {
+    state.newFriend = data;
   }
 }
 

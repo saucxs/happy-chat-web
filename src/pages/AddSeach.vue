@@ -3,7 +3,7 @@
 	<Header goback='true' :chatTitle="chatTitle"></Header>
 	<ul>
 		<li v-if="userDataList !== []" v-for="data in userDataList">
-			<div @click="enterUserCard(data.id)">
+			<div class="people-box" @click="enterUserCard(data.id)">
 				<img :src="data.avator" alt="">
 				<div class="content">
 					<p>{{data.name}}
@@ -18,7 +18,7 @@
 			</div>
 		</li>
 		<li v-if="groupDataList !== []" v-for="data in groupDataList">
-			<div @click="enterGroupCard(data.group_id)">
+			<div class="people-box" @click="enterGroupCard(data.group_id)">
 				<img :src="data.group_avator" alt="">
 				<div class="content">
 					<p class="group-creater">{{data.group_name}} <svg class="icon" aria-hidden="true"> <use  xlink:href="#icon-group_fill"></use></svg>
@@ -72,17 +72,8 @@ export default {
 		findPeople(username) {
       this.findPerson({ name: username }).then(res => {
         console.log('findPeople', res)
-        this.userDataList = res.data.data.userInfo;
+        this.userDataList = res.data.userInfo;
       })
-
-			// axios.get('/api/chat/find_people', {
-			// 	params: {
-			// 		name: username
-			// 	}
-			// }).then(res => {
-			// 	console.log('findPeople', res)
-			// 	this.userDataList = res.data.data.userInfo;
-			// })
 		},
 		//找群
 		findGroup(groupname) {
@@ -113,6 +104,14 @@ export default {
 .wrapper {
     padding-top: 0.7rem;
     position: relative;
+    .people-box{
+      display: flex;
+      align-items: center;
+      img {
+        margin-right: 20px;
+      }
+    }
+
     .can-find {
         position: absolute;
         top: 50%;
