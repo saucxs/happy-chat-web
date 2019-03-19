@@ -4,8 +4,8 @@
 	<Header :currentTab="currentTab"></Header>
 	<ul>
     <li v-for="data in msgListGetter" @click="enterChat(data.type,data.id)">
-      <a v-if="data.type === 'group'" href=""><img :src="data.group_avator" alt="群头像" class="img"><span class="group-unread" v-if="data.unread">{{data.unread}}</span></a>
-      <a v-if="data.type === 'private'" href=""><img :src="data.avator" alt="用户头像" class="img"><span class="private-unread" v-if="data.unread">{{data.unread}}</span></a>
+      <a v-if="data.type === 'group'" href=""><img :src="data.group_avator" alt="" class="img"><span class="group-unread" v-if="data.unread">{{data.unread}}</span></a>
+      <a v-if="data.type === 'private'" href=""><img :src="data.avator" alt="" class="img"><span class="private-unread" v-if="data.unread">{{data.unread}}</span></a>
       <div class="content">
         <div v-if="data.type === 'group'" class="title">{{data.group_name}}<span>{{data.time}}</span></div>
         <div v-if="data.type === 'private'" class="title">{{data.name}}<span>{{data.time}}</span></div>
@@ -17,7 +17,6 @@
 </div>
 </template>
 
- <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
 <script>
 import Header from '../components/Header.vue'
 import Footer from '../components/Footer.vue'

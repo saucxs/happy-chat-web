@@ -29,7 +29,7 @@ export default {
     return {
       currentTab: 2,
       inputMsg: "",
-      time: toNomalTime(Date.parse(new Date()) / 1000),
+      time: toNomalTime((new Date()).getTime() ),
       img: "",
       isScrollToBottom: true
     }

@@ -15,7 +15,19 @@ export default {
       this.screenRatio();
     }
   },
+  mounted() {
+    this.getReqBySocket();
+  },
   methods: {
+    // 获取新好友通知
+    getReqBySocket() {
+      socketWeb.on('getresponse', (data) => {
+        console.log('获取新好友通知', data);
+        // 存vuex
+        this.$store.commit('newFriendMutation', data)
+        this.$store.commit('friendReqTipsMutation',true);
+      })
+    },
     /*获取屏幕dpr*/
     dprRatio(){
       const ua = navigator.userAgent;

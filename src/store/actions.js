@@ -79,6 +79,7 @@ export const queryUserInfo = ({commit},params) => {
 /*获取新朋友列表*/
 export const getNewFriends = ({commit},params) => {
   return Api.getNewFriends(params).then(res => {
+    console.log(res, '---------------------------------------------')
     commit(types.newFriendMutation, res.data.newFriends);
   }).catch(err => {
     console.log(err);
@@ -103,12 +104,12 @@ export const messageList = ({commit},params) => {
       const privateList = res.data.privateList;
       groupList.forEach(element => {
         element.type = "group";
-        element.time = element.time ? toNomalTime(element.time) : toNomalTime(element.creater_time);
+        element.time = element.time ? element.time : element.creater_time;
         element.id = element.group_id;
       });
       privateList.forEach(element => {
         element.type = "private";
-        element.time = element.time ? toNomalTime(element.time) : toNomalTime(element.be_friend_time);
+        element.time = element.time ? element.time : element.be_friend_time;
         element.id = element.other_user_id;
         // element.unread = 0;
       });

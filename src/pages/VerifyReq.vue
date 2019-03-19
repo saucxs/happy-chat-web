@@ -13,6 +13,7 @@
 <script>
 import Header from '../components/Header.vue'
 import { mapGetters, mapActions } from 'vuex';
+import { toNomalTime } from "../utils/common"
 export default {
 	components: {
 		Header
@@ -47,13 +48,13 @@ export default {
 				avator: this.fromUserInfo.avator,
 				sex: this.fromUserInfo.sex,
 				content: this.textAreaContent,
-				time: Date.parse(new Date()) / 1000 //时间
+				time: toNomalTime((new Date()).getTime()) //时间
 			})
 			//db持久化储存
       let params = {
         to_user: this.$route.params.user_id, //对方id
         content: this.textAreaContent,
-        time: Date.parse(new Date()) / 1000, //时间
+        time: toNomalTime((new Date()).getTime()), //时间
         status: 0
       }
       this.insertNewFriends(params).then(res => {

@@ -8,14 +8,14 @@
   <body>
     <div id="app"></div>
     <!-- built files will be auto injected -->
+    <script src="//at.alicdn.com/t/font_1083780_0mgmkfzolnij.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+    <script>
+      const socketWeb = io('http://localhost:3000');
+      const userInfo = JSON.parse(sessionStorage.getItem("HappyChatUserInfo"))
+      if (userInfo) {
+        socketWeb.emit('update', userInfo.user_id);
+      }
+    </script>
   </body>
-  <script src="//at.alicdn.com/t/font_1083780_0mgmkfzolnij.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
-  <script>
-    const socketWeb = io('http://localhost:3000');
-    const userInfo = JSON.parse(sessionStorage.getItem("HappyChatUserInfo"))
-    if (userInfo) {
-      socketWeb.emit('update', userInfo.user_id);
-    }
-  </script>
 </html>

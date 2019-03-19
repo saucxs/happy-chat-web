@@ -3,7 +3,7 @@
 	<Header goback='true' chatTitle="新好友通知"></Header>
 	<ul>
 		<li v-for="data in newFriendGetter">
-			<div @click="enterIt(data.from_user)">
+			<div class="list-box" @click="enterIt(data.from_user)">
 				<img :src="data.avator" alt="">
 				<div class="content">
 					<p>{{data.name}}</p>
@@ -24,6 +24,7 @@
 import Header from '../components/Header.vue'
 import axios from "axios"
 import { mapGetters, mapActions } from 'vuex';
+import { toNomalTime } from "../utils/common"
 export default {
 	components: {
 		Header
@@ -51,10 +52,9 @@ export default {
 		},
 		//同意加好友
 		async agreeBeFriend(val) {
-			this.time = Date.parse(new Date()) / 1000;
 			this.beFriends({
         other_user_id: val,
-        time: this.time //时间
+        time: toNomalTime((new Date()).getTime()) //时间
       })
       this.updateNewFriends(val);
 		},
@@ -70,7 +70,7 @@ export default {
 						id: val, //加我的人的id
 						other_user_id: val,
 						message: "我们已成为好友，开始聊天吧！",
-						time: Date.parse(new Date()) / 1000,
+						time: toNomalTime((new Date()).getTime()), //时间
 						name: ele.name, //加我的人的名字
 						type: "private",
 						action: "push"
@@ -87,7 +87,7 @@ export default {
 				type: 'private',
 				action: "request",
 				status: '1', //是否在线 0为不在线 1为在线
-				time: Date.parse(new Date()) / 1000 //时间
+				time: toNomalTime((new Date()).getTime()) //时间
 			};
       socketWeb.emit('sendPrivateMsg', data2); //让对方的信息列表也可以显示添加成功的信息
 
@@ -95,8 +95,8 @@ export default {
 	},
 	created() {
 		this.userInfo = JSON.parse(sessionStorage.getItem("HappyChatUserInfo"));
-		this.getNewFriends({user_id: this.userInfo.user_id})
-		// this.$store.dispatch('newFriendAction', this.userInfo.user_id);
+		console.log(this.newFriendGetter, '===============================')
+    this.getNewFriends({user_id: this.userInfo.user_id});
 		this.$store.commit('friendReqTipsMutation', false);
 	}
 }
@@ -105,6 +105,9 @@ export default {
 <style lang="scss" scoped>
 .wrapper {
     padding-top: 0.7rem;
+    .list-box{
+      padding: 0 2vh;
+    }
     ul {
         margin-top: 0.2rem;
         li {

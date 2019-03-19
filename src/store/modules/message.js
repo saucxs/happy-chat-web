@@ -22,7 +22,7 @@ const mutations = {
   //更新首页消息列表
   updateListMutation(state, data) {
     let unread = 0;
-    data.time = toNomalTime(data.time);
+    // data.time = toNomalTime(data.time);
     //添加
     if (data.action === "push") {
       data.unread = unread + 1;
