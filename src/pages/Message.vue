@@ -3,12 +3,21 @@
 <div class="wrapper">
 	<Header :currentTab="currentTab"></Header>
 	<ul>
-
+    <li v-for="data in msgListGetter" @click="enterChat(data.type,data.id)">
+      <a v-if="data.type === 'group'" href=""><img :src="data.group_avator" alt="群头像" class="img"><span class="group-unread" v-if="data.unread">{{data.unread}}</span></a>
+      <a v-if="data.type === 'private'" href=""><img :src="data.avator" alt="用户头像" class="img"><span class="private-unread" v-if="data.unread">{{data.unread}}</span></a>
+      <div class="content">
+        <div v-if="data.type === 'group'" class="title">{{data.group_name}}<span>{{data.time}}</span></div>
+        <div v-if="data.type === 'private'" class="title">{{data.name}}<span>{{data.time}}</span></div>
+        <div class="message">{{data.message}}</div>
+      </div>
+    </li>
 	</ul>
 	<Footer :currentTab="currentTab"></Footer>
 </div>
 </template>
 
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
 <script>
 import Header from '../components/Header.vue'
 import Footer from '../components/Footer.vue'
@@ -18,7 +27,8 @@ export default {
 	// name: 'message',
 	data() {
 		return {
-			currentTab: 1
+			currentTab: 1,
+      webSocket: ''
 		}
 	},
 	components: {
@@ -27,17 +37,39 @@ export default {
 	},
 	computed: {
 		...mapGetters([
+		  'firstLoad',
 			'msgListGetter'
 		])
 	},
 	methods: {
-    ...mapActions([""]),
+    ...mapActions(["messageList"]),
 		enterChat(chatType, chatId) {
-
+      const path = chatType == 'private' ? `/private_chat/${chatId}` : `/group_chat/${chatId}`
+      this.$router.push(path)
 		},
+    // 获取私聊和群的消息
+    getMsgBySocket() {
+      socketWeb.removeAllListeners('getPrivateMsg');
+      socketWeb.removeAllListeners('getGroupMsg');
+      socketWeb.on('getPrivateMsg', (data) => {
+        console.log('首页获取私聊消息', data);
+        data.type = 'private'
+        this.$store.commit('updateListMutation', data)
+      })
+      socketWeb.on('getGroupMsg', (data) => {
+        console.log('首页获取群消息', data);
+        data.type = 'group'
+        this.$store.commit('updateListMutation', data)
+      })
+    }
+
 	},
 	created() {
-
+    if (this.firstLoad) {
+      this.messageList()
+      this.$store.commit('firstLoadMutation', false)
+    }
+    this.getMsgBySocket();
 	}
 }
 </script>

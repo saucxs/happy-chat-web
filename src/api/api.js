@@ -80,8 +80,23 @@ export default {
     let data = { params: params }
     return service.get("/api/chat/get_newfriends", data)
   },
-
-
+  /*查询此用户是否是我的好友 - get*/
+  isFriendJudge: (params) => {
+    let data = { params: params }
+    return service.get("/api/chat/is_friend", data)
+  },
+  /*插入新朋友 - post*/
+  insertNewFriends: (params) => {
+    return service.post("/api/chat/insert_newfriends", params)
+  },
+  /*加为好友 - post*/
+  beFriends: (params) => {
+    return service.post("/api/chat/be_friend", params)
+  },
+  /*更新好友状态 - post*/
+  updateNewFriendsState: (params) => {
+    return service.put("/api/chat/update_newfriends", params)
+  },
 
 /**
  * API demo

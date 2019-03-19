@@ -65,7 +65,7 @@ export default {
             console.log(res, '------------------')
 			      if (res.success) {
               //保存soket.io
-              socket.emit('login', res.userInfo.user_id)
+              socketWeb.emit('login', res.userInfo.user_id)
 			        sessionStorage.setItem("HappyChatUserToken", res.token);
 			        sessionStorage.setItem("HappyChatUserInfo", JSON.stringify(res.userInfo));
 			        /*弹窗提示*/
@@ -86,35 +86,6 @@ export default {
             type: "error"
           });
         });
-
-
-				// axios.post("/api/v1/login", {
-        //   name: this.name,
-        //   password: this.password
-				// }).then(res => {
-				// 	if (res.data.success) {
-				// 		//保存soket.io
-				// 		socket.emit('login', res.data.userInfo.user_id)
-				// 		localStorage.setItem("userToken", res.data.token);
-				// 		localStorage.setItem("userInfo", JSON.stringify(res.data.userInfo));
-				// 		//弹窗
-				// 		this.messageBox.messageBoxEvent = 'login'
-				// 		this.messageBox.visible = true;
-				// 		this.messageBox.message = "您已登录成功"
-				// 	} else {
-				// 		this.$message({
-				// 			message: res.data.message,
-				// 			type: "error"
-				// 		});
-				// 	}
-				// }).catch(err => {
-				// 	console.log(err)
-				// 	this.$message({
-				// 		message: '服务器出错啦',
-				// 		type: "error"
-				// 	});
-				// });
-				//
 			} else {
 				const message = this.name === "" ? "请输入用户名" : "请输入密码";
 				this.$message({

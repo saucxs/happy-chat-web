@@ -8,6 +8,9 @@ import Message from "@/pages/Message";
 import Add from "@/pages/Add";
 import AddSeach from "@/pages/AddSeach";
 import UserInfo from "@/pages/UserInfo";
+import VerifyReq from "@/pages/VerifyReq";
+import ContactList from "@/pages/ContactList";
+import NewFriends from "@/pages/NewFriends";
 
 Vue.use(Router)
 
@@ -48,6 +51,18 @@ const router = new Router({
     { //用户信息卡
       path: "/user_info/:user_id",
       component: UserInfo
+    },
+    { //加好友请求验证
+      path: "/user_info/verify/:user_id",
+      component: VerifyReq
+    },
+    { //通讯录
+      path: "/contact_list",
+      component: ContactList
+    },
+    { //加好友通知
+      path: "/contact_list/new_friends",
+      component: NewFriends
     },
 
   ]

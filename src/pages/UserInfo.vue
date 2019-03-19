@@ -15,19 +15,32 @@
 		<img :src="userInfo.avator" alt="">
 		<p class="href">
 			<span @click="goGithub"><svg class="icon" aria-hidden="true"><use  xlink:href="#iconGitHub"></use></svg></span>
-			<span @click="goWebsite"><svg class="icon" aria-hidden="true"><use  xlink:href="#icon-web"></use></svg></span>
+			<span @click="goWebsite"><svg class="icon" aria-hidden="true"><use  xlink:href="#iconWorld-WideWeb"></use></svg></span>
 		</p>
 		<p v-if="this.isMyFriend">
-			<svg class="icon" aria-hidden="true"><use  xlink:href="#icon-tianjiabeizhu"></use></svg><span>备注</span>：{{this.remark}}
+			<svg class="icon" aria-hidden="true">
+        <use xlink:href="#iconbeizhu"></use>
+      </svg>
+      <span>备注</span>：{{this.remark}}
 		</p>
 		<p>
-			<svg class="icon" aria-hidden="true"><use  xlink:href="#icon-yonghu"></use></svg><span>用户名</span>：{{userInfo.name}}
+			<svg class="icon" aria-hidden="true">
+        <use xlink:href="#iconmine"></use>
+      </svg>
+      <span>用户名</span>：{{userInfo.name}}
 		</p>
 		<p>
-			<svg class="icon" aria-hidden="true"><use  xlink:href="#icon-xingbie"></use></svg><span>性别</span>：{{userInfo.sex === 0 ? '男' : '女' }}
+			<svg class="icon" aria-hidden="true">
+        <use v-if="userInfo.sex === 0"  xlink:href="#iconxingbienan"></use>
+        <use v-else xlink:href="#iconxingbienv"></use>
+      </svg>
+      <span>性别</span>：{{userInfo.sex === 0 ? '男' : '女' }}
 		</p>
 		<p>
-			<svg class="icon" aria-hidden="true"><use  xlink:href="#icon-placeholder"></use></svg><span>来自</span>：{{userInfo.place}}
+			<svg class="icon" aria-hidden="true">
+        <use xlink:href="#iconplaceholder"></use>
+      </svg>
+      <span>来自</span>：{{userInfo.place}}
 		</p>
 	</div>
 	<div v-if="this.isAddingMe" class="action">
@@ -90,7 +103,7 @@ export default {
 		])
 	},
 	methods: {
-    ...mapActions(["queryUserInfo"]),
+    ...mapActions(["queryUserInfo", "isFriendJudge"]),
 		//获取用户资料
 		getInfo() {
 			//如果是自己，那就用本地的个人信息即可，省一次请求
@@ -107,24 +120,18 @@ export default {
 		},
 		// 查询此用户是否是我的好友
 		isFriend() {
-			axios.get('/api/v1/is_friend', {
-				params: {
-					// user_id: this.myInfo.user_id,
-					other_user_id: this.$route.params.user_id
-				}
-			}).then(res => {
-				// console.log("isFriend", res)
-				if (res.data.data.isMyFriend.length != 0) {
-					this.isMyFriend = true;
-					this.remark = res.data.data.isMyFriend[0].remark;
-				}
-				if (res.data.data.isHisFriend.length != 0) {
-					this.isHisFriend = true;
-				}
-				// console.log(this.isMyFriend, "====", this.isHisFriend)
-			}).catch(err => {
-				console.log('err2', err)
-			})
+      let data = { other_user_id: this.$route.params.user_id };
+      this.isFriendJudge(data).then(res => {
+        if (res.data.isMyFriend.length != 0) {
+          this.isMyFriend = true;
+          this.remark = res.data.isMyFriend[0].remark;
+        }
+        if (res.data.isHisFriend.length != 0) {
+          this.isHisFriend = true;
+        }
+      }).catch(err => {
+        console.log('err1', err)
+      })
 		},
 		//判断这个人是否请求加我未通过
 		isAddingMeFun() {

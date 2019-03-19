@@ -2,12 +2,12 @@
 <div class="wrapper">
 	<Header goback='true' :chatTitle="chatTitle"></Header>
 	<div class="creat-group" @click="createGroup">
-		<svg class="icon" aria-hidden="true"> <use  xlink:href="#icon-group1"></use></svg>
+		<svg class="icon" aria-hidden="true"> <use  xlink:href="#icongroup-copy"></use></svg>
 		<span>建一个群</span>
-		<svg class="icon icon-right" aria-hidden="true"><use  xlink:href="#icon-right"></use></svg>
+		<svg class="icon icon-right" aria-hidden="true"><use  xlink:href="#iconright"></use></svg>
 	</div>
 	<div class="search">
-		<svg class="icon" aria-hidden="true"> <use  xlink:href="#icon-search1"></use></svg>
+		<svg class="icon" aria-hidden="true"> <use  xlink:href="#iconsousuo"></use></svg>
 		<input type="text" v-model="inputContent" placeholder="在这边输入用户名或者群名称哦" />
 	</div>
 	<div class="choose">
