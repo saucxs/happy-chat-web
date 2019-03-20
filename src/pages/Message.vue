@@ -75,13 +75,12 @@ export default {
 
 <style lang="scss" scoped>
 .wrapper {
-    // height: 100vh;
     padding-top: 0.8rem;
     background-color: #fff;
     z-index: 1;
     ul {
         background-color: #fff;
-        padding-bottom: 0.5rem;
+        padding-bottom: 1vh;
         li {
             display: -webkit-box;
             display: -ms-flexbox;

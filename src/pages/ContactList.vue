@@ -7,7 +7,21 @@
 	</router-link>
 	<p class="tab"><span :class="friend" @click="showFriends">朋友</span><span :class="group" @click="showGroups">群组</span></p>
 	<ul>
-
+      <li v-for="(data, index) in alreadyFriends">
+        <div class="list-box" @click="enterIt(data.other_user_id)">
+          <img :src="data.avator" alt="">
+          <div class="content">
+            <p>{{data.name}}</p>
+            <p>
+              <svg class="icon" aria-hidden="true">
+                <use v-if="data.sex === 0"  xlink:href="#iconxingbienan"></use>
+                <use v-else xlink:href="#iconxingbienv"></use>
+              </svg>
+            </p>
+          </div>
+          <div class="remark">{{data.remark === ''? '没有留下备注~': data.remark}}</div>
+        </div>
+      </li>
 	</ul>
 	<Footer :currentTab="currentTab"></Footer>
 </div>
@@ -17,6 +31,7 @@
 import Header from '../components/Header.vue'
 import Footer from '../components/Footer.vue'
 import axios from "axios"
+import { mapGetters, mapActions } from 'vuex';
 export default {
 	components: {
 		Header,
@@ -27,7 +42,8 @@ export default {
 		return {
 			currentTab: 3,
 			friend: "hover",
-			group: ""
+			group: "",
+      alreadyFriends: []
 		}
 	},
 
@@ -36,6 +52,10 @@ export default {
 	watch: {},
 
 	methods: {
+    ...mapActions(["getAlreadyFriends"]),
+    enterIt(val) {
+      this.$router.push(`/user_info/${val}`)
+    },
 		showFriends() {
 			this.friend = "hover";
 			this.group = '';
@@ -44,10 +64,19 @@ export default {
 			this.friend = '';
 			this.group = "hover";
 		},
+    alreadyFriendsList(){
+      this.userInfo = JSON.parse(sessionStorage.getItem("HappyChatUserInfo"));
+      this.getAlreadyFriends({user_id: this.userInfo.user_id}).then(res => {
+        if (res) {
+          this.alreadyFriends =  res.data.alreadyFriends
+        }
+      })
+    }
 
 	},
 
 	mounted() {
+   this.alreadyFriendsList()
 		// this.getMsgBySocket();
 	}
 }
@@ -56,6 +85,41 @@ export default {
 <style lang="scss" scoped>
 .wrapper {
     padding-top: 1rem;
+    .list-box{
+      padding: 1.5vh 2vh;
+      display: flex;
+      justify-items: center;
+      align-items: center;
+    }
+    ul {
+      margin-top: 0.2rem;
+      li {
+        cursor: pointer;
+        background-color: #fff;
+        list-style-type: none;
+        margin-bottom: 0.16rem;
+        position: relative;
+        img {
+          width: 0.8rem;
+          height: 0.8rem;
+        }
+        .content {
+          display: inline-block;
+          margin-left: 2vh;
+          line-height: 3vh;
+          p:nth-child(1) {
+            font-size: 0.24rem;
+          }
+          p:nth-child(2) {
+            font-size: 0.2rem;
+          }
+        }
+        .remark {
+          font-size: 0.2rem;
+          margin-left: 2vh;
+        }
+      }
+    }
     .new-friend {
         background-color: #fff;
         color: #333;

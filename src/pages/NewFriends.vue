@@ -105,7 +105,10 @@ export default {
 .wrapper {
     padding-top: 0.7rem;
     .list-box{
-      padding: 0 2vh;
+      padding: 1.5vh 2vh;
+      display: flex;
+      justify-items: center;
+      align-items: center;
     }
     ul {
         margin-top: 0.2rem;
@@ -121,13 +124,13 @@ export default {
             }
             .content {
                 display: inline-block;
+                margin-left: 2vh;
+                line-height: 3vh;
                 p:nth-child(1) {
                     font-size: 0.24rem;
                 }
                 p:nth-child(2) {
                     font-size: 0.2rem;
-                    line-height: 0.8rem;
-                    // margin-bottom: 0.02rem;
                 }
             }
             .result {

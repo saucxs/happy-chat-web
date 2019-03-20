@@ -12,6 +12,7 @@ import VerifyReq from "@/pages/VerifyReq";
 import ContactList from "@/pages/ContactList";
 import NewFriends from "@/pages/NewFriends";
 import PrivateChat from "@/pages/PrivateChat";
+import Me from "@/pages/Me";
 
 Vue.use(Router)
 
@@ -68,6 +69,10 @@ const router = new Router({
     { //私聊
       path: "/private_chat/:user_id",
       component: PrivateChat
+    },
+    { //个人中心
+      path: "/me",
+      component: Me
     },
 
   ]

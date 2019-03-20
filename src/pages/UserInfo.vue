@@ -12,36 +12,38 @@
 	</Message-box>
 	<Header goback='true' chatTitle="用户资料"></Header>
 	<div class="content">
-		<img :src="userInfo.avator" alt="">
-		<p class="href">
-			<span @click="goGithub"><svg class="icon" aria-hidden="true"><use  xlink:href="#iconGitHub"></use></svg></span>
-			<span @click="goWebsite"><svg class="icon" aria-hidden="true"><use  xlink:href="#iconWorld-WideWeb"></use></svg></span>
-		</p>
-		<p v-if="this.isMyFriend">
-			<svg class="icon" aria-hidden="true">
-        <use xlink:href="#iconbeizhu"></use>
-      </svg>
-      <span>备注</span>：{{this.remark}}
-		</p>
-		<p>
-			<svg class="icon" aria-hidden="true">
-        <use xlink:href="#iconmine"></use>
-      </svg>
-      <span>用户名</span>：{{userInfo.name}}
-		</p>
-		<p>
-			<svg class="icon" aria-hidden="true">
-        <use v-if="userInfo.sex === 0"  xlink:href="#iconxingbienan"></use>
-        <use v-else xlink:href="#iconxingbienv"></use>
-      </svg>
-      <span>性别</span>：{{userInfo.sex === 0 ? '男' : '女' }}
-		</p>
-		<p>
-			<svg class="icon" aria-hidden="true">
-        <use xlink:href="#iconplaceholder"></use>
-      </svg>
-      <span>来自</span>：{{userInfo.place}}
-		</p>
+    <div class="content-box">
+      <img :src="userInfo.avator" alt="">
+      <p class="href">
+        <span @click="goGithub"><svg class="icon" aria-hidden="true"><use  xlink:href="#iconGitHub"></use></svg></span>
+        <span @click="goWebsite"><svg class="icon" aria-hidden="true"><use  xlink:href="#iconWorld-WideWeb"></use></svg></span>
+      </p>
+      <p v-if="this.isMyFriend">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#iconbeizhu"></use>
+        </svg>
+        <span>备注</span>：{{this.remark}}
+      </p>
+      <p>
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#iconmine"></use>
+        </svg>
+        <span>用户名</span>：{{userInfo.name}}
+      </p>
+      <p>
+        <svg class="icon" aria-hidden="true">
+          <use v-if="userInfo.sex === 0"  xlink:href="#iconxingbienan"></use>
+          <use v-else xlink:href="#iconxingbienv"></use>
+        </svg>
+        <span>性别</span>：{{userInfo.sex === 0 ? '男' : '女' }}
+      </p>
+      <p>
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#iconplaceholder"></use>
+        </svg>
+        <span>来自</span>：{{userInfo.place}}
+      </p>
+    </div>
 	</div>
 	<div v-if="this.isAddingMe" class="action">
 		<span class="add-as-friend" @click="agreeBeFriend">通过验证</span>
@@ -103,7 +105,9 @@ export default {
 		])
 	},
 	methods: {
-    ...mapActions(["queryUserInfo", "isFriendJudge"]),
+    ...mapActions(["queryUserInfo", "isFriendJudge","confirmEditorRemark",
+      "confirmEditorInfo", "confirmDeleteFriend", "updateNewFriendsState",
+      "beFriends"]),
 		//获取用户资料
 		getInfo() {
 			//如果是自己，那就用本地的个人信息即可，省一次请求
@@ -205,10 +209,7 @@ export default {
 		},
 		//同意加好友
 		async agreeBeFriend() {
-			await axios.post('/api/v1/be_friend', {
-				// user_id: this.myInfo.user_id,
-				other_user_id: this.$route.params.user_id
-			})
+      this.beFriends({ other_user_id: this.$route.params.user_id });
 			await this.updateNewFriends();
 			this.messageBox.messageBoxEvent = 'agreeBeFriend'
 			this.messageBox.visible = true;
@@ -217,10 +218,9 @@ export default {
 		},
 		//更新验证状态
 		async updateNewFriends() {
-			await axios.put('/api/v1/update_newfriends', {
-				from_user: this.$route.params.user_id
-				// to_user: this.myInfo.user_id
-			})
+      this.updateNewFriendsState({
+        from_user: this.$route.params.user_id
+      })
 		},
 		//弹窗取消事件
 		cancel(value) {
@@ -235,27 +235,27 @@ export default {
 		confirm(value) {
 			//删除好友
 			if (value === 'delFriend') {
-				axios.delete('/api/v1/del_friend', {
-					params: {
-						// user_id: this.myInfo.user_id,
-						other_user_id: this.$route.params.user_id
-					}
-				}).then(res => {
-					this.messageBox.visible = false;
-					this.messageBox.message = null;
-					const data = {
-						action: "delete",
-						id: this.$route.params.user_id
-					}
-					this.$store.commit('updateListMutation', data)
-					this.$message({
-						message: '删除此好友成功',
-						type: "success"
-					});
-					this.isMyFriend = false;
-				}).catch(err => {
-					console.log('err', err)
-				})
+			  let params = {
+          other_user_id: this.$route.params.user_id
+        }
+        this.confirmDeleteFriend(params).then(res => {
+          if(res){
+            this.messageBox.visible = false;
+            this.messageBox.message = null;
+            const data = {
+              action: "delete",
+              id: this.$route.params.user_id
+            }
+            this.$store.commit('updateListMutation', data)
+            this.$message({
+              message: '删除此好友成功',
+              type: "success"
+            });
+            this.isMyFriend = false;
+          }
+        }).catch(err => {
+          console.log('err', err)
+        })
 			}
 			//同意加为好友
 			if (value === 'agreeBeFriend') {
@@ -263,15 +263,17 @@ export default {
 			}
 			//修改备注
 			if (value.messageBoxEvent === 'editorRemark') {
-				axios.put('/api/v1/editor_remark', {
-					remark: value.canInputText,
-					// user_id: this.myInfo.user_id,
-					other_user_id: this.$route.params.user_id
-				}).then((res) => {
-					this.remark = value.canInputText;
-					this.messageBox.canInput = false;
-					this.messageBox.visible = false;
-				})
+			  let params = {
+          remark: value.canInputText,
+          other_user_id: this.$route.params.user_id
+        }
+			  this.confirmEditorRemark(params).then( res => {
+			    if(res){
+            this.remark = value.canInputText;
+            this.messageBox.canInput = false;
+            this.messageBox.visible = false;
+          }
+        })
 			}
 			//编辑个人信息
 			if (value.messageBoxEvent === 'editorInfo') {
@@ -302,15 +304,18 @@ export default {
 					}
 				}
 				console.log(value.myInfo)
-				axios.put('/api/v1/editor_info', {
-					github: value.myInfo.github,
-					website: value.myInfo.website,
-					sex: value.myInfo.sex,
-					place: value.myInfo.place
-				}).then((res) => {
-					localStorage.setItem("userInfo", JSON.stringify(value.myInfo));
-					this.messageBox.visible = false;
-				})
+        let params = {
+          github: value.myInfo.github,
+          website: value.myInfo.website,
+          sex: value.myInfo.sex,
+          place: value.myInfo.place
+        }
+        this.confirmEditorInfo(params).then(res => {
+          if(res){
+            sessionStorage.setItem("HappyChatUserInfo", JSON.stringify(value.myInfo));
+            this.messageBox.visible = false;
+          }
+        })
 			}
 		}
 	},
@@ -328,40 +333,37 @@ export default {
 <style lang="scss" scoped>
 .wrapper {
     position: relative;
-    padding-top: 0.1rem;
+    padding-top: 1rem;
     .content {
-        left: 50%;
-        transform: translateX(-50%);
-        position: absolute;
+      .content-box{
+        text-align: center;
         img {
-            width: 2rem;
-            height: 2rem;
-            border-radius: 50%;
-            margin: 1rem 0 0.6rem;
+          width: 2rem;
+          height: 2rem;
+          border-radius: 50%;
+          margin: 4vh 0;
         }
         p {
-            font-size: 0.28rem;
-            line-height: 0.8rem;
-            color: #4290F7;
-            .icon {
-                font-size: 1.6em;
-            }
-            span {
-                font-size: 0.14rem;
-            }
+          font-size: 2vh;
+          line-height: 0.8rem;
+          color: #4290F7;
+          .icon {
+            font-size: 1.6em;
+          }
+          span {
+            font-size: 2vh;
+          }
         }
         .href {
-            text-align: center;
-            span {
-                font-size: 0.3rem;
-                cursor: pointer;
-            }
+          span {
+            font-size: 2vh;
+            margin: 0 1vh;
+            cursor: pointer;
+          }
         }
+      }
     }
     .action {
-        position: absolute;
-        width: 100%;
-        top: 8.8rem;
         text-align: center;
         span {
             display: inline-block;

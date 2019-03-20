@@ -3,26 +3,26 @@
   <div class="footer">
     <router-link class="item" to="message">
       <svg class="icon" aria-hidden="true">
-            <use  v-show="currentTab === 1" xlink:href="#iconmessage"></use>
+            <use  v-show="currentTab === 1" xlink:href="#iconmessage-copy"></use>
             <use v-show="currentTab !== 1" xlink:href="#iconmessage"></use>
         </svg>
     </router-link>
     <router-link class="item" to="robot">
       <svg class="icon" aria-hidden="true">
-            <use  v-show="currentTab === 2" xlink:href="#iconrobot"></use>
+            <use  v-show="currentTab === 2" xlink:href="#iconrobot-copy"></use>
             <use v-show="currentTab !== 2" xlink:href="#iconrobot"></use>
         </svg>
     </router-link>
     <router-link class="item" to="contact_list">
     <!-- <router-link v-else class="item " to="contact_list"> -->
       <svg class="icon" aria-hidden="true">
-            <use  v-show="currentTab === 3" xlink:href="#icongroup"></use>
+            <use  v-show="currentTab === 3" xlink:href="#icongroup-copy"></use>
             <use v-show="currentTab !== 3" xlink:href="#icongroup"></use>
         </svg>
     </router-link>
     <router-link class="item" to="me">
       <svg class="icon" aria-hidden="true">
-            <use  v-show="currentTab === 4" xlink:href="#iconmine"></use>
+            <use  v-show="currentTab === 4" xlink:href="#iconmine-copy"></use>
             <use v-show="currentTab !== 4" xlink:href="#iconmine"></use>
         </svg>
     </router-link>

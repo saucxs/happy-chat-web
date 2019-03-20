@@ -79,7 +79,6 @@ export const queryUserInfo = ({commit},params) => {
 /*获取用户资料-special*/
 export const queryUserInfoSpecial = ({commit},params) => {
   return Api.queryUserInfo(params).then(res => {
-    console.log(res, '---------------------------------------------')
     commit(types.someOneInfoMutation, res.data.userInfo[0]);
   }).catch(err => {
     console.log(err);
@@ -89,8 +88,18 @@ export const queryUserInfoSpecial = ({commit},params) => {
 /*获取新朋友列表*/
 export const getNewFriends = ({commit},params) => {
   return Api.getNewFriends(params).then(res => {
-    console.log(res, '---------------------------------------------')
+    console.log(res, '新朋友列表---------------------------------------------')
     commit(types.newFriendMutation, res.data.newFriends);
+  }).catch(err => {
+    console.log(err);
+  });
+};
+
+/*获取朋友列表*/
+export const getAlreadyFriends = ({commit},params) => {
+  return Api.getAlreadyFriends(params).then(res => {
+    console.log(res, '朋友列表---------------------------------------------')
+    return res;
   }).catch(err => {
     console.log(err);
   });
@@ -177,3 +186,29 @@ export const savePrivateMsg = ({commit},params) => {
   });
 };
 
+/*修改备注*/
+export const confirmEditorRemark = ({commit},params) => {
+  return Api.confirmEditorRemark(params).then(res => {
+    return res;
+  }).catch(err => {
+    console.log(err);
+  });
+};
+
+/*修改个人信息*/
+export const confirmEditorInfo = ({commit},params) => {
+  return Api.confirmEditorInfo(params).then(res => {
+    return res;
+  }).catch(err => {
+    console.log(err);
+  });
+};
+
+/*删除好友*/
+export const confirmDeleteFriend = ({commit},params) => {
+  return Api.confirmDeleteFriend(params).then(res => {
+    return res;
+  }).catch(err => {
+    console.log(err);
+  });
+};

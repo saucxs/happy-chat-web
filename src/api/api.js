@@ -80,6 +80,11 @@ export default {
     let data = { params: params }
     return service.get("/api/chat/get_newfriends", data)
   },
+  /*获取朋友列表 - get*/
+  getAlreadyFriends: (params) => {
+    let data = { params: params }
+    return service.get("/api/chat/get_friends", data)
+  },
   /*查询此用户是否是我的好友 - get*/
   isFriendJudge: (params) => {
     let data = { params: params }
@@ -105,6 +110,19 @@ export default {
   /*存此条私聊信息到数据库 - post*/
   savePrivateMsg: (params) => {
     return service.post("/api/chat/private_save_msg", params)
+  },
+  /*修改备注 - put*/
+  confirmEditorRemark: (params) => {
+    return service.put("/api/chat/editor_remark", params)
+  },
+  /*修改个人信息 - put*/
+  confirmEditorInfo: (params) => {
+    return service.put("/api/chat/editor_info", params)
+  },
+  /*删除好友 - delete*/
+  confirmDeleteFriend: (params) => {
+    let data = { params: params }
+    return service.delete("/api/chat/del_friend", data)
   },
 
 /**
