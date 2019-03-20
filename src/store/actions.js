@@ -76,6 +76,16 @@ export const queryUserInfo = ({commit},params) => {
   });
 };
 
+/*获取用户资料-special*/
+export const queryUserInfoSpecial = ({commit},params) => {
+  return Api.queryUserInfo(params).then(res => {
+    console.log(res, '---------------------------------------------')
+    commit(types.someOneInfoMutation, res.data.userInfo[0]);
+  }).catch(err => {
+    console.log(err);
+  });
+};
+
 /*获取新朋友列表*/
 export const getNewFriends = ({commit},params) => {
   return Api.getNewFriends(params).then(res => {
@@ -150,3 +160,20 @@ export const updateNewFriendsState = ({commit},params) => {
     console.log(err);
   });
 };
+/*获取数据库私聊消息*/
+export const getPrivateDetail = ({commit},params) => {
+  return Api.getPrivateDetail(params).then(res => {
+    return res;
+  }).catch(err => {
+    console.log(err);
+  });
+};
+/*存此条私聊信息到数据库*/
+export const savePrivateMsg = ({commit},params) => {
+  return Api.savePrivateMsg(params).then(res => {
+    return res;
+  }).catch(err => {
+    console.log(err);
+  });
+};
+

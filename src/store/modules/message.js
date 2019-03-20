@@ -1,5 +1,5 @@
 import {
-  msgListMutation, firstLoadMutation,updateListMutation
+  msgListMutation, firstLoadMutation, updateListMutation, resetUnredMutation, someOneInfoMutation
 } from "../mutation-types.js";
 import {
   toNomalTime
@@ -8,6 +8,7 @@ import {
 const state = {
   firstLoad: true, //是否是第一次加载首页消息页面
   msgList: [], // 消息首页列表
+  someOneInfo: {}, //某个用户的用户资料
 };
 
 const mutations = {
@@ -20,7 +21,7 @@ const mutations = {
     state.msgList = data;
   },
   //更新首页消息列表
-  updateListMutation(state, data) {
+  [updateListMutation](state, data) {
     let unread = 0;
     // data.time = toNomalTime(data.time);
     //添加
@@ -96,9 +97,21 @@ const mutations = {
         }
       });
     }
-    // }
   },
 
+  //未读信息归零
+  [resetUnredMutation](state, id) {
+    state.msgList.forEach(ele => {
+      if (ele.id == id) {
+        ele.unread = null
+      }
+    })
+  },
+
+  //用户资料
+  [someOneInfoMutation](state, data) {
+    state.someOneInfo = data;
+  },
 
 }
 

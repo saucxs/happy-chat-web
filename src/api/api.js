@@ -93,9 +93,18 @@ export default {
   beFriends: (params) => {
     return service.post("/api/chat/be_friend", params)
   },
-  /*更新好友状态 - post*/
+  /*更新好友状态 - put*/
   updateNewFriendsState: (params) => {
     return service.put("/api/chat/update_newfriends", params)
+  },
+  /*获取数据库私聊消息 - get*/
+  getPrivateDetail: (params) => {
+    let data = { params: params }
+    return service.get("/api/chat/private_detail", data)
+  },
+  /*存此条私聊信息到数据库 - post*/
+  savePrivateMsg: (params) => {
+    return service.post("/api/chat/private_save_msg", params)
   },
 
 /**

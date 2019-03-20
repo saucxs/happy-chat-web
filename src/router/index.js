@@ -11,6 +11,7 @@ import UserInfo from "@/pages/UserInfo";
 import VerifyReq from "@/pages/VerifyReq";
 import ContactList from "@/pages/ContactList";
 import NewFriends from "@/pages/NewFriends";
+import PrivateChat from "@/pages/PrivateChat";
 
 Vue.use(Router)
 
@@ -63,6 +64,10 @@ const router = new Router({
     { //加好友通知
       path: "/contact_list/new_friends",
       component: NewFriends
+    },
+    { //私聊
+      path: "/private_chat/:user_id",
+      component: PrivateChat
     },
 
   ]

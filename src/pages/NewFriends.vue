@@ -95,7 +95,6 @@ export default {
 	},
 	created() {
 		this.userInfo = JSON.parse(sessionStorage.getItem("HappyChatUserInfo"));
-		console.log(this.newFriendGetter, '===============================')
     this.getNewFriends({user_id: this.userInfo.user_id});
 		this.$store.commit('friendReqTipsMutation', false);
 	}
