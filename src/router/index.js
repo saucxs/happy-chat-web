@@ -13,6 +13,7 @@ import ContactList from "@/pages/ContactList";
 import NewFriends from "@/pages/NewFriends";
 import PrivateChat from "@/pages/PrivateChat";
 import Me from "@/pages/Me";
+import CreatEditorGroup from "@/pages/CreatEditorGroup";
 
 Vue.use(Router)
 
@@ -73,6 +74,10 @@ const router = new Router({
     { //个人中心
       path: "/me",
       component: Me
+    },
+    { //建群
+      path: "/creat_group",
+      component: CreatEditorGroup
     },
 
   ]
