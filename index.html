@@ -11,7 +11,8 @@
     <script src="//at.alicdn.com/t/font_1083780_gcxqqympm36.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
     <script>
-      const socketWeb = io('http://localhost:3000');
+      // const socketWeb = io('http://localhost:3000');
+      const socketWeb = io('http://chat.chengxinsong.cn');
       const userInfo = JSON.parse(sessionStorage.getItem("HappyChatUserInfo"))
       if (userInfo) {
         socketWeb.emit('update', userInfo.user_id);
