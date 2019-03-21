@@ -13,7 +13,7 @@
             <use v-show="currentTab !== 2" xlink:href="#iconrobot"></use>
         </svg>
     </router-link>
-    <router-link class="item" to="contact_list">
+    <router-link class="item" :class="this.tabTipsGetter.addFriendReq" to="contact_list">
     <!-- <router-link v-else class="item " to="contact_list"> -->
       <svg class="icon" aria-hidden="true">
             <use  v-show="currentTab === 3" xlink:href="#icongroup-copy"></use>

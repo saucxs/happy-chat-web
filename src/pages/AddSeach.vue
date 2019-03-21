@@ -107,6 +107,7 @@ export default {
     .people-box{
       display: flex;
       align-items: center;
+      padding: 1.5vh 2vh;
       img {
         margin-right: 20px;
       }
@@ -121,7 +122,6 @@ export default {
     ul {
         margin-top: 0.2rem;
         li {
-            padding: 0 0.2rem;
             cursor: pointer;
             background-color: #fff;
             list-style-type: none;

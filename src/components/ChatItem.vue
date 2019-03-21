@@ -1,7 +1,7 @@
 <template>
     <div class="chat-item">
         <div v-if="!me" class="otherchat">
-          <svg class="icon img" aria-hidden="true">
+          <svg class="icon img" aria-hidden="true" @click="lookInfo">
             <use xlink:href="#iconrobot"></use>
           </svg>
           <div class="nt"><span v-if="name">{{name}}</span><span v-if="time">{{time}}</span></div>
@@ -9,7 +9,7 @@
         </div>
 
         <div v-if="me" class="mychat">
-          <svg class="icon img" aria-hidden="true">
+          <svg class="icon img" aria-hidden="true" @click="lookInfo">
             <use xlink:href="#iconniu"></use>
           </svg>
           <div class="nt"><span v-if="time">{{time}}</span><span v-if="name">{{name}}</span></div>
@@ -35,7 +35,7 @@
 
         methods: {
             lookInfo(){
-                console.log('href',this.href)
+              this.$router.push(`/user_info/${this.href}`)
             }
         }
     }

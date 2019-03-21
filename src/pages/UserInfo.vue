@@ -236,6 +236,7 @@ export default {
 			//删除好友
 			if (value === 'delFriend') {
 			  let params = {
+          user_id: this.myInfo.user_id,
           other_user_id: this.$route.params.user_id
         }
         this.confirmDeleteFriend(params).then(res => {

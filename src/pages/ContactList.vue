@@ -1,10 +1,10 @@
 <template>
 <div class="wrapper">
 	<Header :currentTab="currentTab"></Header>
-	<router-link class="new-friend" to="contact_list/new_friends">
+	<div class="new-friend" @click="newFriendList">
 		<svg class="icon img" aria-hidden="true"> <use  xlink:href="#iconfriends"></use></svg><span>新朋友</span>
 		<svg class="icon enter" aria-hidden="true"> <use  xlink:href="#iconright"></use></svg>
-	</router-link>
+	</div>
 	<p class="tab"><span :class="friend" @click="showFriends">朋友</span><span :class="group" @click="showGroups">群组</span></p>
 	<ul>
       <li v-for="(data, index) in alreadyFriends">
@@ -64,6 +64,9 @@ export default {
 			this.friend = '';
 			this.group = "hover";
 		},
+    newFriendList () {
+      this.$router.push({path: 'contact_list/new_friends'})
+    },
     alreadyFriendsList(){
       this.userInfo = JSON.parse(sessionStorage.getItem("HappyChatUserInfo"));
       this.getAlreadyFriends({user_id: this.userInfo.user_id}).then(res => {

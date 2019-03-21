@@ -38,8 +38,7 @@ export default {
 	},
 	computed: {
 		...mapGetters([
-			'newFriendGetter',
-
+			'newFriendGetter'
 		])
 	},
 
@@ -62,6 +61,7 @@ export default {
 		async updateNewFriends(val) {
       this.updateNewFriendsState({ from_user: val })
 			let data = {};
+      console.log(this.newFriendGetter, 'debugger')
 			this.newFriendGetter.forEach((ele) => {
 				if (ele.from_user == val) {
 					ele.status = 1;
@@ -95,8 +95,8 @@ export default {
 	},
 	created() {
 		this.userInfo = JSON.parse(sessionStorage.getItem("HappyChatUserInfo"));
+    this.$store.commit('friendReqTipsMutation', false);
     this.getNewFriends({user_id: this.userInfo.user_id});
-		this.$store.commit('friendReqTipsMutation', false);
 	}
 }
 </script>
