@@ -13,37 +13,39 @@
 	<Header goback='true' chatTitle="用户资料"></Header>
 	<div class="content">
     <div class="content-box">
-      <img :src="userInfo.avator" alt="">
-      <p class="href">
-        <span @click="goGithub"><svg class="icon" aria-hidden="true"><use  xlink:href="#iconGitHub"></use></svg></span>
-        <span @click="goWebsite"><svg class="icon" aria-hidden="true"><use  xlink:href="#iconWorld-WideWeb"></use></svg></span>
-      </p>
-      <p v-if="this.isMyFriend">
-        <svg class="icon" aria-hidden="true">
-          <use xlink:href="#iconbeizhu"></use>
-        </svg>
-        <span>备注</span>：{{this.remark}}
-      </p>
-      <p>
-        <svg class="icon" aria-hidden="true">
-          <use xlink:href="#iconmine"></use>
-        </svg>
-        <span>用户名</span>：{{userInfo.name}}
-      </p>
-      <p>
-        <svg class="icon" aria-hidden="true">
-          <use v-if="userInfo.sex === 0"  xlink:href="#iconxingbienan"></use>
-          <use v-else xlink:href="#iconxingbienv"></use>
-        </svg>
-        <span>性别</span>：{{userInfo.sex === 0 ? '男' : '女' }}
-      </p>
-      <p>
-        <svg class="icon" aria-hidden="true">
-          <use xlink:href="#iconplaceholder"></use>
-        </svg>
-        <span>来自</span>：{{userInfo.place}}
-      </p>
+      <svg id="icon" class="icon" alt="User Icon" aria-hidden="true">
+        <use xlink:href="#iconniu"></use>
+      </svg>
     </div>
+    <p class="href">
+      <span @click="goGithub"><svg class="icon" aria-hidden="true"><use  xlink:href="#iconGitHub"></use></svg></span>
+      <span @click="goWebsite"><svg class="icon" aria-hidden="true"><use  xlink:href="#iconWorld-WideWeb"></use></svg></span>
+    </p>
+    <p v-if="this.isMyFriend">
+      <svg class="icon" aria-hidden="true">
+        <use xlink:href="#iconbeizhu"></use>
+      </svg>
+      <span>备注</span>：{{this.remark}}
+    </p>
+    <p>
+      <svg class="icon" aria-hidden="true">
+        <use xlink:href="#iconmine"></use>
+      </svg>
+      <span>用户名</span>：{{userInfo.name}}
+    </p>
+    <p>
+      <svg class="icon" aria-hidden="true">
+        <use v-if="userInfo.sex === 0"  xlink:href="#iconxingbienan"></use>
+        <use v-else xlink:href="#iconxingbienv"></use>
+      </svg>
+      <span>性别</span>：{{userInfo.sex === 0 ? '男' : '女' }}
+    </p>
+    <p>
+      <svg class="icon" aria-hidden="true">
+        <use xlink:href="#iconplaceholder"></use>
+      </svg>
+      <span>来自</span>：{{userInfo.place}}
+    </p>
 	</div>
 	<div v-if="this.isAddingMe" class="action">
 		<span class="add-as-friend" @click="agreeBeFriend">通过验证</span>
@@ -334,33 +336,36 @@ export default {
 <style lang="scss" scoped>
 .wrapper {
     position: relative;
-    padding-top: 1rem;
+    padding-top: 8vh;
     .content {
+      text-align: center;
+      margin-top: 3vh;
       .content-box{
         text-align: center;
-        img {
-          width: 2rem;
-          height: 2rem;
-          border-radius: 50%;
-          margin: 4vh 0;
+        padding: 4vh 0 6vh 0;
+      }
+      img {
+        width: 2rem;
+        height: 2rem;
+        border-radius: 50%;
+        margin: 4vh 0;
+      }
+      p {
+        font-size: 3vh;
+        line-height: 0.8rem;
+        color: #4290F7;
+        .icon {
+          font-size: 4vh;
         }
-        p {
+        span {
           font-size: 2vh;
-          line-height: 0.8rem;
-          color: #4290F7;
-          .icon {
-            font-size: 1.6em;
-          }
-          span {
-            font-size: 2vh;
-          }
         }
-        .href {
-          span {
-            font-size: 2vh;
-            margin: 0 1vh;
-            cursor: pointer;
-          }
+      }
+      .href {
+        span {
+          font-size: 2vh;
+          margin: 0 1vh;
+          cursor: pointer;
         }
       }
     }

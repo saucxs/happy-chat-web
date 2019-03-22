@@ -1,7 +1,7 @@
 .login {
   background-color: #ccc ;
   font-family: "Poppins", sans-serif;
-  height: 100vh;
+  height: 10rem;
 
   .wrapper {
     display: flex;
@@ -15,9 +15,9 @@
       border-radius: 0.2rem 0.2rem 0.2rem 0.2rem;
       background: #fff;
       padding: 0.6rem;
-      width: 80%;
+      width: 90%;
       max-width: 5rem;
-      min-height: 70vh;
+      min-height: 7rem;
       position: relative;
       padding: 0;
       -webkit-box-shadow: 0 0.6rem 1.2rem 0 rgba(0, 0, 0, 0.3);
@@ -26,7 +26,7 @@
 
       h2 {
         text-align: center;
-        font-size: 0.26rem;
+        font-size: 0.3rem;
         font-weight: 600;
         text-transform: uppercase;
         display: inline-block;
@@ -45,12 +45,12 @@
           background-color: #39ace7;
           border: none;
           color: white;
-          padding: 0.15rem 0.8rem;
+          padding: 0.15rem 1.4rem;
           text-align: center;
           text-decoration: none;
           display: inline-block;
           text-transform: uppercase;
-          font-size: 0.13rem;
+          font-size: 0.18rem;
           -webkit-box-shadow: 0 0.1rem 0.3rem 0 rgba(95, 186, 233, 0.4);
           box-shadow: 0 0.1rem 0.3rem 0 rgba(95, 186, 233, 0.4);
           -webkit-border-radius: 0.05rem 0.05rem 0.05rem 0.05rem;
@@ -88,7 +88,7 @@
           text-align: center;
           text-decoration: none;
           display: inline-block;
-          font-size: 0.16rem;
+          font-size: 0.2rem;
           margin: 0.05rem;
           width: 50%;
           border: 0.02rem solid #f6f6f6;
@@ -120,7 +120,7 @@
         }
 
         .normal-word {
-          font-size: 0.16rem;
+          font-size: 0.2rem;
         }
 
       }

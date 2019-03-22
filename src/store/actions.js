@@ -105,6 +105,16 @@ export const getAlreadyFriends = ({commit},params) => {
   });
 };
 
+/*获取群列表*/
+export const getAlreadyGroups = ({commit},params) => {
+  return Api.getAlreadyGroups(params).then(res => {
+    console.log(res, '群列表---------------------------------------------')
+    return res;
+  }).catch(err => {
+    console.log(err);
+  });
+};
+
 /*查询此用户是否是我的好友*/
 export const isFriendJudge = ({commit},params) => {
   return Api.isFriendJudge(params).then(res => {
@@ -136,6 +146,7 @@ export const messageList = ({commit},params) => {
       allMsgList.sort((a, b) => {
         return b.time - a.time;
       });
+      console.log(allMsgList, '-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-')
       commit(types.msgListMutation, allMsgList);
     }
   }).catch(err => {
@@ -207,6 +218,81 @@ export const confirmEditorInfo = ({commit},params) => {
 /*删除好友*/
 export const confirmDeleteFriend = ({commit},params) => {
   return Api.confirmDeleteFriend(params).then(res => {
+    return res;
+  }).catch(err => {
+    console.log(err);
+  });
+};
+
+/*创建群*/
+export const confirmCreateGroup = ({commit},params) => {
+  return Api.confirmCreateGroup(params).then(res => {
+    return res;
+  }).catch(err => {
+    console.log(err);
+  });
+};
+
+/*加群*/
+export const confirmJoinGroup = ({commit},params) => {
+  return Api.confirmJoinGroup(params).then(res => {
+    return res;
+  }).catch(err => {
+    console.log(err);
+  });
+};
+
+/*获取群聊记录*/
+export const getGroupChat = ({commit},params) => {
+  return Api.getGroupChat(params).then(res => {
+    return res;
+  }).catch(err => {
+    console.log(err);
+  });
+};
+
+/*保存此条信息到数据库*/
+export const saveGroupChatMsg = ({commit},params) => {
+  return Api.saveGroupChatMsg(params).then(res => {
+    return res;
+  }).catch(err => {
+    console.log(err);
+  });
+};
+
+/*把新成员加入群名单*/
+export const addGroupChatRelation = ({commit},params) => {
+  return Api.addGroupChatRelation(params).then(res => {
+    if(res.success){
+      console.log('group_chat_relation', res)
+      commit(types.groupMemberMutation, res.data.groupMember);
+    }
+  }).catch(err => {
+    console.log(err);
+  });
+};
+
+/*获取建群信息*/
+export const getGroupInformation = ({commit},params) => {
+  return Api.getGroupInformation(params).then(res => {
+    return res;
+  }).catch(err => {
+    console.log(err);
+  });
+};
+
+/*获取建群信息*/
+export const judgeIsInGroup = ({commit},params) => {
+  return Api.judgeIsInGroup(params).then(res => {
+    return res;
+  }).catch(err => {
+    console.log(err);
+  });
+};
+
+/*退群*/
+export const exitChatGroup = ({commit},params) => {
+  return Api.exitChatGroup(params).then(res => {
     return res;
   }).catch(err => {
     console.log(err);

@@ -6,6 +6,5 @@ export const friendReqTipsMutation= "friendReqTipsMutation";
 export const updateListMutation = "updateListMutation";
 export const resetUnredMutation = "resetUnredMutation";
 export const someOneInfoMutation = "someOneInfoMutation";
-
-// export const queryUserInfoMutation = "queryUserInfoMutation";
-// export const USER_INFO = "USER_INFO";
+export const groupMemberMutation = "groupMemberMutation";
+export const groupInfoMutation = "groupInfoMutation";

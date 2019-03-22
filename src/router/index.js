@@ -14,10 +14,13 @@ import NewFriends from "@/pages/NewFriends";
 import PrivateChat from "@/pages/PrivateChat";
 import Me from "@/pages/Me";
 import CreatEditorGroup from "@/pages/CreatEditorGroup";
+import GroupChat from "@/pages/GroupChat";
+import GroupInfo from "@/pages/GroupInfo";
 
 Vue.use(Router)
 
 const router = new Router({
+  // mode: 'history',
   routes: [
     {
       path: "/",
@@ -79,20 +82,40 @@ const router = new Router({
       path: "/creat_group",
       component: CreatEditorGroup
     },
+    { //群聊
+      path: "/group_chat/:group_id",
+      component: GroupChat
+    },
+    { //群信息卡
+      path: "/group_info/:group_id",
+      component: GroupInfo
+    },
+    { //搜群
+      path: "/add_seach/group/:groupname",
+      component: AddSeach
+    },
 
   ]
 })
 
+/*路由白名单*/
+let whiteRouter = ["/login", "/register", "/activate"]
+
 /*路由守卫*/
 router.beforeEach((to, from, next) => {
+  let flag = whiteRouter.some(item => {
+    if (to.path.indexOf(item) >= 0){
+      return true
+    }
+  })
   if (!sessionStorage.HappyChatUserToken) {
-    if (to.path === "/login" || to.path === "/register") {
-      next();
+    if (flag) {
+      next()
     } else {
       next("/login");
     }
   } else {
-    if (to.path === "/login" || to.path === "/register") {
+    if (flag) {
       next("/robot");
     } else {
       next();

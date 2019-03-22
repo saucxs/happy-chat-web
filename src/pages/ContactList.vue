@@ -6,9 +6,9 @@
 		<svg class="icon enter" aria-hidden="true"> <use  xlink:href="#iconright"></use></svg>
 	</div>
 	<p class="tab"><span :class="friend" @click="showFriends">朋友</span><span :class="group" @click="showGroups">群组</span></p>
-	<ul>
+	<ul v-if="friend">
       <li v-for="(data, index) in alreadyFriends">
-        <div class="list-box" @click="enterIt(data.other_user_id)">
+        <div class="list-box" @click="enterIt(data.other_user_id,'friend')">
           <img :src="data.avator" alt="">
           <div class="content">
             <p>{{data.name}}</p>
@@ -23,6 +23,18 @@
         </div>
       </li>
 	</ul>
+  <ul v-if="group">
+    <li v-for="(data, index) in alreadyGroups">
+      <div class="list-box" @click="enterIt(data.group_id,'group')">
+        <img :src="data.avator" alt="">
+        <div class="content">
+          <p>{{data.group_name}}</p>
+          <p>群主：{{data.group_creater}}</p>
+        </div>
+        <div class="remark">{{data.group_notice === ''? '没有留下公告~': data.group_notice.slice(0,10)+'...'}}</div>
+      </div>
+    </li>
+  </ul>
 	<Footer :currentTab="currentTab"></Footer>
 </div>
 </template>
@@ -43,7 +55,8 @@ export default {
 			currentTab: 3,
 			friend: "hover",
 			group: "",
-      alreadyFriends: []
+      alreadyFriends: [],
+      alreadyGroups: []
 		}
 	},
 
@@ -52,9 +65,13 @@ export default {
 	watch: {},
 
 	methods: {
-    ...mapActions(["getAlreadyFriends"]),
-    enterIt(val) {
-      this.$router.push(`/user_info/${val}`)
+    ...mapActions(["getAlreadyFriends", "getAlreadyGroups"]),
+    enterIt(val,type) {
+      if(type === 'friend'){
+        this.$router.push(`/user_info/${val}`)
+      }else if(type === 'group'){
+        this.$router.push(`/group_info/${val}`)
+      }
     },
 		showFriends() {
 			this.friend = "hover";
@@ -68,10 +85,16 @@ export default {
       this.$router.push({path: 'contact_list/new_friends'})
     },
     alreadyFriendsList(){
-      this.userInfo = JSON.parse(sessionStorage.getItem("HappyChatUserInfo"));
       this.getAlreadyFriends({user_id: this.userInfo.user_id}).then(res => {
         if (res) {
           this.alreadyFriends =  res.data.alreadyFriends
+        }
+      })
+    },
+    alreadyGroupsList () {
+      this.getAlreadyGroups({user_id: this.userInfo.user_id}).then(res => {
+        if (res) {
+          this.alreadyGroups =  res.data.alreadyGroups
         }
       })
     }
@@ -79,8 +102,9 @@ export default {
 	},
 
 	mounted() {
-   this.alreadyFriendsList()
-		// this.getMsgBySocket();
+    this.userInfo = JSON.parse(sessionStorage.getItem("HappyChatUserInfo"));
+    this.alreadyFriendsList();
+    this.alreadyGroupsList()
 	}
 }
 </script>

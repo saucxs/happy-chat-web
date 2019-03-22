@@ -1,5 +1,6 @@
 import {
-  msgListMutation, firstLoadMutation, updateListMutation, resetUnredMutation, someOneInfoMutation
+  msgListMutation, firstLoadMutation, updateListMutation, resetUnredMutation, someOneInfoMutation,
+  groupMemberMutation, groupInfoMutation
 } from "../mutation-types.js";
 import {
   toNomalTime
@@ -9,6 +10,8 @@ const state = {
   firstLoad: true, //是否是第一次加载首页消息页面
   msgList: [], // 消息首页列表
   someOneInfo: {}, //某个用户的用户资料
+  groupMember: [], //群成员
+  groupInfo: [], //群资料
 };
 
 const mutations = {
@@ -111,6 +114,15 @@ const mutations = {
   //用户资料
   [someOneInfoMutation](state, data) {
     state.someOneInfo = data;
+  },
+
+  /*群成员*/
+  [groupMemberMutation](state, data) {
+    state.groupMember = data;
+  },
+  //群资料
+  [groupInfoMutation](state, data) {
+    state.groupInfo = data;
   },
 
 }

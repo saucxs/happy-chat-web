@@ -8,10 +8,10 @@
     <use xlink:href="#iconadd-copy"></use>
   </svg>
 	<svg v-show="groupInfo" class="icon add" aria-hidden="true" @click="lookGroupInfo">
-    <use xlink:href="#icon-group_fill-copy"></use>
+    <use xlink:href="#icongroup-copy-white"></use>
   </svg>
 	<svg v-show="userInfo" class="icon add" aria-hidden="true" @click="lookUserInfo">
-    <use xlink:href="#icon-group_fill-copy"></use>
+    <use xlink:href="#icongroup-copy-white"></use>
   </svg>
 </div>
 </template>

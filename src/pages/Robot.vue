@@ -5,7 +5,7 @@
     <ul>
       <li v-for="msg in robotMsgGetter">
         <ChatItem v-if="msg.user" :msg="msg.message" :name="msg.user" :time="time"></ChatItem>
-        <ChatItem v-if="!msg.user" me="true" :img=img :msg="msg.message" :time="time"></ChatItem>
+        <ChatItem v-if="!msg.user" me="true" :name="name" :img=img :msg="msg.message" :time="time"></ChatItem>
       </li>
     </ul>
     <div class="input-msg">
@@ -31,7 +31,8 @@ export default {
       inputMsg: "",
       time: toNomalTime((new Date()).getTime() ),
       img: "",
-      isScrollToBottom: true
+      isScrollToBottom: true,
+      name: ''
     }
   },
   components: {
@@ -47,16 +48,10 @@ export default {
       this.$store.commit('robotMsgMutation', { //提交自己的内容
         message: this.inputMsg
       })
-//      let data = {
-//        params: {message: this.inputMsg}
-//      }
       let data = {
        message: this.inputMsg
       }
       await this.chatRobot(data);
-//      await this.$store.dispatch('robatMsgAction', { //提交由自己输入内容作为参数请求接口异步得来的内容（机器人的回复）
-//        message: this.inputMsg
-//      })
       this.inputMsg = '';
     },
     refresh() {
@@ -74,7 +69,12 @@ export default {
   ...mapGetters([
       'robotMsgGetter'
     ])
-  }
+  },
+  created() {
+    const userInfo = JSON.parse(sessionStorage.getItem("HappyChatUserInfo"));
+    this.img = userInfo.avator;
+    this.name = userInfo.name;
+  },
 }
 </script>
 
@@ -99,38 +99,38 @@ export default {
     }
   }
   .input-msg {
-    height: 0.46rem;
+    height: 0.54rem;
     position: fixed;
-    bottom: 0.62rem;
+    bottom: 0.71rem;
     display: flex;
     width: 100%;
     z-index: 999;
     textarea {
-      width: 87.8%;
-      margin: 0 0.06rem;
-      padding-top: 0.07rem;
-      padding-left: 0.06rem;
+      width: 78.8%;
+      margin: 0 0.05rem;
+      padding: 0.05rem 0.1rem;
       border-radius: 0.02rem;
       outline: none;
       resize: none;
       border: none;
       overflow-y: hidden;
-      font: 0.16rem/0.18rem 'Microsoft Yahei';
+      font: 0.24rem 'Microsoft Yahei';
     }
     p.btn {
-      font-size: 0.2rem;
+      font-size: 0.22rem;
       display: flex;
       align-items: center;
       justify-content: center;
       text-align: center;
       margin-right: 0.06rem;
       height: 100%;
-      width: 11%;
+      width: 19%;
       background: #ccc;
       color: white;
       border-radius: 0.02rem;
       cursor: not-allowed;
       font-family: 'Microsoft Yahei';
+
     &.enable {
        background: #1E90FF;
        cursor: pointer;

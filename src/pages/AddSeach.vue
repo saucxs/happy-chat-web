@@ -56,7 +56,7 @@ export default {
 	watch: {},
 
 	methods: {
-    ...mapActions(["findPerson"]),
+    ...mapActions(["findPerson","getGroupInformation"]),
 		getChatTitle() {
 			const username = this.$route.params.username;
 			const groupname = this.$route.params.groupname;
@@ -71,20 +71,43 @@ export default {
 		//找人
 		findPeople(username) {
       this.findPerson({ name: username }).then(res => {
-        console.log('findPeople', res)
-        this.userDataList = res.data.userInfo;
+        if(res.success){
+          this.userDataList = res.data.userInfo;
+        }else{
+          this.$message({
+            message: '服务器出错啦',
+            type: "error"
+          });
+        }
+      }).catch(err => {
+        console.log('err', err)
+        const errorMsg = err.error
+        this.$message({
+          message: errorMsg,
+          type: "error"
+        });
       })
 		},
 		//找群
 		findGroup(groupname) {
-			axios.get('/api/chat/get_group_info', {
-				params: {
-					groupName: groupname
-				}
-			}).then(res => {
-				console.log('findGroup', res)
-				this.groupDataList = res.data.data.groupInfo;
-			})
+      this.getGroupInformation({groupName: groupname}).then(res => {
+        console.log('findGroup', res)
+        if(res.success){
+          this.groupDataList = res.data.groupInfo;
+        }else{
+          this.$message({
+            message: '服务器出错啦',
+            type: "error"
+          });
+        }
+      }).catch(err => {
+        console.log('err', err)
+        const errorMsg = err.error
+        this.$message({
+          message: errorMsg,
+          type: "error"
+        });
+      })
 		},
 		enterUserCard(val) {
 			this.$router.push(`/user_info/${val}`)

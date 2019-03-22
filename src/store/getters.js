@@ -5,5 +5,5 @@ export const msgListGetter = state => state.message.msgList;
 export const firstLoad = state => state.message.firstLoad;
 export const someOneInfoGetter = state => state.message.someOneInfo;
 export const tabTipsGetter = state => state.common.tabTips;
-// export const queryUserInfoGetter = state => state.common.queryUserInfo;
-
+export const groupMemberGetter = state => state.message.groupMember;
+export const groupInfoGetter = state => state.message.groupInfo;

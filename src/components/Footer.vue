@@ -53,13 +53,12 @@ import { mapGetters, mapActions } from 'vuex';
     bottom: 0;
     width: 100%;
     z-index: 99;
-    font-size: 0.36rem;
+    font-size: 0.37rem;
     display: flex;
     justify-content: space-between;
-    background: white;
-    border-top: 0.01rem solid #eee;
-    padding-top: 0.1rem;
-    padding-bottom: 0.1rem;
+    background: #eee;
+    border-top: 0.05rem solid #eee;
+    height: 0.7rem;
     .item {
       margin: 0 auto;
     }

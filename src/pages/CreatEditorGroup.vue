@@ -6,9 +6,11 @@
 		<p slot="content">{{this.messageBox.message}}</p>
 	</Message-box>
 	<div class="content">
-    <svg id="icon" class="icon" alt="User Icon" aria-hidden="true">
-      <use xlink:href="group_avator"></use>
-    </svg>
+    <div class="content-box">
+      <svg id="icon" class="icon" alt="User Icon" aria-hidden="true">
+        <use xlink:href="#icongroup"></use>
+      </svg>
+    </div>
 		<p>群名:</br><input type="text" v-model="groupInfo.group_name" placeholder="不超过10个字哦" maxlength="10" /></p>
 		<p>群公告:</br><textarea rows="5" type="text" v-model="groupInfo.group_notice" placeholder="不超过60个字哦" maxlength="60" /></textarea>
 		</p>
@@ -23,9 +25,9 @@
 <script>
 import Header from '../components/Header.vue'
 import axios from "axios"
-import {
-	mapGetters
-} from 'vuex'
+import { mapGetters, mapActions } from 'vuex';
+import {toNomalTime} from "../utils/common";
+
 export default {
 	data() {
 		return {
@@ -50,37 +52,74 @@ export default {
 		Header
 	},
 	methods: {
+    ...mapActions(["confirmCreateGroup", "confirmJoinGroup"]),
 		//创建群
 		createGroup() {
-			this.groupInfo.creater_time = Date.parse(new Date()) / 1000; //时间
+			this.groupInfo.creater_time = toNomalTime((new Date()).getTime()); //时间
 			this.groupInfo.group_creater = this.userInfo.name;
-			axios.post('/api/v1/create_group', this.groupInfo).then((res) => {
-				console.log('res', res)
-				this.group_id = res.data.data.group_id;
-				const data = {
-					message: "创建群成功！",
-					time: this.groupInfo.creater_time,
-					group_name: this.groupInfo.group_name,
-					group_avator: this.groupInfo.group_avator,
-					type: "group",
-					action: "push",
-					id: this.group_id,
-					group_id: this.group_id
-				}
-				this.$store.commit('updateListMutation', data)
-				this.joinGroup();
-			})
+			if (this.groupInfo.group_name && this.groupInfo.group_notice) {
+        this.confirmCreateGroup(this.groupInfo).then((res) => {
+          console.log('res', res)
+          if (res.success) {
+            this.group_id = res.data.group_id;
+            const data = {
+              message: "创建群成功！",
+              time: this.groupInfo.creater_time,
+              group_name: this.groupInfo.group_name,
+              group_avator: this.groupInfo.group_avator,
+              type: "group",
+              action: "push",
+              id: this.group_id,
+              group_id: this.group_id
+            }
+            this.$store.commit('updateListMutation', data)
+            this.joinGroup();
+          } else {
+            this.$message({
+              message: '服务器出错啦',
+              type: "error"
+            });
+          }
+        }).catch(err => {
+          const errorMsg = err.response.error
+          this.$message({
+            message: errorMsg,
+            type: "error"
+          });
+        })
+      } else {
+        let message;
+        if (this.groupInfo.group_name.trim() === "") { message = "请输入群名" }
+        if (this.this.groupInfo.group_notice.trim() === "") { message = "请输入群公告" }
+        this.$message({
+          message: message,
+          type: "warn"
+        });
+      }
 
 		},
 		//把自己加进这个群中
 		joinGroup() {
-			axios.post('/api/v1/join_group', {
-				group_id: this.group_id
-			}).then((res) => {
-				this.messageBox.messageBoxEvent = 'createGroup'
-				this.messageBox.visible = true;
-				this.messageBox.message = "创建群成功"
-			})
+      this.confirmJoinGroup({
+        group_id: this.group_id
+      }).then((res) => {
+        if (res.success) {
+          this.messageBox.messageBoxEvent = 'createGroup'
+          this.messageBox.visible = true;
+          this.messageBox.message = "创建群成功"
+        } else {
+          this.$message({
+            message: '服务器出错啦',
+            type: "error"
+          });
+        }
+      }).catch(err => {
+        const errorMsg = err.response.error
+        this.$message({
+          message: errorMsg,
+          type: "error"
+        });
+      })
 		},
 		confirm(value) {
 			if (value === 'createGroup') {
@@ -91,7 +130,7 @@ export default {
 		}
 	},
 	created() {
-		this.userInfo = JSON.parse(localStorage.getItem("userInfo"));
+		this.userInfo = JSON.parse(sessionStorage.getItem("HappyChatUserInfo"));
 	}
 }
 </script>
@@ -101,19 +140,20 @@ export default {
     position: relative;
     padding-top: 0.1rem;
     .content {
-        div {
-            text-align: center;
-            margin-bottom: 1rem;
-            img {
-                width: 2rem;
-                height: 2rem;
-                border-radius: 50%;
-                margin: 1rem 0 0;
-            }
+        margin-top: 8vh;
+        .content-box{
+          text-align: center;
+          padding: 4vh 0 6vh 0;
+          img {
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            margin: 1rem 0 0;
+          }
         }
         p {
             font-size: 0.32rem;
-            margin: 0 20% 0.6rem;
+            margin: 0 6vh 6vh;;
         }
         :nth-child(1) {
             line-height: 0.6rem;
@@ -133,8 +173,7 @@ export default {
             width: 100%;
             outline: none;
             border: 0.01rem solid #fff;
-            padding: 0.06rem 0 0.1rem 0.1rem;
-            font-size: 0.28rem;
+            padding: 1.5vh;
             -webkit-appearance: none;
             /*去除系统默认的样式，苹果手机上的阴影*/
             -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
@@ -144,29 +183,30 @@ export default {
         input,
         textarea::-webkit-input-placeholder {
             /* WebKit browsers */
-            font-size: 0.24rem;
+            font-size: 2.6vh;
             color: #999;
         }
         input,
         textarea:-moz-placeholder {
             /* Mozilla Firefox 4 to 18 */
-            font-size: 0.24rem;
+            font-size: 2.6vh;
             color: #999;
         }
         input,
         textarea::-moz-placeholder {
             /* Mozilla Firefox 19+ */
-            font-size: 0.24rem;
+            font-size: 2.6vh;
             color: #999;
         }
         input,
         textarea:-ms-input-placeholder {
             /* Internet Explorer 10+ */
-            font-size: 0.24rem;
+            font-size: 2.6vh;
             color: #999;
         }
         textarea {
             width: 100%;
+            color: #999;
             /*别忘了文本域的box-sizing属性值是border-box;所有的边框和padding都是在你固定的宽高的基础上绘制*/
             /*去除点击出现轮廓颜色*/
             outline: none;
@@ -174,14 +214,11 @@ export default {
             resize: none;
             /*padding已在重置样式中去除，如果没有去除，记得有padding哦*/
             border: 0.01rem solid #fff;
-            padding: 0.06rem 0 0.1rem 0.1rem;
-            font-size: 0.24rem;
+            padding: 1.5vh;
+            font-size: 2.6vh;
         }
     }
     .action {
-        position: absolute;
-        width: 100%;
-        top: 8.8rem;
         text-align: center;
         span {
             display: inline-block;

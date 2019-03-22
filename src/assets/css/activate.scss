@@ -45,6 +45,20 @@
 
       .active {
         color: #39ace7;
+        font-size: 3vh;
+      }
+
+      .message-tip {
+        color: #000;
+        font-size: 2vh;
+        margin-top: 4vh;
+      }
+
+      .go-back-login{
+        color: #39ace7;
+        font-size: 2vh;
+        margin-top: 4vh;
+        text-decoration: underline;
       }
 
     }
