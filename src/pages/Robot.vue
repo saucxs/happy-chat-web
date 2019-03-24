@@ -43,7 +43,6 @@ export default {
   methods: {
     ...mapActions(["chatRobot"]),
     async sendMessage() {
-      console.log(this.inputMsg, '发送信息');
       if (this.inputMsg.trim() == '') return;
       this.$store.commit('robotMsgMutation', { //提交自己的内容
         message: this.inputMsg

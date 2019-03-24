@@ -91,7 +91,6 @@ export default {
 		//找群
 		findGroup(groupname) {
       this.getGroupInformation({groupName: groupname}).then(res => {
-        console.log('findGroup', res)
         if(res.success){
           this.groupDataList = res.data.groupInfo;
         }else{

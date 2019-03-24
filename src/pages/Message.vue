@@ -51,12 +51,10 @@ export default {
       socketWeb.removeAllListeners('getPrivateMsg');
       socketWeb.removeAllListeners('getGroupMsg');
       socketWeb.on('getPrivateMsg', (data) => {
-        console.log('首页获取私聊消息', data);
         data.type = 'private'
         this.$store.commit('updateListMutation', data)
       })
       socketWeb.on('getGroupMsg', (data) => {
-        console.log('首页获取群消息', data);
         data.type = 'group'
         this.$store.commit('updateListMutation', data)
       })

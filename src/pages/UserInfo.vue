@@ -141,9 +141,7 @@ export default {
 		},
 		//判断这个人是否请求加我未通过
 		isAddingMeFun() {
-			console.log('this.newFriendGetter', this.newFriendGetter)
 			this.newFriendGetter.forEach((ele) => {
-				// console.log(ele.from_user, '=====', this.$route.params.user_id)
 				if (ele.from_user == this.$route.params.user_id && ele.status !== 1) {
 					this.isAddingMe = true;
 					return
@@ -283,7 +281,6 @@ export default {
 				//验证url
 				var urlP = /^((https?|ftp|file):\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/;
 				var re = new RegExp(urlP);
-				console.log('value.myInfo.website', value.myInfo.website)
 				if (value.myInfo.website) {
 					if (!re.test(value.myInfo.website)) {
 						this.$message({
@@ -306,7 +303,6 @@ export default {
 						value.myInfo.github = value.myInfo.github.substr(0, 4) != 'http' ? ('http://' + value.myInfo.github) : value.myInfo.github;
 					}
 				}
-				console.log(value.myInfo)
         let params = {
           github: value.myInfo.github,
           website: value.myInfo.website,

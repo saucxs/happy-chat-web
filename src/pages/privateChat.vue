@@ -65,7 +65,6 @@ export default {
         to_user: this.toUserInfo.to_user
       }
       this.getPrivateDetail(params).then(res => {
-        console.log(res, '私聊信息')
         if (res.success) {
           this.privateDetail = res.data.privateDetail;
           if (this.privateDetail.length == 0) return
@@ -86,7 +85,6 @@ export default {
 		sendMessage() {
 			if (this.inputMsg.trim() == '') return
 			if (!this.isMyFriend) {
-				console.log('isnotMyFriend')
 				this.$message({
 					message: 'ta不是您的好友，请先加ta为好友',
 					type: "error"
@@ -94,7 +92,6 @@ export default {
 				return
 			}
 			if (!this.isHisFriend) {
-				console.log('isnoHisFriend')
 				this.$message({
 					message: '您不是ta的好友，请先加ta为好友',
 					type: "error"
@@ -135,7 +132,6 @@ export default {
         if(res){
           this.inputMsg = '';
           // 存此条私聊信息到本地
-          console.log('saveMsgByDBdata', data)
           this.privateDetail.push(data);
         }
       }).catch(err => {
@@ -150,7 +146,6 @@ export default {
 		getMsgBySocket() {
       socketWeb.removeAllListeners('getPrivateMsg');
       socketWeb.on('getPrivateMsg', (data) => {
-				console.log('聊天内获取私聊消息', data);
 				//如果收到的soket信息不是发给自己的 放弃这条soket 没必要了 因为私聊是点对点发送的
 				// if(data.to_user != this.fromUserInfo.user_id) return
 				//如果收到的soket信息不是来自当前聊天者 写入首页信息列表 并return
@@ -158,7 +153,6 @@ export default {
 				// console.log(data.from_user, '!=', this.toUserInfo.to_user)
 				// 	//soket信息不是来自当前聊天者 vuex添加此条信息 有未读提示
 				if (data.from_user != this.toUserInfo.to_user) {
-					console.log(data, "updateListMutation____data")
 					data.chatOfNow = false;
 					this.$store.commit('updateListMutation', data)
 					return

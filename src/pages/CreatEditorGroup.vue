@@ -59,7 +59,6 @@ export default {
 			this.groupInfo.group_creater = this.userInfo.name;
 			if (this.groupInfo.group_name && this.groupInfo.group_notice) {
         this.confirmCreateGroup(this.groupInfo).then((res) => {
-          console.log('res', res)
           if (res.success) {
             this.group_id = res.data.group_id;
             const data = {

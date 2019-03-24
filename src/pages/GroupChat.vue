@@ -60,7 +60,6 @@ export default {
         groupId: this.groupInfo.groupId
       }
       this.getGroupChat(params).then((res) => {
-        console.log(res, '++++++++++++++++++++++++++++++++++')
         if (res.success) {
           this.message = res.data.groupMsg;
           this.$store.commit('groupInfoMutation', res.data.groupInfo[0])
@@ -82,7 +81,6 @@ export default {
             this.$store.commit('updateListMutation', data)
           }
           if (this.message.length == 0) return;
-          console.log(this.message, '12324')
           this.message.forEach(element => {
             element.time = element.time;
             element.message = element.message.split(':')[1];
@@ -151,7 +149,6 @@ export default {
 		getMsgBySocket() {
       socketWeb.removeAllListeners('getGroupMsg');
       socketWeb.on('getGroupMsg', (data) => {
-				console.log('聊天内获取群聊消息', data);
 				//收到soket群信息 如果该群群成员不包含自己 放弃这条soket
 				if (!this.groupMemberGetter.includes(this.userInfo.user_id)) return;
 				//如果收到的soket信息不是来自当前聊天群 写入首页信息列表 并return

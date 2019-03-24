@@ -61,7 +61,6 @@ export default {
 		async updateNewFriends(val) {
       this.updateNewFriendsState({ from_user: val })
 			let data = {};
-      console.log(this.newFriendGetter, 'debugger')
 			this.newFriendGetter.forEach((ele) => {
 				if (ele.from_user == val) {
 					ele.status = 1;

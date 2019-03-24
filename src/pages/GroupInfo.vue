@@ -55,7 +55,6 @@ export default {
         groupId: this.$route.params.group_id
       }
       this.getGroupInformation(params).then(res => {
-        console.log(res, '建群信息');
         if(res.success){
           this.groupInfo = res.data.groupInfo[0];
         }else{

@@ -62,7 +62,6 @@ export default {
         }
 			  this.login(params).then(res => {
 			    if(res) {
-            console.log(res, '------------------')
 			      if (res.success) {
               //保存soket.io
               socketWeb.emit('login', res.userInfo.user_id)
@@ -95,7 +94,6 @@ export default {
 			}
 		},
 		confirm(value) {
-			console.log('confirm', value)
 			if (value === 'login') {
 				this.messageBox.visible = false;
 				this.$router.push("/robot");
