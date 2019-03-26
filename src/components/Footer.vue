@@ -53,7 +53,7 @@ import { mapGetters, mapActions } from 'vuex';
     bottom: 0;
     width: 100%;
     z-index: 99;
-    font-size: 0.37rem;
+    font-size: 0.4rem;
     display: flex;
     justify-content: space-between;
     background: #eee;

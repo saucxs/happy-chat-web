@@ -108,4 +108,16 @@ export default {
     fill: currentColor;
     overflow: hidden;
   }
+
+  .content-busuanzi{
+    position: fixed;
+    text-align: center;
+    bottom: 0.2rem;
+  }
+  .after-content{
+    font-size: 0.12rem;
+    color: #cccccc;
+
+  }
+
 </style>

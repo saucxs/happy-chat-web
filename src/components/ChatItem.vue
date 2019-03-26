@@ -35,7 +35,11 @@
 
         methods: {
             lookInfo(){
-              this.$router.push(`/user_info/${this.href}`)
+              if(this.href){
+                this.$router.push(`/user_info/${this.href}`)
+              }else {
+                window.location.href = "https://github.com/saucxs/happy-chat-web"
+              }
             }
         }
     }

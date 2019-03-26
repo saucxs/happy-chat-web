@@ -16,15 +16,14 @@
   }
 
   .input-msg {
-    height: 0.54rem;
+    height: 0.66rem;
     position: fixed;
-    bottom: 0.1rem;
+    bottom: 0rem;
     display: flex;
     width: 100%;
     z-index: 999;
     textarea {
-      width: 78.8%;
-      margin: 0 0.05rem;
+      width: 80%;
       padding: 0.05rem 0.1rem;
       border-radius: 0.02rem;
       outline: none;
@@ -40,9 +39,8 @@
       align-items: center;
       justify-content: center;
       text-align: center;
-      margin-right: 0.06rem;
       height: 100%;
-      width: 19%;
+      width: 20%;
       background: #ccc;
       color: white;
       border-radius: 0.02rem;

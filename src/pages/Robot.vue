@@ -5,7 +5,7 @@
     <ul>
       <li v-for="msg in robotMsgGetter">
         <ChatItem v-if="msg.user" :msg="msg.message" :name="msg.user" :time="time"></ChatItem>
-        <ChatItem v-if="!msg.user" me="true" :name="name" :img=img :msg="msg.message" :time="time"></ChatItem>
+        <ChatItem v-if="!msg.user" me="true" :name="name" :href="href" :img=img :msg="msg.message" :time="time"></ChatItem>
       </li>
     </ul>
     <div class="input-msg">
@@ -32,7 +32,8 @@ export default {
       time: toNomalTime((new Date()).getTime() ),
       img: "",
       isScrollToBottom: true,
-      name: ''
+      name: '',
+      href: ''
     }
   },
   components: {
@@ -73,6 +74,7 @@ export default {
     const userInfo = JSON.parse(sessionStorage.getItem("HappyChatUserInfo"));
     this.img = userInfo.avator;
     this.name = userInfo.name;
+    this.href = userInfo.user_id
   },
 }
 </script>
@@ -98,15 +100,14 @@ export default {
     }
   }
   .input-msg {
-    height: 0.54rem;
+    height: 0.66rem;
     position: fixed;
-    bottom: 0.71rem;
+    bottom: 0.7rem;
     display: flex;
     width: 100%;
     z-index: 999;
     textarea {
-      width: 78.8%;
-      margin: 0 0.05rem;
+      width: 80%;
       padding: 0.05rem 0.1rem;
       border-radius: 0.02rem;
       outline: none;
@@ -123,7 +124,7 @@ export default {
       text-align: center;
       margin-right: 0.06rem;
       height: 100%;
-      width: 19%;
+      width: 20%;
       background: #ccc;
       color: white;
       border-radius: 0.02rem;
