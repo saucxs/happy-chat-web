@@ -28,14 +28,38 @@ export default {
       message: ''
 		};
 	},
-  beforeRouteEnter: (to, from, next) => {
-    next(vm => {
+  // beforeRouteEnter: (to, from, next) => {
+  //   next(vm => {
+  //     let data = {
+  //       code: vm.code
+  //     }
+  //     vm.activateEmail(data).then(res => {
+  //       if (res) {
+  //         vm.message = res.message;
+  //       }
+  //     }).catch(err => {
+  //       this.$message({
+  //         message: '服务器出错啦',
+  //         type: "error"
+  //       });
+  //     })
+  //   });
+  // },
+  created() {
+	  this.activateEmailFunction();
+  },
+	methods: {
+    ...mapActions(["activateEmail"]),
+    goBackLogin () {
+      this.$router.push('/login')
+    },
+    activateEmailFunction(){
       let data = {
-        code: vm.code
+        code: this.code
       }
-      vm.activateEmail(data).then(res => {
+      this.activateEmail(data).then(res => {
         if (res) {
-          vm.message = res.message;
+          this.message = res.message;
         }
       }).catch(err => {
         this.$message({
@@ -43,12 +67,6 @@ export default {
           type: "error"
         });
       })
-    });
-  },
-	methods: {
-    ...mapActions(["activateEmail"]),
-    goBackLogin () {
-      this.$router.push('/login')
     }
 	}
 };
