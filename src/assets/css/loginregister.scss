@@ -1,7 +1,9 @@
 .login {
   background-color: #ccc ;
   font-family: "Poppins", sans-serif;
-  height: 10rem;
+  height: 100%;
+  width: 100%;
+  position: absolute;
 
   .wrapper {
     display: flex;
@@ -17,7 +19,7 @@
       padding: 0.6rem;
       width: 90%;
       max-width: 5rem;
-      min-height: 7rem;
+      min-height: 8rem;
       position: relative;
       padding: 0;
       -webkit-box-shadow: 0 0.6rem 1.2rem 0 rgba(0, 0, 0, 0.3);
@@ -90,7 +92,7 @@
           display: inline-block;
           font-size: 0.2rem;
           margin: 0.05rem;
-          width: 50%;
+          width: 60%;
           border: 0.02rem solid #f6f6f6;
           -webkit-transition: all 0.5s ease-in-out;
           -moz-transition: all 0.5s ease-in-out;

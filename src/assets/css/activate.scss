@@ -1,7 +1,9 @@
 .activate {
   background-color: #ccc ;
   font-family: "Poppins", sans-serif;
-  height: 100vh;
+  height: 100%;
+  width: 100%;
+  position: absolute;
 
   .wrapper {
     display: flex;
@@ -17,7 +19,7 @@
       padding: 0.6rem;
       width: 80%;
       max-width: 5rem;
-      min-height: 70vh;
+      min-height: 8rem;
       position: relative;
       padding: 0;
       -webkit-box-shadow: 0 0.6rem 1.2rem 0 rgba(0, 0, 0, 0.3);
@@ -26,7 +28,7 @@
 
       h2 {
         text-align: center;
-        font-size: 2.2vh;
+        font-size: 0.3rem;
         font-weight: 600;
         text-transform: uppercase;
         display: inline-block;
@@ -36,7 +38,7 @@
 
       .text {
         text-align: center;
-        font-size: 1vh;
+        font-size: 0.15rem;
         font-weight: 600;
         display: inline-block;
         margin: 0.4rem 1.08rem 0.1rem;
@@ -45,13 +47,13 @@
 
       .active {
         color: #39ace7;
-        font-size: 3vh;
       }
 
       .message-tip {
         color: #000;
-        font-size: 2vh;
+        font-size: 0.2rem;
         margin-top: 4vh;
+        padding: 0.8rem;
       }
 
       .go-back-login{
