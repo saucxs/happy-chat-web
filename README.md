@@ -65,3 +65,11 @@ npm run dev
 ![login](./images/personal.png)
 
 等等
+
+## 5、后端源码地址
+
+https://github.com/saucxs/happy-chat-node
+
+## 6、最后
+
+欢迎fork和star，有问题提issue
