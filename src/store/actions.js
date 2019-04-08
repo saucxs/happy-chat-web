@@ -88,7 +88,7 @@ export const queryUserInfoSpecial = ({commit},params) => {
 /*获取新朋友列表*/
 export const getNewFriends = ({commit},params) => {
   return Api.getNewFriends(params).then(res => {
-    console.log(res, '新朋友列表---------------------------------------------')
+    // console.log(res, '新朋友列表---------------------------------------------')
     commit(types.newFriendMutation, res.data.newFriends);
   }).catch(err => {
     console.log(err);
@@ -98,7 +98,7 @@ export const getNewFriends = ({commit},params) => {
 /*获取朋友列表*/
 export const getAlreadyFriends = ({commit},params) => {
   return Api.getAlreadyFriends(params).then(res => {
-    console.log(res, '朋友列表---------------------------------------------')
+    // console.log(res, '朋友列表---------------------------------------------')
     return res;
   }).catch(err => {
     console.log(err);
@@ -108,7 +108,7 @@ export const getAlreadyFriends = ({commit},params) => {
 /*获取群列表*/
 export const getAlreadyGroups = ({commit},params) => {
   return Api.getAlreadyGroups(params).then(res => {
-    console.log(res, '群列表---------------------------------------------')
+    // console.log(res, '群列表---------------------------------------------')
     return res;
   }).catch(err => {
     console.log(err);
@@ -127,7 +127,7 @@ export const isFriendJudge = ({commit},params) => {
 /*消息首页列表*/
 export const messageList = ({commit},params) => {
   return Api.messageList(params).then(res => {
-    console.log("res", res);
+    // console.log("res", res);
     if (res.success) {
       const groupList = res.data.groupList;
       const privateList = res.data.privateList;
@@ -146,7 +146,6 @@ export const messageList = ({commit},params) => {
       allMsgList.sort((a, b) => {
         return b.time - a.time;
       });
-      console.log(allMsgList, '-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-')
       commit(types.msgListMutation, allMsgList);
     }
   }).catch(err => {
@@ -264,7 +263,7 @@ export const saveGroupChatMsg = ({commit},params) => {
 export const addGroupChatRelation = ({commit},params) => {
   return Api.addGroupChatRelation(params).then(res => {
     if(res.success){
-      console.log('group_chat_relation', res)
+      // console.log('group_chat_relation', res)
       commit(types.groupMemberMutation, res.data.groupMember);
     }
   }).catch(err => {
