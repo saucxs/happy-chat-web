@@ -59,7 +59,9 @@ export default {
       let params = {
         groupId: this.groupInfo.groupId
       }
+      this.$loading.show();
       this.getGroupChat(params).then((res) => {
+        this.$loading.hide();
         if (res.success) {
           this.message = res.data.groupMsg;
           this.$store.commit('groupInfoMutation', res.data.groupInfo[0])
@@ -178,7 +180,7 @@ export default {
 	},
 	async created() {
 		this.groupInfo.groupId = this.$route.params.group_id;
-		this.userInfo = JSON.parse(sessionStorage.getItem("HappyChatUserInfo"));
+		this.userInfo = JSON.parse(localStorage.getItem("HappyChatUserInfo"));
 		await this.getChatMsg();
 		this.resetUnred();
 		this.getMsgBySocket()

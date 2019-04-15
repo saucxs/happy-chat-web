@@ -129,7 +129,7 @@ export default {
 		}
 	},
 	created() {
-		this.userInfo = JSON.parse(sessionStorage.getItem("HappyChatUserInfo"));
+		this.userInfo = JSON.parse(localStorage.getItem("HappyChatUserInfo"));
 	}
 }
 </script>

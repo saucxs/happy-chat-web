@@ -102,7 +102,7 @@ export default {
 	},
 
 	mounted() {
-    this.userInfo = JSON.parse(sessionStorage.getItem("HappyChatUserInfo"));
+    this.userInfo = JSON.parse(localStorage.getItem("HappyChatUserInfo"));
     this.alreadyFriendsList();
     this.alreadyGroupsList()
 	}

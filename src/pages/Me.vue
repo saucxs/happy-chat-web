@@ -71,8 +71,8 @@ export default {
 			if (value === 'logOut') {
 				//登出
         socketWeb.emit('logout', this.userInfo.user_id)
-				sessionStorage.removeItem("HappyChatUserToken");
-        sessionStorage.removeItem("HappyChatUserInfo");
+				localStorage.removeItem("HappyChatUserToken");
+        localStorage.removeItem("HappyChatUserInfo");
 				let self = this;
 				setTimeout(function() {
 					self.$router.push({
@@ -105,7 +105,7 @@ export default {
     }
 	},
 	mounted() {
-		this.userInfo = JSON.parse(sessionStorage.getItem("HappyChatUserInfo"));
+		this.userInfo = JSON.parse(localStorage.getItem("HappyChatUserInfo"));
 	}
 }
 </script>

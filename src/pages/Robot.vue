@@ -71,7 +71,7 @@ export default {
     ])
   },
   created() {
-    const userInfo = JSON.parse(sessionStorage.getItem("HappyChatUserInfo"));
+    const userInfo = JSON.parse(localStorage.getItem("HappyChatUserInfo"));
     this.img = userInfo.avator;
     this.name = userInfo.name;
     this.href = userInfo.user_id
@@ -82,7 +82,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
 .wrapper {
-  padding-top: 0.6rem;
+  padding-top: 0.8rem;
   z-index: 1;
   .title{
     font-size: 0.32rem;
@@ -92,11 +92,9 @@ export default {
      display: flex;
      flex-direction: column;
      width: 100%;
-     padding-bottom: 1.6rem;
-   // touch-action:none !important;
-    li {
-      margin-top: -1rem;
-      padding: 0;
+     /*padding-bottom: 1.6rem;*/
+    li{
+      list-style-type: none;
     }
   }
   .input-msg {

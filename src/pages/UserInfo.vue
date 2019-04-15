@@ -200,7 +200,10 @@ export default {
 			this.messageBox.title = '修改我的信息';
 		},
 		//屏蔽此人
-		shieldIt() {},
+		shieldIt() {
+
+
+    },
 		//删除好友
 		deFriended() {
 			this.messageBox.messageBoxEvent = 'delFriend'
@@ -311,7 +314,7 @@ export default {
         }
         this.confirmEditorInfo(params).then(res => {
           if(res){
-            sessionStorage.setItem("HappyChatUserInfo", JSON.stringify(value.myInfo));
+            localStorage.setItem("HappyChatUserInfo", JSON.stringify(value.myInfo));
             this.messageBox.visible = false;
           }
         })
@@ -319,7 +322,7 @@ export default {
 		}
 	},
 	async created() {
-		this.myInfo = JSON.parse(sessionStorage.getItem("HappyChatUserInfo"));
+		this.myInfo = JSON.parse(localStorage.getItem("HappyChatUserInfo"));
 		this.isMe = this.myInfo.user_id == this.$route.params.user_id ? true : false;
 //		await this.$store.dispatch('newFriendAction', this.myInfo.user_id)
 		await this.isAddingMeFun();

@@ -8,6 +8,9 @@ import store from './store'
 import Components from './components/index'
 Vue.use(Components);
 
+import Loading from './components/Loading/index'
+Vue.use(Loading)
+
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

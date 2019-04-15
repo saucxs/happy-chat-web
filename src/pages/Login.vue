@@ -17,10 +17,10 @@
 			</div>
 			<form>
         <div>
-          <span class="normal-word">用户名：</span><input type="text" class="fadeIn second" placeholder="用户名" v-model="name">
+          <span class="normal-word">用户名：</span><input @keyup.enter.native="startLogin" type="text"  class="fadeIn second" placeholder="用户名" v-model="name">
         </div>
         <div>
-          <span class="normal-word">密码：</span><input type="password" class="fadeIn third" placeholder="密码" v-model="password">
+          <span class="normal-word">密码：</span><input @keyup.enter.native="startLogin" type="password" class="fadeIn third" placeholder="密码" v-model="password">
         </div>
 				<input type="button" @click="startLogin" class="fadeIn fourth" value="登录">
 			</form>
@@ -31,7 +31,6 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
-import axios from "axios";
 export default {
 	name: "login",
 	props: {},
@@ -51,22 +50,33 @@ export default {
 	computed: {},
 
 	watch: {},
+  mounted () {
+    document.addEventListener('keyup', this.handleEnter);
+  },
 
 	methods: {
     ...mapActions(["login"]),
+    handleEnter (e) {
+      const event = e || window.event;
+      if (event.keyCode === 13) {
+        this.startLogin()
+      }
+    },
     startLogin() {
 			if (this.name !== "" && this.password !== "") {
 			  let params = {
           name: this.name,
           password: this.password
         }
+        this.$loading.show();
 			  this.login(params).then(res => {
 			    if(res) {
+            this.$loading.hide();
 			      if (res.success) {
               //保存soket.io
               socketWeb.emit('login', res.userInfo.user_id)
-			        sessionStorage.setItem("HappyChatUserToken", res.token);
-			        sessionStorage.setItem("HappyChatUserInfo", JSON.stringify(res.userInfo));
+			        localStorage.setItem("HappyChatUserToken", res.token);
+			        localStorage.setItem("HappyChatUserInfo", JSON.stringify(res.userInfo));
 			        /*弹窗提示*/
               this.messageBox.messageBoxEvent = 'login'
               this.messageBox.visible = true;
@@ -96,7 +106,8 @@ export default {
 		confirm(value) {
 			if (value === 'login') {
 				this.messageBox.visible = false;
-				this.$router.push("/robot");
+        let redirect = decodeURIComponent(this.$route.query.redirect || '/robot');
+        this.$router.push({ path: redirect });
 			}
 		}
 	}

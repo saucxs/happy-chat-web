@@ -63,16 +63,16 @@
                 cursor: pointer;
             }
             .nt {
-                font-size: 0.2rem;
+                font-size: 0.25rem;
                 left: 1rem;
                 top: -0.4rem;
                 position: absolute;
                 color: #686868;
                 span {
-                    padding-right: 0.1rem;
+                    padding-right: 0.2rem;
                 }
                 span:nth-child(2) {
-                    font-size: 0.1rem;
+                    font-size: 0.2rem;
                 }
             }
             .msg {
@@ -101,16 +101,16 @@
                 transform: translateY(-50%);
             }
             .nt {
-                font-size: 0.2rem;
+                font-size: 0.25rem;
                 right:1rem;
                 top: -0.4rem;
                 position: absolute;
                 color: #686868;
                 span {
-                    padding-left: 0.1rem;
+                    padding-left: 0.2rem;
                 }
                 span:nth-child(1) {
-                    font-size: 0.1rem;
+                    font-size: 0.2rem;
                 }
             }
             .msg {

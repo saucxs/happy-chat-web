@@ -4,11 +4,23 @@
 	<Header :currentTab="currentTab"></Header>
 	<ul>
     <li v-for="data in msgListGetter" @click="enterChat(data.type,data.id)">
-      <a v-if="data.type === 'group'" href=""><img :src="data.group_avator" alt="" class="img"><span class="group-unread" v-if="data.unread">{{data.unread}}</span></a>
-      <a v-if="data.type === 'private'" href=""><img :src="data.avator" alt="" class="img"><span class="private-unread" v-if="data.unread">{{data.unread}}</span></a>
+      <a v-if="data.type === 'group'" href="">
+        <!--<img v-if="data.group_avator" :src="data.group_avator" alt="" class="img">-->
+        <svg class="icon img" aria-hidden="true">
+          <use xlink:href="#iconniu"></use>
+        </svg>
+        <span class="group-unread" v-if="data.unread">{{data.unread}}</span>
+      </a>
+      <a v-if="data.type === 'private'" href="">
+        <!--<img v-if="data.avator" :src="data.avator" alt="" class="img">-->
+        <svg class="icon img" aria-hidden="true">
+          <use xlink:href="#iconniu"></use>
+        </svg>
+        <span class="private-unread" v-if="data.unread">{{data.unread}}</span>
+      </a>
       <div class="content">
         <div v-if="data.type === 'group'" class="title">{{data.group_name}}<span>{{data.time}}</span></div>
-        <div v-if="data.type === 'private'" class="title">{{data.name}}<span>{{data.time}}</span></div>
+        <div v-if="data.type === 'private'" class="title">{{data.remark?data.remark: data.name}}<span>{{data.time}}</span></div>
         <div class="message">{{data.message}}</div>
       </div>
     </li>
@@ -20,10 +32,9 @@
 <script>
 import Header from '../components/Header.vue'
 import Footer from '../components/Footer.vue'
-import axios from "axios"
 import { mapGetters, mapActions } from 'vuex';
 export default {
-	// name: 'message',
+	name: 'message',
 	data() {
 		return {
 			currentTab: 1,
@@ -51,7 +62,9 @@ export default {
       socketWeb.removeAllListeners('getPrivateMsg');
       socketWeb.removeAllListeners('getGroupMsg');
       socketWeb.on('getPrivateMsg', (data) => {
-        data.type = 'private'
+        data.type = 'private';
+        // console.log(data, '获取数据')
+        data.name = data.remark?data.remark: data.name;
         this.$store.commit('updateListMutation', data)
       })
       socketWeb.on('getGroupMsg', (data) => {
@@ -93,6 +106,7 @@ export default {
                     height: 0.8rem;
                     margin-right: 0.04rem;
                     border-radius: 50%;
+                    vertical-align: 0;
                     display: inline-block;
                 }
                 span {

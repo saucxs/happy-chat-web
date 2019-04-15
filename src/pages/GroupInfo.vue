@@ -129,7 +129,7 @@ export default {
 		}
 	},
 	async created() {
-		this.userInfo = JSON.parse(sessionStorage.getItem("HappyChatUserInfo"));
+		this.userInfo = JSON.parse(localStorage.getItem("HappyChatUserInfo"));
 		await this.isInGroup();
 		this.getGroupInfo();
 

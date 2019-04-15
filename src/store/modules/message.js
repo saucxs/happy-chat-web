@@ -26,7 +26,6 @@ const mutations = {
   //更新首页消息列表
   [updateListMutation](state, data) {
     let unread = 0;
-    // data.time = toNomalTime(data.time);
     //添加
     if (data.action === "push") {
       data.unread = unread + 1;
@@ -62,6 +61,7 @@ const mutations = {
           ele.message = data.name + ' : ' + data.message;
           ele.time = data.time;
           ele.name = data.name;
+          ele.reamrk = data.remark;
           ele.avator = data.avator;
           //如果是当前的聊天，没必要加未读标识了
           if (data.chatOfNow) return

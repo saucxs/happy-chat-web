@@ -1,11 +1,11 @@
 <template>
 <!--  私聊 -->
 <div class="wrapper">
-	<Header goback='true' userInfo='true' :chatTitle="someOneInfoGetter.name"></Header>
+	<Header goback='true' userInfo='true' :chatTitle="remarkName ? remarkName: someOneInfoGetter.name"></Header>
 	<ul>
 		<li v-for="item in privateDetail">
 			<ChatItem v-if="fromUserInfo.user_id === item.from_user" :href="item.from_user" :img="item.avator" me="true" :msg="item.message" :name="item.name" :time="item.time"></ChatItem>
-			<ChatItem v-else :img="item.avator" :msg="item.message" :href=" item.from_user " :name="item.name" :time="item.time"></ChatItem>
+			<ChatItem v-else :img="item.avator" :msg="item.message" :href=" item.from_user " :name="remarkName ? remarkName: item.name" :time="item.time"></ChatItem>
 		</li>
 	</ul>
 	<div class="input-msg">
@@ -41,7 +41,9 @@ export default {
 			isMyFriend: false, //他是否是我的好友
 			isHisFriend: false, //我是否是他的好友
 			fromUserInfo: {}, //用户自己
-			btnInfo: "发送"
+			btnInfo: "发送",
+      remarkName: '',
+      anotherRemarkName: ''
 		}
 	},
 
@@ -64,15 +66,20 @@ export default {
       let params = {
         to_user: this.toUserInfo.to_user
       }
+      this.$loading.show();
       this.getPrivateDetail(params).then(res => {
+        this.$loading.hide();
         if (res.success) {
           this.privateDetail = res.data.privateDetail;
-          if (this.privateDetail.length == 0) return
+          if (this.privateDetail.length == 0) {
+            return
+          }
           this.privateDetail.forEach(element => {
-            element.time = toNomalTime(element.time);
+            element.time = element.time;
             element.message = element.message.split(':')[1];
           });
         }
+
       }).catch(err => {
         const errorMsg = err.response.error
         this.$message({
@@ -107,12 +114,15 @@ export default {
 				from_user: this.fromUserInfo.user_id, //自己的id
 				to_user: this.toUserInfo.to_user, //对方id
 				name: this.fromUserInfo.name, //自己的昵称
+        remark: this.remarkName, //别人给的备注
 				avator: this.fromUserInfo.avator, //自己的头像
 				message: this.inputMsg, //消息内容
 				type: 'private',
 				status: '1', //是否在线 0为不在线 1为在线
 				time: toNomalTime((new Date()).getTime()), //时间
 			};
+			// console.log(this.anotherRemarkName,'remark')
+      data.remark = this.anotherRemarkName;
       socketWeb.emit('sendPrivateMsg', data)
 			this.$store.commit('updateListMutation', data);
 		},
@@ -122,6 +132,7 @@ export default {
 				from_user: this.fromUserInfo.user_id, //自己的id
 				to_user: this.toUserInfo.to_user, //对方的id
 				name: this.fromUserInfo.name, //自己的昵称
+        remark: this.remarkName, //别人给的备注
 				avator: this.fromUserInfo.avator, //自己的头像
 				message: this.inputMsg, //消息内容
 				status: '1', //是否在线 0为不在线 1为在线
@@ -149,7 +160,6 @@ export default {
 				//如果收到的soket信息不是发给自己的 放弃这条soket 没必要了 因为私聊是点对点发送的
 				// if(data.to_user != this.fromUserInfo.user_id) return
 				//如果收到的soket信息不是来自当前聊天者 写入首页信息列表 并return
-
 				// console.log(data.from_user, '!=', this.toUserInfo.to_user)
 				// 	//soket信息不是来自当前聊天者 vuex添加此条信息 有未读提示
 				if (data.from_user != this.toUserInfo.to_user) {
@@ -174,6 +184,10 @@ export default {
         if (res) {
           this.isMyFriend = res.data.isMyFriend.length !== 0 ? true : false;
           this.isHisFriend = res.data.isHisFriend.length !== 0 ? true : false;
+          if(res.data.isHisFriend.length > 0 && res.data.isMyFriend.length > 0){
+            this.remarkName = res.data.isMyFriend[0].remark;
+            this.anotherRemarkName = res.data.isHisFriend[0].remark;
+          }
         }
       }).catch(err => {
         const errorMsg = err.response.error
@@ -196,13 +210,12 @@ export default {
 	},
 	created() {
 		this.toUserInfo.to_user = this.$route.params.user_id;
-		this.fromUserInfo = JSON.parse(sessionStorage.getItem("HappyChatUserInfo"));
+		this.fromUserInfo = JSON.parse(localStorage.getItem("HappyChatUserInfo"));
 		this.isFriend();
 		this.resetUnred();
 		this.getPrivateMsg();
 		this.getMsgBySocket();
 		this.queryUserInfoSpecial({user_id: this.toUserInfo.to_user})
-		// this.$store.dispatch('someOneInfoAction', this.toUserInfo.to_user)
 	}
 }
 </script>

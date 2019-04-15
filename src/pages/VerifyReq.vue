@@ -77,7 +77,7 @@ export default {
 	},
 
 	mounted() {
-		this.fromUserInfo = JSON.parse(sessionStorage.getItem("HappyChatUserInfo"));
+		this.fromUserInfo = JSON.parse(localStorage.getItem("HappyChatUserInfo"));
 	}
 }
 </script>

@@ -108,7 +108,7 @@ router.beforeEach((to, from, next) => {
       return true
     }
   })
-  if (!sessionStorage.HappyChatUserToken) {
+  if (!localStorage.HappyChatUserToken) {
     if (flag) {
       next()
     } else {

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>happyChat(一个拥有群聊天，私人聊天，机器人聊天等功能的应用）</title>
+    <title>happyChat乐聊</title>
   </head>
   <body>
     <div id="app"></div>
@@ -18,7 +18,7 @@
     <script>
       // const socketWeb = io('http://localhost:3000');
       const socketWeb = io('http://chat.chengxinsong.cn');
-      const userInfo = JSON.parse(sessionStorage.getItem("HappyChatUserInfo"))
+      const userInfo = JSON.parse(localStorage.getItem("HappyChatUserInfo"))
       if (userInfo) {
         socketWeb.emit('update', userInfo.user_id);
       }
