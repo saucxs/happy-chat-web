@@ -92,7 +92,7 @@ export default {
      display: flex;
      flex-direction: column;
      width: 100%;
-     /*padding-bottom: 1.6rem;*/
+     padding-bottom: 1.6rem;
     li{
       list-style-type: none;
     }
@@ -100,7 +100,7 @@ export default {
   .input-msg {
     height: 0.66rem;
     position: fixed;
-    bottom: 0.7rem;
+    bottom: 0.82rem;
     display: flex;
     width: 100%;
     z-index: 999;

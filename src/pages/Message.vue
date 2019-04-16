@@ -144,7 +144,7 @@ export default {
                 .title {
                     font-size: 0.32rem;
                     span {
-                        font-size: 0.28rem;
+                        font-size: 0.2rem;
                         color: #676767;
                         position: absolute;
                         right: 0.5rem;
