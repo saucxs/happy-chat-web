@@ -112,6 +112,7 @@ export const getAlreadyGroups = ({commit},params) => {
     return res;
   }).catch(err => {
     console.log(err);
+    return err;
   });
 };
 

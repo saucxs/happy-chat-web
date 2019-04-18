@@ -100,7 +100,7 @@ export default {
   .input-msg {
     height: 0.66rem;
     position: fixed;
-    bottom: 0.82rem;
+    bottom: 0.83rem;
     display: flex;
     width: 100%;
     z-index: 999;

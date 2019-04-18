@@ -16,15 +16,6 @@
       <p class="user-intro">{{userInfo.intro == '' ? '没有留下介绍~': userInfo.intro}}</p>
       <p class="user-more"><svg @click="goInfo" class="icon" aria-hidden="true"> <use  xlink:href="#iconacmore"></use></svg></p>
     </div>
-		<!--<li class="info" @click="goInfo">-->
-			<!--<img :src="userInfo.avator" alt="">-->
-			<!--<span>{{userInfo.name}}</span>-->
-			<!--<svg class="icon" aria-hidden="true"> <use  xlink:href="#icon-right"></use></svg>-->
-		<!--</li>-->
-		<!-- <img :src="userInfo.avator" alt="">
-                    <p>用户名：{{userInfo.name}}</p>
-                    <p>性别：{{userInfo.sex}}</p>
-                    <p>来自：{{userInfo.place}}</p> -->
 	</div>
 	<div class="action" @click="logout">
 		<span class="logout">退出登录</span>
@@ -60,6 +51,7 @@ export default {
 			this.$router.push(path)
 		},
 		logout() {
+      console.log(this.messageBox,'00000000000000000000000000')
 			this.messageBox.messageBoxEvent = 'logOut'
 			this.messageBox.visible = true;
 			this.messageBox.message = "确定退出？"

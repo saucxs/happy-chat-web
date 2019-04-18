@@ -115,7 +115,33 @@ export default {
   .after-content{
     font-size: 0.12rem;
     color: #cccccc;
-
   }
+
+  /*重写meassage box*/
+  .el-message-box{
+    font-size: 0.18rem;
+    width: 70%;
+    .el-message-box__header{
+      padding: 0.16rem 0.01rem 0.2rem;
+      span{
+        font-size: 0.24rem;
+      }
+    }
+    .el-message-box__content p{
+      font-size: 0.22rem;
+      color: rgba(0, 0, 0, 0.808);
+      margin-bottom: 0.18rem;
+      line-height: 0.42rem;
+    }
+    .el-button--primary{
+      padding: 0 0.7rem;
+      line-height: 0.7rem;
+      height: 0.7rem;
+      span{
+        font-size: 0.22rem;
+      }
+    }
+  }
+
 
 </style>

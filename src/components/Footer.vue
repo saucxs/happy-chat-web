@@ -90,6 +90,9 @@ import { mapGetters, mapActions } from 'vuex';
     }
     .router-link-active{
       transform: scale(1.1) rotate(1turn);
+      p{
+        color: #1E90FF;
+      }
     }
   }
 </style>
