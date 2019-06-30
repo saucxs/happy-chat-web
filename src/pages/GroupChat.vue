@@ -3,13 +3,14 @@
 <div class="wrapper">
 	<Header goback='true' groupInfo='true' :chatTitle="groupInfoGetter.group_name"></Header>
 	<ul>
+    <load-more :is-no-more="isNoMore" :is-show-loading="isShowLoading" @load-more="loadMore"></load-more>
 		<li v-for="item in message">
 			<ChatItem v-if="userInfo.user_id === item.from_user" :href="item.from_user" :img="item.avator" me="true" :msg="item.message" :name="item.name" :time="item.time"></ChatItem>
 			<ChatItem v-else :img="item.avator" :msg="item.message" :href="item.from_user" :name="item.name" :time="item.time"></ChatItem>
 		</li>
 	</ul>
 	<div class="input-msg">
-		<textarea v-model="inputMsg" @keydown.enter.prevent="sendMessage"></textarea>
+		<textarea v-model="inputMsg" @keydown.enter.prevent="sendMessage" placeholder="输入..."></textarea>
 		<p class="btn" :class="{'enable':inputMsg!=''}" @click="sendMessage">{{btnInfo}}</p>
 	</div>
 </div>
@@ -18,16 +19,22 @@
 <script>
 import Header from '../components/Header.vue'
 import ChatItem from '../components/ChatItem.vue'
+import LoadMore from '../components/LoadMore.vue';
 import axios from "axios"
 import {	toNomalTime } from "../utils/common";
 import { mapGetters, mapActions } from 'vuex';
 export default {
 	components: {
 		Header,
-		ChatItem
+		ChatItem,
+    LoadMore
 	},
 	data() {
 		return {
+      page: 1,
+      pageNum: 20,
+      isShowLoading: false,
+      isNoMore: false,
 			groupInfo: {
 				groupId: '' //群id
 			},
@@ -57,6 +64,8 @@ export default {
 		//获取聊天记录
 		getChatMsg() {
       let params = {
+        page: this.page,
+        pageNum: this.pageNum,
         groupId: this.groupInfo.groupId
       }
       this.$loading.show();
@@ -176,7 +185,29 @@ export default {
 			setTimeout(() => {
 				window.scrollTo(0, document.body.scrollHeight + 10000)
 			}, 0)
-		}
+		},
+    loadMore() {
+      console.log('加載更多');
+      if (!this.isNoMore) {
+        this.isShowLoading = true;
+        console.log(this.page, '-=-=-=-=-=-=-=-')
+        this.page = this.page + 1;
+        let params = {
+          page: this.page,
+          pageNum: this.pageNum,
+          groupId: this.groupInfo.groupId
+        }
+        this.getGroupChat(params).then((res) => {
+          if (res.success) {
+            if (res.data.groupMsg.length < this.pageNum) {
+              this.isNoMore = true;
+            }
+            this.message.unshift(...res.data.groupMsg);
+            this.isShowLoading = false;
+          }
+        })
+      }
+    }
 	},
 	async created() {
 		this.groupInfo.groupId = this.$route.params.group_id;

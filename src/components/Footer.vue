@@ -63,7 +63,7 @@ import { mapGetters, mapActions } from 'vuex';
     background: #eee;
     border-top: 1px solid #e7e7e7;
     border-bottom: 1px solid #f8f8f8;
-    padding: 0.05rem 0.8rem;
+    padding: 0rem 0.3rem;
     .icon {
       width: 0.9em;
       height: 0.9em;
@@ -73,6 +73,8 @@ import { mapGetters, mapActions } from 'vuex';
       display: block;
       color:#5d656b;
       text-decoration: none;
+       flex: 1;
+      padding: 10px 0;
       p{
         font-size: 0.18rem;
         margin-top: -0.05rem;

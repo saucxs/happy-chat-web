@@ -3,13 +3,14 @@
 <div class="wrapper">
 	<Header goback='true' userInfo='true' :chatTitle="remarkName ? remarkName: someOneInfoGetter.name"></Header>
 	<ul>
+    <load-more :is-no-more="isNoMore" :is-show-loading="isShowLoading" @load-more="loadMore"></load-more>
 		<li v-for="item in privateDetail">
 			<ChatItem v-if="fromUserInfo.user_id === item.from_user" :href="item.from_user" :img="item.avator" me="true" :msg="item.message" :name="item.name" :time="item.time"></ChatItem>
 			<ChatItem v-else :img="item.avator" :msg="item.message" :href=" item.from_user " :name="remarkName ? remarkName: item.name" :time="item.time"></ChatItem>
 		</li>
 	</ul>
 	<div class="input-msg">
-		<textarea v-model="inputMsg" @keydown.enter.prevent="sendMessage" ref="message"></textarea>
+		<textarea v-model="inputMsg" @keydown.enter.prevent="sendMessage" ref="message" placeholder="输入..."></textarea>
 		<p class="btn" :class="{'enable':inputMsg!=''}" @click="sendMessage">{{btnInfo}}</p>
 	</div>
 </div>
@@ -18,17 +19,23 @@
 <script>
 import Header from '../components/Header.vue'
 import ChatItem from '../components/ChatItem.vue'
+import LoadMore from '../components/LoadMore.vue';
 import axios from "axios"
 import {	toNomalTime} from "../utils/common";
 import { mapGetters, mapActions } from 'vuex';
 export default {
 	components: {
 		Header,
-		ChatItem
+		ChatItem,
+    LoadMore
 	},
 
 	data() {
 		return {
+      page: 1,
+      pageNum: 30,
+      isShowLoading: false,
+      isNoMore: false,
 			inputMsg: '',
 			privateDetail: [], //私聊相关
 			toUserInfo: { //被私聊者
@@ -64,6 +71,8 @@ export default {
 		//获取数据库的消息
 		getPrivateMsg() {
       let params = {
+        page: this.page,
+        pageNum: this.pageNum,
         to_user: this.toUserInfo.to_user
       }
       this.$loading.show();
@@ -206,7 +215,29 @@ export default {
 			setTimeout(() => {
 				window.scrollTo(0, document.body.scrollHeight + 10000)
 			}, 0)
-		}
+		},
+    loadMore() {
+      console.log('加載更多');
+      if (!this.isNoMore) {
+        this.isShowLoading = true;
+        console.log(this.page, '-=-=-=-=-=-=-=-')
+        this.page = this.page + 1;
+        let params = {
+          page: this.page,
+          pageNum: this.pageNum,
+          to_user: this.toUserInfo.to_user
+        }
+        this.getPrivateDetail(params).then((res) => {
+          if (res.success) {
+            if (res.data.privateDetail.length < this.pageNum) {
+              this.isNoMore = true;
+            }
+            this.privateDetail.unshift(...res.data.privateDetail);
+            this.isShowLoading = false;
+          }
+        })
+      }
+    }
 	},
 	created() {
 		this.toUserInfo.to_user = this.$route.params.user_id;
