@@ -43,7 +43,8 @@ export default {
 			message: [], //群消息
 			inputMsg: '',
 			userInfo: {},
-			btnInfo: "发送"
+			btnInfo: "发送",
+      type: 'bottom'
 		};
 	},
 
@@ -56,7 +57,9 @@ export default {
 
 	watch: {
 		message() {
-			this.refresh();
+      if(this.type == 'bottom'){
+        this.refresh();
+      }
 		}
 	},
 	methods: {
@@ -72,6 +75,7 @@ export default {
       this.getGroupChat(params).then((res) => {
         this.$loading.hide();
         if (res.success) {
+          this.type = 'bottom'
           this.message = res.data.groupMsg;
           this.$store.commit('groupInfoMutation', res.data.groupInfo[0])
           this.$store.commit('groupMemberMutation', res.data.groupMember)
@@ -199,6 +203,7 @@ export default {
         }
         this.getGroupChat(params).then((res) => {
           if (res.success) {
+            this.type = 'unBottom'
             if (res.data.groupMsg.length < this.pageNum) {
               this.isNoMore = true;
             }

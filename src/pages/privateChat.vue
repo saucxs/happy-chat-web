@@ -50,7 +50,8 @@ export default {
 			fromUserInfo: {}, //用户自己
 			btnInfo: "发送",
       remarkName: '',
-      anotherRemarkName: ''
+      anotherRemarkName: '',
+      type: 'bottom'
 		}
 	},
 
@@ -62,7 +63,9 @@ export default {
 
 	watch: {
 		privateDetail() {
-			this.refresh();
+		  if(this.type == 'bottom'){
+        this.refresh();
+      }
 		}
 	},
 
@@ -79,6 +82,7 @@ export default {
       this.getPrivateDetail(params).then(res => {
         this.$loading.hide();
         if (res.success) {
+          this.type = 'bottom'
           this.privateDetail = res.data.privateDetail;
           if (this.privateDetail.length == 0) {
             return
@@ -229,9 +233,14 @@ export default {
         }
         this.getPrivateDetail(params).then((res) => {
           if (res.success) {
+            this.type = 'unBottom'
             if (res.data.privateDetail.length < this.pageNum) {
               this.isNoMore = true;
             }
+            res.data.privateDetail.forEach(element => {
+              element.time = element.time;
+              element.message = element.message.split(':')[1];
+            });
             this.privateDetail.unshift(...res.data.privateDetail);
             this.isShowLoading = false;
           }
