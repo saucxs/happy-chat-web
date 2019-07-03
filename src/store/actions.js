@@ -128,7 +128,6 @@ export const isFriendJudge = ({commit},params) => {
 /*消息首页列表*/
 export const messageList = ({commit},params) => {
   return Api.messageList(params).then(res => {
-    // console.log("res", res);
     if (res.success) {
       const groupList = res.data.groupList;
       const privateList = res.data.privateList;
@@ -152,6 +151,7 @@ export const messageList = ({commit},params) => {
   }).catch(err => {
     console.log(err);
   });
+  return res;
 };
 
 /*插入新的朋友*/

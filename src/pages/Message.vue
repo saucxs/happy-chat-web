@@ -63,7 +63,6 @@ export default {
       socketWeb.removeAllListeners('getGroupMsg');
       socketWeb.on('getPrivateMsg', (data) => {
         data.type = 'private';
-        // console.log(data, '获取数据')
         data.name = data.remark?data.remark: data.name;
         this.$store.commit('updateListMutation', data)
       })
@@ -76,7 +75,10 @@ export default {
 	},
 	created() {
     if (this.firstLoad) {
-      this.messageList()
+      this.$loading.show();
+      this.messageList().then(res => {
+        this.$loading.hide();
+      })
       this.$store.commit('firstLoadMutation', false)
     }
     this.getMsgBySocket();
