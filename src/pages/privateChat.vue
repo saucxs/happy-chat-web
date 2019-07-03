@@ -2,13 +2,17 @@
 <!--  私聊 -->
 <div class="wrapper">
 	<Header goback='true' userInfo='true' :chatTitle="remarkName ? remarkName: someOneInfoGetter.name"></Header>
-	<ul>
-    <load-more :is-no-more="isNoMore" :is-show-loading="isShowLoading" @load-more="loadMore"></load-more>
-		<li v-for="item in privateDetail">
-			<ChatItem v-if="fromUserInfo.user_id === item.from_user" :href="item.from_user" :img="item.avator" me="true" :msg="item.message" :name="item.name" :time="item.time"></ChatItem>
-			<ChatItem v-else :img="item.avator" :msg="item.message" :href=" item.from_user " :name="remarkName ? remarkName: item.name" :time="item.time"></ChatItem>
-		</li>
-	</ul>
+  <div class="chat-wrapper">
+    <div class="secret-box">
+      <ul>
+        <load-more :is-no-more="isNoMore" :is-show-loading="isShowLoading" @load-more="loadMore"></load-more>
+        <li v-for="item in privateDetail">
+          <ChatItem v-if="fromUserInfo.user_id === item.from_user" :href="item.from_user" :img="item.avator" me="true" :msg="item.message" :name="item.name" :time="item.time"></ChatItem>
+          <ChatItem v-else :img="item.avator" :msg="item.message" :href=" item.from_user " :name="remarkName ? remarkName: item.name" :time="item.time"></ChatItem>
+        </li>
+      </ul>
+    </div>
+  </div>
 	<div class="input-msg">
 		<textarea v-model="inputMsg" @keydown.enter.prevent="sendMessage" ref="message" placeholder="输入..."></textarea>
 		<p class="btn" :class="{'enable':inputMsg!=''}" @click="sendMessage">{{btnInfo}}</p>

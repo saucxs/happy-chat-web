@@ -174,7 +174,7 @@ export default {
         color: #333;
         display: flex;
         display: -webkit-flex;
-        padding: 0.16rem;
+        padding: 0.2rem;
         margin-bottom: 0.16rem;
         text-decoration: none;
         .icon {
@@ -199,9 +199,8 @@ export default {
         display: flex;
         display: -webkit-flex;
         justify-content: center;
-        // border: red;
         span {
-            padding: 0.16rem;
+            padding: 0.2rem;
         }
         .hover {
             color: #1E90FF;
