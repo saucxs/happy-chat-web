@@ -1,22 +1,26 @@
 <template>
 <div class="wrapper">
 	<Header goback='true' chatTitle="新好友通知"></Header>
-	<ul>
-		<li v-for="data in newFriendGetter">
-			<div class="list-box" @click="enterIt(data.from_user)">
-				<img :src="data.avator" alt="">
-				<div class="content">
-					<p>{{data.name}}</p>
-					<p>{{data.content}}</p>
-				</div>
-			</div>
+  <div class="chat-wrapper">
+    <div class="secret-box">
+      <ul>
+        <li v-for="data in newFriendGetter">
+          <div class="list-box" @click="enterIt(data.from_user)">
+            <img :src="data.avator" alt="">
+            <div class="content">
+              <p>{{data.name}}</p>
+              <p>{{data.content}}</p>
+            </div>
+          </div>
 
-			<div class="result">
-				<span v-if="data.status === 0" class="agree-btn" @click="agreeBeFriend(data.from_user)">同意</span>
-				<span v-if="data.status === 1">已通过验证</span>
-			</div>
-		</li>
-	</ul>
+          <div class="result">
+            <span v-if="data.status === 0" class="agree-btn" @click="agreeBeFriend(data.from_user)">同意</span>
+            <span v-if="data.status === 1">已通过验证</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
 </div>
 </template>
 
@@ -102,8 +106,25 @@ export default {
 
 <style lang="scss" scoped>
 .wrapper {
-    padding-top: 0.7rem;
-    .list-box{
+  height: 100vh;
+  min-width: 100%;
+  width: 100%;
+  position: relative;
+.chat-wrapper{
+  height: calc(100% - 2rem);
+  width: 100%;
+  position: relative;
+}
+.secret-box {
+  height: 100%;
+  padding: 0px 0px 20px 0;
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  overflow-y: auto;
+}
+
+.list-box{
       padding: 1.5vh 2vh;
       display: flex;
       justify-items: center;

@@ -1,18 +1,29 @@
 <template>
 <!--  群聊 -->
 <div class="wrapper">
-	<Header goback='true' groupInfo='true' :chatTitle="groupInfoGetter.group_name"></Header>
-	<ul>
-    <load-more :is-no-more="isNoMore" :is-show-loading="isShowLoading" @load-more="loadMore"></load-more>
-		<li v-for="item in message">
-			<ChatItem v-if="userInfo.user_id === item.from_user" :href="item.from_user" :img="item.avator" me="true" :msg="item.message" :name="item.name" :time="item.time"></ChatItem>
-			<ChatItem v-else :img="item.avator" :msg="item.message" :href="item.from_user" :name="item.name" :time="item.time"></ChatItem>
-		</li>
-	</ul>
-	<div class="input-msg">
-		<textarea v-model="inputMsg" @keydown.enter.prevent="sendMessage" placeholder="输入..."></textarea>
-		<p class="btn" :class="{'enable':inputMsg!=''}" @click="sendMessage">{{btnInfo}}</p>
-	</div>
+	<Header goback='true' groupInfo='true' :chatTitle="groupInfoGetter.group_name" @showGroupInfo="showGroupInfoChild"></Header>
+  <div class="chat-wrapper">
+    <div class="secret-box">
+      <ul>
+        <li>
+          <load-more :is-no-more="isNoMore" :is-show-loading="isShowLoading" @load-more="loadMore"></load-more>
+        </li>
+        <li v-for="item in message">
+          <ChatItem v-if="userInfo.user_id === item.from_user" :href="item.from_user" :img="item.avator" me="true" :msg="item.message" :name="item.name" :time="item.time"></ChatItem>
+          <ChatItem v-else :img="item.avator" :msg="item.message" :href="item.from_user" :name="item.name" :time="item.time"></ChatItem>
+        </li>
+      </ul>
+    </div>
+    <div class="chat-info-modal" v-if="showGroupInfoDialog"></div>
+    <group-info v-if="showGroupInfoDialog" class="chat-info" :groupMembers="groupMembers" :groupInfoGetter="groupInfoGetter" :isMyGroup="isMyGroup"></group-info>
+  </div>
+  <div class="input-msg" v-if="!isMyGroup">
+    <input type="button" class="base-button button" disable="false" value="加入群聊">
+  </div>
+  <div class="input-msg" v-if="isMyGroup">
+    <textarea v-model="inputMsg" @keydown.enter.prevent="sendMessage" placeholder="输入..."></textarea>
+    <p class="btn" :class="{'enable':inputMsg!=''}" @click="sendMessage">{{btnInfo}}</p>
+  </div>
 </div>
 </template>
 
@@ -20,14 +31,15 @@
 import Header from '../components/Header.vue'
 import ChatItem from '../components/ChatItem.vue'
 import LoadMore from '../components/LoadMore.vue';
-import axios from "axios"
+import GroupInfo from  './GroupInfo'
 import {	toNomalTime } from "../utils/common";
 import { mapGetters, mapActions } from 'vuex';
 export default {
 	components: {
 		Header,
 		ChatItem,
-    LoadMore
+    LoadMore,
+    GroupInfo
 	},
 	data() {
 		return {
@@ -44,7 +56,10 @@ export default {
 			inputMsg: '',
 			userInfo: {},
 			btnInfo: "发送",
-      type: 'bottom'
+      type: 'bottom',
+      showGroupInfoDialog: false,
+      groupMembers: [],  //群成员信息列表,
+      isMyGroup: null
 		};
 	},
 
@@ -63,7 +78,7 @@ export default {
 		}
 	},
 	methods: {
-    ...mapActions(["getGroupChat", "saveGroupChatMsg", "addGroupChatRelation"]),
+    ...mapActions(["getGroupChat", "saveGroupChatMsg", "addGroupChatRelation", "judgeIsInGroup"]),
 		//获取聊天记录
 		getChatMsg() {
       let params = {
@@ -77,24 +92,24 @@ export default {
         if (res.success) {
           this.type = 'bottom'
           this.message = res.data.groupMsg;
+          this.groupMembers = res.data.groupMemberInfo;
           this.$store.commit('groupInfoMutation', res.data.groupInfo[0])
           this.$store.commit('groupMemberMutation', res.data.groupMember)
           // 群成员不存在此用户id，则添加
-          if (!res.data.groupMember.includes(this.userInfo.user_id)) {
-            this.addGroupUserRelation();
-            const data = {
-              action: "push",
-              message: "您已成功加入此群！",
-              group_avator: this.groupInfoGetter.group_avator,
-              group_name: this.groupInfoGetter.group_name,
-              time: this.groupInfoGetter.creater_time,
-              group_id: this.groupInfoGetter.group_id,
-              type: "group",
-              id: this.groupInfoGetter.group_id
-            }
-            // this.$store.commit('updateListMutation', data)
-            this.$store.commit('updateListMutation', data)
-          }
+          // if (!res.data.groupMember.includes(this.userInfo.user_id)) {
+          //   this.addGroupUserRelation();
+          //   const data = {
+          //     action: "push",
+          //     message: "您已成功加入此群！",
+          //     group_avator: this.groupInfoGetter.group_avator,
+          //     group_name: this.groupInfoGetter.group_name,
+          //     time: this.groupInfoGetter.creater_time,
+          //     group_id: this.groupInfoGetter.group_id,
+          //     type: "group",
+          //     id: this.groupInfoGetter.group_id
+          //   }
+          //   this.$store.commit('updateListMutation', data)
+          // }
           if (this.message.length == 0) return;
           this.message.forEach(element => {
             element.time = element.time;
@@ -152,7 +167,6 @@ export default {
         }
       })
 		},
-
 		// 把新成员加入群名单
 		addGroupUserRelation() {
       let params = {
@@ -212,11 +226,53 @@ export default {
           }
         })
       }
+    },
+    showGroupInfoChild(val) {
+      console.log('子组件传递的值', val)
+      this.showGroupInfoDialog = val;
+    },
+    //看该用户是否在某个群中(根据返回的数组长度是不是为零
+    isInGroup() {
+      let params = {
+        group_id: this.$route.params.group_id
+      }
+      this.judgeIsInGroup(params).then((res) => {
+        if(res.success){
+          this.isMyGroup = res.data.group_user.length === 0 ? false : true;
+        }else{
+          this.$message({
+            message: '服务器出错啦',
+            type: "error"
+          });
+        }
+      }).catch(err => {
+        console.log('err', err)
+        const errorMsg = err.error
+        this.$message({
+          message: errorMsg,
+          type: "error"
+        });
+      })
+    },
+    goChat() {
+      this.addGroupUserRelation();
+      const data = {
+        action: "push",
+        message: "您已成功加入此群！",
+        group_avator: this.groupInfoGetter.group_avator,
+        group_name: this.groupInfoGetter.group_name,
+        time: this.groupInfoGetter.creater_time,
+        group_id: this.groupInfoGetter.group_id,
+        type: "group",
+        id: this.groupInfoGetter.group_id
+      }
+      this.$store.commit('updateListMutation', data)
     }
 	},
 	async created() {
 		this.groupInfo.groupId = this.$route.params.group_id;
 		this.userInfo = JSON.parse(localStorage.getItem("HappyChatUserInfo"));
+    await this.isInGroup();
 		await this.getChatMsg();
 		this.resetUnred();
 		this.getMsgBySocket()

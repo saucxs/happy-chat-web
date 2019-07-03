@@ -87,6 +87,9 @@ export default {
           if (this.privateDetail.length == 0) {
             return
           }
+          if (res.data.privateDetail.length < this.pageNum) {
+            this.isNoMore = true;
+          }
           this.privateDetail.forEach(element => {
             element.time = element.time;
             element.message = element.message.split(':')[1];
@@ -224,7 +227,6 @@ export default {
       console.log('加載更多');
       if (!this.isNoMore) {
         this.isShowLoading = true;
-        console.log(this.page, '-=-=-=-=-=-=-=-')
         this.page = this.page + 1;
         let params = {
           page: this.page,

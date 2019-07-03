@@ -1,0 +1,69 @@
+@import "./base.scss";
+*,
+*:after,
+*:before {
+  //max-height: 100000px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  // -webkit-tap-highlight-color: rgba(0,0,0,0);
+  // -ms-touch-action: none;
+  // -webkit-touch-callout: none;
+  // user-select: none;
+  // text-size-adjust: none;
+}
+
+body,
+html {
+  background-color: #F5F6F8;
+  width: 100%;
+  height: 100%;
+  font-family: 'Microsoft Yahei' !important;
+  overflow: hidden;
+}
+
+.icon {
+  width: 1em;
+  height: 1em;
+  fill: currentColor;
+  overflow: hidden;
+}
+
+.content-busuanzi{
+  position: fixed;
+  text-align: center;
+  bottom: 0.2rem;
+}
+.after-content{
+  font-size: 0.12rem;
+  color: #cccccc;
+}
+
+/*重写meassage box*/
+.el-message-box{
+  font-size: 0.18rem;
+  width: 70%;
+  .el-message-box__header{
+    padding: 0.16rem 0.01rem 0.2rem;
+    span{
+      font-size: 0.24rem;
+    }
+  }
+  .el-message-box__content p{
+    font-size: 0.22rem;
+    color: rgba(0, 0, 0, 0.808);
+    margin-bottom: 0.18rem;
+    line-height: 0.42rem;
+  }
+  .el-button--primary{
+    padding: 0 0.7rem;
+    line-height: 0.7rem;
+    height: 0.7rem;
+    span{
+      font-size: 0.22rem;
+    }
+  }
+}

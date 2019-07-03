@@ -2,29 +2,33 @@
 <!-- 消息 -->
 <div class="wrapper">
 	<Header :currentTab="currentTab"></Header>
-	<ul>
-    <li v-for="data in msgListGetter" @click="enterChat(data.type,data.id)">
-      <a v-if="data.type === 'group'" href="">
-        <!--<img v-if="data.group_avator" :src="data.group_avator" alt="" class="img">-->
-        <svg class="icon img" aria-hidden="true">
-          <use xlink:href="#iconniu"></use>
-        </svg>
-        <span class="group-unread" v-if="data.unread">{{data.unread}}</span>
-      </a>
-      <a v-if="data.type === 'private'" href="">
-        <!--<img v-if="data.avator" :src="data.avator" alt="" class="img">-->
-        <svg class="icon img" aria-hidden="true">
-          <use xlink:href="#iconniu"></use>
-        </svg>
-        <span class="private-unread" v-if="data.unread">{{data.unread}}</span>
-      </a>
-      <div class="content">
-        <div v-if="data.type === 'group'" class="title">{{data.group_name}}<span>{{data.time}}</span></div>
-        <div v-if="data.type === 'private'" class="title">{{data.remark?data.remark: data.name}}<span>{{data.time}}</span></div>
-        <div class="message">{{data.message}}</div>
-      </div>
-    </li>
-	</ul>
+  <div class="chat-wrapper">
+    <div class="secret-box">
+      <ul>
+        <li v-for="data in msgListGetter" @click="enterChat(data.type,data.id)">
+          <a v-if="data.type === 'group'" href="">
+            <!--<img v-if="data.group_avator" :src="data.group_avator" alt="" class="img">-->
+            <svg class="icon img" aria-hidden="true">
+              <use xlink:href="#iconniu"></use>
+            </svg>
+            <span class="group-unread" v-if="data.unread">{{data.unread}}</span>
+          </a>
+          <a v-if="data.type === 'private'" href="">
+            <!--<img v-if="data.avator" :src="data.avator" alt="" class="img">-->
+            <svg class="icon img" aria-hidden="true">
+              <use xlink:href="#iconniu"></use>
+            </svg>
+            <span class="private-unread" v-if="data.unread">{{data.unread}}</span>
+          </a>
+          <div class="content">
+            <div v-if="data.type === 'group'" class="title">{{data.group_name}}<span>{{data.time}}</span></div>
+            <div v-if="data.type === 'private'" class="title">{{data.remark?data.remark: data.name}}<span>{{data.time}}</span></div>
+            <div class="message">{{data.message}}</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
 	<Footer :currentTab="currentTab"></Footer>
 </div>
 </template>
@@ -87,10 +91,26 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
 .wrapper {
-    padding-top: 0.8rem;
-    background-color: #fff;
-    z-index: 1;
+  height: 100vh;
+  min-width: 100%;
+  width: 100%;
+  position: relative;
+  .chat-wrapper{
+    height: calc(100% - 2rem);
+    width: 100%;
+    position: relative;
+  }
+  .secret-box{
+    height: 100%;
+    padding: 0px 0px 20px 0;
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    overflow-y: auto;
+  }
+
     ul {
         background-color: #fff;
         padding-bottom: 1vh;
@@ -127,17 +147,6 @@ export default {
                 .group-unread {
                     background-color: #98d1f2;
                 }
-                //  ::after {
-                //   content: "";
-                //   width: 0.26rem;
-                //   height: 0.26rem;
-                //   display: inline-block;
-                //   border-radius: 50%;
-                //   background-color: red;
-                //   position: absolute;
-                //   left: -0.08rem;
-                //   z-index: -1;
-                // }
             }
             .content {
                 display: inline-block;

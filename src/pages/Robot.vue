@@ -2,12 +2,17 @@
   <!--机器人-->
   <div class="wrapper">
     <Header :currentTab="currentTab"></Header>
-    <ul>
-      <li v-for="msg in robotMsgGetter">
-        <ChatItem v-if="msg.user" :msg="msg.message" :name="msg.user" :time="time"></ChatItem>
-        <ChatItem v-if="!msg.user" me="true" :name="name" :href="href" :img=img :msg="msg.message" :time="time"></ChatItem>
-      </li>
-    </ul>
+    <div class="chat-wrapper">
+      <div class="secret-box">
+        <ul>
+          <li v-for="msg in robotMsgGetter">
+            <ChatItem v-if="msg.user" :msg="msg.message" :name="msg.user" :time="time"></ChatItem>
+            <ChatItem v-if="!msg.user" me="true" :name="name" :href="href" :img=img :msg="msg.message" :time="time"></ChatItem>
+          </li>
+        </ul>
+      </div>
+    </div>
+
     <div class="input-msg">
       <textarea v-model="inputMsg" @keydown.enter.prevent="sendMessage" ref="message"></textarea>
       <p class="btn" :class="{'enable':inputMsg!=''}" @click="sendMessage">发送</p>
@@ -82,8 +87,23 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
 .wrapper {
-  padding-top: 0.8rem;
-  z-index: 1;
+  height: 100vh;
+  min-width: 100%;
+  width: 100%;
+  position: relative;
+  .chat-wrapper{
+    height: calc(100% - 2rem);
+    width: 100%;
+    position: relative;
+  }
+  .secret-box{
+    height: 100%;
+    padding: 0px 0px 20px 0;
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    overflow-y: auto;
+  }
   .title{
     font-size: 0.32rem;
     text-align: center;

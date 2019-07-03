@@ -1,4 +1,5 @@
 <template>
+  <!--通讯录-->
 <div class="wrapper">
 	<Header :currentTab="currentTab"></Header>
 	<div class="new-friend" @click="newFriendList">
@@ -6,35 +7,39 @@
 		<svg class="icon enter" aria-hidden="true"> <use  xlink:href="#iconright"></use></svg>
 	</div>
 	<p class="tab"><span :class="friend" @click="showFriends">朋友</span><span :class="group" @click="showGroups">群组</span></p>
-	<ul v-if="friend">
-      <li v-for="(data, index) in alreadyFriends">
-        <div class="list-box" @click="enterIt(data.other_user_id,'friend')">
-          <img :src="data.avator" alt="">
-          <div class="content">
-            <p>{{data.name}}</p>
-            <p>
-              <svg class="icon" aria-hidden="true">
-                <use v-if="data.sex === 0"  xlink:href="#iconxingbienan"></use>
-                <use v-else xlink:href="#iconxingbienv"></use>
-              </svg>
-            </p>
+  <div class="chat-wrapper">
+    <div class="secret-box">
+      <ul v-if="friend">
+        <li v-for="(data, index) in alreadyFriends">
+          <div class="list-box" @click="enterIt(data.other_user_id,'friend')">
+            <img :src="data.avator" alt="">
+            <div class="content">
+              <p>{{data.name}}</p>
+              <p>
+                <svg class="icon" aria-hidden="true">
+                  <use v-if="data.sex === 0"  xlink:href="#iconxingbienan"></use>
+                  <use v-else xlink:href="#iconxingbienv"></use>
+                </svg>
+              </p>
+            </div>
+            <div class="remark">{{data.remark === ''? '没有留下备注~': data.remark}}</div>
           </div>
-          <div class="remark">{{data.remark === ''? '没有留下备注~': data.remark}}</div>
-        </div>
-      </li>
-	</ul>
-  <ul v-if="group">
-    <li v-for="(data, index) in alreadyGroups">
-      <div class="list-box" @click="enterIt(data.group_id,'group')">
-        <img :src="data.avator" alt="">
-        <div class="content">
-          <p>{{data.group_name}}</p>
-          <p>群主：{{data.group_creater}}</p>
-        </div>
-        <div class="remark">{{data.group_notice === ''? '没有留下公告~': data.group_notice.slice(0,10)+'...'}}</div>
-      </div>
-    </li>
-  </ul>
+        </li>
+      </ul>
+      <ul v-if="group">
+        <li v-for="(data, index) in alreadyGroups">
+          <div class="list-box" @click="enterIt(data.group_id,'group')">
+            <img :src="data.avator" alt="">
+            <div class="content">
+              <p>{{data.group_name}}</p>
+              <p>群主：{{data.group_creater}}</p>
+            </div>
+            <div class="remark">{{data.group_notice === ''? '没有留下公告~': data.group_notice.slice(0,10)+'...'}}</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
 	<Footer :currentTab="currentTab"></Footer>
 </div>
 </template>
@@ -111,7 +116,24 @@ export default {
 
 <style lang="scss" scoped>
 .wrapper {
-    padding-top: 1rem;
+  height: 100vh;
+  min-width: 100%;
+  width: 100%;
+  position: relative;
+  .chat-wrapper{
+    height: calc(100% - 2rem);
+    width: 100%;
+    position: relative;
+  }
+  .secret-box{
+    height: 100%;
+    padding: 0px 0px 20px 0;
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    overflow-y: auto;
+  }
+
     .list-box{
       padding: 1.5vh 2vh;
       display: flex;

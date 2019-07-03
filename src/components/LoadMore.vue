@@ -33,18 +33,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  @import "../assets/css/base.scss";
 .load-more {
-  padding: 0.2em 0;
   text-align: center;
   .has-more {
     cursor: pointer;
     font-size: 0.25rem;
-    color: #4290F7;
+    color: $base-color;
   }
   .no-more {
     cursor: default;
     font-size: 0.25rem;
-    color: #686868;
+    color: $gray-color;
   }
 }
 </style>

@@ -1,29 +1,22 @@
 <template>
 <!-- 群资料 -->
-<div class="wrapper">
-	<Header goback='true' chatTitle="群资料"></Header>
-	<div class="content">
-    <div class="content-box">
-      <svg id="icon" class="icon" alt="User Icon" aria-hidden="true">
-        <use xlink:href="#icongroup"></use>
-      </svg>
-    </div>
-		<p>
-			<span>群名</span>：{{this.groupInfo.group_name}}
-		</p>
-		<p>
-			<span>群创建者</span>：{{this.groupInfo.group_creater}}
-		</p>
-		<p>
-			<span>群创建时间</span>：{{this.groupInfo.creater_time}}
-		</p>
-		<p>
-			<span>群公告</span>：{{this.groupInfo.group_notice}}
-		</p>
+<div class="wrapper-group">
+	<div class="info">
+    <p class="notice-title">群公告</p>
+    <p class="notice-content">{{groupInfoGetter.group_notice}}</p>
+    <p class="notice-title">群创建者：{{groupInfoGetter.group_creater}}</p>
+    <p class="notice-title">群创建时间：<span class="notice-content">{{groupInfoGetter.creater_time}}</span></p>
+    <p class="member-number">人数：{{groupMembers.length}}</p>
 	</div>
+  <ul class="members">
+    <li class="member" v-for="(item,index) in groupMembers">
+      <div class="avatar">{{item.avator}}</div>
+      <span class="member-name">{{item.name}}</span>
+    </li>
+  </ul>
 	<div class="action">
-		<span v-if="isMyGroup" class="del-group" @click="exitGroup">退出群聊</span>
-		<span class="go-chat" @click="goChat">{{isMyGroup ? '进入群聊' : '加入群聊' }}</span>
+    <input v-if="isMyGroup" type="button" class="warning-button button" disable="false" value="退出群聊" @click="exitGroup">
+    <input v-else type="button" class="base-button button" disable="false" value="加入群聊" @click="goChat">
 	</div>
 	<!-- <div v-else class="action">
         <span class="go-chat" @click="goChat">加入群聊</span>
@@ -32,21 +25,20 @@
 </template>
 
 <script>
-import Header from '../components/Header.vue'
-import axios from "axios"
 import { mapGetters, mapActions } from 'vuex';
 export default {
 	data() {
 		return {
 			groupInfo: {}, //群资料
 			userInfo: {}, //本机用户资料
-			isMyGroup: null
 		}
 	},
+  props: {
+    groupMembers: Array,
+    groupInfoGetter: Object,
+    isMyGroup: Boolean
+  },
 	computed: {},
-	components: {
-		Header
-	},
 	methods: {
     ...mapActions(["getGroupInformation", "judgeIsInGroup", "exitChatGroup"]),
 		//获取群资料
@@ -73,31 +65,10 @@ export default {
       })
 		},
 
-		//看该用户是否在某个群中(根据返回的数组长度是不是为零
-		isInGroup() {
-      let params = {
-        group_id: this.$route.params.group_id
-      }
-      this.judgeIsInGroup(params).then((res) => {
-        if(res.success){
-          this.isMyGroup = res.data.group_user.length === 0 ? false : true;
-        }else{
-          this.$message({
-            message: '服务器出错啦',
-            type: "error"
-          });
-        }
-      }).catch(err => {
-        console.log('err', err)
-        const errorMsg = err.error
-        this.$message({
-          message: errorMsg,
-          type: "error"
-        });
-      })
-		},
+
 		exitGroup() {
       let params = {
+        user_id: this.userInfo.user_id,
         group_id: this.$route.params.group_id
       }
       this.exitChatGroup(params).then((res) => {
@@ -124,66 +95,73 @@ export default {
       })
 		},
 		goChat() {
-			const path = `/group_chat/${this.$route.params.group_id}`
-			this.$router.push(path)
+			// const path = `/group_chat/${this.$route.params.group_id}`
+			// this.$router.push(path)
 		}
 	},
 	async created() {
 		this.userInfo = JSON.parse(localStorage.getItem("HappyChatUserInfo"));
-		await this.isInGroup();
-		this.getGroupInfo();
+		// await this.isInGroup();
+		// this.getGroupInfo();
 
 	}
 }
 </script>
 
 <style lang="scss" scoped>
-.wrapper {
-    position: relative;
-    padding-top: 8vh;
-    .content {
-      text-align: center;
-      margin-top: 3vh;
-      .content-box{
+  @import "../assets/css/chat.scss";
+.wrapper-group {
+  .info{
+    padding: 0.15rem 0.2rem;
+    .notice-title{
+      color: #676767;
+      padding-bottom: 10px;
+      font-size: 0.26rem;
+      position: relative;
+    }
+    .notice-content{
+      word-wrap: break-word;
+      height: 60px;
+      overflow: hidden;
+      overflow-y: auto;
+      font-size: 0.2rem;
+    }
+    .member-number{
+      font-size: 0.26rem;
+      padding-top: 10px;
+      color: #676767;
+    }
+  }
+  .members{
+    list-style: none;
+    overflow-y: auto;
+    font-size: 0.26rem;
+    height: calc(100% - 190px);
+    .member{
+      padding: 0.15rem 0.2rem;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      .avatar{
+        position: relative;
         text-align: center;
-        padding: 4vh 0 6vh 0;
+        width: 0.8rem;
+        height: 0.8rem;
+        border-radius: 50%;
+        border: 1px solid #676767;
+        line-height: 0.4rem;
+        color: white;
+        display: inline-block;
       }
-        img {
-            width: 2rem;
-            height: 2rem;
-            border-radius: 50%;
-            margin: 1rem 0 0.6rem;
-        }
-        p {
-            font-size: 3vh;
-            line-height: 0.8rem;
-            color: #4290F7;
-            span {
-                font-size: 3vh;
-            }
-        }
+      .member-name{
+        font-size: 0.26rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        width: calc(100% - 0.6rem);
+        padding-left: 10px;
+      }
     }
-    .action {
-        position: absolute;
-        width: 100%;
-        top: 8.8rem;
-        text-align: center;
-        span {
-            display: inline-block;
-            font-size: 0.26rem;
-            line-height: 0.26rem;
-            padding: 0.16rem 0;
-            width: 40%;
-            cursor: pointer;
-        }
-        .go-chat {
-            background-color: #4290F7;
-            color: #fff;
-        }
-        .del-group {
-            background-color: #E16762;
-            color: #fff;
-        }
-    }
+  }
 }
 </style>
