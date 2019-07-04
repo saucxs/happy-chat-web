@@ -18,12 +18,12 @@ export const chatRobot = ({commit},params) => {
         });
       } else if (res.data.code === 302000) {
         commit(types.robotMsgMutation, {
-          message: "暂不支持此类对话",
+          message: res.data.text || "暂不支持此类对话",
           user: "robot"
         });
       } else {
         commit(types.robotMsgMutation, {
-          message: "暂不支持此类对话",
+          message: res.data.text || "暂不支持此类对话",
           user: "robot"
         });
       }

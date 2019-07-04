@@ -15,7 +15,6 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
-    "element-ui": "^2.7.2",
     "node-sass": "^4.11.0",
     "sass-loader": "^7.1.0",
     "socket.io": "^2.2.0",

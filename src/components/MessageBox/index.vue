@@ -15,9 +15,9 @@
 			<div class="info-sex">
 				<span>性别:</span>
 				<select v-model="myInfo.sex">
-			   <option disabled value="">性别</option>
-			   <option>男</option>
-			   <option>女</option>
+			   <option class="option" disabled value="">性别</option>
+			   <option calss="option">男</option>
+			   <option class="option">女</option>
 			 </select>
 			</div>
 			<div class="">
@@ -99,7 +99,7 @@ export default {
 				});
 				return
 			} else if (this.canEditorInfo) {
-                console.log('myInfo',this.myInfo); 
+                console.log('myInfo',this.myInfo);
                 this.myInfo.sex = this.myInfo.sex === '男' ? 0 : 1;
 				this.$emit("confirm", {
 					messageBoxEvent: this.messageBoxEvent,
@@ -137,7 +137,7 @@ export default {
     //Opera
     -ms-transform: translate(-50%, -50%);
     //IE9
-    width: 50%;
+    width: 80%;
     height: auto;
     background-color: white;
     border-radius: 0.1rem;
@@ -157,7 +157,7 @@ export default {
     }
     h1 {
         text-align: center;
-        font-size: 0.18rem;
+        font-size: 0.34rem;
         margin: 0.16rem 0.01rem 0.2rem;
     }
     p {
@@ -177,7 +177,7 @@ export default {
     input {
         // display: inline-block;
         /*去除点击出现轮廓颜色*/
-        width: 60%;
+        width: 66%;
         outline: none;
         border:: 0.01rem solid #fff;
         border-bottom:: 0.01rem solid #999;
@@ -190,13 +190,13 @@ export default {
         /*padding已在重置样式中去除，如果没有去除，记得有padding哦*/
     }
     .hasCancel {
-        height: 0.6rem;
+        height: 1rem;
         p {
             background: transparent;
             color: #1678E5;
-            font-size: 0.14rem;
-            height: 0.6rem;
-            line-height: 0.6rem;
+            font-size: 0.28rem;
+            height: 1rem;
+            line-height: 1rem;
             width: 50%;
             position: absolute;
         }
@@ -250,15 +250,20 @@ export default {
         display: -ms-flexbox;
         flex-direction: column;
         justify-content: center;
-        font-size: 0.2rem;
+        font-size: 0.28rem;
+        margin-bottom: 0.24rem;
         div {
             width: 100%;
             margin: 0.3rem auto;
             select {
-                width: 60%;
+                width: 40%;
+                font-size: 0.28rem;
+                .option{
+                  font-size: 0.28rem;
+                }
             }
             input {
-                font-size: 0.1rem;
+                /*font-size: 0.1rem;*/
             }
         }
     }
