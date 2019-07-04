@@ -1,103 +1,6 @@
 @import "./base.scss";
 
-.button {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-}
-.base-button{
-  background-color: #66b3ef;
-  border: none;
-  color: white;
-  padding: 10px 40px;
-  text-align: center;
-  border-radius: 4px 4px 4px 4px;
-  display: inline-block;
-  cursor: pointer;
-}
-
-.warning-button{
-  background-color: #E16762;
-  border: none;
-  color: white;
-  padding: 10px 40px;
-  text-align: center;
-  border-radius: 4px 4px 4px 4px;
-  display: inline-block;
-  cursor: pointer;
-}
-
-.wrapper {
-  height: 100vh;
-  min-width: 100%;
-  width: 100%;
-  position: relative;
-  .chat-wrapper{
-    height: calc(100% - 1.8rem);
-    width: 100%;
-    position: relative;
-  }
-  .secret-box{
-    height: 100%;
-    padding: 20px 0;
-    display: flex;
-    flex-direction: column;
-    list-style: none;
-    overflow-y: auto;
-  }
-
-  ul {
-    padding: 20px 0;
-    display: flex;
-    flex-direction: column;
-    list-style: none;
-    overflow-y: auto;
-
-    li {
-      list-style-type: none;
-    }
-  }
-
-  .input-msg {
-    height: 0.76rem;
-    position: fixed;
-    bottom: 0rem;
-    display: flex;
-    width: 100%;
-    z-index: 999;
-    textarea {
-      width: 80%;
-      padding: 0.05rem 0.1rem;
-      border-radius: 0.02rem;
-      outline: none;
-      resize: none;
-      border: none;
-      overflow-y: hidden;
-      font: 0.24rem 'Microsoft Yahei';
-    }
-
-    p.btn {
-      font-size:0.22rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      height: 100%;
-      width: 20%;
-      background: #ccc;
-      color: white;
-      border-radius: 0.02rem;
-      cursor: not-allowed;
-      font-family: 'Microsoft Yahei';
-
-      &.enable {
-        background: #1E90FF;
-        cursor: pointer;
-      }
-    }
-  }
-}
-
+/*聊天页弹层*/
 .chat-info-modal{
   position: fixed;
   width: 100%;
@@ -106,17 +9,17 @@
   left: 0;
   background-color: #eeeeee;
   opacity: 0;
-  z-index: 98;
+  z-index: 99999;
 }
 .chat-info{
-  height: calc(100% - 0.86rem);
+  height: 100%;
   width: 4rem;
   position: absolute;
-  top: 0.86rem;;
+  top: 0.98rem;;;
   right: 0;
   z-index: 9999;
-  background: #f6f7f9;
+  background: #eeeeee;
   border: 1px solid rgba(77,77,77,.6);
   opacity: 0.97;
-  z-index: 99;
+  z-index: 999999;
 }

@@ -5,21 +5,25 @@
 		<p slot="content">{{this.messageBox.message}}</p>
 	</Message-box>
 	<Header :currentTab="currentTab"></Header>
-	<div class="content">
-    <div class="content-box">
-      <img :src="userInfo.avator" alt="">
-      <p class="name">{{userInfo.name}}</p>
-      <p class="href">
-        <span @click="goGithub"><svg class="icon" aria-hidden="true"><use  xlink:href="#iconGitHub"></use></svg></span>
-        <span @click="goWebsite"><svg class="icon" aria-hidden="true"><use  xlink:href="#iconWorld-WideWeb"></use></svg></span>
-      </p>
-      <p class="user-intro">{{userInfo.intro == '' ? '没有留下介绍~': userInfo.intro}}</p>
-      <p class="user-more"><svg @click="goInfo" class="icon" aria-hidden="true"> <use  xlink:href="#iconacmore"></use></svg></p>
+  <div class="chat-wrapper-spe">
+    <div class="secret-box-spe">
+      <div class="content">
+        <div class="content-box">
+          <img :src="userInfo.avator" alt="">
+          <p class="name">{{userInfo.name}}</p>
+          <p class="href">
+            <span @click="goGithub"><svg class="icon" aria-hidden="true"><use  xlink:href="#iconGitHub"></use></svg></span>
+            <span @click="goWebsite"><svg class="icon" aria-hidden="true"><use  xlink:href="#iconWorld-WideWeb"></use></svg></span>
+          </p>
+          <p class="user-intro">{{userInfo.intro == '' ? '没有留下介绍~': userInfo.intro}}</p>
+          <p class="user-more"><svg @click="goInfo" class="icon" aria-hidden="true"> <use  xlink:href="#iconacmore"></use></svg>更多信息</p>
+        </div>
+      </div>
+      <div class="action" @click="logout">
+        <span class="logout">退出登录</span>
+      </div>
     </div>
-	</div>
-	<div class="action" @click="logout">
-		<span class="logout">退出登录</span>
-	</div>
+  </div>
 	<Footer :currentTab="currentTab"></Footer>
 </div>
 </template>
@@ -104,49 +108,41 @@ export default {
 
 <style lang="scss" scoped>
 .wrapper {
-    position: relative;
-    padding-top: 1rem;
     .content{
-      margin-top: 8vh;
+      margin-top: 1rem;
       .content-box{
         text-align: center;
-        line-height: 10vh;
+        line-height: 1.2rem;
         img {
           width: 2rem;
           height: 2rem;
           border-radius: 50%;
         }
         .name{
-          font-size: 5vh;
-          line-height: 0.8rem;
+          font-size: 0.8rem;
           color: #4290F7;
         }
         .href {
           span {
-            font-size: 4vh;
-            margin: 0 1vh;
+            font-size: 0.6rem;
+            margin: 0 0.3rem;
             cursor: pointer;
           }
         }
         .user-intro{
-          font-size: 4vh;
+          font-size: 0.3rem;
         }
         .user-more{
-          font-size: 4vh;
+          font-size: 0.3rem;
           cursor: pointer;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          text-decoration: solid;
         }
       }
     }
     .action {
-        text-align: center;
-        span {
-            display: inline-block;
-            font-size: 0.26rem;
-            line-height: 0.26rem;
-            padding: 0.16rem 0;
-            width: 40%;
-            cursor: pointer;
-        }
         .logout {
             background-color: #4290F7;
             color: #fff;

@@ -1,23 +1,28 @@
 <template>
 <div class="wrapper">
 	<Header goback='true' :chatTitle="chatTitle"></Header>
-	<div class="creat-group" @click="createGroup">
-		<svg class="icon" aria-hidden="true"> <use  xlink:href="#icongroup-copy"></use></svg>
-		<span>建一个群</span>
-		<svg class="icon icon-right" aria-hidden="true"><use  xlink:href="#iconright"></use></svg>
-	</div>
-	<div class="search">
-		<svg class="icon" aria-hidden="true"> <use  xlink:href="#iconsousuo"></use></svg>
-		<input type="text" v-model="inputContent" placeholder="在这边输入用户名或者群名称哦" />
-	</div>
-	<div class="choose">
-		<p v-show="this.inputContent !='' " class="find-people" @click="findPeople">
-			<svg class="icon" aria-hidden="true"> <use  xlink:href="#icon-my-copy"></use></svg><span>加人:&nbsp&nbsp{{this.inputContent}}</span>
-		</p>
-		<p v-show="this.inputContent !='' " class="find-group" @click="findGroup"><svg class="icon" aria-hidden="true"> <use  xlink:href="#icon-group1"></use></svg><span>进群:&nbsp&nbsp{{this.inputContent}}</span>
-		</p>
+  <div class="chat-wrapper-spe">
+    <div class="secret-box-spe">
+      <div class="creat-group" @click="createGroup">
+        <svg class="icon" aria-hidden="true"> <use  xlink:href="#icongroup-copy"></use></svg>
+        <span>建一个群</span>
+        <svg class="icon icon-right" aria-hidden="true"><use  xlink:href="#iconright"></use></svg>
+      </div>
+      <div class="search">
+        <svg class="icon" aria-hidden="true"> <use  xlink:href="#iconsousuo"></use></svg>
+        <input type="text" v-model="inputContent" placeholder="在这边输入用户名或者群名称哦" />
+      </div>
+      <div class="choose">
+        <p v-show="this.inputContent !='' " class="find-people" @click="findPeople">
+          <svg class="icon" aria-hidden="true"> <use  xlink:href="#icon-my-copy"></use></svg><span>加人:&nbsp&nbsp{{this.inputContent}}</span>
+        </p>
+        <p v-show="this.inputContent !='' " class="find-group" @click="findGroup"><svg class="icon" aria-hidden="true"> <use  xlink:href="#icon-group1"></use></svg><span>进群:&nbsp&nbsp{{this.inputContent}}</span>
+        </p>
 
-	</div>
+      </div>
+    </div>
+  </div>
+
 </div>
 </template>
 
@@ -61,7 +66,6 @@ export default {
 
 <style lang="scss" scoped>
 .wrapper {
-    padding-top: 1rem;
     .creat-group {
         font-size: 0.3rem;
         display: -webkit-box;
@@ -70,7 +74,7 @@ export default {
         align-items: center;
         background-color: #fff;
         margin-bottom: 0.2rem;
-        padding: 0.1rem;
+        padding: 0.2rem;
         .icon {
             width: 0.5rem;
             height: 0.5rem;
@@ -91,12 +95,12 @@ export default {
         display: flex;
         display: -webkit-flex;
         background-color: #fff;
-        padding: 0.1rem;
+        padding: 0.2rem;
         width: 100%;
         .icon {
-            width: 0.5rem;
-            height: 0.5rem;
-            margin: 0 0 0 0.4rem;
+          width: 0.5rem;
+          height: 0.5rem;
+          margin: 0 0.2rem 0 0.4rem;
         }
         // input {
         /*在IE10+浏览器中, 使用css即可隐藏input文本输入框右侧的叉号*/
@@ -130,7 +134,7 @@ export default {
         p {
             display: flex;
             display: -webkit-flex;
-            padding: 0.1rem;
+            padding: 0.2rem;
             // border-top: 0.01rem solid #f0ecec;
             .icon {
                 font-size: 0.38rem;

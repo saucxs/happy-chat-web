@@ -36,6 +36,7 @@ export default {
   @import "../assets/css/base.scss";
 .load-more {
   text-align: center;
+  padding-top: 16px;
   .has-more {
     cursor: pointer;
     font-size: 0.25rem;

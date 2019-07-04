@@ -118,9 +118,9 @@ export default {
     }
   }
   .input-msg {
-    height: 0.66rem;
+    height: 0.76rem;
     position: fixed;
-    bottom: 0.95rem;
+    bottom: 1rem;
     display: flex;
     width: 100%;
     z-index: 999;

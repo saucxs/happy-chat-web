@@ -11,65 +11,64 @@
 		<p slot="content">{{this.messageBox.message}}</p>
 	</Message-box>
 	<Header goback='true' chatTitle="用户资料"></Header>
-	<div class="content">
-    <div class="content-box">
-      <svg id="icon" class="icon" alt="User Icon" aria-hidden="true">
-        <use xlink:href="#iconniu"></use>
-      </svg>
+  <div class="chat-wrapper-spe">
+    <div class="secret-box-spe">
+      <div class="content">
+        <div class="content-box">
+          <svg id="icon" class="icon" alt="User Icon" aria-hidden="true">
+            <use xlink:href="#iconniu"></use>
+          </svg>
+        </div>
+        <p class="href">
+          <span @click="goGithub"><svg class="icon" aria-hidden="true"><use  xlink:href="#iconGitHub"></use></svg></span>
+          <span @click="goWebsite"><svg class="icon" aria-hidden="true"><use  xlink:href="#iconWorld-WideWeb"></use></svg></span>
+        </p>
+        <p v-if="this.isMyFriend">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#iconbeizhu"></use>
+          </svg>
+          <span>备注</span>：{{this.remark}}
+        </p>
+        <p>
+          <span>用户名</span>：{{userInfo.name}}
+        </p>
+        <p>
+          <span>性别</span>：{{userInfo.sex === 0 ? '男' : '女' }} <svg class="icon" aria-hidden="true">
+          <use v-if="userInfo.sex === 0"  xlink:href="#iconxingbienan"></use>
+          <use v-else xlink:href="#iconxingbienv"></use>
+        </svg>
+        </p>
+        <p>
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#iconplaceholder"></use>
+          </svg>
+          <span>来自</span>：{{userInfo.place}}
+        </p>
+      </div>
+      <div v-if="this.isAddingMe" class="action">
+        <span class="add-as-friend" @click="agreeBeFriend">通过验证</span>
+      </div>
+      <div v-if="this.isMyFriend === true && this.isHisFriend === true " class="action">
+        <span class="editor-remark" @click="editorRemark">修改备注</span>
+        <span class="go-chat" @click="goChat">发消息</span>
+        <span class="shield-it" @click="shieldIt">屏蔽此人</span>
+        <span class="de-friended" @click="deFriended">删除好友</span>
+      </div>
+      <div v-if="this.isMyFriend === true && this.isHisFriend === false " class="action">
+        <span class="de-friended" @click="deFriended">删除好友</span>
+        <span class="add-as-friend" @click="enterReqPage">让对方重新加自己为好友</span>
+      </div>
+      <div v-if="this.isMyFriend === false && this.isHisFriend === true && this.isAddingMe === false " class="action">
+        <span class="add-as-friend" @click="enterReqPage">加为好友</span>
+      </div>
+      <div v-if="this.isMyFriend === false && this.isHisFriend === false && this.isAddingMe === false && this.isMe === false" class="action">
+        <span class="add-as-friend" @click="enterReqPage">加为好友</span>
+      </div>
+      <div v-if="this.isMe" class="action">
+        <span class="editor-info" @click="editorInfo">编辑我的信息</span>
+      </div>
     </div>
-    <p class="href">
-      <span @click="goGithub"><svg class="icon" aria-hidden="true"><use  xlink:href="#iconGitHub"></use></svg></span>
-      <span @click="goWebsite"><svg class="icon" aria-hidden="true"><use  xlink:href="#iconWorld-WideWeb"></use></svg></span>
-    </p>
-    <p v-if="this.isMyFriend">
-      <svg class="icon" aria-hidden="true">
-        <use xlink:href="#iconbeizhu"></use>
-      </svg>
-      <span>备注</span>：{{this.remark}}
-    </p>
-    <p>
-      <svg class="icon" aria-hidden="true">
-        <use xlink:href="#iconmine"></use>
-      </svg>
-      <span>用户名</span>：{{userInfo.name}}
-    </p>
-    <p>
-      <svg class="icon" aria-hidden="true">
-        <use v-if="userInfo.sex === 0"  xlink:href="#iconxingbienan"></use>
-        <use v-else xlink:href="#iconxingbienv"></use>
-      </svg>
-      <span>性别</span>：{{userInfo.sex === 0 ? '男' : '女' }}
-    </p>
-    <p>
-      <svg class="icon" aria-hidden="true">
-        <use xlink:href="#iconplaceholder"></use>
-      </svg>
-      <span>来自</span>：{{userInfo.place}}
-    </p>
-	</div>
-	<div v-if="this.isAddingMe" class="action">
-		<span class="add-as-friend" @click="agreeBeFriend">通过验证</span>
-	</div>
-	<div v-if="this.isMyFriend === true && this.isHisFriend === true " class="action">
-		<span class="editor-remark" @click="editorRemark">修改备注</span>
-		<span class="go-chat" @click="goChat">发消息</span>
-		<span class="shield-it" @click="shieldIt">屏蔽此人</span>
-		<span class="de-friended" @click="deFriended">删除好友</span>
-	</div>
-
-	<div v-if="this.isMyFriend === true && this.isHisFriend === false " class="action">
-		<span class="de-friended" @click="deFriended">删除好友</span>
-		<span class="add-as-friend" @click="enterReqPage">让对方重新加自己为好友</span>
-	</div>
-	<div v-if="this.isMyFriend === false && this.isHisFriend === true && this.isAddingMe === false " class="action">
-		<span class="add-as-friend" @click="enterReqPage">加为好友</span>
-	</div>
-	<div v-if="this.isMyFriend === false && this.isHisFriend === false && this.isAddingMe === false && this.isMe === false" class="action">
-		<span class="add-as-friend" @click="enterReqPage">加为好友</span>
-	</div>
-	<div v-if="this.isMe" class="action">
-		<span class="editor-info" @click="editorInfo">编辑我的信息</span>
-	</div>
+  </div>
 </div>
 </template>
 
@@ -334,8 +333,6 @@ export default {
 
 <style lang="scss" scoped>
 .wrapper {
-    position: relative;
-    padding-top: 8vh;
     .content {
       text-align: center;
       margin-top: 3vh;
@@ -350,34 +347,27 @@ export default {
         margin: 4vh 0;
       }
       p {
-        font-size: 3vh;
-        line-height: 0.8rem;
+        font-size: 0.34rem;
         color: #4290F7;
+        margin-bottom: 2vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         .icon {
-          font-size: 4vh;
-        }
-        span {
-          font-size: 2vh;
+          font-size: 0.45rem;
         }
       }
       .href {
+        .icon {
+          font-size: 0.5rem;
+        }
         span {
-          font-size: 2vh;
           margin: 0 1vh;
           cursor: pointer;
         }
       }
     }
     .action {
-        text-align: center;
-        span {
-            display: inline-block;
-            font-size: 0.26rem;
-            line-height: 0.26rem;
-            padding: 0.16rem 0;
-            width: 40%;
-            cursor: pointer;
-        }
         .go-chat {
             background-color: #4290F7;
             color: #fff;

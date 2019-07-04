@@ -9,14 +9,14 @@
     <p class="member-number">人数：{{groupMembers.length}}</p>
 	</div>
   <ul class="members">
-    <li class="member" v-for="(item,index) in groupMembers">
+    <li class="member" v-for="(item,index) in groupMembers" @click="goInfo(item)">
       <div class="avatar">{{item.avator}}</div>
       <span class="member-name">{{item.name}}</span>
     </li>
   </ul>
-	<div class="action">
-    <input v-if="isMyGroup" type="button" class="warning-button button" disable="false" value="退出群聊" @click="exitGroup">
-    <input v-else type="button" class="base-button button" disable="false" value="加入群聊" @click="goChat">
+	<div class="action action-spe">
+    <span class="warning-span whole-span" v-if="isMyGroup" @click="exitGroup">退出群聊</span>
+    <span class="primary-span whole-span" v-else @click="goChat">加入群聊</span>
 	</div>
 	<!-- <div v-else class="action">
         <span class="go-chat" @click="goChat">加入群聊</span>
@@ -64,8 +64,6 @@ export default {
         });
       })
 		},
-
-
 		exitGroup() {
       let params = {
         user_id: this.userInfo.user_id,
@@ -97,7 +95,11 @@ export default {
 		goChat() {
 			// const path = `/group_chat/${this.$route.params.group_id}`
 			// this.$router.push(path)
-		}
+		},
+    goInfo(item) {
+      const path = `/user_info/${item.user_id}`
+      this.$router.push(path)
+    }
 	},
 	async created() {
 		this.userInfo = JSON.parse(localStorage.getItem("HappyChatUserInfo"));
@@ -112,23 +114,23 @@ export default {
   @import "../assets/css/chat.scss";
 .wrapper-group {
   .info{
-    padding: 0.15rem 0.2rem;
+    padding: 0.15rem 0.2rem 0.3rem 0.2rem;
     .notice-title{
       color: #676767;
-      padding-bottom: 10px;
+      padding-bottom: 0.1rem;
       font-size: 0.26rem;
       position: relative;
     }
     .notice-content{
       word-wrap: break-word;
-      height: 60px;
+      height: 0.6rem;
       overflow: hidden;
       overflow-y: auto;
       font-size: 0.2rem;
     }
     .member-number{
       font-size: 0.26rem;
-      padding-top: 10px;
+      padding-top: 0.1rem;
       color: #676767;
     }
   }
@@ -136,7 +138,8 @@ export default {
     list-style: none;
     overflow-y: auto;
     font-size: 0.26rem;
-    height: calc(100% - 190px);
+    height: calc(100% - 5.22rem);
+    max-height: calc(100% - 5.22rem);
     .member{
       padding: 0.15rem 0.2rem;
       display: flex;

@@ -1,36 +1,40 @@
 <template>
 <div class="wrapper">
 	<Header goback='true' :chatTitle="chatTitle"></Header>
-	<ul>
-		<li v-if="userDataList !== []" v-for="data in userDataList">
-			<div class="people-box" @click="enterUserCard(data.id)">
-				<img :src="data.avator" alt="">
-				<div class="content">
-					<p>{{data.name}}
-						<svg v-if="data.sex = 0" class="icon" aria-hidden="true"> <use  xlink:href="#icon-icon1"></use></svg>
-						<svg v-else class="icon" aria-hidden="true"> <use  xlink:href="#icon-icon"></use></svg>
-					</p>
-					<p>
-						<svg v-if="data.place" class="icon" aria-hidden="true"> <use  xlink:href="#icon-placeholder"></use></svg> {{data.place}}
-						<svg v-if="data.github" class="icon" aria-hidden="true"> <use  xlink:href="#icon-github"></use></svg> {{data.github}}
-					</p>
-				</div>
-			</div>
-		</li>
-		<li v-if="groupDataList !== []" v-for="data in groupDataList">
-			<div class="people-box" @click="enterGroupCard(data.group_id)">
-				<img :src="data.group_avator" alt="">
-				<div class="content">
-					<p class="group-creater">{{data.group_name}} <svg class="icon" aria-hidden="true"> <use  xlink:href="#icon-group_fill"></use></svg>
-						<span> {{data.group_creater}}</span>
-					</p>
-					<p>
-						<span>群公告：{{data.group_notice}}</span>
-					</p>
-				</div>
-			</div>
-		</li>
-	</ul>
+  <div class="chat-wrapper-spe">
+    <div class="secret-box-spe">
+      <ul>
+        <li v-if="userDataList !== []" v-for="data in userDataList">
+          <div class="people-box" @click="enterUserCard(data.id)">
+            <img :src="data.avator" alt="">
+            <div class="content">
+              <p>{{data.name}}
+                <svg v-if="data.sex = 0" class="icon" aria-hidden="true"> <use  xlink:href="#icon-icon1"></use></svg>
+                <svg v-else class="icon" aria-hidden="true"> <use  xlink:href="#icon-icon"></use></svg>
+              </p>
+              <p>
+                <svg v-if="data.place" class="icon" aria-hidden="true"> <use  xlink:href="#icon-placeholder"></use></svg> {{data.place}}
+                <svg v-if="data.github" class="icon" aria-hidden="true"> <use  xlink:href="#icon-github"></use></svg> {{data.github}}
+              </p>
+            </div>
+          </div>
+        </li>
+        <li v-if="groupDataList !== []" v-for="data in groupDataList">
+          <div class="people-box" @click="enterGroupCard(data.group_id)">
+            <img :src="data.group_avator" alt="">
+            <div class="content">
+              <p class="group-creater">{{data.group_name}} <svg class="icon" aria-hidden="true"> <use  xlink:href="#icon-group_fill"></use></svg>
+                <span> {{data.group_creater}}</span>
+              </p>
+              <p>
+                <span>群公告：{{data.group_notice}}</span>
+              </p>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
 </div>
 </template>
 
@@ -61,10 +65,8 @@ export default {
 			const username = this.$route.params.username;
 			const groupname = this.$route.params.groupname;
 			if (username) {
-				this.chatTitle = "查找结果（人）";
 				this.findPeople(username)
 			} else if (groupname) {
-				this.chatTitle = "查找结果（群）";
 				this.findGroup(groupname);
 			}
 		},
@@ -73,6 +75,7 @@ export default {
       this.findPerson({ name: username }).then(res => {
         if(res.success){
           this.userDataList = res.data.userInfo;
+          this.chatTitle = "查找结果（"+ this.userDataList.length +"人）";
         }else{
           this.$message({
             message: '服务器出错啦',
@@ -93,6 +96,7 @@ export default {
       this.getGroupInformation({groupName: groupname}).then(res => {
         if(res.success){
           this.groupDataList = res.data.groupInfo;
+          this.chatTitle = "查找结果（"+ this.groupDataList.length +"群）";
         }else{
           this.$message({
             message: '服务器出错啦',
@@ -124,8 +128,6 @@ export default {
 
 <style lang="scss" scoped>
 .wrapper {
-    padding-top: 0.7rem;
-    position: relative;
     .people-box{
       display: flex;
       align-items: center;
@@ -142,7 +144,6 @@ export default {
         transform: translate(-50%, -50%);
     }
     ul {
-        margin-top: 0.2rem;
         li {
             cursor: pointer;
             background-color: #fff;

@@ -9,11 +9,11 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  // -webkit-tap-highlight-color: rgba(0,0,0,0);
-  // -ms-touch-action: none;
-  // -webkit-touch-callout: none;
-  // user-select: none;
-  // text-size-adjust: none;
+   -webkit-tap-highlight-color: rgba(0,0,0,0);
+   -ms-touch-action: none;
+   -webkit-touch-callout: none;
+   user-select: none;
+   text-size-adjust: none;
 }
 
 body,
@@ -40,6 +40,157 @@ html {
 .after-content{
   font-size: 0.12rem;
   color: #cccccc;
+}
+
+/*基础布局样式*/
+.wrapper {
+  height: 100vh;
+  min-width: 100%;
+  width: 100%;
+  position: relative;
+  .chat-wrapper{
+    height: calc(100% - 1.8rem);
+    width: 100%;
+    position: relative;
+  }
+  .chat-wrapper-spe{
+    height: calc(100% - 2rem);
+    width: 100%;
+    position: relative;
+  }
+  .secret-box{
+    height: 100%;
+    padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    overflow-y: auto;
+  }
+  .secret-box-spe{
+    height: 100%;
+    //padding: 0px 0px 20px 0;
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    overflow-y: auto;
+  }
+
+  ul {
+    padding-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    overflow-y: auto;
+
+    li {
+      list-style-type: none;
+    }
+  }
+
+  .input-msg {
+    height: 0.76rem;
+    position: fixed;
+    bottom: 0rem;
+    display: flex;
+    width: 100%;
+    z-index: 999;
+    textarea {
+      width: 80%;
+      padding: 0.05rem 0.1rem;
+      border-radius: 0.02rem;
+      outline: none;
+      resize: none;
+      border: none;
+      overflow-y: hidden;
+      font: 0.24rem 'Microsoft Yahei';
+    }
+
+    p.btn {
+      font-size:0.22rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      height: 100%;
+      width: 20%;
+      background: #ccc;
+      color: white;
+      border-radius: 0.02rem;
+      cursor: not-allowed;
+      font-family: 'Microsoft Yahei';
+
+      &.enable {
+        background: #1E90FF;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+
+/*按钮样式*/
+.button {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.base-button{
+  background-color: #66b3ef;
+  border: none;
+  color: white;
+  padding: 10px 40px;
+  text-align: center;
+  border-radius: 4px 4px 4px 4px;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.warning-button{
+  background-color: #E16762;
+  border: none;
+  color: white;
+  padding: 0.26rem 0.5rem;;
+  text-align: center;
+  border-radius: 4px 4px 4px 4px;
+  display: inline-block;
+  cursor: pointer;
+}
+
+/*action 按钮*/
+.action {
+  text-align: center;
+  span {
+    display: inline-block;
+    font-size: 0.3rem;
+    line-height: 0.26rem;
+    padding: 0.26rem 0;
+    width: 40%;
+    cursor: pointer;
+  }
+  .whole-span{
+    width: 100%;
+    line-height: inherit;
+  }
+  .warning-span {
+    background-color: #E16762;
+    color: #fff;
+  }
+  .primary-span {
+    background-color: $base-color;
+    color: #fff;
+  }
+}
+
+/*空页面布局*/
+.no-content{
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  color: $base-color;
+  margin-top: calc(50vh - 2rem);
+  .icon{
+    font-size: 2rem;
+  }
 }
 
 /*重写meassage box*/

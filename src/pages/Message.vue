@@ -2,8 +2,8 @@
 <!-- 消息 -->
 <div class="wrapper">
 	<Header :currentTab="currentTab"></Header>
-  <div class="chat-wrapper">
-    <div class="secret-box">
+  <div class="chat-wrapper-spe">
+    <div class="secret-box-spe" v-if="msgListGetter.length > 0">
       <ul>
         <li v-for="data in msgListGetter" @click="enterChat(data.type,data.id)">
           <a v-if="data.type === 'group'" href="">
@@ -27,6 +27,11 @@
           </div>
         </li>
       </ul>
+    </div>
+    <div class="no-content" v-else>
+      <svg class="icon img" aria-hidden="true">
+        <use xlink:href="#iconkong"></use>
+      </svg>
     </div>
   </div>
 	<Footer :currentTab="currentTab"></Footer>
@@ -92,27 +97,8 @@ export default {
 
 <style lang="scss" scoped>
 .wrapper {
-  height: 100vh;
-  min-width: 100%;
-  width: 100%;
-  position: relative;
-  .chat-wrapper{
-    height: calc(100% - 2rem);
-    width: 100%;
-    position: relative;
-  }
-  .secret-box{
-    height: 100%;
-    padding: 0px 0px 20px 0;
-    display: flex;
-    flex-direction: column;
-    list-style: none;
-    overflow-y: auto;
-  }
-
     ul {
         background-color: #fff;
-        padding-bottom: 1vh;
         li {
             display: -webkit-box;
             display: -ms-flexbox;

@@ -3,8 +3,8 @@
 <div class="wrapper">
 	<Header goback='true' groupInfo='true' :chatTitle="groupInfoGetter.group_name" @showGroupInfo="showGroupInfoChild"></Header>
   <div class="chat-wrapper">
-    <div class="secret-box">
-      <ul>
+    <div class="secret-box-spe">
+      <ul ref="viewBox">
         <li>
           <load-more :is-no-more="isNoMore" :is-show-loading="isShowLoading" @load-more="loadMore"></load-more>
         </li>
@@ -14,11 +14,11 @@
         </li>
       </ul>
     </div>
-    <div class="chat-info-modal" v-if="showGroupInfoDialog"></div>
-    <group-info v-if="showGroupInfoDialog" class="chat-info" :groupMembers="groupMembers" :groupInfoGetter="groupInfoGetter" :isMyGroup="isMyGroup"></group-info>
   </div>
+  <div @click="showGroupInfoDialog = false" class="chat-info-modal" v-if="showGroupInfoDialog"></div>
+  <group-info v-if="showGroupInfoDialog" class="chat-info" :groupMembers="groupMembers" :groupInfoGetter="groupInfoGetter" :isMyGroup="isMyGroup"></group-info>
   <div class="input-msg" v-if="!isMyGroup">
-    <input type="button" class="base-button button" disable="false" value="加入群聊">
+    <input @click="goChat" type="button" class="base-button button" disable="false" value="加入群聊">
   </div>
   <div class="input-msg" v-if="isMyGroup">
     <textarea v-model="inputMsg" @keydown.enter.prevent="sendMessage" placeholder="输入..."></textarea>
@@ -59,7 +59,10 @@ export default {
       type: 'bottom',
       showGroupInfoDialog: false,
       groupMembers: [],  //群成员信息列表,
-      isMyGroup: null
+      isMyGroup: null,
+      viewBox: '',
+      beforeScrollHeight: '',
+      afterScrollHeight: ''
 		};
 	},
 
@@ -72,8 +75,11 @@ export default {
 
 	watch: {
 		message() {
+      this.viewBox = this.$refs.viewBox;
       if(this.type == 'bottom'){
         this.refresh();
+      }else{
+        this.nofresh()
       }
 		}
 	},
@@ -144,6 +150,7 @@ export default {
 				message: this.inputMsg, //消息内容
 				time: toNomalTime(new Date().getTime()) //时间
 			}
+      this.type = 'bottom'
       socketWeb.emit('sendGroupMsg', data)
 			this.saveMsgByDB();
 
@@ -201,14 +208,20 @@ export default {
 		// 消息置底
 		refresh() {
 			setTimeout(() => {
-				window.scrollTo(0, document.body.scrollHeight + 10000)
-			}, 0)
+        this.viewBox.scrollTop = this.viewBox.scrollHeight
+			}, 100)
 		},
+    // 消息保持不变
+    nofresh() {
+      setTimeout(() => {
+        this.afterScrollHeight = this.viewBox.scrollHeight - this.beforeScrollHeight;
+        this.viewBox.scrollTop = this.afterScrollHeight;
+      }, 100)
+    },
     loadMore() {
-      console.log('加載更多');
+      this.beforeScrollHeight = this.viewBox.scrollHeight;
       if (!this.isNoMore) {
         this.isShowLoading = true;
-        console.log(this.page, '-=-=-=-=-=-=-=-')
         this.page = this.page + 1;
         let params = {
           page: this.page,
@@ -221,6 +234,11 @@ export default {
             if (res.data.groupMsg.length < this.pageNum) {
               this.isNoMore = true;
             }
+            res.data.groupMsg.forEach(element => {
+              element.time = element.time;
+              element.message = element.message.split(':')[1];
+            });
+            if(res.data.groupMsg.length == 0) return ;
             this.message.unshift(...res.data.groupMsg);
             this.isShowLoading = false;
           }
@@ -266,7 +284,11 @@ export default {
         type: "group",
         id: this.groupInfoGetter.group_id
       }
-      this.$store.commit('updateListMutation', data)
+      this.$store.commit('updateListMutation', data);
+      this.isMyGroup = true;
+    },
+    handleScroll() {
+      this.viewBox = this.$refs.viewBox;
     }
 	},
 	async created() {
@@ -275,11 +297,14 @@ export default {
     await this.isInGroup();
 		await this.getChatMsg();
 		this.resetUnred();
-		this.getMsgBySocket()
-	}
+		this.getMsgBySocket();
+	},
+  mounted: function () {
+    // window.addEventListener('scroll', this.handleScroll, true);  // 监听（绑定）滚轮滚动事件
+  },
 }
 </script>
 
 <style lang="scss" scoped>
-@import "../assets/css/chat.scss";
+  @import "../assets/css/chat.scss";
 </style>

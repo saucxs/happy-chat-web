@@ -5,19 +5,23 @@
 	<Message-box :messageBoxEvent="this.messageBox.messageBoxEvent" :visible="this.messageBox.visible" :hasCancel='false' @confirm="confirm">
 		<p slot="content">{{this.messageBox.message}}</p>
 	</Message-box>
-	<div class="content">
-    <div class="content-box">
-      <svg id="icon" class="icon" alt="User Icon" aria-hidden="true">
-        <use xlink:href="#icongroup"></use>
-      </svg>
+  <div class="chat-wrapper-spe">
+    <div class="secret-box-spe">
+      <div class="content">
+        <div class="content-box">
+          <svg id="icon" class="icon" alt="User Icon" aria-hidden="true">
+            <use xlink:href="#icongroup"></use>
+          </svg>
+        </div>
+        <p>群名:</br><input type="text" v-model="groupInfo.group_name" placeholder="不超过10个字哦" maxlength="10" /></p>
+        <p>群公告:</br><textarea rows="5" type="text" v-model="groupInfo.group_notice" placeholder="不超过30个字哦" maxlength="30" /></textarea>
+        </p>
+      </div>
+      <div class="action" @click="createGroup">
+        <span class="creat_group">确定建群</span>
+      </div>
     </div>
-		<p>群名:</br><input type="text" v-model="groupInfo.group_name" placeholder="不超过10个字哦" maxlength="10" /></p>
-		<p>群公告:</br><textarea rows="5" type="text" v-model="groupInfo.group_notice" placeholder="不超过60个字哦" maxlength="60" /></textarea>
-		</p>
-	</div>
-	<div class="action" @click="createGroup">
-		<span class="creat_group">确定建群</span>
-	</div>
+  </div>
 </div>
 </template>
 
@@ -136,8 +140,6 @@ export default {
 
 <style lang="scss" scoped>
 .wrapper {
-    position: relative;
-    padding-top: 0.1rem;
     .content {
         margin-top: 8vh;
         .content-box{
@@ -218,15 +220,6 @@ export default {
         }
     }
     .action {
-        text-align: center;
-        span {
-            display: inline-block;
-            font-size: 0.26rem;
-            line-height: 0.26rem;
-            padding: 0.16rem 0;
-            width: 40%;
-            cursor: pointer;
-        }
         .creat_group {
             background-color: #4290F7;
             color: #fff;
