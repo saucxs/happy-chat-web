@@ -20,7 +20,7 @@
         </div>
       </div>
       <div class="action" @click="logout">
-        <span class="logout">退出登录</span>
+        <span class="warning-span">退出登录</span>
       </div>
     </div>
   </div>
@@ -112,7 +112,7 @@ export default {
       margin-top: 1rem;
       .content-box{
         text-align: center;
-        line-height: 1.2rem;
+        line-height: 1rem;
         img {
           width: 2rem;
           height: 2rem;
@@ -141,12 +141,6 @@ export default {
           text-decoration: solid;
         }
       }
-    }
-    .action {
-        .logout {
-            background-color: #4290F7;
-            color: #fff;
-        }
     }
 }
 </style>

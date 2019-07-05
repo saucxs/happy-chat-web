@@ -17,12 +17,14 @@
 			</div>
 			<form>
         <div>
-          <span class="normal-word">用户名：</span><input @keyup.enter.native="startLogin" type="text"  class="fadeIn second" placeholder="用户名" v-model="name">
+          <span class="normal-word">用户名：</span><input @keyup.enter="startLogin" type="text"  class="fadeIn second" placeholder="用户名" v-model="name">
         </div>
         <div>
-          <span class="normal-word">密码：</span><input @keyup.enter.native="startLogin" type="password" class="fadeIn third" placeholder="密码" v-model="password">
+          <span class="normal-word">密码：</span><input @keyup.enter="startLogin" type="password" class="fadeIn third" placeholder="密码" v-model="password">
         </div>
-				<input type="button" @click="startLogin" class="fadeIn fourth" value="登录">
+        <div class="action" @click="startLogin">
+          <span class="primary-span">登录</span>
+        </div>
 			</form>
 		</div>
 	</div>
@@ -50,18 +52,9 @@ export default {
 	computed: {},
 
 	watch: {},
-  mounted () {
-    document.addEventListener('keyup', this.handleEnter);
-  },
 
 	methods: {
     ...mapActions(["login"]),
-    handleEnter (e) {
-      const event = e || window.event;
-      if (event.keyCode === 13) {
-        this.startLogin()
-      }
-    },
     startLogin() {
 			if (this.name !== "" && this.password !== "") {
 			  let params = {

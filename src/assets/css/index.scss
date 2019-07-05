@@ -76,7 +76,7 @@ html {
   }
 
   ul {
-    padding-bottom: 10px;
+    padding-bottom: 0.1rem;
     display: flex;
     flex-direction: column;
     list-style: none;
@@ -127,33 +127,38 @@ html {
   }
 }
 
+/*不可用*/
+.disabled{
+  pointer-events: none;
+}
 
 /*按钮样式*/
+.box-button-group{
+  margin: 0.16rem;
+}
 .button {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-}
-.base-button{
-  background-color: #66b3ef;
-  border: none;
-  color: white;
-  padding: 10px 40px;
-  text-align: center;
-  border-radius: 4px 4px 4px 4px;
+  font-size: 0.24rem;
+  width: 50%;
+  border-radius: 0.4rem;
   display: inline-block;
   cursor: pointer;
+  text-align: center;
+}
+.base-button{
+  background-color: $base-success-color;
+  color: white;
+  margin: 0.1rem 0;
+  padding: 0.14rem 0;
 }
 
 .warning-button{
-  background-color: #E16762;
-  border: none;
+  background-color: $base-warning-color;
   color: white;
-  padding: 0.26rem 0.5rem;;
-  text-align: center;
-  border-radius: 4px 4px 4px 4px;
-  display: inline-block;
-  cursor: pointer;
+  margin: 0.1rem 0;
+  padding: 0.14rem 0;
 }
 
 /*action 按钮*/
@@ -161,10 +166,11 @@ html {
   text-align: center;
   span {
     display: inline-block;
-    font-size: 0.3rem;
-    line-height: 0.26rem;
-    padding: 0.26rem 0;
-    width: 40%;
+    font-size: 0.24rem;
+    //line-height: 0.26rem;
+    padding: 0.2rem 0;
+    width: 50%;
+    border-radius: 0.4rem;
     cursor: pointer;
   }
   .whole-span{
@@ -172,7 +178,7 @@ html {
     line-height: inherit;
   }
   .warning-span {
-    background-color: #E16762;
+    background-color: $base-warning-color;
     color: #fff;
   }
   .primary-span {
@@ -183,11 +189,19 @@ html {
 
 /*空页面布局*/
 .no-content{
-  display: flex;
-  justify-content: center;
-  align-content: center;
   color: $base-color;
-  margin-top: calc(50vh - 2rem);
+  height: 3.6rem;
+  text-align: center;
+  margin-top: calc(50vh - 3.6rem);
+  .icon{
+    font-size: 2rem;
+  }
+}
+.no-content-spe{
+  color: $base-color;
+  height: 3.6rem;
+  text-align: center;
+  margin-top: calc(50vh - 3.6rem);
   .icon{
     font-size: 2rem;
   }

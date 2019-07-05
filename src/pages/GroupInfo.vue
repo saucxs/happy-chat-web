@@ -14,10 +14,15 @@
       <span class="member-name">{{item.name}}</span>
     </li>
   </ul>
-	<div class="action action-spe">
-    <span class="warning-span whole-span" v-if="isMyGroup" @click="exitGroup">退出群聊</span>
-    <span class="primary-span whole-span" v-else @click="goChat">加入群聊</span>
-	</div>
+  <div class="box-button-group">
+    <span v-if="isMyGroup" @click="exitGroup" class="warning-button button">退出群聊</span>
+    <span v-else @click="goChat" class="base-button button">加入群聊</span>
+  </div>
+
+	<!--<div class="action action-spe">-->
+    <!--<span class="warning-span whole-span" v-if="isMyGroup" @click="exitGroup">退出群聊</span>-->
+    <!--<span class="primary-span whole-span" v-else @click="goChat">加入群聊</span>-->
+	<!--</div>-->
 	<!-- <div v-else class="action">
         <span class="go-chat" @click="goChat">加入群聊</span>
     </div> -->
@@ -114,7 +119,7 @@ export default {
   @import "../assets/css/chat.scss";
 .wrapper-group {
   .info{
-    padding: 0.15rem 0.2rem 0.3rem 0.2rem;
+    padding: 0.2rem;
     .notice-title{
       color: #676767;
       padding-bottom: 0.1rem;
@@ -135,11 +140,13 @@ export default {
     }
   }
   .members{
+    padding-top: 0.1rem;
+    background: #fff;
     list-style: none;
     overflow-y: auto;
     font-size: 0.26rem;
-    height: calc(100% - 5.22rem);
-    max-height: calc(100% - 5.22rem);
+    height: calc(100% - 4.8rem);
+    max-height: calc(100% - 4.8rem);
     .member{
       padding: 0.15rem 0.2rem;
       display: flex;

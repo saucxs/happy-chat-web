@@ -4,8 +4,6 @@ import Vue from "vue";
 import axios from "axios";
 import router from '../router/index';
 import Loading from '../components/Loading/index'
-import { MessageBox } from 'element-ui'
-import 'element-ui/lib/theme-chalk/index.css'
 
 axios.defaults.retry = 4;
 axios.defaults.retryDelay = 1000;
@@ -59,17 +57,17 @@ service.interceptors.response.use(
           }, 500);
         case 504:
           /*后端服务器关闭的时候*/
-          MessageBox.confirm('服务器暂时开了小差，请稍后重试','提示',{
-            confirmButtonText:'重新连接',
-            type:'warning',
-            center: true,
-            showClose: false,
-            showCancelButton: false,
-            closeOnClickModal: false,
-          }).then(()=>{
-            console.log('服务器关闭了');
-            window.location.reload();
-          })
+          // MessageBox.confirm('服务器暂时开了小差，请稍后重试','提示',{
+          //   confirmButtonText:'重新连接',
+          //   type:'warning',
+          //   center: true,
+          //   showClose: false,
+          //   showCancelButton: false,
+          //   closeOnClickModal: false,
+          // }).then(()=>{
+          //   console.log('服务器关闭了');
+          //   window.location.reload();
+          // })
       }
     } else if (!error.response) {
       /*断网*/

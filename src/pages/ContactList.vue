@@ -6,7 +6,10 @@
 		<svg class="icon img" aria-hidden="true"> <use  xlink:href="#iconfriends"></use></svg><span>新朋友</span>
 		<svg class="icon enter" aria-hidden="true"> <use  xlink:href="#iconright"></use></svg>
 	</div>
-	<p class="tab"><span :class="friend" @click="showFriends">朋友</span><span :class="group" @click="showGroups">群组</span></p>
+	<p class="tab">
+    <span :class="friend" @click="showFriends">朋友</span>
+    <span :class="group" @click="showGroups">群组</span>
+  </p>
   <div class="chat-wrapper">
     <div class="secret-box">
       <ul v-if="friend">
@@ -26,6 +29,7 @@
           </div>
         </li>
       </ul>
+      <Nothing v-else :name="'加群'" :type="'addGroup'"></Nothing>
       <ul v-if="group">
         <li v-for="(data, index) in alreadyGroups">
           <div class="list-box" @click="enterIt(data.group_id,'group')">
@@ -38,6 +42,7 @@
           </div>
         </li>
       </ul>
+      <Nothing v-else :name="'加好友'" :type="'addAuthor'"></Nothing>
     </div>
   </div>
 	<Footer :currentTab="currentTab"></Footer>
@@ -47,12 +52,14 @@
 <script>
 import Header from '../components/Header.vue'
 import Footer from '../components/Footer.vue'
+import Nothing from '../components/Nothing.vue'
 import axios from "axios"
 import { mapGetters, mapActions } from 'vuex';
 export default {
 	components: {
 		Header,
-		Footer
+		Footer,
+    Nothing
 	},
 
 	data() {
@@ -108,8 +115,10 @@ export default {
 
 	mounted() {
     this.userInfo = JSON.parse(localStorage.getItem("HappyChatUserInfo"));
-    this.alreadyFriendsList();
-    this.alreadyGroupsList()
+    this.$loading.show();
+    Promise.all([this.alreadyFriendsList(),this.alreadyGroupsList()]).then(res => {
+      this.$loading.hide();
+    })
 	}
 }
 </script>

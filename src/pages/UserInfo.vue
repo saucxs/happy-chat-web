@@ -49,23 +49,23 @@
         <span class="add-as-friend" @click="agreeBeFriend">通过验证</span>
       </div>
       <div v-if="this.isMyFriend === true && this.isHisFriend === true " class="action">
-        <span class="editor-remark" @click="editorRemark">修改备注</span>
-        <span class="go-chat" @click="goChat">发消息</span>
-        <span class="shield-it" @click="shieldIt">屏蔽此人</span>
-        <span class="de-friended" @click="deFriended">删除好友</span>
+        <span class="primary-span editor-remark" @click="editorRemark">修改备注</span>
+        <span class="primary-span go-chat" @click="goChat">发消息</span>
+        <span class="warning-span shield-it" @click="shieldIt">屏蔽此人</span>
+        <span class="warning-span de-friended" @click="deFriended">删除好友</span>
       </div>
       <div v-if="this.isMyFriend === true && this.isHisFriend === false " class="action">
-        <span class="de-friended" @click="deFriended">删除好友</span>
-        <span class="add-as-friend" @click="enterReqPage">让对方重新加自己为好友</span>
+        <span class="warning-span de-friended" @click="deFriended">删除好友</span>
+        <span class="primary-span add-as-friend" @click="enterReqPage">让对方重新加自己为好友</span>
       </div>
       <div v-if="this.isMyFriend === false && this.isHisFriend === true && this.isAddingMe === false " class="action">
-        <span class="add-as-friend" @click="enterReqPage">加为好友</span>
+        <span class="primary-span add-as-friend" @click="enterReqPage">加为好友</span>
       </div>
       <div v-if="this.isMyFriend === false && this.isHisFriend === false && this.isAddingMe === false && this.isMe === false" class="action">
-        <span class="add-as-friend" @click="enterReqPage">加为好友</span>
+        <span class="primary-span add-as-friend" @click="enterReqPage">加为好友</span>
       </div>
       <div v-if="this.isMe" class="action">
-        <span class="editor-info" @click="editorInfo">编辑我的信息</span>
+        <span class="primary-span editor-info" @click="editorInfo">编辑我的信息</span>
       </div>
     </div>
   </div>
@@ -366,29 +366,6 @@ export default {
           cursor: pointer;
         }
       }
-    }
-    .action {
-        .go-chat {
-            background-color: #4290F7;
-            color: #fff;
-        }
-        .editor-remark {
-            background-color: #fff;
-            color: #4290F7;
-        }
-        .shield-it {
-            background-color: #fff;
-            color: #4290F7;
-        }
-        .de-friended {
-            background-color: #E16762;
-            color: #fff;
-        }
-        .add-as-friend,
-        .editor-info {
-            background-color: #4290F7;
-            color: #fff;
-        }
     }
 }
 </style>

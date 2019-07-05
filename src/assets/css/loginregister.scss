@@ -1,3 +1,4 @@
+@import "./base.scss";
 .login {
   background-color: #ccc ;
   font-family: "Poppins", sans-serif;
@@ -18,7 +19,7 @@
       background: #fff;
       padding: 0.6rem;
       width: 90%;
-      max-width: 5rem;
+      max-width: 5.6rem;
       min-height: 8rem;
       position: relative;
       padding: 0;
@@ -28,7 +29,7 @@
 
       h2 {
         text-align: center;
-        font-size: 0.3rem;
+        font-size: 0.36rem;
         font-weight: 600;
         text-transform: uppercase;
         display: inline-block;
@@ -37,14 +38,18 @@
       }
 
       .active {
-        color: #39ace7;
+        color: $base-color;
+      }
+
+      .register-form{
+        min-height: 6.2rem;
       }
 
       form {
         input[type=button],
         input[type=reset],
         input[type=submit] {
-          background-color: #39ace7;
+          background-color: $base-color;
           border: none;
           color: white;
           padding: 0.15rem 1.4rem;
@@ -68,7 +73,7 @@
         input[type=button]:hover,
         input[type=reset]:hover,
         input[type=submit]:hover {
-          background-color: #39ace7;
+          background-color: $base-color;
         }
 
         input[type=button]:active,
@@ -90,7 +95,7 @@
           text-align: center;
           text-decoration: none;
           display: inline-block;
-          font-size: 0.2rem;
+          font-size: 0.24rem;
           margin: 0.05rem;
           width: 60%;
           border: 0.02rem solid #f6f6f6;
@@ -105,16 +110,16 @@
 
         input[type=text]:focus {
           background-color: #fff;
-          border-bottom: 0.02rem solid #5fbae9;
+          border-bottom: 0.02rem solid $base-color;
         }
 
         input[type=password]:focus {
           background-color: #fff;
-          border-bottom: 0.02rem solid #5fbae9;
+          border-bottom: 0.02rem solid $base-color;
         }
 
         input[type=text]:placeholder {
-          color: #cccccc;
+          color: #eeee;
         }
 
         input[type=password]:placeholder {
@@ -122,7 +127,7 @@
         }
 
         .normal-word {
-          font-size: 0.2rem;
+          font-size: 0.28rem;
         }
 
       }

@@ -137,7 +137,7 @@ export default {
     //Opera
     -ms-transform: translate(-50%, -50%);
     //IE9
-    width: 80%;
+    width: 70%;
     height: auto;
     background-color: white;
     border-radius: 0.1rem;
@@ -161,7 +161,7 @@ export default {
         margin: 0.16rem 0.01rem 0.2rem;
     }
     p {
-        font-size: 0.18rem;
+        font-size: 0.24rem;
         color: rgba(0, 0, 0, 0.808);
         margin-bottom: 0.18rem;
     }
@@ -190,13 +190,13 @@ export default {
         /*padding已在重置样式中去除，如果没有去除，记得有padding哦*/
     }
     .hasCancel {
-        height: 1rem;
+        height: 0.8rem;
         p {
             background: transparent;
             color: #1678E5;
             font-size: 0.28rem;
-            height: 1rem;
-            line-height: 1rem;
+            height: 0.8rem;
+            line-height: 0.8rem;
             width: 50%;
             position: absolute;
         }
@@ -221,13 +221,13 @@ export default {
         }
     }
     .noCancel {
-        height: 0.6rem;
+        height: 0.8rem;
         p {
             background: transparent;
             color: #1678E5;
-            height: 0.6rem;
-            font-size: 0.14rem;
-            line-height: 0.6rem;
+            height: 0.8rem;
+            font-size: 0.24rem;
+            line-height: 0.8rem;
             width: 100%;
             position: absolute;
             text-decoration: none;

@@ -17,7 +17,7 @@
           </svg>
         </div>
 			</div>
-			<form>
+			<form class="register-form">
 				<div>
           <span class="normal-word">用户名：</span><input type="text" class="fadeIn second" v-model="name" placeholder="用户名">
         </div>
@@ -27,7 +27,10 @@
 				<div>
           <span class="normal-word">邮箱：</span><input type="text" class="fadeIn third" v-model="email" placeholder="邮箱">
         </div>
-				<input type="button" :disabed="disabledFlag" @click="startRegister" class="fadeIn fourth" value="注册">
+        <div class="action" @click="startRegister" :class="{'disabled': disabledFlag}">
+          <span class="primary-span">注 册</span>
+        </div>
+				<!--<input type="button" :disabed="disabledFlag" @click="startRegister" class="fadeIn fourth" value="注册">-->
 			</form>
 		</div>
 	</div>
@@ -75,12 +78,14 @@ export default {
               });
             }
           }
+          this.disabledFlag = false;
         }).catch(err => {
           console.log(err)
           this.$message({
             message: '服务器出错啦',
             type: "error"
           });
+          this.disabledFlag = false;
         })
       } else {
         let message;
@@ -97,7 +102,6 @@ export default {
     startRegister() {
       this.disabledFlag = true;
       this.actualRegister()
-      this.disabledFlag = false;
 		},
 		confirm(value) {
 			if (value === 'register') {

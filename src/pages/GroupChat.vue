@@ -17,13 +17,15 @@
   </div>
   <div @click="showGroupInfoDialog = false" class="chat-info-modal" v-if="showGroupInfoDialog"></div>
   <group-info v-if="showGroupInfoDialog" class="chat-info" :groupMembers="groupMembers" :groupInfoGetter="groupInfoGetter" :isMyGroup="isMyGroup"></group-info>
-  <div class="input-msg" v-if="!isMyGroup">
-    <input @click="goChat" type="button" class="base-button button" disable="false" value="加入群聊">
-  </div>
+
+
   <div class="input-msg" v-if="isMyGroup">
+    <picker :i18n="emojiData" />
+    <p class="btn" @click="sendMessage">表情</p>
     <textarea v-model="inputMsg" @keydown.enter.prevent="sendMessage" placeholder="输入..."></textarea>
     <p class="btn" :class="{'enable':inputMsg!=''}" @click="sendMessage">{{btnInfo}}</p>
   </div>
+  <span v-else @click="goChat" class="base-button button">加入群聊</span>
 </div>
 </template>
 
@@ -32,6 +34,8 @@ import Header from '../components/Header.vue'
 import ChatItem from '../components/ChatItem.vue'
 import LoadMore from '../components/LoadMore.vue';
 import GroupInfo from  './GroupInfo'
+import { Picker } from 'emoji-mart-vue-fast'
+import 'emoji-mart-vue-fast/css/emoji-mart.css'
 import {	toNomalTime } from "../utils/common";
 import { mapGetters, mapActions } from 'vuex';
 export default {
@@ -39,7 +43,8 @@ export default {
 		Header,
 		ChatItem,
     LoadMore,
-    GroupInfo
+    GroupInfo,
+    Picker
 	},
 	data() {
 		return {
@@ -62,7 +67,24 @@ export default {
       isMyGroup: null,
       viewBox: '',
       beforeScrollHeight: '',
-      afterScrollHeight: ''
+      afterScrollHeight: '',
+      emojiData: {
+        search: 'Search',
+        notfound: 'No Emoji Found',
+        categories: {
+          search: 'Search Results',
+          recent: 'Frequently Used',
+          people: 'Smileys & People',
+          nature: 'Animals & Nature',
+          foods: 'Food & Drink',
+          activity: 'Activity',
+          places: 'Travel & Places',
+          objects: 'Objects',
+          symbols: 'Symbols',
+          flags: 'Flags',
+          custom: 'Custom',
+        }
+      }
 		};
 	},
 
@@ -85,6 +107,10 @@ export default {
 	},
 	methods: {
     ...mapActions(["getGroupChat", "saveGroupChatMsg", "addGroupChatRelation", "judgeIsInGroup"]),
+    /*选表情*/
+    selectEmoji(emoji) {
+      console.log(emoji)
+    },
 		//获取聊天记录
 		getChatMsg() {
       let params = {
@@ -219,30 +245,38 @@ export default {
       }, 100)
     },
     loadMore() {
-      this.beforeScrollHeight = this.viewBox.scrollHeight;
-      if (!this.isNoMore) {
-        this.isShowLoading = true;
-        this.page = this.page + 1;
-        let params = {
-          page: this.page,
-          pageNum: this.pageNum,
-          groupId: this.groupInfo.groupId
-        }
-        this.getGroupChat(params).then((res) => {
-          if (res.success) {
-            this.type = 'unBottom'
-            if (res.data.groupMsg.length < this.pageNum) {
-              this.isNoMore = true;
-            }
-            res.data.groupMsg.forEach(element => {
-              element.time = element.time;
-              element.message = element.message.split(':')[1];
-            });
-            if(res.data.groupMsg.length == 0) return ;
-            this.message.unshift(...res.data.groupMsg);
-            this.isShowLoading = false;
+      console.log(this.isMyGroup, '-=-=-=-=-=-=')
+      if(!this.isMyGroup){
+        this.$message({
+          message: '请先加入群聊',
+          type: "warn"
+        });
+      }else{
+        this.beforeScrollHeight = this.viewBox.scrollHeight;
+        if (!this.isNoMore) {
+          this.isShowLoading = true;
+          this.page = this.page + 1;
+          let params = {
+            page: this.page,
+            pageNum: this.pageNum,
+            groupId: this.groupInfo.groupId
           }
-        })
+          this.getGroupChat(params).then((res) => {
+            if (res.success) {
+              this.type = 'unBottom'
+              if (res.data.groupMsg.length < this.pageNum) {
+                this.isNoMore = true;
+              }
+              res.data.groupMsg.forEach(element => {
+                element.time = element.time;
+                element.message = element.message.split(':')[1];
+              });
+              if(res.data.groupMsg.length == 0) return ;
+              this.message.unshift(...res.data.groupMsg);
+              this.isShowLoading = false;
+            }
+          })
+        }
       }
     },
     showGroupInfoChild(val) {

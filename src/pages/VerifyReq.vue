@@ -4,9 +4,17 @@
 		<p slot="content">{{this.messageBox.message}}</p>
 	</Message-box>
 	<Header goback='true' chatTitle="用户申请"></Header>
-	<p>你需要发送验证申请，等对方通过</p>
-	<textarea rows="5" v-model="textAreaContent"></textarea>
-	<p class="send-btn" @click="send">发送</p>
+  <div class="chat-wrapper-spe">
+    <div class="secret-box-spe">
+      <p>你需要发送验证申请，等对方通过</p>
+      <textarea rows="5" v-model="textAreaContent" maxlength="60"></textarea>
+      <div class="action" @click="send">
+        <span class="primary-span">发 送</span>
+      </div>
+      <!--<p class="send-btn" @click="send">发送</p>-->
+    </div>
+  </div>
+
 </div>
 </template>
 
@@ -84,7 +92,6 @@ export default {
 
 <style lang="scss" scoped>
 .wrapper {
-    padding-top: 1rem;
     text-align: center;
     textarea {
         width: 90%;

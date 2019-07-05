@@ -28,11 +28,7 @@
         </li>
       </ul>
     </div>
-    <div class="no-content" v-else>
-      <svg class="icon img" aria-hidden="true">
-        <use xlink:href="#iconkong"></use>
-      </svg>
-    </div>
+    <Nothing v-else :name="'加好友'" :type="'addAuthor'"></Nothing>
   </div>
 	<Footer :currentTab="currentTab"></Footer>
 </div>
@@ -41,6 +37,7 @@
 <script>
 import Header from '../components/Header.vue'
 import Footer from '../components/Footer.vue'
+import Nothing from '../components/Nothing.vue'
 import { mapGetters, mapActions } from 'vuex';
 export default {
 	name: 'message',
@@ -52,7 +49,8 @@ export default {
 	},
 	components: {
 		Header,
-		Footer
+		Footer,
+    Nothing
 	},
 	computed: {
 		...mapGetters([
