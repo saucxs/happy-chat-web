@@ -101,13 +101,14 @@ html {
     z-index: 999;
     textarea {
       width: 80%;
+      height: 100%;
       padding: 0.05rem 0.1rem;
       border-radius: 0.02rem;
       outline: none;
       resize: none;
       border: none;
       overflow-y: hidden;
-      font: 0.24rem 'Microsoft Yahei';
+      font: 0.34rem 'Microsoft Yahei';
     }
 
     p.btn {
@@ -240,4 +241,44 @@ html {
       font-size: 0.22rem;
     }
   }
+}
+
+
+/*emoji*/
+.emoji-mart-emoji span{
+  width: 0.6rem !important;
+  height: 0.6rem !important;
+}
+.emoji-mart-preview{
+  height: 0.8rem !important;
+  display: none;
+}
+.emoji-mart .emoji-mart-emoji{
+  padding: 0.1rem !important;
+}
+.emoji-mart-anchors svg{
+  max-height: 1rem !important;
+  width: 0.5rem !important;
+  height: 0.5rem !important;
+}
+.emoji-mart-search{
+  margin-top: 0.1rem !important;
+  padding: 0 0.1rem !important;
+}
+.emoji-mart-search input{
+  padding: 0.1rem 0.2rem !important;
+  font-size: 0.32rem !important;
+}
+.emoji-select{
+  width: 100% !important;
+  position: fixed;
+  height: 5rem !important;
+  bottom: 0;
+}
+.emoji-mart{
+  font-size: 0.3rem !important;
+}
+.emoji-mart-emoji span{
+  width: 0.6rem !important;
+  height: 0.6rem !important;
 }

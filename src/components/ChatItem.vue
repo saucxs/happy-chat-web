@@ -82,9 +82,10 @@
                 margin-left: 1rem;
                 padding: 0.12rem;
                 border-radius: 0.1rem;
-                font-size: 0.24rem;
-                line-height: 0.34rem;
+                font-size: 0.3rem;
+                line-height: 0.46rem;
                 background-color: #fff;
+                word-break: break-all;
             }
         }
         .mychat {
@@ -119,10 +120,11 @@
                 margin-right: 1rem;
                 padding: 0.12rem;
                 border-radius: 0.1rem;
-                font-size: 0.24rem;
-                line-height: 0.34rem;
+                font-size: 0.3rem;
+                line-height: 0.46rem;
                 background-color: #4290F7;
                 color: #fff;
+                word-break: break-all;
             }
         }
     }
