@@ -29,7 +29,7 @@
           </div>
         </li>
       </ul>
-      <Nothing v-else :name="'加群'" :type="'addGroup'"></Nothing>
+      <Nothing v-if="alreadyFriends.length === 0" :name="'加群'" :type="'addGroup'"></Nothing>
       <ul v-if="group">
         <li v-for="(data, index) in alreadyGroups">
           <div class="list-box" @click="enterIt(data.group_id,'group')">
@@ -42,7 +42,7 @@
           </div>
         </li>
       </ul>
-      <Nothing v-else :name="'加好友'" :type="'addAuthor'"></Nothing>
+      <Nothing v-if="alreadyGroups.length === 0" :name="'加好友'" :type="'addAuthor'"></Nothing>
     </div>
   </div>
 	<Footer :currentTab="currentTab"></Footer>
