@@ -2,9 +2,9 @@
 <!--  私聊 -->
 <div class="wrapper">
 	<Header goback='true' userInfo='true' :chatTitle="remarkName ? remarkName: someOneInfoGetter.name"></Header>
-  <div class="chat-wrapper">
-    <div class="secret-box">
-      <ul>
+  <div class="chat-wrapper" :class="{'chat-wrapper-emoji': showEmojiPicker}">
+    <div class="secret-box-spe">
+      <ul ref="viewBox">
         <load-more :is-no-more="isNoMore" :is-show-loading="isShowLoading" @load-more="loadMore"></load-more>
         <li v-for="item in privateDetail">
           <ChatItem v-if="fromUserInfo.user_id === item.from_user" :href="item.from_user" :img="item.avator" me="true" :msg="item.message" :name="item.name" :time="item.time"></ChatItem>
@@ -13,8 +13,18 @@
       </ul>
     </div>
   </div>
-	<div class="input-msg">
-		<textarea v-model="inputMsg" @keydown.enter.prevent="sendMessage" ref="message" placeholder="输入..."></textarea>
+	<div class="input-msg" :class="{ 'input-msg-select':showEmojiPicker}">
+    <picker
+      class="emoji-select"
+      v-if="showEmojiPicker"
+      title="Pick your emoji..."
+      emoji="point_up"
+      @select="addEmoji"
+    />
+    <svg class="svg-icon" :class="{ 'triggered': showEmojiPicker }" @mousedown.prevent="toggleEmojiPicker" viewBox="0 0 24 24" >
+      <path fill="#888888" d="M20,12A8,8 0 0,0 12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20A8,8 0 0,0 20,12M22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2A10,10 0 0,1 22,12M10,9.5C10,10.3 9.3,11 8.5,11C7.7,11 7,10.3 7,9.5C7,8.7 7.7,8 8.5,8C9.3,8 10,8.7 10,9.5M17,9.5C17,10.3 16.3,11 15.5,11C14.7,11 14,10.3 14,9.5C14,8.7 14.7,8 15.5,8C16.3,8 17,8.7 17,9.5M12,17.23C10.25,17.23 8.71,16.5 7.81,15.42L9.23,14C9.68,14.72 10.75,15.23 12,15.23C13.25,15.23 14.32,14.72 14.77,14L16.19,15.42C15.29,16.5 13.75,17.23 12,17.23Z" />
+    </svg>
+		<textarea ref="textarea" v-model="inputMsg" @keydown.enter.prevent="sendMessage" placeholder="输入..."></textarea>
 		<p class="btn" :class="{'enable':inputMsg!=''}" @click="sendMessage">{{btnInfo}}</p>
 	</div>
 </div>
@@ -24,6 +34,7 @@
 import Header from '../components/Header.vue'
 import ChatItem from '../components/ChatItem.vue'
 import LoadMore from '../components/LoadMore.vue';
+import { Picker } from 'emoji-mart-vue';
 import axios from "axios"
 import {	toNomalTime} from "../utils/common";
 import { mapGetters, mapActions } from 'vuex';
@@ -31,11 +42,13 @@ export default {
 	components: {
 		Header,
 		ChatItem,
-    LoadMore
+    LoadMore,
+    Picker
 	},
 
 	data() {
 		return {
+      showEmojiPicker: false,
       page: 1,
       pageNum: 30,
       isShowLoading: false,
@@ -55,7 +68,10 @@ export default {
 			btnInfo: "发送",
       remarkName: '',
       anotherRemarkName: '',
-      type: 'bottom'
+      type: 'bottom',
+      viewBox: '',
+      beforeScrollHeight: '',
+      afterScrollHeight: ''
 		}
 	},
 
@@ -67,14 +83,33 @@ export default {
 
 	watch: {
 		privateDetail() {
-		  if(this.type == 'bottom'){
+      this.viewBox = this.$refs.viewBox;
+      if(this.type == 'bottom'){
         this.refresh();
+      }else{
+        this.nofresh()
       }
 		}
 	},
 
 	methods: {
     ...mapActions(["getPrivateDetail","isFriendJudge","queryUserInfoSpecial","savePrivateMsg"]),
+    /*展示表情框*/
+    toggleEmojiPicker () {
+      this.showEmojiPicker = !this.showEmojiPicker;
+      this.refresh();
+    },
+    addEmoji (emoji) {
+      const textarea = this.$refs.textarea;
+      const cursorPosition = textarea.selectionEnd;
+      const start = this.inputMsg.substring(0, textarea.selectionStart);
+      const end = this.inputMsg.substring(textarea.selectionStart);
+      this.inputMsg = start + emoji.native + end;
+      textarea.focus();
+      this.$nextTick(() => {
+        textarea.selectionEnd = cursorPosition + emoji.native.length;
+      })
+    },
 		//获取数据库的消息
 		getPrivateMsg() {
       let params = {
@@ -125,6 +160,7 @@ export default {
 				});
 				return
 			}
+      this.type = 'bottom'
 			this.sendMsgBySocket();
 			this.saveMsgByDB();
 		},
@@ -222,13 +258,20 @@ export default {
 			this.$store.commit('resetUnredMutation', this.toUserInfo.to_user)
 		},
 		// 消息置底
-		refresh() {
-			setTimeout(() => {
-				window.scrollTo(0, document.body.scrollHeight + 10000)
-			}, 0)
-		},
+    refresh() {
+      setTimeout(() => {
+        this.viewBox.scrollTop = this.viewBox.scrollHeight
+      }, 100)
+    },
+    nofresh() {
+      setTimeout(() => {
+        this.afterScrollHeight = this.viewBox.scrollHeight - this.beforeScrollHeight;
+        this.viewBox.scrollTop = this.afterScrollHeight;
+      }, 100)
+    },
     loadMore() {
       console.log('加載更多');
+      this.beforeScrollHeight = this.viewBox.scrollHeight;
       if (!this.isNoMore) {
         this.isShowLoading = true;
         this.page = this.page + 1;
@@ -268,4 +311,18 @@ export default {
 
 <style lang="scss" scoped>
 @import "../assets/css/chat.scss";
+.svg-icon {
+  cursor: pointer;
+  height: 0.7rem;
+  width: 0.7rem;
+}
+.emoji-select{
+  width: 100% !important;
+  position: fixed;
+  height: 5rem !important;
+  bottom: 0;
+}
+.emoji-mart-preview{
+  height: 48px !important;
+}
 </style>

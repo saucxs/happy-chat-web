@@ -58,6 +58,9 @@ html {
     width: 100%;
     position: relative;
   }
+  .chat-wrapper-emoji{
+    height: calc(100% - 6.8rem) !important;
+  }
   .secret-box{
     height: 100%;
     padding: 20px 0;
@@ -92,6 +95,8 @@ html {
     position: fixed;
     bottom: 0rem;
     display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100%;
     z-index: 999;
     textarea {
@@ -124,6 +129,10 @@ html {
         cursor: pointer;
       }
     }
+  }
+
+  .input-msg-select{
+    bottom: 5rem !important;
   }
 }
 

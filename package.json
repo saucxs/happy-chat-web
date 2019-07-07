@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
-    "emoji-mart-vue-fast": "^5.4.14",
+    "emoji-mart-vue": "^2.6.6",
     "node-sass": "^4.11.0",
     "sass-loader": "^7.1.0",
     "socket.io": "^2.2.0",
