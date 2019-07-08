@@ -61,7 +61,8 @@ export default {
       viewBox: '',
       beforeScrollHeight: '',
       afterScrollHeight: '',
-      showEmojiPicker: false
+      showEmojiPicker: false,
+      keyWordHeight: ''
     };
 	},
 
@@ -80,13 +81,23 @@ export default {
       }else{
         this.nofresh()
       }
-		}
+		},
+//    viewBoxHeight(val){
+//      this.viewBoxHeight = val;
+//      console.log(this.viewBoxHeight, '-=-=-=-=-=')
+//    }
 	},
 	methods: {
     ...mapActions(["getGroupChat", "saveGroupChatMsg", "addGroupChatRelation", "judgeIsInGroup"]),
     /*子组件回传*/
     showEmojiPickerFunc(val){
       this.showEmojiPicker = val;
+      this.$nextTick(()=>{
+        this.viewBoxHeight = this.$refs.viewBox.clientHeight;
+        console.log(this.viewBoxHeight, '-=-=-=-=-=')
+        this.keyWordHeight = document.body.clientHeight - this.viewBoxHeight - 176;
+        console.log(this.keyWordHeight, '键盘高度')
+      })
       this.refresh()
     },
     sendMessageFunc(val){
@@ -301,6 +312,7 @@ export default {
     handleOnresize() {
       this.viewBox = this.$refs.viewBox;
       console.log(this.viewBox.clientHeight, '聊天页高度')
+      this.viewHeight = this.viewBox.clientHeight;
     }
 	},
 	async created() {
@@ -313,7 +325,7 @@ export default {
 	},
   mounted: function () {
     // window.addEventListener('scroll', this.handleScroll, true);  // 监听（绑定）滚轮滚动事件
-    window.addEventListener('onresize ', this.handleOnresize, true);  // 监听页面视图高度变化事件
+    this.viewBoxHeight = this.$refs.viewBox.clientHeight;
   },
 }
 </script>
