@@ -267,6 +267,7 @@ export const addGroupChatRelation = ({commit},params) => {
       // console.log('group_chat_relation', res)
       commit(types.groupMemberMutation, res.data.groupMember);
     }
+    return res;
   }).catch(err => {
     console.log(err);
   });

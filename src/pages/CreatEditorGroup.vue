@@ -5,7 +5,7 @@
 	<Message-box :messageBoxEvent="this.messageBox.messageBoxEvent" :visible="this.messageBox.visible" :hasCancel='false' @confirm="confirm">
 		<p slot="content">{{this.messageBox.message}}</p>
 	</Message-box>
-  <div class="chat-wrapper-spe">
+  <div class="chat-wrapper-no-footer">
     <div class="secret-box-spe">
       <div class="content">
         <div class="content-box">

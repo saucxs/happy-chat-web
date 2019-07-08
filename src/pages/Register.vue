@@ -27,8 +27,8 @@
 				<div>
           <span class="normal-word">邮箱：</span><input type="text" class="fadeIn third" v-model="email" placeholder="邮箱">
         </div>
-        <div class="action" @click="startRegister" :class="{'disabled': disabledFlag}">
-          <span class="primary-span">注 册</span>
+        <div class="action" :class="{'disabled': disabledFlag}">
+          <span  @click="startRegister" class="primary-span">注 册</span>
         </div>
 				<!--<input type="button" :disabed="disabledFlag" @click="startRegister" class="fadeIn fourth" value="注册">-->
 			</form>
@@ -70,7 +70,7 @@ export default {
               //弹窗
               this.messageBox.messageBoxEvent = 'register'
               this.messageBox.visible = true;
-              this.messageBox.message = "您已注册成功";
+              this.messageBox.message = res.message || "您已注册成功";
             } else {
               this.$message({
                 message: res.message,

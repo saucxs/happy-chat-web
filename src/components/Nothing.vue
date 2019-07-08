@@ -30,7 +30,10 @@ export default {
         path = `/user_info/16`
         this.$router.push(path)
       }else if(this.type === 'addGroup'){
-        path = `/group_chat/f69fa910-4c64-11e9-941f-cb9c589f1e1d`
+        path = `/group_chat/64bd8fa0-a149-11e9-8893-6bfa70c9461a`
+        this.$router.push(path)
+      }else if(this.type === 'goSearch'){
+        path = `/add`
         this.$router.push(path)
       }
     }

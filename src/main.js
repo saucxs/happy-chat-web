@@ -12,6 +12,9 @@ Vue.use(Components);
 import Loading from './components/Loading/index'
 Vue.use(Loading)
 
+import VueClipboard from 'vue-clipboard2'
+Vue.use(VueClipboard)
+
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

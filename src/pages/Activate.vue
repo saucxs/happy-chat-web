@@ -10,7 +10,9 @@
         </svg>
 			</div>
       <p class="message-tip">{{message}}</p>
-      <p class="go-back-login" @click="goBackLogin">返回登录</p>
+      <div class="action">
+        <span @click="goBackLogin" class="primary-span">返回登录</span>
+      </div>
 		</div>
 	</div>
 </div>

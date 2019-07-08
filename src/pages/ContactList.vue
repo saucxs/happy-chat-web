@@ -13,7 +13,8 @@
   <div class="chat-wrapper">
     <div class="secret-box">
       <ul v-if="friend">
-        <li v-for="(data, index) in alreadyFriends">
+        <Nothing v-if="alreadyFriends.length === 0" :name="'加群'" :type="'addGroup'"></Nothing>
+        <li v-else v-for="(data, index) in alreadyFriends">
           <div class="list-box" @click="enterIt(data.other_user_id,'friend')">
             <img :src="data.avator" alt="">
             <div class="content">
@@ -29,9 +30,10 @@
           </div>
         </li>
       </ul>
-      <Nothing v-if="alreadyFriends.length === 0" :name="'加群'" :type="'addGroup'"></Nothing>
+
       <ul v-if="group">
-        <li v-for="(data, index) in alreadyGroups">
+        <Nothing v-if="alreadyGroups.length === 0" :name="'加好友'" :type="'addAuthor'"></Nothing>
+        <li v-else v-for="(data, index) in alreadyGroups">
           <div class="list-box" @click="enterIt(data.group_id,'group')">
             <img :src="data.avator" alt="">
             <div class="content">
@@ -42,7 +44,7 @@
           </div>
         </li>
       </ul>
-      <Nothing v-if="alreadyGroups.length === 0" :name="'加好友'" :type="'addAuthor'"></Nothing>
+
     </div>
   </div>
 	<Footer :currentTab="currentTab"></Footer>
@@ -67,8 +69,8 @@ export default {
 			currentTab: 3,
 			friend: "hover",
 			group: "",
-      alreadyFriends: [],
-      alreadyGroups: []
+      alreadyFriends: ['1'],
+      alreadyGroups: ['1']
 		}
 	},
 

@@ -86,6 +86,7 @@
                 line-height: 0.46rem;
                 background-color: #fff;
                 word-break: break-all;
+                letter-spacing: 1px;
             }
         }
         .mychat {
@@ -125,6 +126,7 @@
                 background-color: #4290F7;
                 color: #fff;
                 word-break: break-all;
+              letter-spacing: 1px;
             }
         }
     }

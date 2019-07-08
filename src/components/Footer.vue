@@ -74,7 +74,7 @@ import { mapGetters, mapActions } from 'vuex';
       color:#5d656b;
       text-decoration: none;
        flex: 1;
-      padding: 12px 0;
+      padding: 0.1rem 0;
       p{
         font-size: 0.18rem;
         margin-top: -0.05rem;

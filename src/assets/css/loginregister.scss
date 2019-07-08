@@ -118,11 +118,11 @@
           border-bottom: 0.02rem solid $base-color;
         }
 
-        input[type=text]:placeholder {
+        input[type=text]::placeholder {
           color: #eeee;
         }
 
-        input[type=password]:placeholder {
+        input[type=password]::placeholder {
           color: #cccccc;
         }
 

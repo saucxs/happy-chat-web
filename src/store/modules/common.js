@@ -7,8 +7,8 @@ const state = {
   newFriend: [], //新朋友列表
   tabTips: { //底部tab的未读提示 暂时只做好友添加请求的提示
     addFriendReq: "" //是否有好友添加请求 0没有 1有
-  }
-
+  },
+  isMobile: navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)
 };
 
 const mutations = {

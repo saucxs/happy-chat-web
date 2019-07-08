@@ -44,7 +44,6 @@ export default {
 		},
 		lookGroupInfo() {
 		  // this.showGroupInfo = true;
-      console.log('shuju')
 		  this.$emit('showGroupInfo',true)
 			// const path = `/group_info/${this.$route.params.group_id}`;
 			// this.$router.push(path);

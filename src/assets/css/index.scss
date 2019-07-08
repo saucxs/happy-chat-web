@@ -58,8 +58,13 @@ html {
     width: 100%;
     position: relative;
   }
+  .chat-wrapper-no-footer{
+    height: calc(100% - 1rem);
+    width: 100%;
+    position: relative;
+  }
   .chat-wrapper-emoji{
-    height: calc(100% - 6.8rem) !important;
+    height: calc(100% - 5.8rem) !important;
   }
   .secret-box{
     height: 100%;
@@ -108,7 +113,7 @@ html {
       resize: none;
       border: none;
       overflow-y: hidden;
-      font: 0.34rem 'Microsoft Yahei';
+      font: 0.3rem 'Microsoft Yahei';
     }
 
     p.btn {
@@ -133,7 +138,7 @@ html {
   }
 
   .input-msg-select{
-    bottom: 5rem !important;
+    bottom: 3.5rem !important;
   }
 }
 
@@ -145,6 +150,7 @@ html {
 /*按钮样式*/
 .box-button-group{
   margin: 0.16rem;
+  display: flex;
 }
 .button {
   position: absolute;
@@ -157,17 +163,27 @@ html {
   cursor: pointer;
   text-align: center;
 }
+
+.button-spe {
+  font-size: 0.24rem;
+  width: 50%;
+  border-radius: 0.4rem;
+  display: inline-block;
+  cursor: pointer;
+  text-align: center;
+}
+
 .base-button{
   background-color: $base-success-color;
   color: white;
-  margin: 0.1rem 0;
+  margin: 0.1rem;
   padding: 0.14rem 0;
 }
 
 .warning-button{
   background-color: $base-warning-color;
   color: white;
-  margin: 0.1rem 0;
+  margin: 0.1rem;
   padding: 0.14rem 0;
 }
 
@@ -245,25 +261,32 @@ html {
 
 
 /*emoji*/
+.emoji-mart{
+  font-size: 0.24rem !important;
+}
 .emoji-mart-emoji span{
-  width: 0.6rem !important;
-  height: 0.6rem !important;
+  width: 0.5rem !important;
+  height: 0.5rem !important;
 }
 .emoji-mart-preview{
   height: 0.8rem !important;
   display: none;
 }
 .emoji-mart .emoji-mart-emoji{
-  padding: 0.1rem !important;
+  padding: 0.06rem !important;
+}
+.emoji-mart-category-label span{
+  padding: 0 !important;
 }
 .emoji-mart-anchors svg{
   max-height: 1rem !important;
-  width: 0.5rem !important;
-  height: 0.5rem !important;
+  width: 0.4rem !important;
+  height: 0.4rem !important;
 }
 .emoji-mart-search{
   margin-top: 0.1rem !important;
   padding: 0 0.1rem !important;
+  display: none;
 }
 .emoji-mart-search input{
   padding: 0.1rem 0.2rem !important;
@@ -272,13 +295,9 @@ html {
 .emoji-select{
   width: 100% !important;
   position: fixed;
-  height: 5rem !important;
+  height: 3.5rem !important;
   bottom: 0;
 }
-.emoji-mart{
-  font-size: 0.3rem !important;
-}
-.emoji-mart-emoji span{
-  width: 0.6rem !important;
-  height: 0.6rem !important;
+.emoji-mart-anchor-selected .emoji-mart-anchor-bar{
+  height: 0.04rem !important;
 }

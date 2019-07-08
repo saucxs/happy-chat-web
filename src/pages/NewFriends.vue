@@ -1,7 +1,7 @@
 <template>
 <div class="wrapper">
 	<Header goback='true' chatTitle="新好友通知"></Header>
-  <div class="chat-wrapper">
+  <div class="chat-wrapper-no-footer">
     <div class="secret-box">
       <ul>
         <li v-for="data in newFriendGetter">

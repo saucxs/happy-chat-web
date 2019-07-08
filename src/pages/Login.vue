@@ -22,8 +22,8 @@
         <div>
           <span class="normal-word">密码：</span><input @keyup.enter="startLogin" type="password" class="fadeIn third" placeholder="密码" v-model="password">
         </div>
-        <div class="action" @click="startLogin">
-          <span class="primary-span">登录</span>
+        <div class="action">
+          <span @click="startLogin" class="primary-span">登录</span>
         </div>
 			</form>
 		</div>
@@ -77,7 +77,7 @@ export default {
             } else {
               this.$message({
                 message: res.message,
-                type: "error"
+                type: "warn"
               });
             }
           }

@@ -1,8 +1,8 @@
 <template>
 <div class="wrapper">
 	<Header goback='true' :chatTitle="chatTitle"></Header>
-  <div class="chat-wrapper-spe">
-    <div class="secret-box-spe">
+  <div class="chat-wrapper-no-footer">
+    <div v-if="userDataList.length > 0 || groupDataList.length > 0" class="secret-box-spe">
       <ul>
         <li v-if="userDataList !== []" v-for="data in userDataList">
           <div class="people-box" @click="enterUserCard(data.id)">
@@ -34,19 +34,21 @@
         </li>
       </ul>
     </div>
+    <Nothing v-else :name="'返回'" :type="'goSearch'"></Nothing>
   </div>
 </div>
 </template>
 
 <script>
 import Header from '../components/Header.vue'
+import Nothing from '../components/Nothing.vue'
 import { mapGetters, mapActions } from 'vuex';
 import axios from "axios"
 export default {
 	components: {
-		Header
+		Header,
+    Nothing
 	},
-
 	data() {
 		return {
 			chatTitle: "查找中...",
@@ -54,11 +56,8 @@ export default {
 			groupDataList: []
 		}
 	},
-
 	computed: {},
-
 	watch: {},
-
 	methods: {
     ...mapActions(["findPerson","getGroupInformation"]),
 		getChatTitle() {

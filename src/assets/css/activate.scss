@@ -1,3 +1,4 @@
+@import "./base.scss";
 .activate {
   background-color: #ccc ;
   font-family: "Poppins", sans-serif;
@@ -46,18 +47,17 @@
       }
 
       .active {
-        color: #39ace7;
+        color: $base-color;
       }
 
       .message-tip {
         color: #000;
-        font-size: 0.2rem;
-        margin-top: 4vh;
-        padding: 0.8rem;
+        font-size: 0.3rem;
+        padding: 0.5rem;
       }
 
       .go-back-login{
-        color: #39ace7;
+        color: $base-color;
         font-size: 2vh;
         margin-top: 4vh;
         text-decoration: underline;

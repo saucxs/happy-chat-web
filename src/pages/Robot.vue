@@ -4,7 +4,7 @@
     <Header :currentTab="currentTab"></Header>
     <div class="chat-wrapper">
       <div class="secret-box">
-        <ul>
+        <ul ref="viewBox">
           <li v-for="msg in robotMsgGetter">
             <ChatItem v-if="msg.user" :msg="msg.message" :name="msg.user" :time="time"></ChatItem>
             <ChatItem v-if="!msg.user" me="true" :name="name" :href="href" :img=img :msg="msg.message" :time="time"></ChatItem>
@@ -38,7 +38,8 @@ export default {
       img: "",
       isScrollToBottom: true,
       name: '',
-      href: ''
+      href: '',
+      viewBox: '',
     }
   },
   components: {
@@ -58,15 +59,17 @@ export default {
       }
       await this.chatRobot(data);
       this.inputMsg = '';
+      this.refresh();
     },
     refresh() {
       setTimeout(() => {
-        window.scrollTo(0, document.body.scrollHeight + 10000)
-      }, 0)
+        this.viewBox.scrollTop = this.viewBox.scrollHeight
+      }, 4)
     }
   },
   watch: {
     robotMsgGetter() { //当数据改变了,则自动刷新
+      this.viewBox = this.$refs.viewBox;
       this.refresh();
     }
   },
@@ -112,7 +115,7 @@ export default {
      display: flex;
      flex-direction: column;
      width: 100%;
-     padding-bottom: 1.6rem;
+     padding-bottom: 0.8rem;
     li{
       list-style-type: none;
     }

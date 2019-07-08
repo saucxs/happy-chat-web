@@ -1,7 +1,7 @@
 <template>
 <div class="wrapper">
 	<Header goback='true' :chatTitle="chatTitle"></Header>
-  <div class="chat-wrapper-spe">
+  <div class="chat-wrapper-no-footer">
     <div class="secret-box-spe">
       <div class="creat-group" @click="createGroup">
         <svg class="icon" aria-hidden="true"> <use  xlink:href="#icongroup-copy"></use></svg>

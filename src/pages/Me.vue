@@ -16,11 +16,11 @@
             <span @click="goWebsite"><svg class="icon" aria-hidden="true"><use  xlink:href="#iconWorld-WideWeb"></use></svg></span>
           </p>
           <p class="user-intro">{{userInfo.intro == null ? '没有留下介绍~': userInfo.intro}}</p>
-          <p class="user-more" @click="goInfo"><svg class="icon" aria-hidden="true"> <use  xlink:href="#iconacmore"></use></svg>更多信息</p>
+          <p class="user-more"><svg @click="goInfo" class="icon" aria-hidden="true"> <use  xlink:href="#iconacmore"></use></svg>更多信息</p>
         </div>
       </div>
-      <div class="action" @click="logout">
-        <span class="warning-span">退出登录</span>
+      <div class="action">
+        <span @click="logout" class="warning-span">退出登录</span>
       </div>
     </div>
   </div>

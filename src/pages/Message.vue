@@ -128,7 +128,7 @@ export default {
                     background-color: red;
                 }
                 .group-unread {
-                    background-color: #98d1f2;
+                    background-color: red;
                 }
             }
             .content {

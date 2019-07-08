@@ -15,17 +15,10 @@
     </li>
   </ul>
   <div class="box-button-group">
-    <span v-if="isMyGroup" @click="exitGroup" class="warning-button button">退出群聊</span>
+    <span v-if="isMyGroup" @click="copyGroupUrl" class="warning-button button-spe">分享群链接</span>
+    <span v-if="isMyGroup" @click="exitGroup" class="warning-button button-spe">退出群聊</span>
     <span v-else @click="goChat" class="base-button button">加入群聊</span>
   </div>
-
-	<!--<div class="action action-spe">-->
-    <!--<span class="warning-span whole-span" v-if="isMyGroup" @click="exitGroup">退出群聊</span>-->
-    <!--<span class="primary-span whole-span" v-else @click="goChat">加入群聊</span>-->
-	<!--</div>-->
-	<!-- <div v-else class="action">
-        <span class="go-chat" @click="goChat">加入群聊</span>
-    </div> -->
 </div>
 </template>
 
@@ -35,7 +28,8 @@ export default {
 	data() {
 		return {
 			groupInfo: {}, //群资料
-			userInfo: {}, //本机用户资料
+			userInfo: {}, //本机用户资料,
+      shareGroupUrl: window.location
 		}
 	},
   props: {
@@ -45,7 +39,7 @@ export default {
   },
 	computed: {},
 	methods: {
-    ...mapActions(["getGroupInformation", "judgeIsInGroup", "exitChatGroup"]),
+    ...mapActions(["getGroupInformation", "judgeIsInGroup", "addGroupChatRelation", "exitChatGroup"]),
 		//获取群资料
 		getGroupInfo() {
       let params = {
@@ -98,13 +92,54 @@ export default {
       })
 		},
 		goChat() {
-			// const path = `/group_chat/${this.$route.params.group_id}`
-			// this.$router.push(path)
+      this.addGroupUserRelation();
 		},
+    // 把新成员加入群名单
+    addGroupUserRelation() {
+      let params = {
+        groupId: this.groupInfoGetter.group_id,
+      }
+      this.addGroupChatRelation(params).then(res => {
+        if(res.success){
+          this.getChatMsg();
+          const data = {
+            action: "push",
+            message: "您已成功加入此群！",
+            group_avator: this.groupInfoGetter.group_avator,
+            group_name: this.groupInfoGetter.group_name,
+            time: this.groupInfoGetter.creater_time,
+            group_id: this.groupInfoGetter.group_id,
+            type: "group",
+            id: this.groupInfoGetter.group_id
+          }
+          this.$store.commit('updateListMutation', data);
+          this.isMyGroup = true;
+        }else{
+          this.$message({
+            message: res.message,
+            type: "warn"
+          });
+        }
+      })
+    },
     goInfo(item) {
       const path = `/user_info/${item.user_id}`
       this.$router.push(path)
-    }
+    },
+    copyGroupUrl(){
+      let thatMessage = this.$message
+      this.$copyText(this.shareGroupUrl).then(function (e) {
+        thatMessage({
+          message: '复制成功',
+          type: "success"
+        });
+      }, function (e) {
+        thatMessage({
+          message: '复制失败',
+          type: "error"
+        });
+      })
+    },
 	},
 	async created() {
 		this.userInfo = JSON.parse(localStorage.getItem("HappyChatUserInfo"));

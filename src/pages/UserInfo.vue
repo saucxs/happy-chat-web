@@ -11,7 +11,7 @@
 		<p slot="content">{{this.messageBox.message}}</p>
 	</Message-box>
 	<Header goback='true' chatTitle="用户资料"></Header>
-  <div class="chat-wrapper-spe">
+  <div class="chat-wrapper-no-footer">
     <div class="secret-box-spe">
       <div class="content">
         <div class="content-box">
