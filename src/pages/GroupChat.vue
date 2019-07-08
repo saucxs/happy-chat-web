@@ -297,6 +297,10 @@ export default {
     },
     handleScroll() {
       this.viewBox = this.$refs.viewBox;
+    },
+    handleOnresize() {
+      this.viewBox = this.$refs.viewBox;
+      console.log(this.viewBox.clientHeight, '聊天页高度')
     }
 	},
 	async created() {
@@ -309,6 +313,7 @@ export default {
 	},
   mounted: function () {
     // window.addEventListener('scroll', this.handleScroll, true);  // 监听（绑定）滚轮滚动事件
+    window.addEventListener('onresize ', this.handleOnresize, true);  // 监听页面视图高度变化事件
   },
 }
 </script>

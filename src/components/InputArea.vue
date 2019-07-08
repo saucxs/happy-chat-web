@@ -55,28 +55,44 @@ export default {
     ]),
     /*点击输入框*/
     clickTextArea(){
+      console.log('11111111111111111111')
       this.showEmojiPicker = false;
       this.emojiSelect = false;
+      let textarea = this.$refs.textarea;
+      textarea.focus();
     },
     /*获取焦点事件*/
     getFocus(){
+      console.log('2222222222222222222')
+      let textarea = this.$refs.textarea;
       if(!this.emojiSelect){
         if(this.isMobile){
           this.showEmojiPicker = false;
+          textarea.focus();
         }
       }else{
         this.showEmojiPicker = true;
+        textarea.blur();
       }
     },
     /*展示表情框*/
     toggleEmojiPicker () {
+      console.log('3333333333333333333333333333')
       this.showEmojiPicker = !this.showEmojiPicker;
+      let textarea = this.$refs.textarea;
+      if(this.showEmojiPicker){
+        textarea.blur();
+      }else{
+        textarea.focus();
+      }
     },
     /*添加表情*/
     addEmoji (emoji) {
+      console.log('444444444444444444444444444444')
       this.emojiSelect = true;
       let textarea = this.$refs.textarea;
       const cursorPosition = textarea.selectionEnd;
+      console.log(cursorPosition, '-=-=-==-=-=')
       const start = this.inputMsg.substring(0, textarea.selectionStart);
       const end = this.inputMsg.substring(textarea.selectionStart);
       this.inputMsg = start + emoji.native + end;
