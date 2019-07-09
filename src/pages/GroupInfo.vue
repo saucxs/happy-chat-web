@@ -205,8 +205,8 @@ export default {
     list-style: none;
     overflow-y: auto;
     font-size: 0.26rem;
-    height: calc(100% - 5.4rem);
-    max-height: calc(100% - 5.4rem);
+    height: calc(100% - 5.6rem);
+    max-height: calc(100% - 5.6rem);
   }
   .members{
     padding-top: 0.1rem;

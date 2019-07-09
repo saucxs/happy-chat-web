@@ -14,8 +14,8 @@
     </div>
 
     <div class="input-msg">
-      <textarea v-model="inputMsg" @keydown.enter.prevent="sendMessage" ref="message"></textarea>
-      <p class="btn" :class="{'enable':inputMsg!=''}" @click="sendMessage">发送</p>
+      <textarea v-model="inputMsg" @keydown.enter.prevent="sendMessage(inputMsg)" ref="message"></textarea>
+      <p class="btn" :class="{'enable':inputMsg!=''}" @click="sendMessage(inputMsg)">发送</p>
     </div>
     <Footer :currentTab="currentTab"></Footer>
   </div>
@@ -49,28 +49,30 @@ export default {
   },
   methods: {
     ...mapActions(["chatRobot"]),
-    async sendMessage() {
-      if (this.inputMsg.trim() == '') return;
+    async sendMessage(val) {
+      this.inputMsg = '';
+      if (val.trim() == '') return;
       this.$store.commit('robotMsgMutation', { //提交自己的内容
-        message: this.inputMsg
+        message: val
       })
       let data = {
-       message: this.inputMsg
+       message: val
       }
       await this.chatRobot(data);
-      this.inputMsg = '';
       this.refresh();
     },
     refresh() {
+      this.viewBox = this.$refs.viewBox;
       setTimeout(() => {
-        this.viewBox.scrollTop = this.viewBox.scrollHeight
+        this.viewBox.scrollTop = this.viewBox.scrollHeight;
       }, 4)
     }
   },
   watch: {
     robotMsgGetter() { //当数据改变了,则自动刷新
-      this.viewBox = this.$refs.viewBox;
       this.refresh();
+      let message = this.$refs.message;
+      message.focus();
     }
   },
   computed: {

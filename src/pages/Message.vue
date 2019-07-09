@@ -138,13 +138,15 @@ export default {
                 display: inline-block;
                 margin-left: 0.2rem;
                 max-width: 80%;
+                width: 80%;
                 .title {
                     font-size: 0.32rem;
+                    position: relative;
+                    display: flex;
+                    justify-content: space-between;
                     span {
                         font-size: 0.2rem;
                         color: #676767;
-                        position: absolute;
-                        right: 0.5rem;
                     }
                 }
                 .message {
