@@ -17,7 +17,10 @@
         <p>群公告:</br><textarea rows="5" type="text" v-model="groupInfo.group_notice" placeholder="不超过30个字哦" maxlength="30" /></textarea>
         </p>
       </div>
-      <div class="action" @click="createGroup">
+      <div class="action" v-if="editGroupId" @click="editGroup">
+        <span class="creat_group">编辑群</span>
+      </div>
+      <div class="action" v-else @click="createGroup">
         <span class="creat_group">确定建群</span>
       </div>
     </div>
@@ -41,14 +44,16 @@ export default {
 				group_notice: "",
 				group_avator: "#icongroup",
 				group_creater: "",
-				creater_time: ""
+				creater_time: "",
+        update_time: ''
 			},
 			group_id: "",
 			messageBox: {
 				visible: false,
 				message: "", //弹窗内容
 				messageBoxEvent: "" //弹窗事件名称
-			}
+			},
+      editGroupId: this.$route.params.group_id
 		}
 	},
 	computed: {},
@@ -56,7 +61,7 @@ export default {
 		Header
 	},
 	methods: {
-    ...mapActions(["confirmCreateGroup", "confirmJoinGroup"]),
+    ...mapActions(["confirmCreateGroup", "confirmJoinGroup","confirmEditGroup", "getGroupInformation"]),
 		//创建群
 		createGroup() {
 			this.groupInfo.creater_time = toNomalTime((new Date()).getTime()); //时间
@@ -99,8 +104,29 @@ export default {
           type: "warn"
         });
       }
-
 		},
+    //编辑群资料
+    editGroup() {
+      this.groupInfo.update_time = toNomalTime((new Date()).getTime()); //时间
+      if (this.groupInfo.group_name && this.groupInfo.group_notice){
+        this.groupInfo.editGroupId = this.editGroupId;
+        this.confirmEditGroup(this.groupInfo).then(res => {
+          if (res.success){
+            this.messageBox.messageBoxEvent = 'updateGroup'
+            this.messageBox.visible = true;
+            this.messageBox.message = "修改群成功"
+          }
+        })
+      }else{
+        let message;
+        if (this.groupInfo.group_name.trim() === "") { message = "请输入群名" }
+        if (this.this.groupInfo.group_notice.trim() === "") { message = "请输入群公告" }
+        this.$message({
+          message: message,
+          type: "warn"
+        });
+      }
+    },
 		//把自己加进这个群中
 		joinGroup() {
       this.confirmJoinGroup({
@@ -129,11 +155,22 @@ export default {
 				this.$router.push({
 					path: `/message`
 				});
-			}
+			}else if(value === 'updateGroup'){
+        this.$router.push({
+          path: `/group_chat/` + this.editGroupId
+        });
+      }
 		}
 	},
 	created() {
 		this.userInfo = JSON.parse(localStorage.getItem("HappyChatUserInfo"));
+		if(this.editGroupId){
+		  this.getGroupInformation({groupId: this.editGroupId}).then(res => {
+        if (res.success){
+          this.groupInfo = res.data.groupInfo[0];
+        }
+      })
+    }
 	}
 }
 </script>

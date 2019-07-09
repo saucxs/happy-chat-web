@@ -82,6 +82,10 @@ const router = new Router({
       path: "/creat_group",
       component: CreatEditorGroup
     },
+    { //编辑群
+      path: "/edit_group/:group_id",
+      component: CreatEditorGroup
+    },
     { //群聊
       path: "/group_chat/:group_id",
       component: GroupChat

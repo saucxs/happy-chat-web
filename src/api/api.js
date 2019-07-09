@@ -183,6 +183,10 @@ export default {
   confirmCreateGroup: (params) => {
     return service.post("/api/chat/create_group", params)
   },
+  /*修改群资料- post*/
+  confirmEditGroup: (params) => {
+    return service.post("/api/chat/edit_group", params)
+  },
   /*加群 - post*/
   confirmJoinGroup: (params) => {
     return service.post("/api/chat/join_group", params)

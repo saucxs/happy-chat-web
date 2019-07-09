@@ -94,6 +94,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  @import "../assets/css/chat.scss";
 .wrapper {
     ul {
         background-color: #fff;
@@ -101,9 +102,11 @@ export default {
             display: -webkit-box;
             display: -ms-flexbox;
             display: flex;
+            height: 132px;
             align-items: center;
-            margin: 0 0.2rem;
+            padding: 0 0.2rem;
             list-style-type: none;
+            border-bottom: 1px solid $base-gray-color-1;
             a {
                 position: relative;
                 .img {
@@ -158,6 +161,9 @@ export default {
                     right: 0;
                 }
             }
+        }
+        li:last-child{
+          border-bottom: none;
         }
     }
 }

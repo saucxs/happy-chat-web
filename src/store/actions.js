@@ -233,6 +233,15 @@ export const confirmCreateGroup = ({commit},params) => {
   });
 };
 
+/*修改群*/
+export const confirmEditGroup = ({commit},params) => {
+  return Api.confirmEditGroup(params).then(res => {
+    return res;
+  }).catch(err => {
+    console.log(err);
+  });
+};
+
 /*加群*/
 export const confirmJoinGroup = ({commit},params) => {
   return Api.confirmJoinGroup(params).then(res => {
@@ -282,7 +291,7 @@ export const getGroupInformation = ({commit},params) => {
   });
 };
 
-/*获取建群信息*/
+/*判断是否在群里*/
 export const judgeIsInGroup = ({commit},params) => {
   return Api.judgeIsInGroup(params).then(res => {
     return res;
