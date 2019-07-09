@@ -135,7 +135,7 @@ export default {
           //   }
           //   this.$store.commit('updateListMutation', data)
           // }
-          if (this.message.length == 0) { this.isNoMore = true;return};
+          if (this.message.length == 0 || this.message.length < this.pageNum) { this.isNoMore = true;return};
           this.message.forEach(element => {
             element.time = element.time;
             element.message = element.message.split(':')[1];
@@ -268,7 +268,7 @@ export default {
           }
           this.getGroupChat(params).then((res) => {
             if (res.success) {
-              this.type = 'unBottom'
+              this.type = 'unBottom';
               if (res.data.groupMsg.length < this.pageNum) {
                 this.isNoMore = true;
               }

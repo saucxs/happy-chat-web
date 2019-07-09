@@ -49,7 +49,7 @@ html {
   width: 100%;
   position: relative;
   .chat-wrapper{
-    height: calc(100% - 1.8rem);
+    height: calc(100% - 2rem);
     width: 100%;
     position: relative;
   }
@@ -64,7 +64,7 @@ html {
     position: relative;
   }
   .chat-wrapper-emoji{
-    height: calc(100% - 5.4rem) !important;
+    height: calc(100% - 5.6rem) !important;
   }
   .secret-box{
     height: 100%;
@@ -94,9 +94,8 @@ html {
       list-style-type: none;
     }
   }
-
   .input-msg {
-    height: 0.76rem;
+    height: 1rem;
     position: fixed;
     bottom: 0rem;
     display: flex;
@@ -104,11 +103,19 @@ html {
     align-items: center;
     width: 100%;
     z-index: 999;
-    textarea {
-      width: 80%;
+    border-top: 1px solid $base-gray-color;
+    border-bottom: 1px solid $base-gray-color;
+    background: $base-gray-color;
+    .input-box{
+      width: 70%;
       height: 100%;
-      padding: 0.05rem 0.1rem;
-      border-radius: 0.02rem;
+      display: flex;
+    }
+    textarea {
+      width: 100%;
+      border-radius: 0.04rem;
+      margin: 0.1rem 0.05rem;
+      padding: 0.08rem 0.12rem;
       outline: none;
       resize: none;
       border: none;
@@ -118,15 +125,16 @@ html {
 
     p.btn {
       font-size:0.22rem;
+      margin: 0.1rem 0.1rem 0.1rem 0;
       display: flex;
       align-items: center;
       justify-content: center;
       text-align: center;
-      height: 100%;
+      height: 80%;
       width: 20%;
       background: #ccc;
       color: white;
-      border-radius: 0.02rem;
+      border-radius: 0.04rem;
       cursor: not-allowed;
       font-family: 'Microsoft Yahei';
 
@@ -188,8 +196,13 @@ html {
 }
 
 /*action 按钮*/
+.action-box{
+  margin: 0.4rem 0;
+}
 .action {
   text-align: center;
+  display: flex;
+  justify-content: center;
   span {
     display: inline-block;
     font-size: 0.24rem;
@@ -198,6 +211,7 @@ html {
     width: 50%;
     border-radius: 0.4rem;
     cursor: pointer;
+    margin: 0.2rem;
   }
   .whole-span{
     width: 100%;

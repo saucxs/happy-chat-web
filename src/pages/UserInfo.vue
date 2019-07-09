@@ -33,8 +33,8 @@
           <span>用户名</span>：{{userInfo.name}}
         </p>
         <p>
-          <span>性别</span>：{{userInfo.sex === 0 ? '男' : '女' }} <svg class="icon" aria-hidden="true">
-          <use v-if="userInfo.sex === 0"  xlink:href="#iconxingbienan"></use>
+          <span>性别</span>：{{userInfo.sex == 1 ? '男' : '女' }} <svg class="icon" aria-hidden="true">
+          <use v-if="userInfo.sex == 1"  xlink:href="#iconxingbienan"></use>
           <use v-else xlink:href="#iconxingbienv"></use>
         </svg>
         </p>
@@ -48,11 +48,15 @@
       <div v-if="this.isAddingMe" class="action">
         <span class="add-as-friend" @click="agreeBeFriend">通过验证</span>
       </div>
-      <div v-if="this.isMyFriend === true && this.isHisFriend === true " class="action">
-        <span class="primary-span editor-remark" @click="editorRemark">修改备注</span>
-        <span class="primary-span go-chat" @click="goChat">发消息</span>
-        <span class="warning-span shield-it" @click="shieldIt">屏蔽此人</span>
-        <span class="warning-span de-friended" @click="deFriended">删除好友</span>
+      <div v-if="this.isMyFriend === true && this.isHisFriend === true " class="action-box">
+        <div class="action">
+          <span class="primary-span editor-remark" @click="editorRemark">修改备注</span>
+          <span class="primary-span go-chat" @click="goChat">发消息</span>
+        </div>
+        <div class="action">
+          <span class="warning-span shield-it" @click="shieldIt">屏蔽此人</span>
+          <span class="warning-span de-friended" @click="deFriended">删除好友</span>
+        </div>
       </div>
       <div v-if="this.isMyFriend === true && this.isHisFriend === false " class="action">
         <span class="warning-span de-friended" @click="deFriended">删除好友</span>
@@ -335,10 +339,9 @@ export default {
 .wrapper {
     .content {
       text-align: center;
-      margin-top: 3vh;
       .content-box{
         text-align: center;
-        padding: 4vh 0 6vh 0;
+        padding: 0.4rem 0;
       }
       img {
         width: 2rem;

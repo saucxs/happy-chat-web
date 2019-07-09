@@ -121,7 +121,7 @@
                 margin-right: 1rem;
                 padding: 0.12rem;
                 border-radius: 0.1rem;
-                font-size: 0.3rem;
+                font-size: 0.28rem;
                 line-height: 0.46rem;
                 background-color: #4290F7;
                 color: #fff;

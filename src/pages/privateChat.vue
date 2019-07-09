@@ -116,11 +116,9 @@ export default {
         if (res.success) {
           this.type = 'bottom'
           this.privateDetail = res.data.privateDetail;
-          if (this.privateDetail.length == 0) {
-            return
-          }
-          if (res.data.privateDetail.length < this.pageNum) {
+          if (this.privateDetail.length == 0 || res.data.privateDetail.length < this.pageNum) {
             this.isNoMore = true;
+            return
           }
           this.privateDetail.forEach(element => {
             element.time = element.time;

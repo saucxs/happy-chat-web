@@ -16,7 +16,7 @@
             <span @click="goWebsite"><svg class="icon" aria-hidden="true"><use  xlink:href="#iconWorld-WideWeb"></use></svg></span>
           </p>
           <p class="user-intro">{{userInfo.intro == null ? '没有留下介绍~': userInfo.intro}}</p>
-          <p class="user-more"><svg @click="goInfo" class="icon" aria-hidden="true"> <use  xlink:href="#iconacmore"></use></svg>更多信息</p>
+          <p class="user-more"><span @click="goInfo"><svg class="icon" aria-hidden="true"><use  xlink:href="#iconacmore"></use></svg>更多信息</span></p>
         </div>
       </div>
       <div class="action">
@@ -84,7 +84,7 @@ export default {
       } else {
         this.$message({
           message: '对方尚未放他的github链接哦',
-          type: "error"
+          type: "warn"
         });
       }
     },
@@ -95,7 +95,7 @@ export default {
       } else {
         this.$message({
           message: '对方尚未放他的网站链接哦',
-          type: "error"
+          type: "warn"
         });
       }
     }
