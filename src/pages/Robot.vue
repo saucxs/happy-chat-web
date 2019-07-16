@@ -56,7 +56,8 @@ export default {
         message: val
       })
       let data = {
-       message: val
+       message: val,
+       userId: this.userInfoDataGetter.user_id,
       }
       await this.chatRobot(data);
       this.refresh();
@@ -77,7 +78,8 @@ export default {
   },
   computed: {
   ...mapGetters([
-      'robotMsgGetter'
+      'robotMsgGetter',
+      'userInfoDataGetter'
     ])
   },
   created() {

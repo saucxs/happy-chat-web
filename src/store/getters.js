@@ -1,5 +1,6 @@
 /*robot*/
 export const isMobile = state => state.common.isMobile;
+export const userInfoDataGetter = state => state.common.userInfoData;
 export const robotMsgGetter = state => state.robot.robotmsg;
 export const newFriendGetter = state => state.common.newFriend;
 export const msgListGetter = state => state.message.msgList;

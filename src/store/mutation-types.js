@@ -1,3 +1,4 @@
+export const userInfoMutation = "userInfoMutation";
 export const robotMsgMutation = "robotMsgMutation";
 export const newFriendMutation = "newFriendMutation";
 export const msgListMutation = "msgListMutation";

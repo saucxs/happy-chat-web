@@ -1,9 +1,10 @@
 import {
-  newFriendMutation, friendReqTipsMutation
+  newFriendMutation, friendReqTipsMutation, userInfoMutation
 } from "../mutation-types.js";
 
 const state = {
   systemName: 'XXX系统',
+  userInfoData: {},
   newFriend: [], //新朋友列表
   tabTips: { //底部tab的未读提示 暂时只做好友添加请求的提示
     addFriendReq: "" //是否有好友添加请求 0没有 1有
@@ -12,6 +13,10 @@ const state = {
 };
 
 const mutations = {
+  //登陆获取信息
+  [userInfoMutation](state, data) {
+    state.userInfoData = data;
+  },
   //新朋友列表
   [newFriendMutation](state, data) {
     state.newFriend = data;

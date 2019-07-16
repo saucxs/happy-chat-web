@@ -55,7 +55,6 @@ export default {
 			this.$router.push(path)
 		},
 		logout() {
-      console.log(this.messageBox,'00000000000000000000000000')
 			this.messageBox.messageBoxEvent = 'logOut'
 			this.messageBox.visible = true;
 			this.messageBox.message = "确定退出？"
