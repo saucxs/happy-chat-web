@@ -25,10 +25,13 @@
     - [x] 2、支持聊天中表情发送
     - [x] 3、支持聊天内容分页获取，滚动条保持在分页时候的地方
     
++ 版本v 1.1.1
+    - [ ] 1、支持聊天中图片发送
+    - [x] 2、支持https和http2.0，前端路由模式history
     
 ## 2、线上地址
 
-http://chat.chengxinsong.cn
+https://chat.chengxinsong.cn
     
 ## 3、源码使用
 ```js
@@ -43,9 +46,9 @@ npm run dev
 
 ## 4、截图
 
-登陆
+聊天
 
-![login](./images/login.png)
+![login](./images/chat.png)
 
 
 机器人

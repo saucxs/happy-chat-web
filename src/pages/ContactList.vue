@@ -10,7 +10,7 @@
     <span :class="friend" @click="showFriends">朋友</span>
     <span :class="group" @click="showGroups">群组</span>
   </p>
-  <div class="chat-wrapper">
+  <div class="chat-wrapper-contract-list">
     <div class="secret-box">
       <ul v-if="friend">
         <Nothing v-if="alreadyFriends.length === 0" :name="'加群'" :type="'addGroup'"></Nothing>

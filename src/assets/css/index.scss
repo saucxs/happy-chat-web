@@ -49,12 +49,17 @@ html {
   width: 100%;
   position: relative;
   .chat-wrapper{
-    height: calc(100% - 2rem);
+    height: calc(100% - 2rem) !important;
     width: 100%;
     position: relative;
   }
   .chat-wrapper-spe{
-    height: calc(100% - 2rem);
+    height: calc(100% - 2rem) !important;
+    width: 100%;
+    position: relative;
+  }
+  .chat-wrapper-contract-list{
+    height: calc(100% - 3.9rem);
     width: 100%;
     position: relative;
   }
@@ -96,6 +101,7 @@ html {
   }
   .input-msg {
     height: 1rem;
+    margin-top: 0.1rem;
     position: fixed;
     bottom: 0rem;
     display: flex;
@@ -103,34 +109,32 @@ html {
     align-items: center;
     width: 100%;
     z-index: 999;
-    border-top: 1px solid $base-gray-color;
-    border-bottom: 1px solid $base-gray-color;
+    border-top: 0.5px solid $base-gray-color;
+    border-bottom: 0.5px solid $base-gray-color;
     background: $base-gray-color;
     .input-box{
       width: 70%;
       height: 100%;
       display: flex;
+      textarea {
+        width: 100%;
+        margin: 0.1rem 0;
+        border-radius: 0.04rem;
+        padding: 0.08rem 0.12rem;
+        outline: none;
+        resize: none;
+        border: none;
+        overflow-y: hidden;
+        font: 0.3rem 'Microsoft Yahei';
+      }
     }
-    textarea {
-      width: 100%;
-      border-radius: 0.04rem;
-      margin: 0.1rem 0.05rem;
-      padding: 0.08rem 0.12rem;
-      outline: none;
-      resize: none;
-      border: none;
-      overflow-y: hidden;
-      font: 0.3rem 'Microsoft Yahei';
-    }
-
-    p.btn {
+       p.btn {
       font-size:0.22rem;
-      margin: 0.1rem 0.1rem 0.1rem 0;
       display: flex;
       align-items: center;
       justify-content: center;
       text-align: center;
-      height: 80%;
+      height: 79.8%;
       width: 20%;
       background: #ccc;
       color: white;

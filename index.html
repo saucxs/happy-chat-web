@@ -19,7 +19,7 @@
     <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
     <script>
       // const socketWeb = io('http://localhost:3000');
-      const socketWeb = io('http://chat.chengxinsong.cn');
+      const socketWeb = io('https://chat.chengxinsong.cn');
       const userInfo = JSON.parse(localStorage.getItem("HappyChatUserInfo"))
       if (userInfo) {
         socketWeb.emit('update', userInfo.user_id);

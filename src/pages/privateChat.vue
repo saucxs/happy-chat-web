@@ -118,7 +118,6 @@ export default {
           this.privateDetail = res.data.privateDetail;
           if (this.privateDetail.length == 0 || res.data.privateDetail.length < this.pageNum) {
             this.isNoMore = true;
-            return
           }
           this.privateDetail.forEach(element => {
             element.time = element.time;

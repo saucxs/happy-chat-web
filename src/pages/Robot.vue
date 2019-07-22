@@ -147,7 +147,6 @@ export default {
       align-items: center;
       justify-content: center;
       text-align: center;
-      margin-right: 0.06rem;
       height: 100%;
       width: 20%;
       background: #ccc;
