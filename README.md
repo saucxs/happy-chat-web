@@ -5,7 +5,7 @@
 [![GitHub forks](https://img.shields.io/github/forks/saucxs/happy-chat-web.svg)](https://github.com/saucxs/happy-chat-web/network)
 [![GitHub issues](https://img.shields.io/github/issues/saucxs/happy-chat-web.svg)](https://github.com/saucxs/happy-chat-web/issues)
 
-乐聊，一个快乐聊天的应用，支持pc端和无线端。线上地址：http://chat.chengxinsong.cn
+乐聊，一个快乐聊天的应用，支持pc端和无线端。技术栈：vue+vuex+koa+websocketIO+mysql+redis。线上地址：https://chat.chengxinsong.cn
 
 ## 1、功能
 + 版本v 1.0.0
@@ -21,13 +21,14 @@
     - [x] 10、支持浏览器：Chrome，Firefox，Safari，IE9及以上； 
 
 + 版本v 1.1.0
-    - [ ] 1、支持聊天中图片发送
-    - [x] 2、支持聊天中表情发送
-    - [x] 3、支持聊天内容分页获取，滚动条保持在分页时候的地方
+    - [x] 1、支持聊天中表情发送
+    - [x] 2、支持聊天内容分页获取，滚动条保持在分页时候的地方
+    - [ ] 3、支持聊天中图片发送
     
 + 版本v 1.1.1
-    - [ ] 1、支持聊天中图片发送
-    - [x] 2、支持https和http2.0，前端路由模式history
+    - [x] 1、支持https和http2.0，前端路由模式history
+    - [ ] 2、支持聊天中图片发送
+   
     
 ## 2、线上地址
 
@@ -48,31 +49,39 @@ npm run dev
 
 聊天
 
-![login](./images/chat.png)
+![chat](./images/chat.png)
 
 
 机器人
 
-![login](./images/robot.png)
+![robot](./images/robot.png)
 
 消息列表
 
-![login](./images/message.png)
+![message](./images/message.png)
 
 通讯录
 
-![login](./images/contact.png)
+![contact](./images/contact.png)
 
 个人信息
 
-![login](./images/personal.png)
+![personal](./images/personal.png)
 
 等等
 
-## 5、后端源码地址
+## 5、源码地址
+项目采用前后端分离，暂时没有给出数据库，有需求可以联系我。
++ 前端代码：https://github.com/saucxs/happy-chat-web
++ 后端代码：https://github.com/saucxs/happy-chat-node
 
-https://github.com/saucxs/happy-chat-node
+## 6、相应文章
 
-## 6、最后
++ [happyChat开发系列：使用websocket.io实现双向通信的乐聊大前端开发](http://www.chengxinsong.cn/post/40)
+
++ [【nginx系列】nginx升级到支持HTTP2.0](https://www.mwcxs.top/page/784.html)
+
+
+## 7、最后
 
 欢迎fork和star，有问题提issue
