@@ -146,7 +146,7 @@ export default {
   }
 
     .list-box{
-      padding: 1.5vh 2vh;
+      padding: 0.2rem 0.15rem;
       display: flex;
       justify-items: center;
       align-items: center;
@@ -200,7 +200,7 @@ export default {
             font-size: 0.28rem;
             line-height: 0.5rem;
             margin-left: 0.2rem;
-            // overflow: hidden;
+            //  overflow: hidden;
         }
     }
     .tab {

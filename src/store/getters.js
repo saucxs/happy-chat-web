@@ -1,4 +1,3 @@
-/*robot*/
 export const isMobile = state => state.common.isMobile;
 export const userInfoDataGetter = state => state.common.userInfoData;
 export const robotMsgGetter = state => state.robot.robotmsg;

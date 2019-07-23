@@ -5,25 +5,28 @@
   <div class="chat-wrapper-spe">
     <div class="secret-box-spe" v-if="msgListGetter.length > 0">
       <ul>
-        <li v-for="data in msgListGetter" @click="enterChat(data.type,data.id)">
-          <a v-if="data.type === 'group'" href="">
-            <!--<img v-if="data.group_avator" :src="data.group_avator" alt="" class="img">-->
-            <svg class="icon img" aria-hidden="true">
-              <use xlink:href="#iconniu"></use>
-            </svg>
-            <span class="group-unread" v-if="data.unread">{{data.unread}}</span>
-          </a>
-          <a v-if="data.type === 'private'" href="">
-            <!--<img v-if="data.avator" :src="data.avator" alt="" class="img">-->
-            <svg class="icon img" aria-hidden="true">
-              <use xlink:href="#iconniu"></use>
-            </svg>
-            <span class="private-unread" v-if="data.unread">{{data.unread}}</span>
-          </a>
-          <div class="content">
-            <div v-if="data.type === 'group'" class="title">{{data.group_name}}<span>{{data.time}}</span></div>
-            <div v-if="data.type === 'private'" class="title">{{data.remark?data.remark: data.name}}<span>{{data.time}}</span></div>
-            <div class="message">{{data.message}}</div>
+        <li v-for="data in msgListGetter">
+          <div class="list-box" @click="enterChat(data.type,data.id)">
+            <a v-if="data.type === 'group'" href="">
+              <!--<img v-if="data.group_avator" :src="data.group_avator" alt="" class="img">-->
+              <svg class="icon img" aria-hidden="true">
+                <use xlink:href="#iconniu"></use>
+              </svg>
+              <span class="group-unread" v-if="data.unread">{{data.unread}}</span>
+            </a>
+            <a v-if="data.type === 'private'" href="">
+              <!--<img v-if="data.avator" :src="data.avator" alt="" class="img">-->
+              <svg class="icon img" aria-hidden="true">
+                <use xlink:href="#iconniu"></use>
+              </svg>
+              <span class="private-unread" v-if="data.unread">{{data.unread}}</span>
+            </a>
+            <div class="content">
+              <div v-if="data.type === 'group'" class="title">{{data.group_name}}<span>{{data.time}}</span></div>
+              <div v-if="data.type === 'private'" class="title">{{data.remark?data.remark: data.name}}<span>{{data.time}}</span></div>
+              <div class="message" v-if="data.message">{{data.message | dotdot(32) }}</div>
+              <div class="message message-no" v-else>暂无消息~</div>
+            </div>
           </div>
         </li>
       </ul>
@@ -39,6 +42,7 @@ import Header from '../components/Header.vue'
 import Footer from '../components/Footer.vue'
 import Nothing from '../components/Nothing.vue'
 import { mapGetters, mapActions } from 'vuex';
+
 export default {
 	name: 'message',
 	data() {
@@ -64,7 +68,7 @@ export default {
       const path = chatType == 'private' ? `/private_chat/${chatId}` : `/group_chat/${chatId}`
       this.$router.push(path)
 		},
-    // 获取私聊和群的消息
+    //  获取私聊和群的消息
     getMsgBySocket() {
       socketWeb.removeAllListeners('getPrivateMsg');
       socketWeb.removeAllListeners('getGroupMsg');
@@ -98,17 +102,20 @@ export default {
 .wrapper {
     ul {
         background-color: #fff;
+        .list-box{
+          padding: 0.24rem 0.15rem;
+          display: flex;
+          justify-items: center;
+          align-items: center;
+          border-bottom: 1px solid $base-gray-color-1;
+        }
         li {
-            display: -webkit-box;
-            display: -ms-flexbox;
-            display: flex;
-            height: 132px;
-            align-items: center;
-            padding: 0 0.2rem;
-            list-style-type: none;
-            border-bottom: 1px solid $base-gray-color-1;
+          cursor: pointer;
+          background-color: #fff;
+          list-style-type: none;
+          position: relative;
             a {
-                position: relative;
+              display: inherit;
                 .img {
                     width: 0.8rem;
                     height: 0.8rem;
@@ -144,23 +151,20 @@ export default {
                     position: relative;
                     display: flex;
                     justify-content: space-between;
+                    margin-bottom: 0.05rem;
                     span {
                         font-size: 0.2rem;
                         color: #676767;
                     }
                 }
                 .message {
-                    color: #676767;
+                    color: #cccccc;
                     font-size: 0.24rem;
-                    max-height: 0.72rem;
                     overflow: hidden;
                     position: relative;
                 }
-                .message :after {
-                    content: "...";
-                    position: absolute;
-                    bottom: 0;
-                    right: 0;
+                .message-no {
+                  color: #cccccc;
                 }
             }
         }

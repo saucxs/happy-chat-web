@@ -38,9 +38,9 @@ export default {
 			currentTab: 4,
 			messageBox: {
 				visible: false,
-				message: "", //弹窗内容
-				hasCancel: true, //弹窗是否有取消键
-				messageBoxEvent: "" //弹窗事件名称
+				message: "", // 弹窗内容
+				hasCancel: true, // 弹窗是否有取消键
+				messageBoxEvent: "" // 弹窗事件名称
 			},
 			userInfo: {}
 		}
@@ -64,7 +64,7 @@ export default {
 		},
 		confirm(value) {
 			if (value === 'logOut') {
-				//登出
+				// 登出
         socketWeb.emit('logout', this.userInfo.user_id)
 				localStorage.removeItem("HappyChatUserToken");
         localStorage.removeItem("HappyChatUserInfo");
@@ -76,7 +76,7 @@ export default {
 				}, 1000);
 			}
 		},
-    //点击跳转到对方的gihub
+    // 点击跳转到对方的gihub
     goGithub() {
       if (this.userInfo.github) {
         window.location.href = this.userInfo.github;
@@ -87,7 +87,7 @@ export default {
         });
       }
     },
-    //点击跳转到对方的网站
+    // 点击跳转到对方的网站
     goWebsite() {
       if (this.userInfo.website) {
         window.location.href = this.userInfo.website;

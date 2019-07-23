@@ -11,12 +11,12 @@ Message.installMessage = function(options) {
       message: options
     }
   }
-  var message = Vue.extend(Message)
+  var Messages = Vue.extend(Message)
 
-  var component = new message({
+  var component = new Messages({
     data: options
   }).$mount()
   document.querySelector('body').appendChild(component.$el)
 }
 
-export default Message
+export default Message;

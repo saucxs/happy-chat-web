@@ -53,17 +53,17 @@ export default {
       isShowLoading: false,
       isNoMore: false,
 			inputMsg: '',
-			privateDetail: [], //私聊相关
-			toUserInfo: { //被私聊者
+			privateDetail: [], // 私聊相关
+			toUserInfo: { // 被私聊者
 				to_user: '',
 				avator: '',
 				sex: '',
 				place: '',
 				status: ''
 			},
-			isMyFriend: false, //他是否是我的好友
-			isHisFriend: false, //我是否是他的好友
-			fromUserInfo: {}, //用户自己
+			isMyFriend: false, // 他是否是我的好友
+			isHisFriend: false, // 我是否是他的好友
+			fromUserInfo: {}, // 用户自己
 			btnInfo: "发送",
       remarkName: '',
       anotherRemarkName: '',
@@ -103,7 +103,7 @@ export default {
       this.inputMsg = val;
       this.sendMessage()
     },
-		//获取数据库的消息
+		// 获取数据库的消息
 		getPrivateMsg() {
       let params = {
         page: this.page,
@@ -133,7 +133,7 @@ export default {
         });
       })
 		},
-		//发送信息
+		// 发送信息
 		sendMessage() {
 			if (this.inputMsg.trim() == '') return
 			if (!this.isMyFriend) {
@@ -154,41 +154,41 @@ export default {
 			this.sendMsgBySocket();
 			this.saveMsgByDB();
 		},
-		//用socket发消息
+		// 用socket发消息
 		sendMsgBySocket() {
 			const data = {
-				from_user: this.fromUserInfo.user_id, //自己的id
-				to_user: this.toUserInfo.to_user, //对方id
-				name: this.fromUserInfo.name, //自己的昵称
-        remark: this.remarkName, //别人给的备注
-				avator: this.fromUserInfo.avator, //自己的头像
-				message: this.inputMsg, //消息内容
+				from_user: this.fromUserInfo.user_id, // 自己的id
+				to_user: this.toUserInfo.to_user, // 对方id
+				name: this.fromUserInfo.name, // 自己的昵称
+        remark: this.remarkName, // 别人给的备注
+				avator: this.fromUserInfo.avator, // 自己的头像
+				message: this.inputMsg, // 消息内容
 				type: 'private',
-				status: '1', //是否在线 0为不在线 1为在线
-				time: toNomalTime((new Date()).getTime()), //时间
+				status: '1', // 是否在线 0为不在线 1为在线
+				time: toNomalTime((new Date()).getTime()), // 时间
 			};
-			// console.log(this.anotherRemarkName,'remark')
+			//  console.log(this.anotherRemarkName,'remark')
       data.remark = this.anotherRemarkName;
       socketWeb.emit('sendPrivateMsg', data)
 			this.$store.commit('updateListMutation', data);
 		},
-		//用数据库存消息
+		// 用数据库存消息
 		saveMsgByDB() {
 			const data = {
-				from_user: this.fromUserInfo.user_id, //自己的id
-				to_user: this.toUserInfo.to_user, //对方的id
-				name: this.fromUserInfo.name, //自己的昵称
-        remark: this.remarkName, //别人给的备注
-				avator: this.fromUserInfo.avator, //自己的头像
-				message: this.inputMsg, //消息内容
-				status: '1', //是否在线 0为不在线 1为在线
-				time: toNomalTime((new Date()).getTime()), //时间
+				from_user: this.fromUserInfo.user_id, // 自己的id
+				to_user: this.toUserInfo.to_user, // 对方的id
+				name: this.fromUserInfo.name, // 自己的昵称
+        remark: this.remarkName, // 别人给的备注
+				avator: this.fromUserInfo.avator, // 自己的头像
+				message: this.inputMsg, // 消息内容
+				status: '1', // 是否在线 0为不在线 1为在线
+				time: toNomalTime((new Date()).getTime()), // 时间
 			}
-			// 存此条私聊信息到数据库
+			//  存此条私聊信息到数据库
       this.savePrivateMsg(data)	.then(res => {
         if(res){
           this.inputMsg = '';
-          // 存此条私聊信息到本地
+          //  存此条私聊信息到本地
           this.privateDetail.push(data);
         }
       }).catch(err => {
@@ -199,29 +199,29 @@ export default {
         });
       })
 		},
-		// 获取socket消息
+		//  获取socket消息
 		getMsgBySocket() {
       socketWeb.removeAllListeners('getPrivateMsg');
       socketWeb.on('getPrivateMsg', (data) => {
-				//如果收到的soket信息不是发给自己的 放弃这条soket 没必要了 因为私聊是点对点发送的
-				// if(data.to_user != this.fromUserInfo.user_id) return
-				//如果收到的soket信息不是来自当前聊天者 写入首页信息列表 并return
-				// console.log(data.from_user, '!=', this.toUserInfo.to_user)
-				// 	//soket信息不是来自当前聊天者 vuex添加此条信息 有未读提示
+				// 如果收到的soket信息不是发给自己的 放弃这条soket 没必要了 因为私聊是点对点发送的
+				//  if(data.to_user != this.fromUserInfo.user_id) return
+				// 如果收到的soket信息不是来自当前聊天者 写入首页信息列表 并return
+				//  console.log(data.from_user, '!=', this.toUserInfo.to_user)
+				//  	// soket信息不是来自当前聊天者 vuex添加此条信息 有未读提示
 				if (data.from_user != this.toUserInfo.to_user) {
 					data.chatOfNow = false;
 					this.$store.commit('updateListMutation', data)
 					return
 				} else {
-					//soket信息来自当前聊天者 vuex添加此条信息 没未读提示
+					// soket信息来自当前聊天者 vuex添加此条信息 没未读提示
 					data.chatOfNow = true;
 					this.$store.commit('updateListMutation', data)
 				}
-				//本地添加此条信息
+				// 本地添加此条信息
 				this.privateDetail.push(data);
 			})
 		},
-		// 查询此用户与我的关系
+		//  查询此用户与我的关系
 		isFriend() {
       let params = {
         other_user_id: this.toUserInfo.to_user
@@ -243,11 +243,11 @@ export default {
         });
       })
 		},
-		//将未读信息归零
+		// 将未读信息归零
 		resetUnred() {
 			this.$store.commit('resetUnredMutation', this.toUserInfo.to_user)
 		},
-		// 消息置底
+		//  消息置底
     refresh() {
       setTimeout(() => {
         this.viewBox.scrollTop = this.viewBox.scrollHeight

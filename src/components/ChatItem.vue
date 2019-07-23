@@ -38,7 +38,7 @@
               if(this.href){
                 this.$router.push(`/user_info/${this.href}`)
               }else {
-                window.location.href = "https://github.com/saucxs/happy-chat-web"
+                window.location.href = "https:// github.com/saucxs/happy-chat-web"
               }
             }
         }
@@ -78,7 +78,7 @@
             .msg {
                 float: left;
                 max-width: 60%;
-                // margin-top: 0.2rem;
+                //  margin-top: 0.2rem;
                 margin-left: 1rem;
                 padding: 0.12rem;
                 border-radius: 0.1rem;

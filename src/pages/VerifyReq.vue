@@ -20,7 +20,7 @@
 
 <script>
 import Header from '../components/Header.vue'
-import { mapGetters, mapActions } from 'vuex';
+import { mapActions } from 'vuex';
 import { toNomalTime } from "../utils/common"
 export default {
 	components: {
@@ -31,17 +31,17 @@ export default {
 			textAreaContent: "您好，我想加您为好友",
 			messageBox: {
 				visible: false,
-				message: "", //弹窗内容
-				hasCancel: true, //弹窗是否有取消键
-				messageBoxEvent: "" //弹窗事件名称
+				message: "", // 弹窗内容
+				hasCancel: true, // 弹窗是否有取消键
+				messageBoxEvent: "" // 弹窗事件名称
 			},
 			fromUserInfo: {}
 		}
 	},
 	computed: {
-		// ...mapGetters([
-		//     'addAsFriendGetter'
-		// ])
+		//  ...mapGetters([
+		//      'addAsFriendGetter'
+		//  ])
 	},
 
 	watch: {},
@@ -51,22 +51,22 @@ export default {
 		send() {
       socketWeb.emit('sendRequest', {
 				from_user: this.fromUserInfo.user_id,
-				to_user: this.$route.params.user_id, //对方id
+				to_user: this.$route.params.user_id, // 对方id
 				name: this.fromUserInfo.name,
 				avator: this.fromUserInfo.avator,
 				sex: this.fromUserInfo.sex,
 				content: this.textAreaContent,
-				time: toNomalTime((new Date()).getTime()) //时间
+				time: toNomalTime((new Date()).getTime()) // 时间
 			})
-			//db持久化储存
+			// db持久化储存
       let params = {
-        to_user: this.$route.params.user_id, //对方id
+        to_user: this.$route.params.user_id, // 对方id
         content: this.textAreaContent,
-        time: toNomalTime((new Date()).getTime()), //时间
+        time: toNomalTime((new Date()).getTime()), // 时间
         status: 0
       }
       this.insertNewFriends(params).then(res => {
-        if(res){
+        if (res) {
           this.messageBox.messageBoxEvent = 'send'
           this.messageBox.visible = true;
           this.messageBox.message = "发送成功，等候回复哦"

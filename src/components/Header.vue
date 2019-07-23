@@ -43,10 +43,10 @@ export default {
 			this.$router.push("/add");
 		},
 		lookGroupInfo() {
-		  // this.showGroupInfo = true;
+		  //  this.showGroupInfo = true;
 		  this.$emit('showGroupInfo',true)
-			// const path = `/group_info/${this.$route.params.group_id}`;
-			// this.$router.push(path);
+			//  const path = `/group_info/${this.$route.params.group_id}`;
+			//  this.$router.push(path);
 		},
 		lookUserInfo() {
 			const path = `/user_info/${this.$route.params.user_id}`;

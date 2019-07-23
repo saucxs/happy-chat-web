@@ -41,9 +41,6 @@
 </template>
 
 <script>
-import {
-	mapGetters
-} from 'vuex'
 export default {
 	name: 'MessageBox',
 	props: {
@@ -58,12 +55,12 @@ export default {
 			type: String,
 			default: "提示"
 		},
-		//单行输入
+		// 单行输入
 		canInput: {
 			type: Boolean,
 			default: false
 		},
-		//编辑个人信息
+		// 编辑个人信息
 		canEditorInfo: {
 			type: Boolean,
 			default: false
@@ -99,8 +96,7 @@ export default {
 				});
 				return
 			} else if (this.canEditorInfo) {
-                console.log('myInfo',this.myInfo);
-                this.myInfo.sex = this.myInfo.sex === '男' ? 0 : 1;
+        this.myInfo.sex = this.myInfo.sex === '男' ? 0 : 1;
 				this.$emit("confirm", {
 					messageBoxEvent: this.messageBoxEvent,
 					myInfo: this.myInfo
@@ -131,12 +127,12 @@ export default {
     left: 50%;
     transform: translate(-50%, -50%);
     -moz-transform: translate(-50%, -50%);
-    //Mozilla内核浏览器：firefox3.5+
-    -webkit-transform: translate(-50%, -50%); //Webkit内核浏览器：Safari and Chrome
+    // Mozilla内核浏览器：firefox3.5+
+    -webkit-transform: translate(-50%, -50%); // Webkit内核浏览器：Safari and Chrome
     -o-transform: translate(-50%, -50%);
-    //Opera
+    // Opera
     -ms-transform: translate(-50%, -50%);
-    //IE9
+    // IE9
     width: 70%;
     height: auto;
     background-color: white;
@@ -175,7 +171,7 @@ export default {
         display: none;
     }
     input {
-        // display: inline-block;
+        //  display: inline-block;
         /*去除点击出现轮廓颜色*/
         width: 66%;
         outline: none;

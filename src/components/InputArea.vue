@@ -37,7 +37,7 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'isMobile',   //是否是无线端
+      'isMobile',   // 是否是无线端
       'tabTipsGetter'
     ])
   },
@@ -55,21 +55,19 @@ export default {
     ...mapActions([
       ''
     ]),
-    /*点击输入框*/
+    /* 点击输入框 */
     clickTextArea(){
-      console.log('11111111111111111111')
       let textarea = this.$refs.textarea;
-      if(this.isMobile){
+      if (this.isMobile) {
         this.showEmojiPicker = false;
         this.emojiSelect = false;
         textarea.focus();
       }
     },
-    /*获取焦点事件*/
+    /* 获取焦点事件 */
     getFocus(){
-      console.log('2222222222222222222')
       let textarea = this.$refs.textarea;
-      if(this.isMobile){
+      if (this.isMobile) {
         if(!this.emojiSelect){
           this.showEmojiPicker = false;
           textarea.focus();
@@ -77,34 +75,31 @@ export default {
           this.showEmojiPicker = true;
           textarea.blur();
         }
-      }else{
+      } else {
         textarea.focus();
       }
     },
-    /*展示表情框*/
+    /* 展示表情框 */
     toggleEmojiPicker () {
-      console.log('3333333333333333333333333333');
       this.$loading.show();
       this.showEmojiPicker = !this.showEmojiPicker;
       let textarea = this.$refs.textarea;
-      if(this.isMobile){
-        if(this.showEmojiPicker){
+      if (this.isMobile) {
+        if (this.showEmojiPicker) {
           textarea.blur();
-        }else{
+        } else {
           textarea.focus();
         }
-      }else{
+      } else {
         textarea.focus();
       }
       this.$loading.hide();
     },
-    /*添加表情*/
+    /* 添加表情 */
     addEmoji (emoji) {
-      console.log('444444444444444444444444444444')
       this.emojiSelect = true;
       let textarea = this.$refs.textarea;
       const cursorPosition = textarea.selectionEnd;
-      console.log(cursorPosition, '-=-=-==-=-=')
       const start = this.inputMsg.substring(0, textarea.selectionStart);
       const end = this.inputMsg.substring(textarea.selectionStart);
       this.inputMsg = start + emoji.native + end;

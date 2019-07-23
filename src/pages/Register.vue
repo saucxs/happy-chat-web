@@ -38,8 +38,8 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex';
-import { debounce, checkEmail } from "../utils/common"
+import { mapActions } from 'vuex';
+import { checkEmail } from "../utils/common"
 export default {
 	data() {
 		return {
@@ -48,15 +48,15 @@ export default {
       email: '',
 			messageBox: {
 				visible: false,
-				message: "", //弹窗内容
-				hasCancel: true, //弹窗是否有取消键
-				messageBoxEvent: "" // 弹窗事件名称
+				message: "", // 弹窗内容
+				hasCancel: true, // 弹窗是否有取消键
+				messageBoxEvent: "" //  弹窗事件名称
 			},
       disabledFlag: false
 		}
 	},
 	methods: {
-    ...mapActions(["register","activateEmail"]),
+    ...mapActions(["register", "activateEmail"]),
 	  actualRegister() {
 	    let params = {
 	      name: this.name,
@@ -67,7 +67,7 @@ export default {
         this.register(params).then(res => {
           if (res) {
             if (res.success) {
-              //弹窗
+              // 弹窗
               this.messageBox.messageBoxEvent = 'register'
               this.messageBox.visible = true;
               this.messageBox.message = res.message || "您已注册成功";

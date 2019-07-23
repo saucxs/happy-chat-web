@@ -31,8 +31,8 @@ import { mapGetters, mapActions } from 'vuex';
 export default {
 	data() {
 		return {
-			groupInfo: {}, //群资料
-			userInfo: {}, //本机用户资料,
+			groupInfo: {}, // 群资料
+			userInfo: {}, // 本机用户资料,
       shareGroupUrl: window.location,
       ownerFlag: false
 		}
@@ -51,7 +51,7 @@ export default {
         path: `/edit_group/` + this.$route.params.group_id
       });
     },
-		//获取群资料
+		// 获取群资料
 		getGroupInfo() {
       let params = {
         groupId: this.$route.params.group_id
@@ -105,7 +105,7 @@ export default {
 		goChat() {
       this.addGroupUserRelation();
 		},
-    // 把新成员加入群名单
+    //  把新成员加入群名单
     addGroupUserRelation() {
       let params = {
         groupId: this.groupInfoGetter.group_id,
@@ -154,8 +154,8 @@ export default {
 	},
 	async created() {
 		this.userInfo = JSON.parse(localStorage.getItem("HappyChatUserInfo"));
-		// await this.isInGroup();
-		// this.getGroupInfo();
+		//  await this.isInGroup();
+		//  this.getGroupInfo();
     if(this.groupInfoGetter.group_creater == this.userInfo.name){
       this.ownerFlag = true
     }

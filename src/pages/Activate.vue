@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex';
+import { mapActions } from 'vuex';
 export default {
 	name: "activate",
 	props: {},
@@ -30,23 +30,23 @@ export default {
       message: ''
 		};
 	},
-  // beforeRouteEnter: (to, from, next) => {
-  //   next(vm => {
-  //     let data = {
-  //       code: vm.code
-  //     }
-  //     vm.activateEmail(data).then(res => {
-  //       if (res) {
-  //         vm.message = res.message;
-  //       }
-  //     }).catch(err => {
-  //       this.$message({
-  //         message: '服务器出错啦',
-  //         type: "error"
-  //       });
-  //     })
-  //   });
-  // },
+  //  beforeRouteEnter: (to, from, next) => {
+  //    next(vm => {
+  //      let data = {
+  //        code: vm.code
+  //      }
+  //      vm.activateEmail(data).then(res => {
+  //        if (res) {
+  //          vm.message = res.message;
+  //        }
+  //      }).catch(err => {
+  //        this.$message({
+  //          message: '服务器出错啦',
+  //          type: "error"
+  //        });
+  //      })
+  //    });
+  //  },
   created() {
 	  this.activateEmailFunction();
   },
@@ -55,7 +55,7 @@ export default {
     goBackLogin () {
       this.$router.push('/login')
     },
-    activateEmailFunction(){
+    activateEmailFunction() {
       let data = {
         code: this.code
       }
@@ -65,7 +65,7 @@ export default {
         }
       }).catch(err => {
         this.$message({
-          message: '服务器出错啦',
+          message: err || '服务器出错啦',
           type: "error"
         });
       })

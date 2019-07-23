@@ -1,7 +1,7 @@
 require('babel-register')
 var config = require('../../config')
 
-// http://nightwatchjs.org/gettingstarted#settings-file
+//  http:// nightwatchjs.org/gettingstarted#settings-file
 module.exports = {
   src_folders: ['test/e2e/specs'],
   output_folder: 'test/e2e/reports',
@@ -23,7 +23,7 @@ module.exports = {
       selenium_host: 'localhost',
       silent: true,
       globals: {
-        devServerURL: 'http://localhost:' + (process.env.PORT || config.dev.port)
+        devServerURL: 'http:// localhost:' + (process.env.PORT || config.dev.port)
       }
     },
 

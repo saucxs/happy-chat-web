@@ -69,7 +69,7 @@ export default {
 				this.findGroup(groupname);
 			}
 		},
-		//找人
+		// 找人
 		findPeople(username) {
       this.findPerson({ name: username }).then(res => {
         if(res.success){
@@ -90,7 +90,7 @@ export default {
         });
       })
 		},
-		//找群
+		// 找群
 		findGroup(groupname) {
       this.getGroupInformation({groupName: groupname}).then(res => {
         if(res.success){

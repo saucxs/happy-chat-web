@@ -25,70 +25,69 @@
   import Header from '../components/Header.vue'
   import Footer from '../components/Footer.vue'
   import ChatItem from '../components/ChatItem.vue'
-  import axios from "axios";
   import { mapGetters, mapActions } from 'vuex';
-  import  {toNomalTime} from "../utils/common"
-export default {
-  name: 'Robot',
-  data () {
-    return {
-      currentTab: 2,
-      inputMsg: "",
-      time: toNomalTime((new Date()).getTime() ),
-      img: "",
-      isScrollToBottom: true,
-      name: '',
-      href: '',
-      viewBox: '',
-    }
-  },
-  components: {
-    Header,
-    Footer,
-    ChatItem
-  },
-  methods: {
-    ...mapActions(["chatRobot"]),
-    async sendMessage(val) {
-      this.inputMsg = '';
-      if (val.trim() == '') return;
-      this.$store.commit('robotMsgMutation', { //提交自己的内容
-        message: val
-      })
-      let data = {
-       message: val,
-       userId: this.userInfoDataGetter.user_id,
+  import  { toNomalTime } from "../utils/common"
+  export default {
+    name: 'Robot',
+    data () {
+      return {
+        currentTab: 2,
+        inputMsg: "",
+        time: toNomalTime((new Date()).getTime()),
+        img: "",
+        isScrollToBottom: true,
+        name: '',
+        href: '',
+        viewBox: '',
       }
-      await this.chatRobot(data);
-      this.refresh();
     },
-    refresh() {
-      this.viewBox = this.$refs.viewBox;
-      setTimeout(() => {
-        this.viewBox.scrollTop = this.viewBox.scrollHeight;
-      }, 4)
-    }
-  },
-  watch: {
-    robotMsgGetter() { //当数据改变了,则自动刷新
-      this.refresh();
-      let message = this.$refs.message;
-      message.focus();
-    }
-  },
-  computed: {
-  ...mapGetters([
-      'robotMsgGetter',
-      'userInfoDataGetter'
-    ])
-  },
-  created() {
-    const userInfo = JSON.parse(localStorage.getItem("HappyChatUserInfo"));
-    this.img = userInfo.avator;
-    this.name = userInfo.name;
-    this.href = userInfo.user_id
-  },
-}
+    components: {
+      Header,
+      Footer,
+      ChatItem
+    },
+    methods: {
+      ...mapActions(["chatRobot"]),
+      async sendMessage(val) {
+        this.inputMsg = '';
+        if (val.trim() == '') return;
+        this.$store.commit('robotMsgMutation', { // 提交自己的内容
+          message: val
+        })
+        let data = {
+          message: val,
+          userId: this.userInfoDataGetter.user_id,
+        }
+        await this.chatRobot(data);
+        this.refresh();
+      },
+      refresh() {
+        this.viewBox = this.$refs.viewBox;
+        setTimeout(() => {
+          this.viewBox.scrollTop = this.viewBox.scrollHeight;
+        }, 4)
+      }
+    },
+    watch: {
+      robotMsgGetter() { // 当数据改变了,则自动刷新
+        this.refresh();
+        let message = this.$refs.message;
+        message.focus();
+      }
+    },
+    computed: {
+      ...mapGetters([
+        'robotMsgGetter',
+        'userInfoDataGetter'
+      ])
+    },
+    created() {
+      const userInfo = JSON.parse(localStorage.getItem("HappyChatUserInfo"));
+      this.img = userInfo.avator;
+      this.name = userInfo.name;
+      this.href = userInfo.user_id
+    },
+  }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -127,13 +126,13 @@ export default {
   .input-msg {
     height: 0.76rem;
     position: fixed;
-    bottom: 1rem;
+    bottom: 0.95rem;
     display: flex;
     width: 100%;
     z-index: 999;
     textarea {
       width: 80%;
-      padding: 0.05rem 0.1rem;
+      padding: 0.06rem 0.1rem;
       border-radius: 0.02rem;
       outline: none;
       resize: none;

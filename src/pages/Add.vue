@@ -102,7 +102,7 @@ export default {
           height: 0.5rem;
           margin: 0 0.2rem 0 0.4rem;
         }
-        // input {
+        //  input {
         /*在IE10+浏览器中, 使用css即可隐藏input文本输入框右侧的叉号*/
         ::-ms-reveal,
         input[type=text]::-ms-clear {
@@ -135,10 +135,10 @@ export default {
             display: flex;
             display: -webkit-flex;
             padding: 0.2rem;
-            // border-top: 0.01rem solid #f0ecec;
+            //  border-top: 0.01rem solid #f0ecec;
             .icon {
                 font-size: 0.38rem;
-                // line-height: 0.4rem;
+                //  line-height: 0.4rem;
                 margin-left: 0.2rem;
             }
             span {
@@ -150,6 +150,6 @@ export default {
             border-top: 0.01rem solid #f0ecec;
         }
     }
-    // }
+    //  }
 }
 </style>

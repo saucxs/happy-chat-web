@@ -18,17 +18,17 @@ export default {
     this.getReqBySocket();
   },
   methods: {
-    // 获取新好友通知
-    getReqBySocket() {
+    //  获取新好友通知
+    getReqBySocket () {
       socketWeb.on('getresponse', (data) => {
         console.log('获取新好友通知', data);
-        // 存vuex
+        //  存vuex
         this.$store.commit('newFriendMutation', data)
-        this.$store.commit('friendReqTipsMutation',true);
+        this.$store.commit('friendReqTipsMutation', true);
       })
     },
-    /*获取屏幕dpr*/
-    dprRatio(){
+    /* 获取屏幕dpr */
+    dprRatio () {
       const ua = navigator.userAgent;
       const matches = ua.match(/Android[\S\s]+AppleWebkit\/(\d{3})/i);
       const UCversion = ua.match(/U3\/((\d+|\.){5,})/i);
@@ -41,8 +41,8 @@ export default {
       }
       return dpr;
     },
-    /*初始化屏幕比例*/
-    screenRatio(baseFontSize, fontscale){
+    /* 初始化屏幕比例 */
+    screenRatio (baseFontSize, fontscale) {
       var ratio = this.dprRatio();
       console.log(ratio, 'dpr');
       var scale = document.createElement('meta');

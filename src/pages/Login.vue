@@ -1,5 +1,5 @@
 <template>
-<!--  登录 -->
+<!-- 登录 -->
 <div class="login">
 	<Message-box :visible="this.messageBox.visible" :messageBoxEvent="this.messageBox.messageBoxEvent" @confirm="confirm" :hasCancel=false>
 		<p slot="content">{{this.messageBox.message}}</p>
@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex';
+import { mapActions } from 'vuex';
 export default {
 	name: "login",
 	props: {},
@@ -43,9 +43,9 @@ export default {
 			password: "",
 			messageBox: {
 				visible: false,
-				message: "", //弹窗内容
-				hasCancel: true, //弹窗是否有取消键
-				messageBoxEvent: "" // 弹窗事件名称
+				message: "", // 弹窗内容
+				hasCancel: true, // 弹窗是否有取消键
+				messageBoxEvent: "" //  弹窗事件名称
 			}
 		};
 	},
@@ -63,14 +63,14 @@ export default {
         }
         this.$loading.show();
 			  this.login(params).then(res => {
-			    if(res) {
+			    if (res) {
             this.$loading.hide();
 			      if (res.success) {
-              //保存soket.io
+              // 保存soket.io
               socketWeb.emit('login', res.userInfo.user_id)
 			        localStorage.setItem("HappyChatUserToken", res.token);
 			        localStorage.setItem("HappyChatUserInfo", JSON.stringify(res.userInfo));
-			        /*弹窗提示*/
+			        // 弹窗提示
               this.messageBox.messageBoxEvent = 'login'
               this.messageBox.visible = true;
               this.messageBox.message = "您已登录成功"
@@ -104,7 +104,7 @@ export default {
 			}
 		}
 	},
-  mounted(){
+  mounted() {
 	  let userNameBox = this.$refs.userName;
     userNameBox.focus();
   }
