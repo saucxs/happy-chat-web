@@ -13,7 +13,7 @@ axios.defaults.retryDelay = 1000;
 Vue.prototype.axios = axios;
 
 const service = axios.create({
-  // baseURL: '/',
+  baseURL: '/',
   //  baseURL: 'https://chat.chengxinsong.cn',
   timeout: 10000
 })
