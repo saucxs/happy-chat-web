@@ -14,7 +14,7 @@
             </svg>
           </div>
           <p>群名:</br><input type="text" v-model="groupInfo.group_name" placeholder="不超过10个字哦" maxlength="10"/></p>
-          <p>群公告:</br><textarea rows="5" type="text" v-model="groupInfo.group_notice" placeholder="不超过30个字哦" maxlength="30"/></textarea>
+          <p>群公告:</br><textarea rows="4" type="text" v-model="groupInfo.group_notice" placeholder="不超过40个字哦" maxlength="40"/></textarea>
           </p>
         </div>
         <div class="action" v-if="editGroupId" @click="editGroup">

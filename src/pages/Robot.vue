@@ -132,6 +132,7 @@
     z-index: 999;
     textarea {
       width: 80%;
+      height: 100%;
       padding: 0.06rem 0.1rem;
       border-radius: 0.02rem;
       outline: none;

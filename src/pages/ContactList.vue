@@ -40,7 +40,8 @@
               <p>{{data.group_name}}</p>
               <p>群主：{{data.group_creater}}</p>
             </div>
-            <div class="remark">{{data.group_notice === ''? '没有留下公告~': data.group_notice.slice(0,10)+'...'}}</div>
+            <div class="remark" v-if="data.group_notice === ''">没有留下公告~</div>
+            <div class="remark" v-else>{{data.group_notice | dotdot(16) }}</div>
           </div>
         </li>
       </ul>
@@ -99,8 +100,10 @@ export default {
       this.$router.push({path: 'contact_list/new_friends'})
     },
     alreadyFriendsList(){
+      this.$loading.show();
       this.getAlreadyFriends({user_id: this.userInfo.user_id}).then(res => {
         if (res) {
+          this.$loading.hide();
           this.alreadyFriends =  res.data.alreadyFriends
         }
       })
@@ -117,15 +120,13 @@ export default {
 
 	mounted() {
     this.userInfo = JSON.parse(localStorage.getItem("HappyChatUserInfo"));
-    this.$loading.show();
-    Promise.all([this.alreadyFriendsList(),this.alreadyGroupsList()]).then(res => {
-      this.$loading.hide();
-    })
+    Promise.all([this.alreadyFriendsList(),this.alreadyGroupsList()]);
 	}
 }
 </script>
 
 <style lang="scss" scoped>
+  @import "../assets/css/chat.scss";
 .wrapper {
   height: 100vh;
   min-width: 100%;
@@ -176,7 +177,8 @@ export default {
         }
         .remark {
           font-size: 0.2rem;
-          margin-left: 2vh;
+          margin-left: 0.2rem;
+          color: $gray-color;
         }
       }
     }

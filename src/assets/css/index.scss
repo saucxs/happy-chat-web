@@ -161,8 +161,12 @@ html {
 
 /*按钮样式*/
 .box-button-group{
-  margin: 0.16rem;
+  margin: 0.1rem;
   display: flex;
+  .join-group-spe{
+    position: relative;
+    margin: 0.04rem 0;
+  }
 }
 .button {
   position: absolute;
@@ -189,7 +193,8 @@ html {
   background-color: $base-success-color;
   color: white;
   margin: 0.1rem;
-  padding: 0.14rem 0;
+  padding: 0.16rem 0;
+
 }
 
 .warning-button{
@@ -198,6 +203,10 @@ html {
   margin: 0.1rem;
   padding: 0.14rem 0;
 }
+.join-group{
+  bottom: 0.1rem;
+}
+
 
 /*action 按钮*/
 .action-box{

@@ -36,7 +36,7 @@ export default {
   @import "../assets/css/base.scss";
 .load-more {
   text-align: center;
-  padding-top: 16px;
+  padding-top: 0.16rem;
   .has-more {
     cursor: pointer;
     font-size: 0.25rem;
@@ -44,7 +44,7 @@ export default {
   }
   .no-more {
     cursor: default;
-    font-size: 0.25rem;
+    font-size: 0.2rem;
     color: $gray-color;
   }
 }

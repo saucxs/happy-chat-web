@@ -325,7 +325,7 @@ export default {
 	},
 	async created() {
 		this.myInfo = JSON.parse(localStorage.getItem("HappyChatUserInfo"));
-		this.isMe = this.myInfo.user_id === this.$route.params.user_id ? true : false;
+		this.isMe = String(this.myInfo.user_id) === this.$route.params.user_id ? true : false;
 // 		await this.$store.dispatch('newFriendAction', this.myInfo.user_id)
 		await this.isAddingMeFun();
 		await this.isFriend();

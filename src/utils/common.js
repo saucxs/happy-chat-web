@@ -54,8 +54,7 @@ export function toNomalTime (timeStamp) {
 
 /* 省略号 */
 export function dotdot (val, num) {
-  console.log(val, num, '======')
-  var txt
+  let txt;
   if (!val) return '';
   if (val.length > num) {
     txt = val.substring(0, num - 1) + '...'

@@ -19,7 +19,7 @@
     <group-info v-if="showGroupInfoDialog" class="chat-info" :groupMembers="groupMembers" :groupInfoGetter="groupInfoGetter" :isMyGroup="isMyGroup"></group-info>
 
     <input-area v-if="isMyGroup" @showEmojiPickerFunc="showEmojiPickerFunc" @sendMessageFunc="sendMessageFunc" :inputMsgData="inputMsg"></input-area>
-    <span v-else @click="goChat" class="base-button button">加入群聊</span>
+    <span v-else @click="goChat" class="base-button button join-group">加入群聊</span>
   </div>
 </template>
 
@@ -94,9 +94,9 @@
         this.showEmojiPicker = val;
         this.$nextTick(()=>{
           this.viewBoxHeight = this.$refs.viewBox.clientHeight;
-          console.log(this.viewBoxHeight, '-=-=-=-=-=')
+          // console.log(this.viewBoxHeight, '-=-=-=-=-=')
           this.keyWordHeight = document.body.clientHeight - this.viewBoxHeight - 176;
-          console.log(this.keyWordHeight, '键盘高度')
+          // console.log(this.keyWordHeight, '键盘高度')
         })
         this.refresh()
       },

@@ -4,9 +4,9 @@
 	<div class="info">
     <p class="notice-title">群公告</p>
     <p class="notice-content">{{groupInfoGetter.group_notice}}</p>
-    <p class="notice-title">群创建者：{{groupInfoGetter.group_creater}}</p>
+    <p class="notice-title">群创建者：<span class="notice-content">{{groupInfoGetter.group_creater}}</span></p>
+    <p class="notice-title">群人数：<span class="member-number">{{groupMembers.length}}</span></p>
     <p class="notice-title">群创建时间：<span class="notice-content">{{groupInfoGetter.creater_time}}</span></p>
-    <p class="member-number">人数：{{groupMembers.length}}</p>
     <p class="edit-group-box">
       <span @click="goEditGroup" class="edit-group-info" v-if="groupInfoGetter.group_creater == userInfo.name">修改群资料</span>
     </p>
@@ -21,7 +21,7 @@
   <div class="box-button-group">
     <span v-if="isMyGroup" @click="copyGroupUrl" class="warning-button button-spe">分享群链接</span>
     <span v-if="isMyGroup" @click="exitGroup" class="warning-button button-spe">退出群聊</span>
-    <span v-else @click="goChat" class="base-button button">加入群聊</span>
+    <span v-else @click="goChat" class="base-button button join-group-spe">加入群聊</span>
   </div>
 </div>
 </template>
@@ -179,24 +179,23 @@ export default {
     border-radius: 0.24rem;
   }
   .info{
-    padding: 0.2rem;
+    padding: 0.15rem 0.2rem;
+    font-size: 0.26rem;
     .notice-title{
-      color: #676767;
       padding-bottom: 0.1rem;
-      font-size: 0.26rem;
       position: relative;
     }
     .notice-content{
       word-wrap: break-word;
-      height: 0.6rem;
+      font-size: 0.22rem;
+      color: $gray-color;
       overflow: hidden;
       overflow-y: auto;
-      font-size: 0.2rem;
+      padding-bottom: 0.1rem;
     }
     .member-number{
-      font-size: 0.26rem;
       padding-top: 0.1rem;
-      color: #676767;
+      color: $gray-color;
     }
   }
   .members-spe{
@@ -205,8 +204,8 @@ export default {
     list-style: none;
     overflow-y: auto;
     font-size: 0.26rem;
-    height: calc(100% - 5.6rem);
-    max-height: calc(100% - 5.6rem);
+    height: calc(100% - 5.4rem);
+    max-height: calc(100% - 5.4rem);
   }
   .members{
     padding-top: 0.1rem;
@@ -214,8 +213,8 @@ export default {
     list-style: none;
     overflow-y: auto;
     font-size: 0.26rem;
-    height: calc(100% - 4.8rem);
-    max-height: calc(100% - 4.8rem);
+    height: calc(100% - 5.0rem);
+    max-height: calc(100% - 5.0rem);
   }
   .member{
     padding: 0.15rem 0.2rem;

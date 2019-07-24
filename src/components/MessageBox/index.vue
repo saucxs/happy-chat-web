@@ -16,8 +16,8 @@
 				<span>性别:</span>
 				<select v-model="myInfo.sex">
 			   <option class="option" disabled value="">性别</option>
-			   <option calss="option">男</option>
-			   <option class="option">女</option>
+			   <option class="option" value="1">男</option>
+			   <option class="option" value="0">女</option>
 			 </select>
 			</div>
 			<div class="">
@@ -96,10 +96,9 @@ export default {
 				});
 				return
 			} else if (this.canEditorInfo) {
-        this.myInfo.sex = this.myInfo.sex === '男' ? 0 : 1;
 				this.$emit("confirm", {
 					messageBoxEvent: this.messageBoxEvent,
-					myInfo: this.myInfo
+					myInfo: JSON.parse(JSON.stringify(this.myInfo))
 				});
 				return
 			}

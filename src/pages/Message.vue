@@ -154,7 +154,7 @@ export default {
                     margin-bottom: 0.05rem;
                     span {
                         font-size: 0.2rem;
-                        color: #676767;
+                        color: $gray-color-light;
                     }
                 }
                 .message {
