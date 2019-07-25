@@ -204,8 +204,8 @@ export default {
     list-style: none;
     overflow-y: auto;
     font-size: 0.26rem;
-    height: calc(100% - 5.4rem);
-    max-height: calc(100% - 5.4rem);
+    height: calc(100% - 4.8rem);
+    max-height: calc(100% - 4.8rem);
   }
   .members{
     padding-top: 0.1rem;
@@ -213,14 +213,15 @@ export default {
     list-style: none;
     overflow-y: auto;
     font-size: 0.26rem;
-    height: calc(100% - 5.0rem);
-    max-height: calc(100% - 5.0rem);
+    height: calc(100% - 4.0rem);
+    max-height: calc(100% - 4.0rem);
   }
   .member{
-    padding: 0.15rem 0.2rem;
+    padding: 0.2rem;
     display: flex;
     align-items: center;
     cursor: pointer;
+    border-bottom: 1px solid $gray-color-light;
   .avatar{
     position: relative;
     text-align: center;

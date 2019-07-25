@@ -12,14 +12,15 @@
   z-index: 99999;
 }
 .chat-info{
-  height: 100%;
+  height: calc(100% - 1rem);
   width: 4.2rem;
   position: absolute;
   top: 0.98rem;;;
   right: 0;
+  bottom: 0;
   z-index: 9999;
   background: #eeeeee;
-  border: 1px solid rgba(77,77,77,.6);
+  border: 1px solid $gray-color-light;
   opacity: 0.97;
   z-index: 999999;
 }

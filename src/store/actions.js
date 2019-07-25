@@ -310,3 +310,12 @@ export const exitChatGroup = ({commit}, params) => {
     console.log(err);
   });
 };
+
+/* PV埋点 */
+export const pvLog = ({commit}, params) => {
+  return Api.pvLog(params).then(res => {
+    return res;
+  }).catch(err => {
+    console.log(err);
+  });
+};

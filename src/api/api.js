@@ -218,7 +218,12 @@ export default {
   exitChatGroup: (params) => {
     let data = { params: params };
     return service.delete("/api/chat/exit_group", data)
-  }
+  },
+  /* PV埋点 */
+  pvLog: (params) => {
+    console.log(params, '-=-=-=-=-=-=-=-=')
+    return service.post("/api/chat/pv_log", params)
+  },
 /* *
  * API demo
  *

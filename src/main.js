@@ -18,7 +18,29 @@ Vue.use(Loading)
 
 Vue.use(VueClipboard)
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
+
+/*全局PV统计*/
+router.beforeEach((to, from, next) => {
+  App.methods.logEvent({
+    type: 'visit',
+    name: to.name,
+    time: (new Date()).getTime(),
+    params: {
+      from: {
+        name: from.name,
+        path: from.path,
+        query: from.query
+      },
+      to: {
+        name: to.name,
+        path: to.path,
+        query: to.query
+      }
+    }
+  })
+  next()
+})
 
 /* eslint-disable no-new */
 new Vue({

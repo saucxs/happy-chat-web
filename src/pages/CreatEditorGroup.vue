@@ -16,12 +16,12 @@
           <p>群名:</br><input type="text" v-model="groupInfo.group_name" placeholder="不超过10个字哦" maxlength="10"/></p>
           <p>群公告:</br><textarea rows="4" type="text" v-model="groupInfo.group_notice" placeholder="不超过40个字哦" maxlength="40"/></textarea>
           </p>
-        </div>
-        <div class="action" v-if="editGroupId" @click="editGroup">
-          <span class="creat_group">编辑群</span>
-        </div>
-        <div class="action" v-else @click="createGroup">
-          <span class="creat_group">确定建群</span>
+          <div class="action" v-if="editGroupId" @click="editGroup">
+            <span class="creat_group">编辑群</span>
+          </div>
+          <div class="action" v-else @click="createGroup">
+            <span class="creat_group">确定建群</span>
+          </div>
         </div>
       </div>
     </div>
@@ -182,10 +182,10 @@
 <style lang="scss" scoped>
   .wrapper {
   .content {
-    margin-top: 8vh;
+    margin-top: 0.8rem;
   .content-box{
     text-align: center;
-    padding: 4vh 0 6vh 0;
+    padding: 0.4rem 0 0.6rem 0;
   img {
     width: 2rem;
     height: 2rem;
@@ -194,11 +194,8 @@
   }
   }
   p {
-    font-size: 0.32rem;
-    margin: 0 6vh 6vh;;
-  }
-  :nth-child(1) {
-    line-height: 0.6rem;
+    font-size: 0.36rem;
+    margin: 0 0.6rem 0.6rem;
   }
   /*在IE10+浏览器中, 使用css即可隐藏input文本输入框右侧的叉号*/
   ::-ms-reveal,
@@ -215,7 +212,7 @@
     width: 100%;
     outline: none;
     border: 0.01rem solid #fff;
-    padding: 1.5vh;
+    padding: 0.15rem;
     -webkit-appearance: none;
     /*去除系统默认的样式，苹果手机上的阴影*/
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
@@ -225,25 +222,25 @@
   input,
   textarea::-webkit-input-placeholder {
     /* WebKit browsers */
-    font-size: 2.6vh;
+    font-size: 0.36rem;
     color: #999;
   }
   input,
   textarea:-moz-placeholder {
     /* Mozilla Firefox 4 to 18 */
-    font-size: 2.6vh;
+    font-size: 0.36rem;
     color: #999;
   }
   input,
   textarea::-moz-placeholder {
     /* Mozilla Firefox 19+ */
-    font-size: 2.6vh;
+    font-size: 0.36rem;
     color: #999;
   }
   input,
   textarea:-ms-input-placeholder {
     /* Internet Explorer 10+ */
-    font-size: 2.6vh;
+    font-size: 0.36rem;
     color: #999;
   }
   textarea {
@@ -256,14 +253,15 @@
     resize: none;
     /*padding已在重置样式中去除，如果没有去除，记得有padding哦*/
     border: 0.01rem solid #fff;
-    padding: 1.5vh;
-    font-size: 2.6vh;
+    padding: 0.15rem;
+    font-size: 0.36rem;
   }
   }
   .action {
   .creat_group {
     background-color: #4290F7;
     color: #fff;
+    font-size: 0.26rem;
   }
   }
   }
