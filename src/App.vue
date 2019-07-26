@@ -62,12 +62,12 @@
       logEvent(opts) {
         let data = {
           type: opts.type,
-          name: opts.name,
+          user_id: opts.user_id,
           time: opts.time,
           params: opts.params || {}
         }
         return Api.pvLog(data).then(res => {
-          console.log(res, '111111111111111111')
+
         }).catch(function (error) {
           console.log(error);
         });
@@ -76,7 +76,6 @@
   }
   App.install = (Vue, options) => {
     Vue.prototype.$app = {
-      // ...
       logEvent: App.logEvent
     }
   }
