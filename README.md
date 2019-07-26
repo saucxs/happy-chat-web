@@ -1,4 +1,4 @@
-# [happy-chat-web](https:// github.com/saucxs/happy-chat-web)
+# [happy-chat-web](https://github.com/saucxs/happy-chat-web)
 [![](https://img.shields.io/badge/Powered%20by-saucxs%20-brightgreen.svg)](https://github.com/saucxs/happy-chat-web)
 [![GitHub license](https://img.shields.io/github/license/saucxs/happy-chat-web.svg)](https://github.com/saucxs/happy-chat-web/blob/master/LICENSE)
 [![GitHub stars](https://img.shields.io/github/stars/saucxs/happy-chat-web.svg)](https://github.com/saucxs/happy-chat-web/stargazers)
@@ -34,7 +34,7 @@
     
 ## 2、线上地址
 
-https:// chat.chengxinsong.cn
+https://chat.chengxinsong.cn
     
 ## 3、源码使用
 ```js
@@ -74,14 +74,14 @@ npm run dev
 
 ## 5、源码地址
 项目采用前后端分离，暂时没有给出数据库，有需求可以联系我。
-+ 前端代码：https:// github.com/saucxs/happy-chat-web
-+ 后端代码：https:// github.com/saucxs/happy-chat-node
++ 前端代码：https://github.com/saucxs/happy-chat-web
++ 后端代码：https://github.com/saucxs/happy-chat-node
 
 ## 6、相应文章
 
-+ [happyChat开发系列：使用websocket.io实现双向通信的乐聊大前端开发](http:// www.chengxinsong.cn/post/40)
++ [happyChat开发系列：使用websocket.io实现双向通信的乐聊大前端开发](http://www.chengxinsong.cn/post/40)
 
-+ [【nginx系列】nginx升级到支持HTTP2.0](https:// www.mwcxs.top/page/784.html)
++ [【nginx系列】nginx升级到支持HTTP2.0](https://www.mwcxs.top/page/784.html)
 
 
 ## 7、最后
