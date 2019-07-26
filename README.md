@@ -5,7 +5,7 @@
 [![GitHub forks](https://img.shields.io/github/forks/saucxs/happy-chat-web.svg)](https://github.com/saucxs/happy-chat-web/network)
 [![GitHub issues](https://img.shields.io/github/issues/saucxs/happy-chat-web.svg)](https://github.com/saucxs/happy-chat-web/issues)
 
-乐聊，一个快乐聊天的应用，支持pc端和无线端。技术栈：vue+vuex+koa+websocketIO+mysql+redis。线上地址：https:// chat.chengxinsong.cn
+乐聊，一个快乐聊天的应用，支持pc端和无线端。技术栈：vue+vuex+koa+websocketIO+mysql+redis。线上地址：https://chat.chengxinsong.cn
 
 ## 1、功能
 + 版本v 1.0.0
