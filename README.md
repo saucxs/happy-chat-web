@@ -1,9 +1,9 @@
 # [happy-chat-web](https:// github.com/saucxs/happy-chat-web)
-[![](https:// img.shields.io/badge/Powered%20by-saucxs%20-brightgreen.svg)](https:// github.com/saucxs/happy-chat-web)
-[![GitHub license](https:// img.shields.io/github/license/saucxs/happy-chat-web.svg)](https:// github.com/saucxs/happy-chat-web/blob/master/LICENSE)
-[![GitHub stars](https:// img.shields.io/github/stars/saucxs/happy-chat-web.svg)](https:// github.com/saucxs/happy-chat-web/stargazers)
-[![GitHub forks](https:// img.shields.io/github/forks/saucxs/happy-chat-web.svg)](https:// github.com/saucxs/happy-chat-web/network)
-[![GitHub issues](https:// img.shields.io/github/issues/saucxs/happy-chat-web.svg)](https:// github.com/saucxs/happy-chat-web/issues)
+[![](https://img.shields.io/badge/Powered%20by-saucxs%20-brightgreen.svg)](https://github.com/saucxs/happy-chat-web)
+[![GitHub license](https://img.shields.io/github/license/saucxs/happy-chat-web.svg)](https://github.com/saucxs/happy-chat-web/blob/master/LICENSE)
+[![GitHub stars](https://img.shields.io/github/stars/saucxs/happy-chat-web.svg)](https://github.com/saucxs/happy-chat-web/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/saucxs/happy-chat-web.svg)](https://github.com/saucxs/happy-chat-web/network)
+[![GitHub issues](https://img.shields.io/github/issues/saucxs/happy-chat-web.svg)](https://github.com/saucxs/happy-chat-web/issues)
 
 乐聊，一个快乐聊天的应用，支持pc端和无线端。技术栈：vue+vuex+koa+websocketIO+mysql+redis。线上地址：https:// chat.chengxinsong.cn
 
