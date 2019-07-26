@@ -221,7 +221,6 @@ export default {
   },
   /* PV埋点 */
   pvLog: (params) => {
-    console.log(params, '-=-=-=-=-=-=-=-=')
     return service.post("/api/chat/pv_log", params)
   },
 /* *

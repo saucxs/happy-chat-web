@@ -13,9 +13,11 @@
 
 	</div>
   <ul :class="ownerFlag?'members-spe':'members'">
-    <li class="member" v-for="(item,index) in groupMembers" @click="goInfo(item)">
-      <div class="avatar">{{item.avator}}</div>
-      <span class="member-name">{{item.name}}</span>
+    <li class="member" v-for="(item,index) in groupMembers">
+      <div class="list-box" @click="goInfo(item)">
+        <div class="avatar">{{item.avator}}</div>
+        <span class="member-name">{{item.name}}</span>
+      </div>
     </li>
   </ul>
   <div class="box-button-group">
@@ -166,6 +168,21 @@ export default {
 <style lang="scss" scoped>
   @import "../assets/css/chat.scss";
 .wrapper-group {
+  ul {
+    li {
+      cursor: pointer;
+      background-color: #fff;
+      list-style-type: none;
+      position: relative;
+    }
+  }
+  .list-box{
+    padding: 0.14rem;
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    border-bottom: 1px solid $gray-color-light;
+  }
   .edit-group-box{
     display: flex;
     justify-content: center;
@@ -217,11 +234,11 @@ export default {
     max-height: calc(100% - 4.0rem);
   }
   .member{
-    padding: 0.2rem;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    border-bottom: 1px solid $gray-color-light;
+    /*padding: 0.2rem;*/
+    /*display: flex;*/
+    /*align-items: center;*/
+    /*cursor: pointer;*/
+    /*border-bottom: 1px solid $gray-color-light;*/
   .avatar{
     position: relative;
     text-align: center;

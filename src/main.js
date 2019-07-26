@@ -21,7 +21,6 @@ Vue.use(VueClipboard)
 Vue.config.productionTip = false;
 
 /*全局PV统计*/
-console.log(router, 'luyou')
 router.beforeEach((to, from, next) => {
   let flag = localStorage.getItem("HappyChatUserInfo") !== null ? true: false;
   let data = {
@@ -45,16 +44,16 @@ router.beforeEach((to, from, next) => {
   next()
 })
 
-window.onbeforeunload = function (e) {
-  e = e || window.event;
-  // 兼容IE8和Firefox 4之前的版本
-  if (e) {
-    e.returnValue = '关闭提示';
-    alert("关闭提示");
-  }
-  // Chrome, Safari, Firefox 4+, Opera 12+ , IE 9+
-  return '关闭提示';
-};
+// window.onbeforeunload = function (e) {
+//   e = e || window.event;
+//   // 兼容IE8和Firefox 4之前的版本
+//   if (e) {
+//     e.returnValue = '关闭提示';
+//     alert("关闭提示");
+//   }
+//   // Chrome, Safari, Firefox 4+, Opera 12+ , IE 9+
+//   return '关闭提示';
+// };
 window.onunload = function unloadPage() {
   let data = {
     type: 'close',
