@@ -115,7 +115,7 @@ export default {
 			this.$router.push(`/user_info/${val}`)
 		},
 		enterGroupCard(val) {
-			this.$router.push(`/group_info/${val}`)
+			this.$router.push(`/group_chat/${val}`)
 		}
 	},
 
@@ -166,7 +166,7 @@ export default {
                 }
                 p:nth-child(2) {
                     font-size: 0.2rem;
-                    line-height: 0.8rem;
+                    line-height: 0.3rem;
                     color: #555;
                     .icon {
                         width: 0.36rem;

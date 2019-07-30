@@ -63,7 +63,7 @@
         afterScrollHeight: '',
         showEmojiPicker: false,
         keyWordHeight: ''
-      };
+      }
     },
 
     computed: {
@@ -76,7 +76,7 @@
     watch: {
       message() {
         this.viewBox = this.$refs.viewBox;
-        if ( this.type == 'bottom' ) {
+        if (this.type == 'bottom') {
           this.refresh();
         } else {
           this.nofresh()
@@ -102,7 +102,7 @@
       },
       sendMessageFunc(val) {
         this.inputMsg = val;
-        this.sendMessage()
+        this.sendMessage();
       },
       // 获取聊天记录
       getChatMsg() {
@@ -164,8 +164,8 @@
           message: this.inputMsg, // 消息内容
           time: toNomalTime(new Date().getTime()) // 时间
         }
-        this.type = 'bottom'
-        socketWeb.emit('sendGroupMsg', data)
+        this.type = 'bottom';
+        socketWeb.emit('sendGroupMsg', data);
         this.saveMsgByDB();
       },
       // 保存此条信息到数据库
@@ -222,7 +222,7 @@
           // 收到soket群信息 如果该群群成员不包含自己 放弃这条soket
           if (!this.groupMemberGetter.includes(this.userInfo.user_id)) return;
           // 如果收到的soket信息不是来自当前聊天群 写入首页信息列表 并return
-          data.type = 'group'
+          data.type = 'group';
           if ( data.groupId != this.groupInfo.groupId ) {
             this.$store.commit('updateListMutation', data)
             return
@@ -313,7 +313,7 @@
       },
       handleOnresize() {
         this.viewBox = this.$refs.viewBox;
-        console.log(this.viewBox.clientHeight, '聊天页高度')
+        // console.log(this.viewBox.clientHeight, '聊天页高度')
         this.viewHeight = this.viewBox.clientHeight;
       }
     },

@@ -17,7 +17,7 @@
 			</div>
 			<form>
         <div>
-          <span class="normal-word">用户名：</span><input style="line-height:normal !important;" maxlength="16" ref="userName" @keyup.enter="startLogin" type="text"  class="input-class fadeIn second" placeholder="用户名" v-model="name">
+          <span class="normal-word">用户名：</span><input style="line-height:normal !important;" maxlength="16" v-focus @keyup.enter="startLogin" type="text"  class="input-class fadeIn second" placeholder="用户名" v-model="name">
         </div>
         <div>
           <span class="normal-word">密码：</span><input style="line-height:normal !important;" maxlength="24" @keyup.enter="startLogin" type="password" class="input-class fadeIn third" placeholder="密码" v-model="password">
@@ -103,11 +103,7 @@ export default {
         this.$router.push({ path: redirect });
 			}
 		}
-	},
-  mounted() {
-	  let userNameBox = this.$refs.userName;
-    userNameBox.focus();
-  }
+	}
 };
 </script>
 

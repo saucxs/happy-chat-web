@@ -8,9 +8,15 @@ import "@/assets/css/index.scss"
 import VueClipboard from 'vue-clipboard2'
 import Components from './components/index'
 import Loading from './components/Loading/index'
-/*引入全局过滤器*/
+/* 引入全局过滤器 */
 import * as fliterCommon from '../src/utils/common'
-Object.keys(fliterCommon).forEach(key => Vue.filter(key, fliterCommon[key]))
+Object.keys(fliterCommon).forEach(key => Vue.filter(key, fliterCommon[key]));
+/* 引入全局指令focus */
+Vue.directive('focus', {
+  inserted: function (el) {
+    el.focus();
+  }
+})
 
 Vue.use(Components);
 

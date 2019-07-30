@@ -1,7 +1,7 @@
 {
   "name": "happy-chat-web",
   "version": "1.1.2",
-  "description": "A Vue.js project",
+  "description": "happy-chat-web",
   "author": "saucxs <saucxs@163.com>",
   "private": true,
   "scripts": {

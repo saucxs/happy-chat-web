@@ -4,8 +4,17 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <title>happyChat乐聊 | 程新松</title>
-    <meta name="description" content="happyChat乐聊，欢乐聊天，完全免费，saucxs，songEagle，程新松">
+    <link rel="icon" href="https://chat.chengxinsong.cn/icon/happyChat.png">
+    <meta name="description" content="happyChat乐聊，完全免费，saucxs，songEagle，程新松">
     <meta name="keywords" content="happyChat乐聊，saucxs，songEagle，程新松">
+    <!-- Add to home screen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="happyChat">
+    <link rel="apple-touch-icon" href="https://chat.chengxinsong.cn/icon/happyChat.png">
+    <!-- for windows-->
+    <meta name="msapplication-TileImage" content="https://chat.chengxinsong.cn/icon/happyChat.png">
+    <meta name="msapplication-TileColor" content="#363941">
   </head>
   <body>
     <div id="app"></div>
@@ -24,7 +33,7 @@
       if (userInfo) {
         socketWeb.emit('update', userInfo.user_id);
       }
-      </script>
+    </script>
     <script async>
       /* ziyuan */
       (function(){

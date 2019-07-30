@@ -67,7 +67,7 @@
           params: opts.params || {}
         }
         return Api.pvLog(data).then(res => {
-
+          // console.log(res)
         }).catch(function (error) {
           console.log(error);
         });

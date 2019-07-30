@@ -14,7 +14,7 @@
     </div>
 
     <div class="input-msg">
-      <textarea v-model="inputMsg" @keydown.enter.prevent="sendMessage(inputMsg)" ref="message"></textarea>
+      <textarea v-focus v-model="inputMsg" @keydown.enter.prevent="sendMessage(inputMsg)" ref="message"></textarea>
       <p class="btn" :class="{'enable':inputMsg!=''}" @click="sendMessage(inputMsg)">发送</p>
     </div>
     <Footer :currentTab="currentTab"></Footer>

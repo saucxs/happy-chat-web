@@ -19,7 +19,7 @@
 			</div>
 			<form class="register-form">
 				<div>
-          <span class="normal-word">用户名：</span><input style="line-height:normal !important;" maxlength="16" type="text" class="input-class fadeIn second" v-model="name" placeholder="用户名">
+          <span class="normal-word">用户名：</span><input v-focus style="line-height:normal !important;" maxlength="16" type="text" class="input-class fadeIn second" v-model="name" placeholder="用户名">
         </div>
         <div>
           <span class="normal-word">密码：</span><input style="line-height:normal !important;" maxlength="24" type="password" class="input-class fadeIn third" v-model="password" placeholder="密码">
