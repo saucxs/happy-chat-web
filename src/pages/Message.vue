@@ -4,7 +4,7 @@
 	<Header :currentTab="currentTab"></Header>
   <div class="chat-wrapper-spe">
     <div class="secret-box-spe" v-if="msgListGetter.length > 0">
-      <ul>
+      <ul v-scroll = "onScroll">
         <li v-for="data in msgListGetter">
           <div class="list-box" @click="enterChat(data.type,data.id)">
             <a v-if="data.type === 'group'" href="">
@@ -81,6 +81,9 @@ export default {
         data.type = 'group'
         this.$store.commit('updateListMutation', data)
       })
+    },
+    onScroll() {
+      console.log('置底操作加载新数据的指令输出')
     }
 
 	},

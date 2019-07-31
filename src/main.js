@@ -17,6 +17,9 @@ Vue.directive('focus', {
     el.focus();
   }
 })
+/* scroll全局置顶scroll */
+import scrollDirective from '../src/utils/scroll';
+Vue.directive('scroll', scrollDirective)
 
 Vue.use(Components);
 
