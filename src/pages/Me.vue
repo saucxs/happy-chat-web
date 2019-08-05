@@ -64,6 +64,7 @@ export default {
 		},
 		confirm(value) {
 			if (value === 'logOut') {
+        this.$store.commit('firstLoadMutation', true)
 				// 登出
         socketWeb.emit('logout', this.userInfo.user_id)
 				localStorage.removeItem("HappyChatUserToken");
