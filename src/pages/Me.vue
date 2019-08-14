@@ -64,6 +64,7 @@ export default {
 		},
 		confirm(value) {
 			if (value === 'logOut') {
+        this.$store.commit('firstLoadMutation', true)
 				// 登出
         this.$store.commit('firstLoadMutation', true)
         socketWeb.emit('logout', this.userInfo.user_id)
