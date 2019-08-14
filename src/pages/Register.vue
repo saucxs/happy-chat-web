@@ -12,19 +12,19 @@
 			<h2 class="active">注册 </h2>
 			<div class="fadeIn first">
         <div class="fadeIn first">
-          <svg id="icon" class="icon" alt="User Icon" aria-hidden="true">
-            <use xlink:href="#iconliaotian"></use>
+          <svg id="icon" class="icon-logo" alt="happyChat乐聊" title="happyChat乐聊" aria-hidden="true">
+            <use xlink:href="#iconliaotian-copy-copy-copy"></use>
           </svg>
         </div>
 			</div>
 			<form class="register-form">
-				<div>
+				<div class="login-form-flex">
           <span class="normal-word">用户名：</span><input v-focus style="-webkit-user-select:text !important" maxlength="16" type="text" class="input-class fadeIn second" v-model="name" placeholder="用户名">
         </div>
-        <div>
+        <div class="login-form-flex">
           <span class="normal-word">密码：</span><input style="-webkit-user-select:text !important" maxlength="24" type="password" class="input-class fadeIn third" v-model="password" placeholder="密码">
         </div>
-				<div>
+				<div class="login-form-flex">
           <span class="normal-word">邮箱：</span><input style="-webkit-user-select:text !important" maxlength="36" type="email" class="input-class fadeIn third" v-model="email" placeholder="邮箱">
         </div>
         <div class="action action-box-spe" :class="{'disabled': disabledFlag}">

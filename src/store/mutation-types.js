@@ -9,3 +9,4 @@ export const resetUnredMutation = "resetUnredMutation";
 export const someOneInfoMutation = "someOneInfoMutation";
 export const groupMemberMutation = "groupMemberMutation";
 export const groupInfoMutation = "groupInfoMutation";
+export const feedbackListMutation = "feedbackListMutation"

@@ -10,7 +10,7 @@
       </div>
       <div class="search">
         <svg class="icon" aria-hidden="true"> <use  xlink:href="#iconsousuo"></use></svg>
-        <input type="text" v-model="inputContent" placeholder="在这边输入用户名或者群名称哦" />
+        <input type="text" style="-webkit-user-select:text !important" v-model="inputContent" placeholder="在这边输入用户名或者群名称哦" />
       </div>
       <div class="choose">
         <p v-show="this.inputContent !='' " class="find-people" @click="findPeople">

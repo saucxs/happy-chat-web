@@ -20,16 +20,25 @@
           <span class="normal-word">用户名：</span><input style="-webkit-user-select:text !important" maxlength="16" v-focus @keyup.enter="startLogin" type="text"  class="input-class fadeIn second" placeholder="用户名" v-model="name">
         </div>
         <div class="login-form-flex">
-          <span class="normal-word">密码：</span><input style="-webkit-user-select:text !important" maxlength="24" @keyup.enter="startLogin" type="password" class="input-class fadeIn third" placeholder="密码" v-model="password">
+          <span class="normal-word">密&nbsp;&nbsp;&nbsp;码：</span><input style="-webkit-user-select:text !important" maxlength="24" @keyup.enter="startLogin" type="password" class="input-class fadeIn third" placeholder="密码" v-model="password">
         </div>
-        <div class="action action-box-spe">
-          <span @click="startLogin" class="primary-span">登录</span>
+        <div class="action action-box-login">
+          <span @click="startLogin" class="primary-span">登&nbsp;&nbsp;&nbsp;录</span>
         </div>
 			</form>
       <!--github登陆-->
-      <svg @click="goGithubOAuth" id="icon" class="icon github-icon" alt="github登陆" title="github登陆" aria-hidden="true">
-        <use xlink:href="#iconGitHub"></use>
-      </svg>
+      <div class="oauth-line-box">
+        第三方登陆
+      </div>
+      <div class="oauth-box">
+        <svg @click="goGithubOAuth" id="icon" class="icon github-icon" alt="github登陆" title="github登陆" aria-hidden="true">
+          <use xlink:href="#iconGitHub"></use>
+        </svg>
+      </div>
+      <div class="feed-back flex-style">
+        <a href="https://github.com/saucxs/happy-chat-web" target="_blank">项目地址</a>
+        <span class="feedback-link" @click="goFeedback()">留言反馈</span>
+      </div>
 		</div>
 	</div>
 </div>
@@ -123,7 +132,11 @@ export default {
       if(code) {
         this.$loading.show();
         this.github({code: code}).then(res => {
-          if(res) {
+          if(res.success) {
+            this.$message({
+              message: res.message,
+              type: "success"
+            });
             this.$loading.hide();
             // 保存soket.io
             socketWeb.emit('login', res.userInfo.user_id)
@@ -134,6 +147,9 @@ export default {
           }
         })
       }
+    },
+    goFeedback() {
+      this.$router.push({ path: '/feedback' });
     }
 	}
 }

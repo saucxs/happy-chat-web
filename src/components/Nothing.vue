@@ -3,7 +3,7 @@
     <svg class="icon img" aria-hidden="true">
       <use xlink:href="#iconkong"></use>
     </svg>
-    <div class="action" @click="goOther">
+    <div class="action" @click="goOther" v-if="type !== '' && name !== ''">
       <span class="primary-span">{{name}}</span>
     </div>
   </div>
@@ -15,12 +15,12 @@ export default {
     type: {
       type: String,
       default: '',
-      required: true
+      required: false
     },
     name: {
       type: String,
       default: '',
-      required: true
+      required: false
     }
   },
   methods: {

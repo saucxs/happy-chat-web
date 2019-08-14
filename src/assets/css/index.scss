@@ -24,6 +24,13 @@ html {
   font-family: 'Microsoft Yahei' !important;
   overflow: hidden;
 }
+/*苹果输入框输入不了*/
+input{
+  -webkit-user-select:text !important
+}
+textarea{
+  -webkit-user-select:text !important
+}
 
 .icon {
   width: 1em;
@@ -158,6 +165,12 @@ html {
   .input-msg-select{
     bottom: 3.5rem !important;
   }
+}
+
+.flex-style{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /*不可用*/

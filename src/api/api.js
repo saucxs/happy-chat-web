@@ -228,6 +228,15 @@ export default {
     let data = { params: params };
     return service.get("/api/chat/oauth", data)
   },
+  /* 留言反馈列表 */
+  getFeedback: (params) => {
+    let data = { params: params };
+    return service.get("/api/chat/get_feedback", data)
+  },
+  /* 提交留言反馈 */
+  submitFeedback: (params) => {
+    return service.post("/api/chat/submit_feedback", params)
+  },
 /* *
  * API demo
  *

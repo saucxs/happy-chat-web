@@ -328,3 +328,25 @@ export const github = ({commit}, params) => {
     console.log(err);
   });
 };
+
+
+/* 反馈留言列表 */
+export const getFeedback = ({commit}, params) => {
+  return Api.getFeedback(params).then(res => {
+    if (res.success) {
+      commit(types.feedbackListMutation, res.data.feedbackList);
+    }
+  }).catch(err => {
+    console.log(err);
+  });
+};
+
+
+/* 提交留言列表 */
+export const submitFeedback = ({commit}, params) => {
+  return Api.submitFeedback(params).then(res => {
+    return res;
+  }).catch(err => {
+    console.log(err);
+  });
+};

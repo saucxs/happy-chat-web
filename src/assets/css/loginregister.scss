@@ -6,15 +6,58 @@
   width: 100%;
   position: absolute;
 
+  .action-box-login{
+    margin: 0.45rem 0;
+  }
+
   .login-form-flex{
     display: flex;
     justify-content: center;
-    margin-top: 0.8rem;
+    margin-top: 0.6rem;
   }
   .github-icon{
     cursor: pointer;
-    width: 0.8rem;
-    height: 0.8rem;
+    width: 0.6rem;
+    height: 0.6rem;
+  }
+  .oauth-box{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 0.2rem;
+  }
+  .oauth-line-box{
+    height: 0.6rem;
+    font-size: 0.2rem;
+    color: #cccccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .oauth-line-box:before{
+    content: '';
+    width: 36%;
+    height: 1px;
+    border-bottom: 1px solid #cccccc;
+    display: inline-block;
+    margin-right: 0.2rem;
+  }
+  .oauth-line-box:after{
+    content: '';
+    width: 36%;
+    height: 1px;
+    border-bottom: 1px solid #cccccc;
+    display: inline-block;
+    margin-left: 0.2rem;
+  }
+  .feed-back{
+    height: 0.6rem;
+    font-size: 0.22rem;
+    color: $base-color;
+    text-decoration: underline;
+    justify-content: space-around;
+  }
+  .feedback-link{
+    cursor: pointer;
   }
 
   .wrapper {
@@ -31,7 +74,7 @@
       padding: 0.6rem;
       width: 90%;
       max-width: 5.6rem;
-      min-height: 8rem;
+      min-height: 9rem;
       position: relative;
       padding: 0;
       -webkit-box-shadow: 0 0.6rem 1.2rem 0 rgba(0, 0, 0, 0.3);
@@ -53,7 +96,7 @@
       }
 
       .register-form{
-        min-height: 6.2rem;
+        min-height: 4.2rem;
       }
 
     }

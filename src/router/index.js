@@ -16,6 +16,7 @@ import Me from "@/pages/Me";
 import CreatEditorGroup from "@/pages/CreatEditorGroup";
 import GroupChat from "@/pages/GroupChat";
 import GroupInfo from "@/pages/GroupInfo";
+import Feedback from "@/pages/Feedback";
 
 Vue.use(Router)
 
@@ -98,12 +99,16 @@ const router = new Router({
       path: "/add_seach/group/:groupname",
       component: AddSeach
     },
+    { //  留言反馈
+      path: "/feedback",
+      component: Feedback
+    },
 
   ]
 })
 
 /* 路由白名单 */
-let whiteRouter = ["/login", "/register", "/activate"]
+let whiteRouter = ["/login", "/register", "/activate", "/feedback"]
 
 /* 路由守卫 */
 router.beforeEach((to, from, next) => {

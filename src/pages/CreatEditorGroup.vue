@@ -13,8 +13,8 @@
               <use xlink:href="#icongroup"></use>
             </svg>
           </div>
-          <p>群名:</br><input type="text" v-model="groupInfo.group_name" placeholder="不超过10个字哦" maxlength="10"/></p>
-          <p>群公告:</br><textarea rows="4" type="text" v-model="groupInfo.group_notice" placeholder="不超过40个字哦" maxlength="40"/></textarea>
+          <p>群名:</br><input type="text" style="-webkit-user-select:text !important" v-model="groupInfo.group_name" placeholder="不超过10个字哦" maxlength="10"/></p>
+          <p>群公告:</br><textarea rows="4" type="text" style="-webkit-user-select:text !important" v-model="groupInfo.group_notice" placeholder="不超过40个字哦" maxlength="40"/></textarea>
           </p>
           <div class="action" v-if="editGroupId" @click="editGroup">
             <span class="creat_group">编辑群</span>
