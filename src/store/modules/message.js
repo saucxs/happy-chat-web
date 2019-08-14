@@ -59,7 +59,7 @@ const mutations = {
           ele.time = data.time;
           ele.name = data.name;
           ele.reamrk = data.remark;
-          ele.avator = data.avator;
+          ele.avatar = data.avatar;
           // 如果是当前的聊天，没必要加未读标识了
           if (data.chatOfNow) return
           // 增加未读消息数
@@ -80,7 +80,7 @@ const mutations = {
           ele.message = data.name + ' : ' + data.message;
           ele.time = data.time;
           ele.group_name = data.group_name;
-          ele.group_avator = data.group_avator;
+          ele.group_avatar = data.group_avatar;
           ele.id = data.groupId;
           // 增加未读消息数
           if (data.chatOfNow) {

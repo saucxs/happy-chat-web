@@ -83,7 +83,7 @@
     },
     created() {
       const userInfo = JSON.parse(localStorage.getItem("HappyChatUserInfo"));
-      this.img = userInfo.avator;
+      this.img = userInfo.avatar;
       this.name = userInfo.name;
       this.href = userInfo.user_id
     },

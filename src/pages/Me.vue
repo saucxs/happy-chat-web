@@ -9,7 +9,7 @@
     <div class="secret-box-spe">
       <div class="content">
         <div class="content-box">
-          <img :src="userInfo.avator" alt="">
+          <img :src="userInfo.avatar" alt="">
           <p class="name">{{userInfo.name}}</p>
           <p class="href">
             <span @click="goGithub"><svg class="icon" aria-hidden="true"><use  xlink:href="#iconGitHub"></use></svg></span>
@@ -110,10 +110,9 @@ export default {
 <style lang="scss" scoped>
 .wrapper {
     .content{
-      margin-top: 1rem;
+      margin-top: 0.4rem;
       .content-box{
         text-align: center;
-        line-height: 1rem;
         img {
           width: 2rem;
           height: 2rem;
@@ -132,6 +131,8 @@ export default {
         }
         .user-intro{
           font-size: 0.3rem;
+          line-height: 0.6rem;
+          margin: 0 0.4rem 0.4rem;
         }
         .user-more{
           font-size: 0.3rem;
@@ -139,7 +140,8 @@ export default {
           display: flex;
           justify-content: center;
           align-items: center;
-          text-decoration: solid;
+          margin: 0.3rem;
+          text-decoration: underline;
         }
       }
     }

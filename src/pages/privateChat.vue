@@ -7,8 +7,8 @@
       <ul ref="viewBox">
         <load-more :is-no-more="isNoMore" :is-show-loading="isShowLoading" @load-more="loadMore"></load-more>
         <li v-for="item in privateDetail">
-          <ChatItem v-if="fromUserInfo.user_id === item.from_user" :href="item.from_user" :img="item.avator" me="true" :msg="item.message" :name="item.name" :time="item.time"></ChatItem>
-          <ChatItem v-else :img="item.avator" :msg="item.message" :href=" item.from_user " :name="remarkName ? remarkName: item.name" :time="item.time"></ChatItem>
+          <ChatItem v-if="fromUserInfo.user_id === item.from_user" :href="item.from_user" :img="item.avatar" me="true" :msg="item.message" :name="item.name" :time="item.time"></ChatItem>
+          <ChatItem v-else :img="item.avatar" :msg="item.message" :href=" item.from_user " :name="remarkName ? remarkName: item.name" :time="item.time"></ChatItem>
         </li>
       </ul>
     </div>
@@ -56,7 +56,7 @@ export default {
 			privateDetail: [], // 私聊相关
 			toUserInfo: { // 被私聊者
 				to_user: '',
-				avator: '',
+				avatar: '',
 				sex: '',
 				place: '',
 				status: ''
@@ -161,7 +161,7 @@ export default {
 				to_user: this.toUserInfo.to_user, // 对方id
 				name: this.fromUserInfo.name, // 自己的昵称
         remark: this.remarkName, // 别人给的备注
-				avator: this.fromUserInfo.avator, // 自己的头像
+				avatar: this.fromUserInfo.avatar, // 自己的头像
 				message: this.inputMsg, // 消息内容
 				type: 'private',
 				status: '1', // 是否在线 0为不在线 1为在线
@@ -179,7 +179,7 @@ export default {
 				to_user: this.toUserInfo.to_user, // 对方的id
 				name: this.fromUserInfo.name, // 自己的昵称
         remark: this.remarkName, // 别人给的备注
-				avator: this.fromUserInfo.avator, // 自己的头像
+				avatar: this.fromUserInfo.avatar, // 自己的头像
 				message: this.inputMsg, // 消息内容
 				status: '1', // 是否在线 0为不在线 1为在线
 				time: toNomalTime((new Date()).getTime()), // 时间

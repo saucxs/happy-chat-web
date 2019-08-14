@@ -11,21 +11,25 @@
 				<h2 class="inactive"> 注册 </h2>
 			</router-link>
 			<div class="fadeIn first">
-        <svg id="icon" class="icon" alt="User Icon" aria-hidden="true">
-          <use xlink:href="#iconliaotian"></use>
+        <svg id="icon" class="icon-logo" alt="happyChat乐聊" title="happyChat乐聊" aria-hidden="true">
+          <use xlink:href="#iconliaotian-copy-copy-copy"></use>
         </svg>
 			</div>
 			<form>
-        <div>
+        <div class="login-form-flex">
           <span class="normal-word">用户名：</span><input style="-webkit-user-select:text !important" maxlength="16" v-focus @keyup.enter="startLogin" type="text"  class="input-class fadeIn second" placeholder="用户名" v-model="name">
         </div>
-        <div>
+        <div class="login-form-flex">
           <span class="normal-word">密码：</span><input style="-webkit-user-select:text !important" maxlength="24" @keyup.enter="startLogin" type="password" class="input-class fadeIn third" placeholder="密码" v-model="password">
         </div>
         <div class="action action-box-spe">
           <span @click="startLogin" class="primary-span">登录</span>
         </div>
 			</form>
+      <!--github登陆-->
+      <svg @click="goGithubOAuth" id="icon" class="icon github-icon" alt="github登陆" title="github登陆" aria-hidden="true">
+        <use xlink:href="#iconGitHub"></use>
+      </svg>
 		</div>
 	</div>
 </div>
@@ -33,6 +37,7 @@
 
 <script>
 import { mapActions } from 'vuex';
+import { getUrlKey } from '../utils/common'
 export default {
 	name: "login",
 	props: {},
@@ -49,12 +54,17 @@ export default {
 			}
 		};
 	},
-	computed: {},
+  beforeRouteEnter(to, from, next) {
+    next(vm => {
+      vm.queryData()
+    })
+  },
+  computed: {},
 
 	watch: {},
 
 	methods: {
-    ...mapActions(["login"]),
+    ...mapActions(["login", "github"]),
     startLogin() {
 			if (this.name !== "" && this.password !== "") {
 			  let params = {
@@ -104,7 +114,27 @@ export default {
         this.$router.push({ path: redirect });
         window.location.reload();
 			}
-		}
+		},
+    goGithubOAuth() {
+      window.location.href = 'https://github.com/login/oauth/authorize?client_id=ceeee7092960dc0704b7&redirect_uri=https://chat.chengxinsong.cn/login'
+    },
+    queryData() {
+      let code = getUrlKey('code');
+      if(code) {
+        this.$loading.show();
+        this.github({code: code}).then(res => {
+          if(res) {
+            this.$loading.hide();
+            // 保存soket.io
+            socketWeb.emit('login', res.userInfo.user_id)
+            localStorage.setItem("HappyChatUserToken", res.token);
+            localStorage.setItem("HappyChatUserInfo", JSON.stringify(res.userInfo));
+            this.$router.push({ path:  '/robot' });
+            window.location.reload();
+          }
+        })
+      }
+    }
 	}
 }
 </script>

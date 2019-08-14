@@ -223,6 +223,11 @@ export default {
   pvLog: (params) => {
     return service.post("/api/chat/pv_log", params)
   },
+  /* github授权登陆 */
+  github: (params) => {
+    let data = { params: params };
+    return service.get("/api/chat/oauth", data)
+  },
 /* *
  * API demo
  *

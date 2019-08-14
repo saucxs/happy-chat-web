@@ -41,7 +41,7 @@
         groupInfo: {
           group_name: "",
           group_notice: "",
-          group_avator: "#icongroup",
+          group_avatar: "#icongroup",
           group_creater: "",
           creater_time: "",
           update_time: ''
@@ -78,7 +78,7 @@
                 message: "创建群成功！",
                 time: this.groupInfo.creater_time,
                 group_name: this.groupInfo.group_name,
-                group_avator: this.groupInfo.group_avator,
+                group_avatar: this.groupInfo.group_avatar,
                 type: "group",
                 action: "push",
                 id: this.group_id,

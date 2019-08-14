@@ -13,10 +13,10 @@
   <div class="chat-wrapper-contract-list">
     <div class="secret-box">
       <ul v-if="friend">
-        <Nothing v-if="alreadyFriends.length === 0" :name="'加群'" :type="'addGroup'"></Nothing>
+        <Nothing v-if="alreadyFriends.length === 0" :name="'加好友'" :type="'addAuthor'"></Nothing>
         <li v-else v-for="(data, index) in alreadyFriends">
           <div class="list-box" @click="enterIt(data.other_user_id,'friend')">
-            <img :src="data.avator" alt="">
+            <img :src="data.avatar" alt="">
             <div class="content">
               <p>{{data.name}}</p>
               <p>
@@ -32,10 +32,10 @@
       </ul>
 
       <ul v-if="group">
-        <Nothing v-if="alreadyGroups.length === 0" :name="'加好友'" :type="'addAuthor'"></Nothing>
+        <Nothing v-if="alreadyGroups.length === 0" :name="'加群'" :type="'addGroup'"></Nothing>
         <li v-else v-for="(data, index) in alreadyGroups">
           <div class="list-box" @click="enterIt(data.group_id,'group')">
-            <img :src="data.avator" alt="">
+            <img :src="data.avatar" alt="">
             <div class="content">
               <p>{{data.group_name}}</p>
               <p>群主：{{data.group_creater}}</p>
@@ -64,7 +64,6 @@ export default {
 		Footer,
     Nothing
 	},
-
 	data() {
 		return {
 			currentTab: 3,
@@ -101,7 +100,7 @@ export default {
     },
     alreadyFriendsList(){
       this.$loading.show();
-      this.getAlreadyFriends({user_id: this.userInfo.user_id}).then(res => {
+      this.getAlreadyFriends().then(res => {
         if (res) {
           this.$loading.hide();
           this.alreadyFriends =  res.data.alreadyFriends
@@ -109,7 +108,7 @@ export default {
       })
     },
     alreadyGroupsList () {
-      this.getAlreadyGroups({user_id: this.userInfo.user_id}).then(res => {
+      this.getAlreadyGroups().then(res => {
         if (res) {
           this.alreadyGroups =  res.data.alreadyGroups
         }
@@ -119,7 +118,6 @@ export default {
 	},
 
 	mounted() {
-    this.userInfo = JSON.parse(localStorage.getItem("HappyChatUserInfo"));
     Promise.all([this.alreadyFriendsList(),this.alreadyGroupsList()]);
 	}
 }

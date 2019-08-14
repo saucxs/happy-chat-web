@@ -9,8 +9,8 @@
             <load-more :is-no-more="isNoMore" :is-show-loading="isShowLoading" @load-more="loadMore"></load-more>
           </li>
           <li v-for="item in message">
-            <ChatItem v-if="userInfo.user_id === item.from_user" :href="item.from_user" :img="item.avator" me="true" :msg="item.message" :name="item.name" :time="item.time"></ChatItem>
-            <ChatItem v-else :img="item.avator" :msg="item.message" :href="item.from_user" :name="item.name" :time="item.time"></ChatItem>
+            <ChatItem v-if="userInfo.user_id === item.from_user" :href="item.from_user" :img="item.avatar" me="true" :msg="item.message" :name="item.name" :time="item.time"></ChatItem>
+            <ChatItem v-else :img="item.avatar" :msg="item.message" :href="item.from_user" :name="item.name" :time="item.time"></ChatItem>
           </li>
         </ul>
       </div>
@@ -126,7 +126,7 @@
             //    const data = {
             //      action: "push",
             //      message: "您已成功加入此群！",
-            //      group_avator: this.groupInfoGetter.group_avator,
+            //      group_avatar: this.groupInfoGetter.group_avatar,
             //      group_name: this.groupInfoGetter.group_name,
             //      time: this.groupInfoGetter.creater_time,
             //      group_id: this.groupInfoGetter.group_id,
@@ -156,11 +156,11 @@
         let data = {
           groupId: this.groupInfo.groupId, // 群id
           group_name: this.groupInfoGetter.group_name, // 群名称
-          group_avator: this.groupInfoGetter.group_avator, // 群头像
+          group_avatar: this.groupInfoGetter.group_avatar, // 群头像
           groupMember: this.groupMemberGetter, // 所有群成员的id
           from_user: this.userInfo.user_id, // 自己的id
           name: this.userInfo.name, // 自己的昵称
-          avator: this.userInfo.avator, // 自己的头像
+          avatar: this.userInfo.avatar, // 自己的头像
           message: this.inputMsg, // 消息内容
           time: toNomalTime(new Date().getTime()) // 时间
         }
@@ -198,7 +198,7 @@
             const data = {
               action: "push",
               message: "您已成功加入此群！",
-              group_avator: this.groupInfoGetter.group_avator,
+              group_avatar: this.groupInfoGetter.group_avatar,
               group_name: this.groupInfoGetter.group_name,
               time: this.groupInfoGetter.creater_time,
               group_id: this.groupInfoGetter.group_id,

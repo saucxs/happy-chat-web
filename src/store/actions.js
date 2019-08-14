@@ -319,3 +319,12 @@ export const pvLog = ({commit}, params) => {
     console.log(err);
   });
 };
+
+/* github授权登陆 */
+export const github = ({commit}, params) => {
+  return Api.github(params).then(res => {
+    return res;
+  }).catch(err => {
+    console.log(err);
+  });
+};

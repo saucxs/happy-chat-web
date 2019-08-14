@@ -6,7 +6,7 @@
       <ul>
         <li v-if="userDataList !== []" v-for="data in userDataList">
           <div class="people-box" @click="enterUserCard(data.id)">
-            <img :src="data.avator" alt="">
+            <img :src="data.avatar" alt="">
             <div class="content">
               <p>{{data.name}}
                 <svg v-if="data.sex = 0" class="icon" aria-hidden="true"> <use  xlink:href="#icon-icon1"></use></svg>
@@ -21,7 +21,7 @@
         </li>
         <li v-if="groupDataList !== []" v-for="data in groupDataList">
           <div class="people-box" @click="enterGroupCard(data.group_id)">
-            <img :src="data.group_avator" alt="">
+            <img :src="data.group_avatar" alt="">
             <div class="content">
               <p class="group-creater">{{data.group_name}} <svg class="icon" aria-hidden="true"> <use  xlink:href="#icon-group_fill"></use></svg>
                 <span> {{data.group_creater}}</span>

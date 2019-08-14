@@ -15,7 +15,7 @@
   <ul :class="ownerFlag?'members-spe':'members'">
     <li class="member" v-for="(item,index) in groupMembers">
       <div class="list-box" @click="goInfo(item)">
-        <div class="avatar">{{item.avator}}</div>
+        <div class="avatar">{{item.avatar}}</div>
         <span class="member-name">{{item.name}}</span>
       </div>
     </li>
@@ -118,7 +118,7 @@ export default {
           const data = {
             action: "push",
             message: "您已成功加入此群！",
-            group_avator: this.groupInfoGetter.group_avator,
+            group_avatar: this.groupInfoGetter.group_avatar,
             group_name: this.groupInfoGetter.group_name,
             time: this.groupInfoGetter.creater_time,
             group_id: this.groupInfoGetter.group_id,

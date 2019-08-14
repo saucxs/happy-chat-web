@@ -3,10 +3,10 @@
 	<Header goback='true' chatTitle="新好友通知"></Header>
   <div class="chat-wrapper-no-footer">
     <div class="secret-box">
-      <ul>
+      <ul v-if="newFriendGetter.length > 0">
         <li v-for="data in newFriendGetter">
           <div class="list-box" @click="enterIt(data.from_user)">
-            <img :src="data.avator" alt="">
+            <img :src="data.avatar" alt="">
             <div class="content">
               <p>{{data.name}}</p>
               <p>{{data.content}}</p>
@@ -19,6 +19,9 @@
           </div>
         </li>
       </ul>
+      <ul else>
+        <Nothing :name="'加好友'" :type="'addAuthor'"></Nothing>
+      </ul>
     </div>
   </div>
 </div>
@@ -29,9 +32,11 @@ import Header from '../components/Header.vue'
 import axios from "axios"
 import { mapGetters, mapActions } from 'vuex';
 import { toNomalTime } from "../utils/common"
+import Nothing from '../components/Nothing.vue'
 export default {
 	components: {
-		Header
+		Header,
+    Nothing
 	},
 
 	data() {
@@ -69,7 +74,7 @@ export default {
 				if (ele.from_user == val) {
 					ele.status = 1;
 					data = {
-						avator: ele.avator, // 加我的人的头像
+						avatar: ele.avatar, // 加我的人的头像
 						id: val, // 加我的人的id
 						other_user_id: val,
 						message: "我们已成为好友，开始聊天吧！",
@@ -85,7 +90,7 @@ export default {
 				from_user: this.userInfo.user_id, // 自己的id
 				to_user: val,
 				name: this.userInfo.name, // 自己的昵称
-				avator: this.userInfo.avator, // 自己的头像
+				avatar: this.userInfo.avatar, // 自己的头像
 				message: data.message, // 消息内容
 				type: 'private',
 				action: "request",

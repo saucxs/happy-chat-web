@@ -8,14 +8,14 @@
         <li v-for="data in msgListGetter">
           <div class="list-box" @click="enterChat(data.type,data.id)">
             <a v-if="data.type === 'group'" href="">
-              <!--<img v-if="data.group_avator" :src="data.group_avator" alt="" class="img">-->
+              <!--<img v-if="data.group_avatar" :src="data.group_avatar" alt="" class="img">-->
               <svg class="icon img" aria-hidden="true">
                 <use xlink:href="#iconniu"></use>
               </svg>
               <span class="group-unread" v-if="data.unread">{{data.unread}}</span>
             </a>
             <a v-if="data.type === 'private'" href="">
-              <!--<img v-if="data.avator" :src="data.avator" alt="" class="img">-->
+              <!--<img v-if="data.avatar" :src="data.avatar" alt="" class="img">-->
               <svg class="icon img" aria-hidden="true">
                 <use xlink:href="#iconniu"></use>
               </svg>
@@ -48,7 +48,8 @@ export default {
 	data() {
 		return {
 			currentTab: 1,
-      webSocket: ''
+      webSocket: '',
+      userInfo: ''
 		}
 	},
 	components: {

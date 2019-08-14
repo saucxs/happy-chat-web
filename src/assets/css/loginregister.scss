@@ -6,6 +6,17 @@
   width: 100%;
   position: absolute;
 
+  .login-form-flex{
+    display: flex;
+    justify-content: center;
+    margin-top: 0.8rem;
+  }
+  .github-icon{
+    cursor: pointer;
+    width: 0.8rem;
+    height: 0.8rem;
+  }
+
   .wrapper {
     display: flex;
     align-items: center;
@@ -51,7 +62,7 @@
       height: 100%;
       border: none;
       color: #0d0d0d;
-      padding: 0.2rem 0.1rem;
+      padding: 0.1rem;
       text-align: center;
       text-decoration: none;
       display: inline-block;

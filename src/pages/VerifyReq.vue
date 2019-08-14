@@ -53,7 +53,7 @@ export default {
 				from_user: this.fromUserInfo.user_id,
 				to_user: this.$route.params.user_id, // 对方id
 				name: this.fromUserInfo.name,
-				avator: this.fromUserInfo.avator,
+				avatar: this.fromUserInfo.avatar,
 				sex: this.fromUserInfo.sex,
 				content: this.textAreaContent,
 				time: toNomalTime((new Date()).getTime()) // 时间

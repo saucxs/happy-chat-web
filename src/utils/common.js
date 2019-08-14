@@ -63,3 +63,8 @@ export function dotdot (val, num) {
     return val
   }
 }
+
+/* 获取url的参数 */
+export function getUrlKey (name) {
+  return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.href) || [, ""])[1].replace(/\+/g, '%20')) || null
+}
