@@ -6,26 +6,25 @@
 	</Message-box>
 	<div class="wrapper fadeInDown">
 		<div id="formContent">
-			<router-link to="/login">
-				<h2 class="inactive"> 登录 </h2>
-			</router-link>
-			<h2 class="active">注册 </h2>
+      <div class="flex-style">
+        <h2 class="inactive" @click="goLogin()"> 登&nbsp;&nbsp;录 </h2>
+        <h2 class="active">注&nbsp;&nbsp;册 </h2>
+      </div>
 			<div class="fadeIn first">
-        <div class="fadeIn first">
-          <svg id="icon" class="icon-logo" alt="happyChat乐聊" title="happyChat乐聊" aria-hidden="true">
-            <use xlink:href="#iconliaotian-copy-copy-copy"></use>
-          </svg>
-        </div>
+        <svg id="icon" class="icon-logo" alt="happyChat乐聊" title="happyChat乐聊" aria-hidden="true">
+          <use xlink:href="#iconliaotian-copy-copy-copy"></use>
+        </svg>
+        <div class="system-name">{{systemName}}</div>
 			</div>
 			<form class="register-form">
 				<div class="login-form-flex">
           <span class="normal-word">用户名：</span><input v-focus style="-webkit-user-select:text !important" maxlength="16" type="text" class="input-class fadeIn second" v-model="name" placeholder="用户名">
         </div>
         <div class="login-form-flex">
-          <span class="normal-word">密码：</span><input style="-webkit-user-select:text !important" maxlength="24" type="password" class="input-class fadeIn third" v-model="password" placeholder="密码">
+          <span class="normal-word">密&nbsp;&nbsp;&nbsp;码：</span><input style="-webkit-user-select:text !important" maxlength="24" type="password" class="input-class fadeIn third" v-model="password" placeholder="密码">
         </div>
 				<div class="login-form-flex">
-          <span class="normal-word">邮箱：</span><input style="-webkit-user-select:text !important" maxlength="36" type="email" class="input-class fadeIn third" v-model="email" placeholder="邮箱">
+          <span class="normal-word">邮&nbsp;&nbsp;&nbsp;箱：</span><input style="-webkit-user-select:text !important" maxlength="36" type="email" class="input-class fadeIn third" v-model="email" placeholder="邮箱">
         </div>
         <div class="action action-box-spe" :class="{'disabled': disabledFlag}">
           <span  @click="startRegister" class="primary-span">注 册</span>
@@ -38,7 +37,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 import { checkEmail } from "../utils/common"
 export default {
 	data() {
@@ -55,6 +54,11 @@ export default {
       disabledFlag: false
 		}
 	},
+  computed: {
+    ...mapGetters([
+      'systemName'
+    ])
+  },
 	methods: {
     ...mapActions(["register", "activateEmail"]),
 	  actualRegister() {
@@ -108,7 +112,10 @@ export default {
 				this.messageBox.visible = false;
 				this.$router.push("/login");
 			}
-		}
+		},
+    goLogin() {
+      this.$router.push({ path: '/login' });
+    }
 	}
 }
 </script>

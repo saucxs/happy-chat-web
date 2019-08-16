@@ -9,9 +9,10 @@
         </div>
 
         <div v-if="me" class="mychat">
-          <svg class="icon img" aria-hidden="true" @click="lookInfo">
+          <svg v-if="!img" class="icon img" aria-hidden="true" @click="lookInfo">
             <use xlink:href="#iconniu"></use>
           </svg>
+          <img class="icon img" v-if="img" :src="img">
           <div class="nt"><span v-if="time">{{time}}</span><span v-if="name">{{name}}</span></div>
           <div class="msg">{{msg}}</div>
         </div>

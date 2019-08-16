@@ -336,6 +336,7 @@ export const getFeedback = ({commit}, params) => {
     if (res.success) {
       commit(types.feedbackListMutation, res.data.feedbackList);
     }
+    return res
   }).catch(err => {
     console.log(err);
   });

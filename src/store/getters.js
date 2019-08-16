@@ -1,3 +1,4 @@
+export const systemName = state => state.common.systemName;
 export const isMobile = state => state.common.isMobile;
 export const  feedbackListData = state => state.common.feedbackListData
 export const userInfoDataGetter = state => state.common.userInfoData;

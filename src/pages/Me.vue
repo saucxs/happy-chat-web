@@ -119,7 +119,7 @@ export default {
           border-radius: 50%;
         }
         .name{
-          font-size: 0.8rem;
+          font-size: 0.5rem;
           color: #4290F7;
         }
         .href {

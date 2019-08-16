@@ -39,10 +39,18 @@ textarea{
   overflow: hidden;
 }
 .icon-logo{
-  width: 1.4em;
-  height: 1.4em;
+  width: 2em;
+  height: 2em;
   fill: currentColor;
   overflow: hidden;
+}
+.system-name{
+  font-size: 0.32rem;
+  font-weight: bold;
+  color: $base-color;
+  background-image:-webkit-linear-gradient(bottom,red,#fd8403,yellow);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
 }
 
 .content-busuanzi{

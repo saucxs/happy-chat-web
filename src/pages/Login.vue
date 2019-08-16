@@ -6,14 +6,15 @@
 	</Message-box>
 	<div class="wrapper fadeInDown">
 		<div id="formContent">
-			<h2 class="active"> 登录 </h2>
-			<router-link to="/register">
-				<h2 class="inactive"> 注册 </h2>
-			</router-link>
+      <div class="flex-style">
+        <h2 class="active"> 登&nbsp;&nbsp;录 </h2>
+        <h2 class="inactive" @click="goRegister()"> 注&nbsp;&nbsp;册 </h2>
+      </div>
 			<div class="fadeIn first">
         <svg id="icon" class="icon-logo" alt="happyChat乐聊" title="happyChat乐聊" aria-hidden="true">
           <use xlink:href="#iconliaotian-copy-copy-copy"></use>
         </svg>
+        <div class="system-name">{{systemName}}</div>
 			</div>
 			<form>
         <div class="login-form-flex">
@@ -45,12 +46,18 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 import { getUrlKey } from '../utils/common'
 export default {
 	name: "login",
 	props: {},
 	components: {},
+  watch: {},
+  computed: {
+    ...mapGetters([
+      'systemName'
+    ])
+  },
 	data() {
 		return {
 			name: "",
@@ -68,10 +75,6 @@ export default {
       vm.queryData()
     })
   },
-  computed: {},
-
-	watch: {},
-
 	methods: {
     ...mapActions(["login", "github"]),
     startLogin() {
@@ -90,6 +93,7 @@ export default {
 			        localStorage.setItem("HappyChatUserToken", res.token);
 			        localStorage.setItem("HappyChatUserInfo", JSON.stringify(res.userInfo));
 			        // 弹窗提示
+              this.$store.commit('firstLoadMutation', true)
               this.messageBox.messageBoxEvent = 'login'
               this.messageBox.visible = true;
               this.messageBox.message = "您已登录成功"
@@ -118,14 +122,15 @@ export default {
 		confirm(value) {
 			if (value === 'login') {
 				this.messageBox.visible = false;
-        this.$store.commit('firstLoadMutation', true)
         let redirect = decodeURIComponent(this.$route.query.redirect || '/robot');
         this.$router.push({ path: redirect });
-        window.location.reload();
 			}
 		},
     goGithubOAuth() {
       window.location.href = 'https://github.com/login/oauth/authorize?client_id=ceeee7092960dc0704b7&redirect_uri=https://chat.chengxinsong.cn/login'
+    },
+    goRegister() {
+      this.$router.push({ path: '/register' });
     },
     queryData() {
       let code = getUrlKey('code');
@@ -138,12 +143,12 @@ export default {
               type: "success"
             });
             this.$loading.hide();
+            this.$store.commit('firstLoadMutation', true);
             // 保存soket.io
             socketWeb.emit('login', res.userInfo.user_id)
             localStorage.setItem("HappyChatUserToken", res.token);
             localStorage.setItem("HappyChatUserInfo", JSON.stringify(res.userInfo));
             this.$router.push({ path:  '/robot' });
-            window.location.reload();
           }
         })
       }

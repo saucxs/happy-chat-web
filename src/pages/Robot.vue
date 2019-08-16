@@ -7,7 +7,7 @@
         <ul ref="viewBox">
           <li v-for="msg in robotMsgGetter">
             <ChatItem v-if="msg.user" :msg="msg.message" :name="msg.user" :time="time"></ChatItem>
-            <ChatItem v-if="!msg.user" me="true" :name="name" :href="href" :img=img :msg="msg.message" :time="time"></ChatItem>
+            <ChatItem v-if="!msg.user" me="true" :name="userInfo.name" :href="userInfo.user_id" :img=userInfo.avatar :msg="msg.message" :time="time"></ChatItem>
           </li>
         </ul>
       </div>
@@ -34,11 +34,9 @@
         currentTab: 2,
         inputMsg: "",
         time: toNomalTime((new Date()).getTime()),
-        img: "",
         isScrollToBottom: true,
-        name: '',
-        href: '',
         viewBox: '',
+        userInfo: JSON.parse(localStorage.getItem("HappyChatUserInfo"))
       }
     },
     components: {
@@ -56,7 +54,7 @@
         })
         let data = {
           message: val,
-          userId: this.userInfoDataGetter.user_id,
+          userId: this.userInfo.user_id,
         }
         await this.chatRobot(data);
         this.refresh();
@@ -82,10 +80,7 @@
       ])
     },
     created() {
-      const userInfo = JSON.parse(localStorage.getItem("HappyChatUserInfo"));
-      this.img = userInfo.avatar;
-      this.name = userInfo.name;
-      this.href = userInfo.user_id
+
     },
   }
 </script>

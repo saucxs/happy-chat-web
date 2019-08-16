@@ -2,10 +2,10 @@
 <!--留言反馈 -->
 <div class="wrapper">
 	<Header goback='true' chatTitle="留言反馈"></Header>
-  <div class="chat-wrapper-spe chat-wrapper-feedback">
-    <div class="secret-box-spe secret-box-feedback">
+  <div class="chat-wrapper-spe" :class="{'chat-wrapper-feedback':!userInfo}">
+    <div class="secret-box-spe" :class="{'secret-box-feedback': !userInfo}">
       <div class="box-style">
-        <div class="flex-style box-item">
+        <div class="flex-style box-item" v-if="!userInfo">
           <span class="title">邮&nbsp;&nbsp;箱：</span>
           <input type="text" v-model="feedback.email" placeholder="请输入邮箱" maxlength="30"/>
         </div>
@@ -23,21 +23,22 @@
         <div class="feedback-item" v-for="item in feedbackListData">
           <div class="flex-style flex-style-feedback-history">
             <p class="item-box">
-              <svg id="icon" class="icon-logo" alt="happyChat乐聊" title="happyChat乐聊" aria-hidden="true">
+              <svg id="icon" class="icon" alt="happyChat乐聊" title="happyChat乐聊" aria-hidden="true">
                 <use xlink:href="#iconEmail"></use>
               </svg>
               <span>{{item.email}}</span>
             </p>
             <p class="item-box">
-              <svg id="icon" class="icon-logo" alt="happyChat乐聊" title="happyChat乐聊" aria-hidden="true">
+              <svg id="icon" class="icon" alt="happyChat乐聊" title="happyChat乐聊" aria-hidden="true">
                 <use xlink:href="#iconIP"></use>
               </svg>
               <span>{{item.ip}}</span>
             </p>
           </div>
           <p class="item-content">{{item.content}}</p>
+          <p class="item-reply" v-if="item.reply"><span style="color: #E6A23C">回复：</span>{{item.reply}}</p>
           <p class="item-date">
-            <svg id="icon" class="icon-logo" alt="happyChat乐聊" title="happyChat乐聊" aria-hidden="true">
+            <svg id="icon" class="icon" alt="happyChat乐聊" title="happyChat乐聊" aria-hidden="true">
               <use xlink:href="#icontime"></use>
             </svg>
             <span>{{item.date}}</span>
@@ -47,11 +48,13 @@
       <Nothing v-else></Nothing>
     </div>
   </div>
+  <Footer v-if="userInfo" :currentTab="currentTab"></Footer>
 </div>
 </template>
 
 <script>
 import Header from '../components/Header.vue'
+import Footer from '../components/Footer.vue'
 import { mapGetters, mapActions } from 'vuex';
 import Nothing from '../components/Nothing.vue'
 import { checkEmail } from "../utils/common"
@@ -66,17 +69,19 @@ export default {
       },
       params: {
         page: 1,
-        pageNum: 30,
+        pageNum: 50,
       },
+      userInfo: JSON.parse(localStorage.getItem("HappyChatUserInfo"))
 		}
 	},
 	components: {
 		Header,
+    Footer,
     Nothing
 	},
   computed: {
     ...mapGetters([
-      'feedbackListData',
+      'feedbackListData'
     ])
   },
 	methods: {
@@ -89,8 +94,18 @@ export default {
       // }
     },
     submit() {
-      if(checkEmail(this.feedback.email) && this.feedback.content.trim()) {
+      let flag;
+      if(this.userInfo){
+        this.feedback.email = this.userInfo.email;
+        this.feedback.user_id = this.userInfo.user_id;
+        flag = true
+      }else{
+        flag = checkEmail(this.feedback.email)
+      }
+      if( flag && this.feedback.content.trim()) {
+        this.$loading.show();
         this.submitFeedback(this.feedback).then(res =>{
+          this.$loading.hide();
           if (res.success) {
             this.feedback = {};
             this.$message({
@@ -112,7 +127,10 @@ export default {
     }
 	},
 	mounted() {
-    this.getFeedback(this.params);
+    this.$loading.show();
+    this.getFeedback(this.params).then(res => {
+      this.$loading.hide();
+    })
 	}
 }
 </script>
@@ -169,6 +187,14 @@ export default {
       margin-top: 0.14rem;
       word-break:break-all;
       word-wrap:break-word;
+    }
+    .item-reply{
+      font-size: 0.26rem;
+      margin-top: 0.14rem;
+      word-break:break-all;
+      word-wrap:break-word;
+      color: #999;
+      margin-left: 0.2rem;
     }
     .item-date {
       font-size: 0.2rem;

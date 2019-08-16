@@ -4,7 +4,7 @@ import {
 
 const state = {
   systemName: 'happyChat乐聊',
-  userInfoData: {},
+  userInfoData: JSON.parse(JSON.stringify(localStorage.getItem('HappyChatUserInfo'))),
   newFriend: [], // 新朋友列表
   tabTips: { // 底部tab的未读提示 暂时只做好友添加请求的提示
     addFriendReq: "" // 是否有好友添加请求 0没有 1有

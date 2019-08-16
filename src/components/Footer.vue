@@ -24,10 +24,17 @@
     </router-link>
     <router-link class="item" to="me">
       <svg class="icon" aria-hidden="true">
-        <use v-show="currentTab === 4" xlink:href="#iconmine-copy"></use>
-        <use v-show="currentTab !== 4" xlink:href="#iconmine"></use>
+        <use v-show="currentTab === 4" xlink:href="#iconme-copy"></use>
+        <use v-show="currentTab !== 4" xlink:href="#iconme"></use>
       </svg>
       <p>我的乐聊</p>
+    </router-link>
+    <router-link class="item" to="feedback">
+      <svg class="icon" aria-hidden="true">
+        <use v-show="currentTab === 5" xlink:href="#iconfeedback-copy"></use>
+        <use v-show="currentTab !== 5" xlink:href="#iconfeedback"></use>
+      </svg>
+      <p>留言反馈</p>
     </router-link>
   </div>
 </template>
@@ -62,7 +69,7 @@ export default {
     background: #eee;
     border-top: 1px solid #e7e7e7;
     border-bottom: 1px solid #f8f8f8;
-    padding: 0rem 0.3rem;
+    padding: 0rem 0.1rem;
     .icon {
       width: 0.9em;
       height: 0.9em;

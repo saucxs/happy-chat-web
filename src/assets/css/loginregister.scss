@@ -7,7 +7,7 @@
   position: absolute;
 
   .action-box-login{
-    margin: 0.45rem 0;
+    margin: 0.4rem 0;
   }
 
   .login-form-flex{
@@ -23,7 +23,6 @@
   .oauth-box{
     display: flex;
     justify-content: center;
-    margin-bottom: 0.2rem;
   }
   .oauth-line-box{
     height: 0.6rem;
@@ -87,7 +86,7 @@
         font-weight: 600;
         text-transform: uppercase;
         display: inline-block;
-        margin: 0.4rem 0.08rem 0.1rem;
+        margin: 0.3rem 0.38rem;
         color: #cccccc;
       }
 
@@ -124,7 +123,9 @@
     .normal-word {
       font-size: 0.28rem;
     }
-
+    .first{
+      line-height: 0.4rem;
+    }
 
     .fadeInDown {
       animation-name: fadeInDown;

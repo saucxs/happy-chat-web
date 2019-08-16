@@ -124,7 +124,7 @@ router.beforeEach((to, from, next) => {
       next("/login");
     }
   } else {
-    if (flag) {
+    if (flag && to.path !== '/feedback') {
       next("/robot");
     } else {
       next();
