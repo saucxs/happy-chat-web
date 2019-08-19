@@ -3,8 +3,9 @@
 	<Header goback='true' chatTitle="新好友通知"></Header>
   <div class="chat-wrapper-no-footer">
     <div class="secret-box">
-      <ul v-if="newFriendGetter.length > 0">
-        <li v-for="data in newFriendGetter">
+      <ul>
+        <Nothing v-if="newFriendGetter.length === 0" :name="'加好友'" :type="'addAuthor'"></Nothing>
+        <li else v-for="data in newFriendGetter">
           <div class="list-box" @click="enterIt(data.from_user)">
             <img :src="data.avatar" alt="">
             <div class="content">
@@ -18,9 +19,6 @@
             <span v-if="data.status === 1">已通过验证</span>
           </div>
         </li>
-      </ul>
-      <ul else>
-        <Nothing :name="'加好友'" :type="'addAuthor'"></Nothing>
       </ul>
     </div>
   </div>
