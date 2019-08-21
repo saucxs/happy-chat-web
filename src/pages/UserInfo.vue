@@ -6,7 +6,7 @@
 		<p slot="content">{{this.messageBox.message}}</p>
 	</Message-box>
 	<!--编辑用户资料-->
-	<Message-box v-if="this.isMe" :messageBoxEvent="this.messageBox.messageBoxEvent" :visible="this.messageBox.visible" :title="this.messageBox.title" :canEditorInfo="this.messageBox.canEditorInfo" :myInfo="this.myInfo" :hasCancel="this.messageBox.hasCancel"
+	<Message-box v-if="this.isMe" :clear="clear" :messageBoxEvent="this.messageBox.messageBoxEvent" :visible="this.messageBox.visible" :title="this.messageBox.title" :canEditorInfo="this.messageBox.canEditorInfo" :myInfoSpe="JSON.parse(JSON.stringify(userInfo))" :hasCancel="this.messageBox.hasCancel"
 	    @cancel="cancel" @confirm="confirm">
 		<p slot="content">{{this.messageBox.message}}</p>
 	</Message-box>
@@ -69,7 +69,8 @@
         <span class="primary-span add-as-friend" @click="enterReqPage">加为好友</span>
       </div>
       <div v-if="this.isMe" class="action">
-        <span class="primary-span editor-info" @click="editorInfo">编辑我的信息</span>
+        <span class="primary-span editor-info" @click="editorInfo('basic')">编辑我的信息</span>
+        <span v-if="!userInfo.github_id" class="primary-span editor-info" @click="editorInfo('password')">修改密码</span>
       </div>
     </div>
   </div>
@@ -100,7 +101,8 @@ export default {
 				hasCancel: true, // 弹窗是否有取消键
 				messageBoxEvent: "", // 弹窗事件名称
 				canEditorInfo: false // 编辑用户资料的弹窗
-			}
+			},
+      clear: false
 		}
 	},
 	computed: {
@@ -111,7 +113,7 @@ export default {
 	methods: {
     ...mapActions(["queryUserInfo", "isFriendJudge","confirmEditorRemark",
       "confirmEditorInfo", "confirmDeleteFriend", "updateNewFriendsState",
-      "beFriends"]),
+      "beFriends", "confirmUpdatePassword"]),
 		// 获取用户资料
 		getInfo() {
 			// 如果是自己，那就用本地的个人信息即可，省一次请求
@@ -195,11 +197,19 @@ export default {
 			this.messageBox.title = '修改备注';
 		},
 		// 修改我的信息
-		editorInfo() {
-			this.messageBox.messageBoxEvent = 'editorInfo'
-			this.messageBox.visible = true;
-			this.messageBox.canEditorInfo = true;
-			this.messageBox.title = '修改我的信息';
+		editorInfo(type) {
+      if(type === 'basic'){
+        this.messageBox.messageBoxEvent = 'editorInfo'
+        this.messageBox.visible = true;
+        this.messageBox.canEditorInfo = true;
+        this.messageBox.title = '修改我的信息';
+      } else if(type === 'password') {
+        this.clear = false;
+        this.messageBox.messageBoxEvent = 'editorPassword'
+        this.messageBox.visible = true;
+        this.messageBox.canEditorInfo = true;
+        this.messageBox.title = '修改密码';
+      }
 		},
 		// 屏蔽此人
 		shieldIt() {
@@ -315,12 +325,55 @@ export default {
           place: value.myInfo.place
         }
         this.confirmEditorInfo(params).then(res => {
-          if (res) {
+          if (res.success) {
             localStorage.setItem("HappyChatUserInfo", JSON.stringify(value.myInfo));
+            this.userInfo = value.myInfo;
             this.messageBox.visible = false;
+          } else {
+            this.$message({
+              message: res.message || '服务器异常',
+              type: "warn"
+            });
           }
         })
 			}
+		  //	修改秘密
+      if(value.messageBoxEvent === 'editorPassword'){
+        if(!value.password.old && !value.password.old.trim()){
+          this.$message({
+            message: '请输入原密码',
+            type: "warn"
+          });
+          return
+        } else if (!value.password.new && !value.password.new.trim()) {
+          this.$message({
+            message: '请输入新密码',
+            type: "warn"
+          });
+          return
+        } else if (value.password.new.trim() !== value.password.confirmNew.trim()) {
+          this.$message({
+            message: '新密码两次输入不一致',
+            type: "warn"
+          });
+          return
+        }
+        this.confirmUpdatePassword(value.password).then(res => {
+          if (res.success) {
+            this.clear = true;
+            this.$message({
+              message: '修改密码成功',
+              type: "success"
+            });
+            this.messageBox.visible = false;
+          } else {
+            this.$message({
+              message: res.message || '服务器异常',
+              type: "warn"
+            });
+          }
+        })
+      }
 		}
 	},
 	async created() {

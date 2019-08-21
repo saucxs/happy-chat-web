@@ -4,10 +4,9 @@
   font-family: "Poppins", sans-serif;
   height: 100%;
   width: 100%;
-  position: absolute;
 
   .action-box-login{
-    margin: 0.4rem 0;
+    margin: 0.4rem 0 0 0;
   }
 
   .login-form-flex{
@@ -65,7 +64,6 @@
     flex-direction: column;
     justify-content: center;
     width: 100%;
-    min-height: 100%;
     #formContent {
       -webkit-border-radius: 0.2rem 0.2rem 0.2rem 0.2rem;
       border-radius: 0.2rem 0.2rem 0.2rem 0.2rem;
@@ -73,7 +71,7 @@
       padding: 0.6rem;
       width: 90%;
       max-width: 5.6rem;
-      min-height: 9rem;
+      height: 9rem;
       position: relative;
       padding: 0;
       -webkit-box-shadow: 0 0.6rem 1.2rem 0 rgba(0, 0, 0, 0.3);

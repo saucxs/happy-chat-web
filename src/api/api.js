@@ -237,6 +237,10 @@ export default {
   submitFeedback: (params) => {
     return service.post("/api/chat/submit_feedback", params)
   },
+  /* 修改密码 */
+  confirmUpdatePassword: (params) => {
+    return service.post("/api/chat/update_password", params)
+  },
 /* *
  * API demo
  *

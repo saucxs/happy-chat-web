@@ -24,6 +24,9 @@ html {
   font-family: 'Microsoft Yahei' !important;
   overflow: hidden;
 }
+#app {
+  height: 100%;
+}
 /*苹果输入框输入不了*/
 input{
   -webkit-user-select:text !important
@@ -65,32 +68,32 @@ textarea{
 
 /*基础布局样式*/
 .wrapper {
-  height: 100vh;
+  height: 100%;
   min-width: 100%;
   width: 100%;
   position: relative;
   .chat-wrapper{
-    height: calc(100% - 2rem) !important;
+    height: calc(100vh - 2rem) !important;
     width: 100%;
     position: relative;
   }
   .chat-wrapper-spe{
-    height: calc(100% - 2rem) !important;
+    height: calc(100vh - 2rem) !important;
     width: 100%;
     position: relative;
   }
   .chat-wrapper-contract-list{
-    height: calc(100% - 3.9rem);
+    height: calc(100vh - 3.9rem);
     width: 100%;
     position: relative;
   }
   .chat-wrapper-no-footer{
-    height: calc(100% - 1rem);
+    height: calc(100vh - 1rem);
     width: 100%;
     position: relative;
   }
   .chat-wrapper-emoji{
-    height: calc(100% - 5.6rem) !important;
+    height: calc(100vh - 5.6rem) !important;
   }
   .secret-box{
     height: 100%;

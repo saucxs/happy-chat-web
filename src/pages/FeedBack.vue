@@ -139,7 +139,7 @@ export default {
 .wrapper {
   .chat-wrapper-feedback{
     overflow-y: hidden;
-    height: calc(100% - 1rem) !important;
+    height: calc(100vh - 1rem) !important;
   }
   .secret-box-feedback{
     overflow-y: hidden;

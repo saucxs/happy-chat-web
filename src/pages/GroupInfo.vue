@@ -209,6 +209,7 @@ export default {
       overflow: hidden;
       overflow-y: auto;
       padding-bottom: 0.1rem;
+      height: 1rem;
     }
     .member-number{
       padding-top: 0.1rem;
@@ -221,8 +222,7 @@ export default {
     list-style: none;
     overflow-y: auto;
     font-size: 0.26rem;
-    height: calc(100% - 4.8rem);
-    max-height: calc(100% - 4.8rem);
+    height: calc(100vh - 5.7rem);
   }
   .members{
     padding-top: 0.1rem;

@@ -84,7 +84,7 @@ export default {
       if(type === 'friend'){
         this.$router.push(`/user_info/${val}`)
       }else if(type === 'group'){
-        this.$router.push(`/group_info/${val}`)
+        this.$router.push(`/group_chat/${val}`)
       }
     },
 		showFriends() {

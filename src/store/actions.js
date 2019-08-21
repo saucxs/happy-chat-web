@@ -351,3 +351,12 @@ export const submitFeedback = ({commit}, params) => {
     console.log(err);
   });
 };
+
+/* 修改密码 */
+export const confirmUpdatePassword = ({commit}, params) => {
+  return Api.confirmUpdatePassword(params).then(res => {
+    return res;
+  }).catch(err => {
+    console.log(err);
+  });
+};

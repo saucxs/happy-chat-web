@@ -5,25 +5,37 @@
 	<div class="message-box-wrapper">
 		<h1> {{title}}</h1>
 		<input v-if="canInput" type="text" v-model="canInputText" maxlength="10" placeholder="最多10个字哦">
-		<form class="editor-info" v-if="canEditorInfo">
+		<form class="editor-info" v-if="messageBoxEvent === 'editorInfo'">
 			<div class="">
-				<span>github:</span><input type="text" v-model="myInfo.github">
+        <!--<span style="font-size: 12px">{{myInfo}}</span>-->
+				<span>github:</span><input type="text" maxlength="40" v-model="myInfoSpe.github">
 			</div>
 			<div class="">
-				<span>website:</span><input type="text" v-model="myInfo.website">
+				<span>website:</span><input type="text" maxlength="40" v-model="myInfoSpe.website">
 			</div>
 			<div class="info-sex">
 				<span>性别:</span>
-				<select v-model="myInfo.sex">
+				<select v-model="myInfoSpe.sex">
 			   <option class="option" disabled value="">性别</option>
 			   <option class="option" value="1">男</option>
 			   <option class="option" value="0">女</option>
 			 </select>
 			</div>
 			<div class="">
-				<span>来自:</span><input type="text" v-model="myInfo.place" maxlength="12">
+				<span>来自:</span><input type="text" v-model="myInfoSpe.place" maxlength="20">
 			</div>
 		</form>
+    <form class="editor-info" v-if="messageBoxEvent === 'editorPassword'">
+      <div class="">
+        <span>原密码:</span><input type="text" maxlength="24" v-model="password.old">
+      </div>
+      <div class="">
+        <span>新密码:</span><input type="text" maxlength="24" v-model="password.new">
+      </div>
+      <div class="">
+        <span>确认密码:</span><input type="text" maxlength="24" v-model="password.confirmNew">
+      </div>
+    </form>
 		<p v-else class="content">
 			<slot name="content"></slot>
 		</p>
@@ -45,7 +57,8 @@ export default {
 	name: 'MessageBox',
 	props: {
 		messageBoxEvent: {
-			type: String
+			type: String,
+      default: ""
 		},
 		visible: {
 			type: Boolean,
@@ -69,23 +82,41 @@ export default {
 			type: Boolean,
 			default: true
 		},
-		myInfo: {
-			type: Object
-		}
+    myInfoSpe: {
+			type: Object,
+      default: () => ({})
+		},
+    clear: {
+      type: Boolean,
+      default: false
+    }
 	},
 	components: {},
+  mounted() {
+
+  },
 	data() {
 		return {
-			canInputText: ""
+			canInputText: "",
+      password: {
+			  old: '',
+        new: '',
+        confirmNew: ''
+      }
 		};
 	},
 
 	computed: {},
 
-	watch: {},
+	watch: {
+    clear(value) {
+      this.password = {}
+    }
+  },
 
 	methods: {
 		cancel() {
+      this.password = {}
 			this.$emit("cancel", this.messageBoxEvent);
 		},
 		confirm() {
@@ -95,13 +126,19 @@ export default {
 					canInputText: this.canInputText
 				});
 				return
-			} else if (this.canEditorInfo) {
+			} else if (this.messageBoxEvent  === 'editorInfo') {
 				this.$emit("confirm", {
 					messageBoxEvent: this.messageBoxEvent,
-					myInfo: JSON.parse(JSON.stringify(this.myInfo))
+					myInfo: JSON.parse(JSON.stringify(this.myInfoSpe))
 				});
 				return
-			}
+			} else if (this.messageBoxEvent === 'editorPassword') {
+        this.$emit("confirm", {
+          messageBoxEvent: this.messageBoxEvent,
+          password: this.password
+        });
+        return
+      }
 			this.$emit("confirm", this.messageBoxEvent);
 		}
 	}
@@ -132,7 +169,7 @@ export default {
     // Opera
     -ms-transform: translate(-50%, -50%);
     // IE9
-    width: 70%;
+    width: 80%;
     height: auto;
     background-color: white;
     border-radius: 0.1rem;
