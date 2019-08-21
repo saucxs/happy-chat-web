@@ -32,6 +32,10 @@
     - [x] 1、数据埋点，页面PV相关数据统计
     - [x] 2、登陆日志统计
     
++ 版本v 1.1.3
+    - [x] 1、留言反馈模块
+    - [x] 2、支持用户名登陆修改密码
+    
 ## 2、线上地址
 
 https://chat.chengxinsong.cn
@@ -78,11 +82,8 @@ npm run dev
 + 后端代码：https://github.com/saucxs/happy-chat-node
 
 ## 6、相应文章
-
 + [happyChat开发系列：使用websocket.io实现双向通信的乐聊大前端开发](http://www.chengxinsong.cn/post/40)
-
 + [【nginx系列】nginx升级到支持HTTP2.0](https://www.mwcxs.top/page/784.html)
-
 
 ## 7、最后
 
