@@ -55,24 +55,24 @@ npm run dev
 
 聊天
 
-![chat](./images/chat.png)
+![chat](http://static.chengxinsong.cn/image/happychat/chat.png)
 
 
 机器人
 
-![robot](./images/robot.png)
+![robot](http://static.chengxinsong.cn/image/happychat/robot.png)
 
 消息列表
 
-![message](./images/message.png)
+![message](http://static.chengxinsong.cn/image/happychat/message.png)
 
 通讯录
 
-![contact](./images/contact.png)
+![contact](http://static.chengxinsong.cn/image/happychat/contact.png)
 
 个人信息
 
-![personal](./images/personal.png)
+![personal](http://static.chengxinsong.cn/image/happychat/personal.png)
 
 等等
 
